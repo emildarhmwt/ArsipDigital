@@ -18,7 +18,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-simplebar>
                 <div class="d-flex mb-4 align-items-center justify-content-between">
-                    <a href="dashboard_admin.html" class="text-nowrap logo-img ms-0 ms-md-1">
+                    <a href="dashboard_user.php" class="text-nowrap logo-img ms-0 ms-md-1">
                         <img src="../assets/images/logoweb.png" width="200" height="auto">
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -33,7 +33,7 @@
                             <span class="hide-menu">Home</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_admin.html"
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_user.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-primary rounded-3">
                                     <i class="ti ti-layout-dashboard fs-7 text-primary"></i>
@@ -54,7 +54,8 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="data_arsip.php"
+                                aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-warning rounded-3">
                                     <i class="ti ti-archive fs-7 text-warning"></i>
                                 </span>
@@ -66,7 +67,8 @@
                             <span class="hide-menu">Profile</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="ganti_password.php"
+                                aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-warning rounded-3">
                                     <i class="ti ti-key fs-7 text-warning"></i>
                                 </span>
@@ -90,12 +92,12 @@
         <!--  Sidebar End -->
     </div>
     <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            document.body.classList.toggle('sidebar-collapsed');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('ti-chevrons-left');
-            icon.classList.toggle('ti-chevrons-right');
-        });
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.body.classList.toggle('sidebar-collapsed');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('ti-chevrons-left');
+        icon.classList.toggle('ti-chevrons-right');
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

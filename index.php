@@ -12,47 +12,47 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Varela+Round&display=swap" rel="stylesheet">
     <style>
-        body {
-            background-color: #d2c392;
-        }
+    body {
+        background-color: #d2c392;
+    }
 
-        .cursor-pointer {
-            cursor: pointer;
-        }
+    .cursor-pointer {
+        cursor: pointer;
+    }
 
-        input[type="radio"]:checked+label {
-            border: 2px solid #0b1f5f !important;
-            box-shadow: 0 0 0 2px rgba(127, 86, 217, 0.2) !important;
-        }
+    input[type="radio"]:checked+label {
+        border: 2px solid #0b1f5f !important;
+        box-shadow: 0 0 0 2px rgba(127, 86, 217, 0.2) !important;
+    }
 
-        .login-container {
-            background-color: #e4e0c2;
-        }
+    .login-container {
+        background-color: #e4e0c2;
+    }
 
-        .login-text {
-            color: #4d3d0d;
-            font-family: 'Varela Round', sans-serif;
-        }
+    .login-text {
+        color: #4d3d0d;
+        font-family: 'Varela Round', sans-serif;
+    }
 
-        .judul {
-            font-family: 'Pacifico', cursive;
-        }
+    .judul {
+        font-family: 'Pacifico', cursive;
+    }
 
-        .sub-judul {
-            font-family: 'Varela Round', sans-serif;
-        }
+    .sub-judul {
+        font-family: 'Varela Round', sans-serif;
+    }
 
-        .pacifico-regular {
-            font-family: "Pacifico", cursive;
-            font-weight: 400;
-            font-style: normal;
-        }
+    .pacifico-regular {
+        font-family: "Pacifico", cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
 
-        .varela-round-regular {
-            font-family: "Varela Round", sans-serif;
-            font-weight: 400;
-            font-style: normal;
-        }
+    .varela-round-regular {
+        font-family: "Varela Round", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
     </style>
 </head>
 
@@ -138,15 +138,15 @@
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            var loginType = document.querySelector('input[name="loginType"]:checked').value;
-            if (loginType === 'user') {
-                window.location.href = './login/loginuser.html';
-            } else if (loginType === 'admin') {
-                window.location.href = './login/loginadmin.html';
-            }
-        });
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var loginType = document.querySelector('input[name="loginType"]:checked').value;
+        if (loginType === 'user') {
+            window.location.href = './login/loginuser.php';
+        } else if (loginType === 'admin') {
+            window.location.href = './login/loginadmin.php';
+        }
+    });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>

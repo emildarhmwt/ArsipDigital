@@ -60,7 +60,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile_admin.html"
+                                        <a href="profile.html"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
@@ -103,11 +103,6 @@
                                         <input type="text" class="form-control me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                        <button type="button" class="btn btn-primary"
-                                            style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                            onclick="tambahKategori()">
-                                            <i class="bi bi-plus-square"></i> Tambah Kategori
-                                        </button>
                                     </div>
                                 </div>
 
@@ -118,7 +113,6 @@
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3">Nama</th>
                                                 <th class="fs-3">Keterangan</th>
-                                                <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody id="hourmeterTableBody">
@@ -138,15 +132,11 @@
         </div>
     </div>
     <script>
-        fetch('sidebar_admin.html')
+        fetch('sidebar_petugas.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             });
-
-        function tambahKategori() {
-            window.location.href = 'tambah_kategori.html';
-        }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

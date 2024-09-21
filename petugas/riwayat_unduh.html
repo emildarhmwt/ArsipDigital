@@ -60,7 +60,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile_admin.html"
+                                        <a href="profile.html"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
@@ -83,7 +83,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Kategori</h5>
+                        <h5 class="card-title fw-semibold mb-4">Data Riwayat Unduhan Arsip</h5>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -103,11 +103,6 @@
                                         <input type="text" class="form-control me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                        <button type="button" class="btn btn-primary"
-                                            style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                            onclick="tambahKategori()">
-                                            <i class="bi bi-plus-square"></i> Tambah Kategori
-                                        </button>
                                     </div>
                                 </div>
 
@@ -116,9 +111,9 @@
                                         <thead class="fs-4">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Nama</th>
-                                                <th class="fs-3">Keterangan</th>
-                                                <th class="fs-3">Opsi</th>
+                                                <th class="fs-3">Waktu Upload</th>
+                                                <th class="fs-3">User</th>
+                                                <th class="fs-3">Arsip yang diunduh</th>
                                             </tr>
                                         </thead>
                                         <tbody id="hourmeterTableBody">
@@ -138,7 +133,7 @@
         </div>
     </div>
     <script>
-        fetch('sidebar_admin.html')
+        fetch('sidebar_petugas.html')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
