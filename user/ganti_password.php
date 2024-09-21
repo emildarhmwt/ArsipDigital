@@ -1,11 +1,10 @@
 <?php 
-include '../koneksi.php';
-session_start();
-if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
-    header("location:../login.php?alert=belum_login");
-    exit();
-}
-?>
+    include '../koneksi.php';
+    session_start();
+    if($_SESSION['status'] != "user_login"){
+        header("location:../login.php?alert=belum_login");
+    }
+    ?>
 <!doctype html>
 <html lang="en">
 
@@ -55,21 +54,21 @@ if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
                                         class="rounded-circle me-2">
-                                    <p class="nama-profile mb-0"> Emilda [Administrator]</p>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [User]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
-                                        <a href="ganti_password.html"
+                                        <a href="ganti_password.php"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-key fs-6"></i>
                                             <p class="mb-0 fs-3">Ganti Password</p>
                                         </a>
-                                        <a href="#"
+                                        <a href="../login/logout.php"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
                                     </div>
                                 </div>
@@ -80,41 +79,39 @@ if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Ganti Password</h5>
-                        <div class="card">
-                            <div class="card-body">
-                                <?php
-                        if (isset($_GET['alert'])) {
-                            if ($_GET['alert'] == "sukses") {
-                                echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
-                            } elseif ($_GET['alert'] == "gagal") {
-                                echo "<div class='alert alert-danger'>Gagal mengganti password. Silakan coba lagi.</div>";
-                            } elseif ($_GET['alert'] == "password_mismatch") {
-                                echo "<div class='alert alert-warning'>Password dan konfirmasi password tidak cocok.</div>";
-                            } elseif ($_GET['alert'] == "password_too_short") {
-                                echo "<div class='alert alert-warning'>Password harus minimal 8 karakter.</div>";
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-4">Ganti Password</h5>
+                            <?php
+                            if (isset($_GET['alert'])) {
+                                if ($_GET['alert'] == "sukses") {
+                                    echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
+                                }
                             }
-                        }
-                        ?>
-                                <form action="ganti_password_act.php" method="post">
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Masukkan Password Baru</label>
-                                        <input type="password" class="form-control" id="password"
-                                            placeholder="Masukkan Password Baru .." name="password" required
-                                            minlength="8">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="confirm_password" class="form-label">Konfirmasi Password
-                                            Baru</label>
-                                        <input type="password" class="form-control" id="confirm_password"
-                                            placeholder="Konfirmasi Password Baru .." name="confirm_password" required
-                                            minlength="8">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
-                                        Submit</button>
-                                </form>
+                            ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <form action="ganti_pw_act.php" method="post">
+                                        <div class="mb-3">
+                                            <label for="password" class="form-label sub-judul">Password</label>
+                                            <input type="password" placeholder="Masukkan Password Baru"
+                                                required="required" autocomplete="off" name="password" id="password"
+                                                class="form-control">
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input primary" type="checkbox" value=""
+                                                    id="showPassword">
+                                                <label class="form-check-label text-dark sub-judul" for="showPassword">
+                                                    Show Password
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                            Submit</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -123,11 +120,20 @@ if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
         </div>
     </div>
     <script>
-    fetch('sidebar_user.html')
+    fetch('sidebar_user.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
+
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordInput = document.getElementById('password');
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
