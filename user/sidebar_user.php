@@ -76,7 +76,8 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link danger-hover-bg" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link danger-hover-bg" href="../login/logout.php"
+                                aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-danger rounded-3">
                                     <i class="ti ti-logout fs-7 text-danger"></i>
                                 </span>

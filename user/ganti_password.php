@@ -1,3 +1,11 @@
+<?php 
+include '../koneksi.php';
+session_start();
+if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
+    header("location:../login.php?alert=belum_login");
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -72,22 +80,41 @@
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Ganti Password</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form id="form-operation" onSubmit="return handleSubmit(event)">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Masukkan Password Baru</label>
-                                            <input type="text" class="form-control" id="shift" name="shift"
-                                                placeholder="Masukkan Password Baru">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                    </form>
-                                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Ganti Password</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <?php
+                        if (isset($_GET['alert'])) {
+                            if ($_GET['alert'] == "sukses") {
+                                echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
+                            } elseif ($_GET['alert'] == "gagal") {
+                                echo "<div class='alert alert-danger'>Gagal mengganti password. Silakan coba lagi.</div>";
+                            } elseif ($_GET['alert'] == "password_mismatch") {
+                                echo "<div class='alert alert-warning'>Password dan konfirmasi password tidak cocok.</div>";
+                            } elseif ($_GET['alert'] == "password_too_short") {
+                                echo "<div class='alert alert-warning'>Password harus minimal 8 karakter.</div>";
+                            }
+                        }
+                        ?>
+                                <form action="ganti_password_act.php" method="post">
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">Masukkan Password Baru</label>
+                                        <input type="password" class="form-control" id="password"
+                                            placeholder="Masukkan Password Baru .." name="password" required
+                                            minlength="8">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirm_password" class="form-label">Konfirmasi Password
+                                            Baru</label>
+                                        <input type="password" class="form-control" id="confirm_password"
+                                            placeholder="Konfirmasi Password Baru .." name="confirm_password" required
+                                            minlength="8">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -96,11 +123,11 @@
         </div>
     </div>
     <script>
-        fetch('sidebar_user.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-            });
+    fetch('sidebar_user.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

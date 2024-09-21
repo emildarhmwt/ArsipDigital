@@ -11,8 +11,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Report Application</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logo2.png" />
+    <title>Arsip Digital</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
@@ -184,11 +184,13 @@
                                                         <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['arsip_file']; ?>"><i class="fa fa-download"></i></a> -->
                                                         <a target="_blank" class="btn btn-default"
                                                             href="arsip_download.php?id=<?php echo $p['arsip_id']; ?>"><i
-                                                                class="fa fa-download"></i></a>
+                                                                class="ti ti-download fs-7"></i></a>
                                                         <a target="_blank"
                                                             href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
-                                                            class="btn btn-default"><i class="fa fa-search"></i>
-                                                            Preview</a>
+                                                            class="btn btn-default text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-eye fs-7 me-1"></i>
+                                                            <span>Preview</span>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>
