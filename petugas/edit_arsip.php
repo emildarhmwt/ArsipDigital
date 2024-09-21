@@ -1,3 +1,10 @@
+<?php
+include '../koneksi.php';
+session_start();
+if ($_SESSION['status'] != "petugas_login") {
+    header("location:../login.php?alert=belum_login");
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -5,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Report Application</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logo2.png" />
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
@@ -51,21 +58,21 @@
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
                                         class="rounded-circle me-2">
-                                    <p class="nama-profile mb-0"> Emilda [Administrator]</p>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Petugas]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
-                                        <a href="ganti_password.html"
+                                        <a href="ganti_password.php"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-key fs-6"></i>
                                             <p class="mb-0 fs-3">Ganti Password</p>
                                         </a>
-                                        <a href="#"
+                                        <a href="../login/logout.php"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
                                     </div>
                                 </div>
@@ -81,36 +88,50 @@
                         <div class="card-body">
                             <h5 class="card-title fw-semibold mb-4">Edit Arsip</h5>
                             <div class="card">
-                                <div class="card-body">
-                                    <form id="form-operation" onSubmit="return handleSubmit(event)">
+                                <div class="card-body"><?php
+                                                        $id = $_GET['id'];
+                                                        $data = mysqli_query($koneksi, "select * from arsip where arsip_id='$id'");
+                                                        while ($d = mysqli_fetch_array($data)) {
+                                                        ?>
+
+                                    <form method="post" action="arsip_update.php" enctype="multipart/form-data">
                                         <div class="mb-3">
                                             <label for="shift" class="form-label">Kode Arsip</label>
-                                            <input type="text" class="form-control" id="shift" name="shift"
-                                                placeholder="Input Data" required>
+                                            <input type="hidden" name="id" value="<?php echo $d['arsip_id']; ?>">
+                                            <input type="text" class="form-control" name="kode" required="required"
+                                                value="<?php echo $d['arsip_kode']; ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="shift" class="form-label">Nama Arsip</label>
-                                            <input type="text" class="form-control" id="shift" name="shift"
-                                                placeholder="Input Data" required>
+                                            <input type="text" class="form-control" name="nama" required="required"
+                                                value="<?php echo $d['arsip_nama']; ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="shift" class="form-label">Kategori</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="form-control" name="kategori" required="required">
+                                                <option value="">Pilih kategori</option>
+                                                <?php
+                                                            $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                                            while ($k = mysqli_fetch_array($kategori)) {
+                                                    ?>
+                                                <option <?php if ($k['kategori_id'] == $d['arsip_kategori']) {
+                                                                    echo "selected='selected'";
+                                                                } ?> value="<?php echo $k['kategori_id']; ?>">
+                                                    <?php echo $k['kategori_nama']; ?></option>
+                                                <?php
+                                                            }
+                                                    ?>
                                             </select>
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleFormControlTextarea1"
                                                 class="form-label">Keterangan</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
-                                                placeholder="Input Data" required></textarea>
+                                            <textarea class="form-control" name="keterangan"
+                                                required="required"><?php echo $d['arsip_keterangan']; ?></textarea>
                                         </div>
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">File</label>
-                                            <input class="form-control" type="file" id="formFile">
+                                            <input class="form-control" type="file" name="file">
                                             <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                         </div>
                                         <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
@@ -119,6 +140,9 @@
                                                 class="bi bi-arrow-left-circle"></i>
                                             Back</button>
                                     </form>
+                                    <?php
+                                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +159,7 @@
         });
 
     function goBack() {
-        window.location.href = 'arsip_saya.html';
+        window.location.href = 'arsip_saya.php';
     }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

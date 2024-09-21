@@ -16,7 +16,7 @@ $filename = $_FILES['foto']['name'];
 if($filename == ""){
 
 	mysqli_query($koneksi, "update user set user_nama='$nama', user_username='$username' where user_id='$id'")or die(mysqli_error($koneksi));
-	header("location:profil.php?alert=sukses");
+	header("location:profile.php?alert=sukses");
 
 }else{
 
@@ -34,11 +34,11 @@ if($filename == ""){
 		move_uploaded_file($_FILES['foto']['tmp_name'], '../gambar/user/'.$rand.'_'.$filename);
 		$nama_file = $rand.'_'.$filename;
 		mysqli_query($koneksi, "update user set user_nama='$nama', user_username='$username', user_foto='$nama_file' where user_id='$id'")or die(mysqli_error($koneksi));
-		header("location:profil.php?alert=sukses");
+		header("location:profile.php?alert=sukses");
 
 	}else{
 
-		header("location:profil.php?alert=gagal");
+		header("location:profile.php?alert=gagal");
 	}
 
 }

@@ -22,7 +22,7 @@ if($akses == "admin"){
 
 		header("location:../admin/dashboard_admin.php");
 	}else{
-		header("location:login.php?alert=gagal");
+		header("location:loginadmin.php?alert=gagal");
 	}
 
 }else{
@@ -40,7 +40,7 @@ if($akses == "admin"){
 
 		header("location:../petugas/dashboard_petugas.php");
 	}else{
-		header("location:login.php?alert=gagal");
+		header("location:loginadmin.php?alert=gagal");
 	}
 
 }

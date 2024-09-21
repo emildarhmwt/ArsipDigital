@@ -1,3 +1,10 @@
+<?php
+include '../koneksi.php';
+session_start();
+if ($_SESSION['status'] != "petugas_login") {
+    header("location:../login.php?alert=belum_login");
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -47,21 +54,21 @@
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
                                         class="rounded-circle me-2">
-                                    <p class="nama-profile mb-0"> Emilda [Administrator]</p>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Petugas]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
-                                        <a href="ganti_password.html"
+                                        <a href="ganti_password.php"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-key fs-6"></i>
                                             <p class="mb-0 fs-3">Ganti Password</p>
                                         </a>
-                                        <a href="#"
+                                        <a href="../login/logout.php"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
                                     </div>
                                 </div>
@@ -83,12 +90,29 @@
                     <div class="row">
                         <!-- Column -->
                         <div class="col-lg-4 col-xlg-3 col-md-5">
+                            <?php
+                            $id = $_SESSION['id'];
+                            $saya = mysqli_query($koneksi, "select * from petugas where petugas_id='$id'");
+                            $s = mysqli_fetch_assoc($saya);
+                            ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <center class="m-t-30"> <img src="../assets/images/login.png" class="rounded-circle"
-                                            width="150" />
-                                        <h4 class="card-title m-t-10">Emilda Rahmawati</h4>
-                                        <h6 class="card-subtitle">Admin</h6>
+                                    <center class="m-t-30">
+                                        <?php
+                                        if ($s['petugas_foto'] == "") {
+                                        ?>
+                                        <img class="img-user" src="../gambar/sistem/user.png" width="150" height="150">
+                                        <?php
+                                        } else {
+                                        ?>
+                                        <img class="img-user" src="../gambar/petugas/<?php echo $s['petugas_foto']; ?>"
+                                            width="150" height="150">
+                                        <?php
+                                        }
+                                        ?>
+                                        <h4 class="card-title m-t-10"> <a class="cards-hd-dn"
+                                                href="#"><?php echo $s['petugas_nama']; ?></a> </h4>
+                                        <h6 class="card-subtitle">Petugas</h6>
                                     </center>
                                 </div>
                             </div>
@@ -98,24 +122,34 @@
                         <div class="col-lg-8 col-xlg-9 col-md-7">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2">
+                                    <?php
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "sukses") {
+                                            echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
+                                        }
+                                    }
+                                    ?>
+                                    <form action="profil_act.php" method="post" enctype="multipart/form-data">
                                         <div class="form-group mb-3">
                                             <label class="col-md-12">Nama</label>
                                             <div class="col-md-12">
-                                                <input type="text" class="form-control form-control-line">
+                                                <input type="text" class="form-control" placeholder="Masukkan Nama .."
+                                                    name="nama" required="required"
+                                                    value="<?php echo $s['petugas_nama'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="example-email" class="col-md-12">Username</label>
                                             <div class="col-md-12">
-                                                <input type="email" class="form-control form-control-line"
-                                                    name="example-email" id="example-email">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Masukkan Username .." name="username"
+                                                    required="required" value="<?php echo $s['petugas_username'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Foto</label>
-                                                <input class="form-control" type="file" id="formFile">
+                                                <label for="foto" class="form-label">Foto</label>
+                                                <input class="form-control" type="file" name="foto">
                                                 <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                             </div>
                                         </div>

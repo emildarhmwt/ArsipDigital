@@ -19,5 +19,5 @@ if($cek > 0){
 
 	header("location:../user/dashboard_user.php");
 }else{
-	header("location:user_login.php?alert=gagal");
+	header("location:loginuser.php?alert=gagal");
 }

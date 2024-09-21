@@ -1,11 +1,18 @@
+<?php
+include '../koneksi.php';
+session_start();
+if ($_SESSION['status'] != "petugas_login") {
+    header("location:../login.php?alert=belum_login");
+}
+?>
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Report Application</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logo2.png" />
+    <title>Arsip Digital</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
@@ -54,21 +61,21 @@
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
                                         class="rounded-circle me-2">
-                                    <p class="nama-profile mb-0"> Emilda [Administrator]</p>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Petugas]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
-                                        <a href="ganti_password.html"
+                                        <a href="ganti_password.php"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-key fs-6"></i>
                                             <p class="mb-0 fs-3">Ganti Password</p>
                                         </a>
-                                        <a href="#"
+                                        <a href="../login/logout.php"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
                                     </div>
                                 </div>
@@ -109,12 +116,42 @@
                                         <thead class="fs-4">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Foto</th>
+                                                <th class="fs-3" style="width: 10%;">Foto</th>
                                                 <th class="fs-3">Nama</th>
                                                 <th class="fs-3">Username</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="hourmeterTableBody">
+                                        <tbody>
+                                            <?php
+                                            include '../koneksi.php';
+                                            $no = 1;
+                                            $user = mysqli_query($koneksi, "SELECT * FROM user ORDER BY user_id DESC");
+                                            while ($p = mysqli_fetch_array($user)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td>
+                                                    <?php
+                                                        if ($p['user_foto'] == "") {
+                                                        ?>
+                                                    <img class="img-user" src="../gambar/sistem/user.png" width="50"
+                                                        height="50">
+                                                    <?php
+                                                        } else {
+                                                        ?>
+                                                    <img class="img-user"
+                                                        src="../gambar/user/<?php echo $p['user_foto']; ?>" width="50"
+                                                        height="50">
+                                                    <?php
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td><?php echo $p['user_nama'] ?></td>
+                                                <td><?php echo $p['user_username'] ?></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -136,6 +173,81 @@
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
+
+    // Fungsi untuk menangani paginasi dan pencarian
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.querySelector('.table');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+        const searchInput = document.getElementById('searchInput');
+        const paginationContainer = document.getElementById('paginationContainer');
+
+        let currentPage = 1;
+        let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+        function displayTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedRows = rows.slice(start, end);
+
+            tbody.innerHTML = '';
+            paginatedRows.forEach(row => tbody.appendChild(row));
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const pageCount = Math.ceil(rows.length / rowsPerPage);
+            paginationContainer.innerHTML = '';
+
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                if (i === currentPage) li.classList.add('active');
+
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.href = '#';
+                a.textContent = i;
+
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayTable(currentPage);
+                });
+
+                li.appendChild(a);
+                paginationContainer.appendChild(li);
+            }
+        }
+
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredRows = rows.filter(row => {
+                return Array.from(row.cells).some(cell =>
+                    cell.textContent.toLowerCase().includes(searchTerm)
+                );
+            });
+
+            tbody.innerHTML = '';
+            filteredRows.forEach(row => tbody.appendChild(row));
+
+            currentPage = 1;
+            updatePagination();
+        }
+
+        rowsPerPageSelect.addEventListener('change', () => {
+            rowsPerPage = parseInt(rowsPerPageSelect.value);
+            currentPage = 1;
+            displayTable(currentPage);
+        });
+
+        searchInput.addEventListener('input', filterTable);
+
+        // Inisialisasi tampilan tabel
+        displayTable(currentPage);
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

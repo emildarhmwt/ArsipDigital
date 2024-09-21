@@ -26,6 +26,7 @@ if ($_SESSION['status'] != "petugas_login") {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -37,12 +38,6 @@ if ($_SESSION['status'] != "petugas_login") {
                             <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
                                 href="javascript:void(0)">
                                 <i class="ti ti-menu-2"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                                <i class="ti ti-bell-ringing"></i>
-                                <div class="notification bg-primary rounded-circle"></div>
                             </a>
                         </li>
                     </ul>
@@ -78,30 +73,79 @@ if ($_SESSION['status'] != "petugas_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Ganti Password</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <?php
-                                    if (isset($_GET['alert'])) {
-                                        if ($_GET['alert'] == "sukses") {
-                                            echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
-                                        }
-                                    }
-                                    ?>
-                                    <form method="POST" action="ganti_pw_act.php">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Masukkan Password Baru</label>
-                                            <input type="password" class="form-control"
-                                                placeholder="Masukkan Password Baru .." name="password"
-                                                required="required" min="5">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                    </form>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Preview Arsip</h5>
+
+                        <a href="arsip_saya.php" class="btn btn-secondary mb-3">
+                            <i class="bi bi-arrow-left"></i> Back
+                        </a>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <?php
+                                $id = $_GET['id'];
+                                $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
+                                while ($d = mysqli_fetch_array($data)) {
+                                ?>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Kode Arsip</th>
+                                                <td><?php echo $d['arsip_kode']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Waktu Upload</th>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($d['arsip_waktu_upload'])) ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nama File</th>
+                                                <td><?php echo $d['arsip_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kategori</th>
+                                                <td><?php echo $d['kategori_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jenis File</th>
+                                                <td><?php echo $d['arsip_jenis']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Petugas Pengupload</th>
+                                                <td><?php echo $d['petugas_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Keterangan</th>
+                                                <td><?php echo $d['arsip_keterangan']; ?></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <?php
+                                            if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
+                                            ?>
+                                        <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
+                                            alt="<?php echo $d['arsip_nama']; ?>">
+                                        <?php
+                                            } elseif ($d['arsip_jenis'] == "pdf") {
+                                            ?>
+                                        <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
+                                            width="100%" height="600px" />
+                                        <?php
+                                            } else {
+                                            ?>
+                                        <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
+                                                href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
+                                        </p>
+                                        <?php
+                                            }
+                                            ?>
+                                    </div>
                                 </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
