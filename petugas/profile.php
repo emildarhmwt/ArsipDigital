@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Report Application</title>
-    <link rel="shortcut icon" type="image/png" href="./assets/images/logos/logo2.png" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Arsip Digital</title>
+    <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <style>
+    .textinfo {
+        font-size: 12px;
+    }
+    </style>
 </head>
 
 <body>
@@ -19,7 +20,6 @@
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
-        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -52,8 +52,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
@@ -73,72 +72,83 @@
             </header>
             <!--  Header End -->
             <div class="container-fluid">
+                <div class="page-breadcrumb">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <h1 class="mb-5 fw-bold">Profile</h1>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Upload Arsip</h5>
+                    <div class="row">
+                        <!-- Column -->
+                        <div class="col-lg-4 col-xlg-3 col-md-5">
                             <div class="card">
                                 <div class="card-body">
-                                    <form id="form-operation" onSubmit="return handleSubmit(event)">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Arsip</label>
-                                            <input type="text" class="form-control" id="shift" name="shift"
-                                                placeholder="Input Data" required>
+                                    <center class="m-t-30"> <img src="../assets/images/login.png" class="rounded-circle"
+                                            width="150" />
+                                        <h4 class="card-title m-t-10">Emilda Rahmawati</h4>
+                                        <h6 class="card-subtitle">Admin</h6>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="form-horizontal form-material mx-2">
+                                        <div class="form-group mb-3">
+                                            <label class="col-md-12">Nama</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control form-control-line">
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Arsip</label>
-                                            <input type="text" class="form-control" id="shift" name="shift"
-                                                placeholder="Input Data" required>
+                                        <div class="form-group mb-3">
+                                            <label for="example-email" class="col-md-12">Username</label>
+                                            <div class="col-md-12">
+                                                <input type="email" class="form-control form-control-line"
+                                                    name="example-email" id="example-email">
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kategori</label>
-                                            <select class="form-select" aria-label="Default select example">
-                                                <option selected>Open this select menu</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
+                                        <div class="form-group mb-3">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">Foto</label>
+                                                <input class="form-control" type="file" id="formFile">
+                                                <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
-                                                placeholder="Input Data" required></textarea>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                                    Submit</button>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">File</label>
-                                            <input class="form-control" type="file" id="formFile">
-                                        </div>
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-primary" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
                                     </form>
                                 </div>
                             </div>
                         </div>
+                        <!-- Column -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        fetch('sidebar_petugas.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-            });
-
-        function goBack() {
-            window.location.href = 'arsip_saya.html';
-        }
+    fetch('sidebar_petugas.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 
 </html>

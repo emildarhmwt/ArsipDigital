@@ -18,7 +18,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-simplebar>
                 <div class="d-flex mb-4 align-items-center justify-content-between">
-                    <a href="dashboard_petugas.html" class="text-nowrap logo-img ms-0 ms-md-1">
+                    <a href="dashboard_petugas.php" class="text-nowrap logo-img ms-0 ms-md-1">
                         <img src="../assets/images/logoweb.png" width="200" height="auto">
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
@@ -33,7 +33,7 @@
                             <span class="hide-menu">Home</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_petugas.html"
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_petugas.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-primary rounded-3">
                                     <i class="ti ti-layout-dashboard fs-7 text-primary"></i>
@@ -54,7 +54,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link danger-hover-bg" href="data_kategori.html"
+                            <a class="sidebar-link sidebar-link danger-hover-bg" href="data_kategori.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-danger rounded-3">
                                     <i class="ti ti-category fs-7 text-danger"></i>
@@ -63,7 +63,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="arsip_saya.html"
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="arsip_saya.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-warning rounded-3">
                                     <i class="ti ti-archive fs-7 text-warning"></i>
@@ -72,7 +72,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link danger-hover-bg" href="riwayat_unduh.html"
+                            <a class="sidebar-link sidebar-link danger-hover-bg" href="riwayat_unduh.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-danger rounded-3">
                                     <i class="ti ti-book-download fs-7 text-danger"></i>
@@ -85,7 +85,7 @@
                             <span class="hide-menu">Pengguna</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link danger-hover-bg" href="data_user.html"
+                            <a class="sidebar-link sidebar-link danger-hover-bg" href="data_user.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-danger rounded-3">
                                     <i class="ti ti-user-plus fs-7 text-danger"></i>
@@ -98,7 +98,7 @@
                             <span class="hide-menu">Profile</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="ganti_password.html"
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="ganti_password.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-warning rounded-3">
                                     <i class="ti ti-key fs-7 text-warning"></i>
@@ -107,7 +107,8 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link danger-hover-bg" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link danger-hover-bg" href="../login/logout.php"
+                                aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-danger rounded-3">
                                     <i class="ti ti-logout fs-7 text-danger"></i>
                                 </span>
@@ -123,12 +124,12 @@
         <!--  Sidebar End -->
     </div>
     <script>
-        document.getElementById('sidebarToggle').addEventListener('click', function () {
-            document.body.classList.toggle('sidebar-collapsed');
-            const icon = this.querySelector('i');
-            icon.classList.toggle('ti-chevrons-left');
-            icon.classList.toggle('ti-chevrons-right');
-        });
+    document.getElementById('sidebarToggle').addEventListener('click', function() {
+        document.body.classList.toggle('sidebar-collapsed');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('ti-chevrons-left');
+        icon.classList.toggle('ti-chevrons-right');
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

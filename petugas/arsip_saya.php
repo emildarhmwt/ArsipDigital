@@ -12,12 +12,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <style>
-        #grup,
-        #lokasi {
-            word-wrap: break-word;
-            word-break: break-all;
-            white-space: normal;
-        }
+    #grup,
+    #lokasi {
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
+    }
     </style>
 </head>
 
@@ -27,7 +27,6 @@
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
-        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -60,8 +59,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
@@ -83,7 +81,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data User</h5>
+                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -103,6 +101,11 @@
                                         <input type="text" class="form-control me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                        <button type="button" class="btn btn-primary"
+                                            style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
+                                            onclick="tambahArsip()">
+                                            <i class="ti ti-book-upload fs-5"></i> Upload Arsip
+                                        </button>
                                     </div>
                                 </div>
 
@@ -111,9 +114,12 @@
                                         <thead class="fs-4">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Foto</th>
-                                                <th class="fs-3">Nama</th>
-                                                <th class="fs-3">Username</th>
+                                                <th class="fs-3">Waktu Upload</th>
+                                                <th class="fs-3">Arsip</th>
+                                                <th class="fs-3">Kategori</th>
+                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3">Keterangan</th>
+                                                <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody id="hourmeterTableBody">
@@ -133,11 +139,15 @@
         </div>
     </div>
     <script>
-        fetch('sidebar_petugas.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-            });
+    fetch('sidebar_petugas.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
+
+    function tambahArsip() {
+        window.location.href = 'tambah_arsip.html';
+    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

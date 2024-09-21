@@ -1,3 +1,10 @@
+<?php
+include '../koneksi.php';
+session_start();
+if ($_SESSION['status'] != "petugas_login") {
+    header("location:../login.php?alert=belum_login");
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -11,14 +18,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-    <style>
-        #grup,
-        #lokasi {
-            word-wrap: break-word;
-            word-break: break-all;
-            white-space: normal;
-        }
-    </style>
 </head>
 
 <body>
@@ -27,7 +26,6 @@
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
-        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -55,13 +53,12 @@
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
                                         class="rounded-circle me-2">
-                                    <p class="nama-profile mb-0"> Emilda [Administrator]</p>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Petugas]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
@@ -83,7 +80,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
+                        <h5 class="card-title fw-semibold mb-4">Data Kategori</h5>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -103,11 +100,6 @@
                                         <input type="text" class="form-control me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                        <button type="button" class="btn btn-primary"
-                                            style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                            onclick="tambahArsip()">
-                                            <i class="ti ti-book-upload fs-5"></i> Upload Arsip
-                                        </button>
                                     </div>
                                 </div>
 
@@ -116,15 +108,24 @@
                                         <thead class="fs-4">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
-                                                <th class="fs-3">Arsip</th>
-                                                <th class="fs-3">Kategori</th>
-                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3">Nama</th>
                                                 <th class="fs-3">Keterangan</th>
-                                                <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="hourmeterTableBody">
+                                        <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                            while ($p = mysqli_fetch_array($kategori)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['kategori_nama'] ?></td>
+                                                <td><?php echo $p['kategori_keterangan'] ?></td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -141,15 +142,86 @@
         </div>
     </div>
     <script>
-        fetch('sidebar_petugas.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
+    fetch('sidebar_petugas.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
+
+    // Fungsi untuk menangani paginasi dan pencarian
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.querySelector('.table');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+        const searchInput = document.getElementById('searchInput');
+        const paginationContainer = document.getElementById('paginationContainer');
+
+        let currentPage = 1;
+        let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+        function displayTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedRows = rows.slice(start, end);
+
+            tbody.innerHTML = '';
+            paginatedRows.forEach(row => tbody.appendChild(row));
+
+            updatePagination();
+        }
+
+        function updatePagination() {
+            const pageCount = Math.ceil(rows.length / rowsPerPage);
+            paginationContainer.innerHTML = '';
+
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                if (i === currentPage) li.classList.add('active');
+
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.href = '#';
+                a.textContent = i;
+
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayTable(currentPage);
+                });
+
+                li.appendChild(a);
+                paginationContainer.appendChild(li);
+            }
+        }
+
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredRows = rows.filter(row => {
+                return Array.from(row.cells).some(cell =>
+                    cell.textContent.toLowerCase().includes(searchTerm)
+                );
             });
 
-        function tambahArsip() {
-            window.location.href = 'tambah_arsip.html';
+            tbody.innerHTML = '';
+            filteredRows.forEach(row => tbody.appendChild(row));
+
+            currentPage = 1;
+            updatePagination();
         }
+
+        rowsPerPageSelect.addEventListener('change', () => {
+            rowsPerPage = parseInt(rowsPerPageSelect.value);
+            currentPage = 1;
+            displayTable(currentPage);
+        });
+
+        searchInput.addEventListener('input', filterTable);
+
+        // Inisialisasi tampilan tabel
+        displayTable(currentPage);
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

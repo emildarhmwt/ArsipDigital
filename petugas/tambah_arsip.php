@@ -11,14 +11,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
-    <style>
-        #grup,
-        #lokasi {
-            word-wrap: break-word;
-            word-break: break-all;
-            white-space: normal;
-        }
-    </style>
 </head>
 
 <body>
@@ -27,7 +19,6 @@
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
-        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -60,8 +51,7 @@
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.html"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.html" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
@@ -81,49 +71,49 @@
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Kategori</h5>
-                        <!-- table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                        <select id="rowsPerPageSelect" class="form-select"
-                                            style="width: auto; display: inline-block;">
-                                            <option value="5">5</option>
-                                            <option value="10" selected>10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span> data per halaman</span>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                    </div>
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-4">Upload Arsip</h5>
+                            <div class="card">
+                                <div class="card-body">
+                                    <form id="form-operation" onSubmit="return handleSubmit(event)">
+                                        <div class="mb-3">
+                                            <label for="shift" class="form-label">Kode Arsip</label>
+                                            <input type="text" class="form-control" id="shift" name="shift"
+                                                placeholder="Input Data" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="shift" class="form-label">Nama Arsip</label>
+                                            <input type="text" class="form-control" id="shift" name="shift"
+                                                placeholder="Input Data" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="shift" class="form-label">Kategori</label>
+                                            <select class="form-select" aria-label="Default select example">
+                                                <option selected>Open this select menu</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1"
+                                                class="form-label">Keterangan</label>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"
+                                                placeholder="Input Data" required></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">File</label>
+                                            <input class="form-control" type="file" id="formFile">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                            Submit</button>
+                                        <button type="button" class="btn btn-primary" onclick="goBack()"><i
+                                                class="bi bi-arrow-left-circle"></i>
+                                            Back</button>
+                                    </form>
                                 </div>
-
-                                <div class="table-responsive products-table" data-simplebar>
-                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
-                                            <tr>
-                                                <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Nama</th>
-                                                <th class="fs-3">Keterangan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="hourmeterTableBody">
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>
@@ -132,11 +122,15 @@
         </div>
     </div>
     <script>
-        fetch('sidebar_petugas.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-            });
+    fetch('sidebar_petugas.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
+
+    function goBack() {
+        window.location.href = 'arsip_saya.html';
+    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
