@@ -1,3 +1,10 @@
+<?php
+include '../koneksi.php';
+session_start();
+if ($_SESSION['status'] != "user_login") {
+    header("location:../login.php?alert=belum_login");
+}
+?>
 <!doctype html>
 <html lang="en">
 
@@ -31,12 +38,6 @@
                             <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
                                 href="javascript:void(0)">
                                 <i class="ti ti-menu-2"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                                <i class="ti ti-bell-ringing"></i>
-                                <div class="notification bg-primary rounded-circle"></div>
                             </a>
                         </li>
                     </ul>
@@ -83,12 +84,28 @@
                     <div class="row">
                         <!-- Column -->
                         <div class="col-lg-4 col-xlg-3 col-md-5">
+                            <?php
+                            $id = $_SESSION['id'];
+                            $saya = mysqli_query($koneksi, "select * from user where user_id='$id'");
+                            $s = mysqli_fetch_assoc($saya);
+                            ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <center class="m-t-30"> <img src="../assets/images/login.png" class="rounded-circle"
-                                            width="150" />
-                                        <h4 class="card-title m-t-10">Emilda Rahmawati</h4>
-                                        <h6 class="card-subtitle">Admin</h6>
+                                    <center class="m-t-30">
+                                        <?php
+                                        if ($s['user_foto'] == "") {
+                                        ?>
+                                        <img class="img-user" src="../gambar/sistem/user.png" width="150" height="150">
+                                        <?php
+                                        } else {
+                                        ?>
+                                        <img class="img-user" src="../gambar/user/<?php echo $s['user_foto']; ?>"
+                                            width="150" height="150">
+                                        <?php
+                                        }
+                                        ?>
+                                        <h4 class="card-title m-t-10"><?php echo $s['user_nama']; ?></h4>
+                                        <h6 class="card-subtitle">User</h6>
                                     </center>
                                 </div>
                             </div>
@@ -96,26 +113,37 @@
                         <!-- Column -->
                         <!-- Column -->
                         <div class="col-lg-8 col-xlg-9 col-md-7">
+                            <?php
+                            if (isset($_GET['alert'])) {
+                                if ($_GET['alert'] == "sukses") {
+                                    echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
+                                }
+                            }
+                            ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2">
+                                    <form class="form-horizontal form-material mx-2" action="profile_act.php"
+                                        method="post" enctype="multipart/form-data">
                                         <div class="form-group mb-3">
                                             <label class="col-md-12">Nama</label>
                                             <div class="col-md-12">
-                                                <input type="text" class="form-control form-control-line">
+                                                <input type="text" class="form-control" placeholder="Masukkan Nama .."
+                                                    name="nama" required="required"
+                                                    value="<?php echo $s['user_nama'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="example-email" class="col-md-12">Username</label>
                                             <div class="col-md-12">
-                                                <input type="email" class="form-control form-control-line"
-                                                    name="example-email" id="example-email">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Masukkan Username .." name="username"
+                                                    required="required" value="<?php echo $s['user_username'] ?>">
                                             </div>
                                         </div>
                                         <div class="form-group mb-3">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Foto</label>
-                                                <input class="form-control" type="file" id="formFile">
+                                                <label for="foto" class="form-label">Foto</label>
+                                                <input class="form-control" type="file" name="foto">
                                                 <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                             </div>
                                         </div>
@@ -136,7 +164,7 @@
         </div>
     </div>
     <script>
-    fetch('sidebar_user.html')
+    fetch('sidebar_user.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
