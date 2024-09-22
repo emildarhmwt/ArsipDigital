@@ -247,7 +247,7 @@
                                      <?php
                                     if (isset($_GET['alert'])) {
                                         if ($_GET['alert'] == "sukses") {
-                                            echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
+                                            echo "<div class='alert alert-success'>Profile anda berhasil diganti!</div>";
                                         }
                                     }
                                     ?>

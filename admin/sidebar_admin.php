@@ -1,0 +1,152 @@
+<!doctype php>
+<php lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Arsip Digital</title>
+        <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
+        <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    </head>
+
+    <body>
+        <!--  Body Wrapper -->
+        <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+            data-sidebar-position="fixed" data-header-position="fixed">
+            <!-- Sidebar Start -->
+            <aside class="left-sidebar">
+                <!-- Sidebar scroll-->
+                <div class="scroll-sidebar" data-simplebar>
+                    <div class="d-flex mb-4 align-items-center justify-content-between">
+                        <a href="dashboard_admin.php" class="text-nowrap logo-img ms-0 ms-md-1">
+                            <img src="../assets/images/logoweb.png" width="200" height="auto">
+                        </a>
+                        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                            <i class="ti ti-x fs-8"></i>
+                        </div>
+                    </div>
+                    <!-- Sidebar navigation-->
+                    <nav class="sidebar-nav">
+                        <ul id="sidebarnav" class="mb-4 pb-2">
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
+                                <span class="hide-menu">Home</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_admin.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                        <i class="ti ti-layout-dashboard fs-7 text-primary"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Dashboard</span>
+                                </a>
+                            </li>
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
+                                <span class="hide-menu">Menu</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                        <i class="ti ti-file-analytics fs-7 text-warning"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Data </span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link danger-hover-bg" href="data_kategori.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
+                                        <i class="ti ti-category fs-7 text-danger"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Data Kategori</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link warning-hover-bg" href="data_arsip.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                        <i class="ti ti-archive fs-7 text-warning"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Data Arsip</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link danger-hover-bg" href="riwayat_unduh.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
+                                        <i class="ti ti-book-download fs-7 text-danger"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Riwayat Unduh</span>
+                                </a>
+                            </li>
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
+                                <span class="hide-menu">Pengguna</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link warning-hover-bg" href="data_petugas.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                        <i class="ti ti-user-plus fs-7 text-warning"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Data Petugas</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link danger-hover-bg" href="data_user.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
+                                        <i class="ti ti-user-plus fs-7 text-danger"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Data User</span>
+                                </a>
+                            </li>
+                            <li class="nav-small-cap">
+                                <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
+                                <span class="hide-menu">Profil</span>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link warning-hover-bg" href="ganti_password.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                        <i class="ti ti-key fs-7 text-warning"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Ganti Password</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link danger-hover-bg" href="../login/logout.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
+                                        <i class="ti ti-logout fs-7 text-danger"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1">Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <!-- End Sidebar navigation -->
+                </div>
+                <!-- End Sidebar scroll-->
+            </aside>
+            <!--  Sidebar End -->
+        </div>
+        <script>
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.body.classList.toggle('sidebar-collapsed');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('ti-chevrons-left');
+            icon.classList.toggle('ti-chevrons-right');
+        });
+        </script>
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/sidebarmenu.js"></script>
+        <script src="../assets/js/app.min.js"></script>
+        <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        <script src="../assets/js/dashboard.js"></script>
+    </body>
+
+</php>

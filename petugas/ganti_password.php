@@ -218,8 +218,17 @@
                                          <div class="mb-3">
                                              <label for="shift" class="form-label">Masukkan Password Baru</label>
                                              <input type="password" class="form-control"
-                                                 placeholder="Masukkan Password Baru .." name="password"
+                                                 placeholder="Masukkan Password Baru .." name="password" id="password"
                                                  required="required" min="5">
+                                         </div>
+                                         <div class="d-flex align-items-center justify-content-between mb-4">
+                                             <div class="form-check">
+                                                 <input class="form-check-input primary" type="checkbox" value=""
+                                                     id="showPassword">
+                                                 <label class="form-check-label text-dark sub-judul" for="showPassword">
+                                                     Show Password
+                                                 </label>
+                                             </div>
                                          </div>
                                          <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
                                              Submit</button>
@@ -238,6 +247,15 @@
          .then(data => {
              document.getElementById('sidebar').innerHTML = data;
          });
+
+     document.getElementById('showPassword').addEventListener('change', function() {
+         var passwordInput = document.getElementById('password');
+         if (this.checked) {
+             passwordInput.type = 'text';
+         } else {
+             passwordInput.type = 'password';
+         }
+     });
      </script>
      <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
      <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -294,22 +294,22 @@
 
                                                      <div class="btn-group mb-3">
                                                          <a target="_blank" class="btn btn-default btn-sm"
-                                                             href="../arsip/<?php echo $p['arsip_file']; ?>"><i
-                                                                 class="ti ti-download fs-5"></i>
+                                                             href="../arsip/<?php echo $p['arsip_file']; ?>" download><i
+                                                                 class="ti ti-download fs-7"></i>
                                                          </a>
                                                          <a target="_blank"
                                                              href="arsip_preview_saya.php?id=<?php echo $p['arsip_id']; ?>"
                                                              class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center"><i
-                                                                 class="ti ti-eye fs-5"></i>
+                                                                 class="ti ti-eye fs-7"></i>
                                                          </a>
                                                      </div>
                                                      <div class="btn-group">
                                                          <a href="edit_arsip.php?id=<?php echo $p['arsip_id']; ?>"
                                                              class="btn btn-default btn-sm"><i
-                                                                 class="ti ti-edit fs-5"></i></a>
+                                                                 class="ti ti-edit fs-7"></i></a>
                                                          <button type="button" class="btn btn-default btn-sm"
                                                              onclick="hapusArsip(<?php echo $p['arsip_id']; ?>)">
-                                                             <i class="ti ti-trash fs-5"></i>
+                                                             <i class="ti ti-trash fs-7"></i>
                                                          </button>
                                                      </div>
                                                  </td>
