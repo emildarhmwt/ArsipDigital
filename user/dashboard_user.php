@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
@@ -15,11 +15,47 @@ if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
     <title>Arsip Digital</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
+        rel="stylesheet">
+    <style>
+    .navbar-judul {
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 20px;
+        font-family: "Playwrite DE Grund", cursive;
+        display: flex;
+        align-items: center;
+        margin-top: 17px;
+        color: #4e6a7d;
+    }
+
+    .pacifico-regular {
+        font-family: "Pacifico", cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .varela-round-regular {
+        font-family: "Varela Round", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .playwrite-de-grund {
+        font-family: "Playwrite DE Grund", cursive;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-weight: 400;
+    }
+    </style>
 </head>
 
 <body>
     <!--  Body Wrapper -->
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+    <div class=" page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
@@ -36,14 +72,32 @@ if(!isset($_SESSION['status']) || $_SESSION['status'] != "user_login"){
                                 <i class="ti ti-menu-2"></i>
                             </a>
                         </li>
+                        <li>
+                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                        </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover d-flex align-items-center" href="javascript:void(0)"
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
-                                        class="rounded-circle me-2">
+                                    <?php
+                                    include('../koneksi.php');
+                                    $id_user = $_SESSION['id'];
+                                    $profil = mysqli_query($koneksi, "SELECT * FROM user WHERE user_id='$id_user'");
+                                    $profil = mysqli_fetch_assoc($profil);
+                                    if ($profil['user_foto'] == "") {
+                                    ?>
+                                    <img src="../gambar/sistem/user.png" class="rounded-circle"
+                                        style="width: 50px;height: 50px; object-fit: cover;">
+                                    <?php
+                                    } else {
+                                    ?>
+                                    <img src="../gambar/user/<?php echo $profil['user_foto'] ?>" class="rounded-circle"
+                                        style="width: 50px;height: 50px; object-fit: cover;">
+                                    <?php
+                                    }
+                                    ?>
                                     <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [User]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"

@@ -2,7 +2,7 @@
 include '../koneksi.php';
 session_start();
 if ($_SESSION['status'] != "user_login") {
-    header("location:../login.php?alert=belum_login");
+    header("location:../login/loginuser.php?alert=belum_login");
 }
 ?>
 <!doctype html>
@@ -18,6 +18,42 @@ if ($_SESSION['status'] != "user_login") {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
+        rel="stylesheet">
+    <style>
+    .navbar-judul {
+        font-size: 20px;
+        font-weight: bold;
+        margin-left: 20px;
+        font-family: "Playwrite DE Grund", cursive;
+        display: flex;
+        align-items: center;
+        margin-top: 17px;
+        color: #4e6a7d;
+    }
+
+    .pacifico-regular {
+        font-family: "Pacifico", cursive;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .varela-round-regular {
+        font-family: "Varela Round", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .playwrite-de-grund {
+        font-family: "Playwrite DE Grund", cursive;
+        font-optical-sizing: auto;
+        font-style: normal;
+        font-weight: 400;
+    }
+    </style>
 </head>
 
 <body>
@@ -40,14 +76,32 @@ if ($_SESSION['status'] != "user_login") {
                                 <i class="ti ti-menu-2"></i>
                             </a>
                         </li>
+                        <li>
+                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                        </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover d-flex align-items-center" href="javascript:void(0)"
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
-                                        class="rounded-circle me-2">
+                                    <?php
+                                    include('../koneksi.php');
+                                    $id_user = $_SESSION['id'];
+                                    $profil = mysqli_query($koneksi, "SELECT * FROM user WHERE user_id='$id_user'");
+                                    $profil = mysqli_fetch_assoc($profil);
+                                    if ($profil['user_foto'] == "") {
+                                    ?>
+                                    <img src="../gambar/sistem/user.png" class="rounded-circle"
+                                        style="width: 50px;height: 50px; object-fit: cover;">
+                                    <?php
+                                    } else {
+                                    ?>
+                                    <img src="../gambar/user/<?php echo $profil['user_foto'] ?>" class="rounded-circle"
+                                        style="width: 50px;height: 50px; object-fit: cover;">
+                                    <?php
+                                    }
+                                    ?>
                                     <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [User]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
@@ -123,24 +177,41 @@ if ($_SESSION['status'] != "user_login") {
                                     </div>
                                     <div class="col-lg-8">
                                         <?php
-                                            if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
-                                            ?>
+                                                if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
+                                                ?>
                                         <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
                                             alt="<?php echo $d['arsip_nama']; ?>">
                                         <?php
-                                            } elseif ($d['arsip_jenis'] == "pdf") {
-                                            ?>
+                                                } elseif ($d['arsip_jenis'] == "pdf") {
+                                                ?>
                                         <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
                                             width="100%" height="600px" />
                                         <?php
-                                            } else {
-                                            ?>
+                                                } elseif ($d['arsip_jenis'] == "xlsx" || $d['arsip_jenis'] == "xls") {
+                                                ?>
+                                        <div id="excel-preview"></div>
+                                        <script>
+                                        fetch('../arsip/<?php echo $d['arsip_file']; ?>')
+                                            .then(response => response.arrayBuffer())
+                                            .then(data => {
+                                                const workbook = XLSX.read(data, {
+                                                    type: 'array'
+                                                });
+                                                const sheetName = workbook.SheetNames[0];
+                                                const worksheet = workbook.Sheets[sheetName];
+                                                const html = XLSX.utils.sheet_to_html(worksheet);
+                                                document.getElementById('excel-preview').innerHTML = html;
+                                            });
+                                        </script>
+                                        <?php
+                                                } else {
+                                                ?>
                                         <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
                                                 href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
                                         </p>
                                         <?php
-                                            }
-                                            ?>
+                                                }
+                                                ?>
                                     </div>
                                 </div>
                                 <?php

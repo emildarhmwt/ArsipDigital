@@ -2,9 +2,10 @@
     include '../koneksi.php';
     session_start();
     if ($_SESSION['status'] != "petugas_login") {
-        header("location:../login.php?alert=belum_login");
+        header("location:../login/loginadmin.php?alert=belum_login");
     }
     ?>
+
  <!doctype html>
  <html lang="en">
 
@@ -18,6 +19,93 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link
+         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
+         rel="stylesheet">
+     <style>
+     .notification-dropdown {
+         width: 280px;
+         right: 0;
+         left: auto;
+         max-height: 400px;
+         overflow-y: auto;
+         z-index: 1050;
+         /* Tambahkan z-index yang lebih tinggi */
+     }
+
+     .notification-dropdown .message-body {
+         padding: 10px;
+     }
+
+     .notification-dropdown .message-title {
+         font-size: 14px;
+     }
+
+     .notification-dropdown .dropdown-item {
+         padding: 8px 10px;
+     }
+
+     .notification-dropdown .notification-content h6 {
+         font-size: 12px;
+         margin-bottom: 2px;
+     }
+
+     .notification-dropdown .notification-content p {
+         font-size: 11px;
+         margin-bottom: 2px;
+     }
+
+     .notification-dropdown .notification-content small {
+         font-size: 10px;
+     }
+
+     .notification-dropdown .btn-sm {
+         font-size: 12px;
+         padding: 4px 8px;
+     }
+
+     .navbar-nav .nav-item.dropdown {
+         position: relative;
+     }
+
+     .navbar-judul {
+         font-size: 20px;
+         font-weight: bold;
+         margin-left: 20px;
+         font-family: "Playwrite DE Grund", cursive;
+         display: flex;
+         align-items: center;
+         margin-top: 17px;
+         color: #4e6a7d;
+     }
+
+     .pacifico-regular {
+         font-family: "Pacifico", cursive;
+         font-weight: 400;
+         font-style: normal;
+     }
+
+     .varela-round-regular {
+         font-family: "Varela Round", sans-serif;
+         font-weight: 400;
+         font-style: normal;
+     }
+
+     .playwrite-de-grund {
+         font-family: "Playwrite DE Grund", cursive;
+         font-optical-sizing: auto;
+         font-style: normal;
+         font-weight: 400;
+     }
+
+     .table td {
+         word-break: break-word;
+         overflow-wrap: break-word;
+         white-space: normal;
+     }
+     </style>
  </head>
 
  <body>
@@ -39,11 +127,8 @@
                                  <i class="ti ti-menu-2"></i>
                              </a>
                          </li>
-                         <li class="nav-item">
-                             <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                                 <i class="ti ti-bell-ringing"></i>
-                                 <div class="notification bg-primary rounded-circle"></div>
-                             </a>
+                         <li>
+                             <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
                          </li>
                      </ul>
                      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -51,8 +136,18 @@
                              <li class="nav-item dropdown">
                                  <a class="nav-link nav-icon-hover d-flex align-items-center" href="javascript:void(0)"
                                      id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                     <img src="../assets/images/profile/user1.jpg" alt="" width="35" height="35"
-                                         class="rounded-circle me-2">
+                                     <?php
+                                        $id_petugas = $_SESSION['id'];
+                                        $profil = mysqli_query($koneksi, "select * from petugas where petugas_id='$id_petugas'");
+                                        $profil = mysqli_fetch_assoc($profil);
+                                        if ($profil['petugas_foto'] == "") {
+                                        ?>
+                                     <img src="../gambar/sistem/user.png" class="rounded-circle"
+                                         style="width: 40px;height: 40px; object-fit: cover;">
+                                     <?php } else { ?>
+                                     <img src="../gambar/petugas/<?php echo $profil['petugas_foto'] ?>"
+                                         class="rounded-circle" style="width: 40px;height: 40px; object-fit: cover;">
+                                     <?php } ?>
                                      <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Petugas]</p>
                                  </a>
                                  <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
@@ -69,6 +164,41 @@
                                          </a>
                                          <a href="../login/logout.php"
                                              class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
+                                     </div>
+                                 </div>
+                             </li>
+
+                             <li class="nav-item dropdown">
+                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                     data-bs-toggle="dropdown" aria-expanded="false">
+                                     <i class="ti ti-bell-ringing"></i>
+                                     <div class="notification bg-primary rounded-circle"></div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                     aria-labelledby="drop2">
+                                     <div class="message-body">
+                                         <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
+                                         <div class="message-list">
+                                             <?php
+                                            $id_saya = $_SESSION['id'];
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
+                                            while ($p = mysqli_fetch_array($arsip)) {
+                                            ?>
+                                             <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
+                                                 <div class="notification-content">
+                                                     <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> menunduh</h6>
+                                                     <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
+                                                         <?php echo $p['arsip_nama'] ?></p>
+                                                     <small
+                                                         class="text-muted fs-2"><?php echo date('H:i d-m-Y', strtotime($p['riwayat_waktu'])) ?></small>
+                                                 </div>
+                                             </a>
+                                             <?php
+                                            }
+                                            ?>
+                                         </div>
+                                         <a href="riwayat_unduh.php"
+                                             class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
                                      </div>
                                  </div>
                              </li>
@@ -130,12 +260,12 @@
                                          <thead class="fs-4">
                                              <tr>
                                                  <th class="fs-3" style="width: 5%;">No</th>
-                                                 <th class="fs-3">Waktu Upload</th>
-                                                 <th class="fs-3">Arsip</th>
-                                                 <th class="fs-3">Kategori</th>
-                                                 <th class="fs-3">Petugas</th>
-                                                 <th class="fs-3">Keterangan</th>
-                                                 <th class="fs-3">Opsi</th>
+                                                 <th class="fs-3" style="width: 10%;">Waktu Upload</th>
+                                                 <th class="fs-3" style="width: 25%;">Arsip</th>
+                                                 <th class="fs-3" style="width: 15%;">Kategori</th>
+                                                 <th class="fs-3" style="width: 10%;">Petugas</th>
+                                                 <th class="fs-3" style="width: 30%;">Keterangan</th>
+                                                 <th class="fs-3" style="width: 5%;">Opsi</th>
                                              </tr>
                                          </thead>
                                          <tbody>
@@ -162,22 +292,24 @@
                                                  <td><?php echo $p['arsip_keterangan'] ?></td>
                                                  <td class="text-center">
 
-                                                     <div class="btn-group">
-                                                         <a target="_blank" class="btn btn-default"
+                                                     <div class="btn-group mb-3">
+                                                         <a target="_blank" class="btn btn-default btn-sm"
                                                              href="../arsip/<?php echo $p['arsip_file']; ?>"><i
-                                                                 class="ti ti-download fs-7"></i>
+                                                                 class="ti ti-download fs-5"></i>
                                                          </a>
                                                          <a target="_blank"
                                                              href="arsip_preview_saya.php?id=<?php echo $p['arsip_id']; ?>"
-                                                             class="btn btn-default text-center d-flex align-items-center justify-content-center"><i
-                                                                 class="ti ti-eye fs-7"></i></i>
-                                                             Preview</a>
+                                                             class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center"><i
+                                                                 class="ti ti-eye fs-5"></i>
+                                                         </a>
+                                                     </div>
+                                                     <div class="btn-group">
                                                          <a href="edit_arsip.php?id=<?php echo $p['arsip_id']; ?>"
-                                                             class="btn btn-default "><i
-                                                                 class="ti ti-edit fs-7"></i></a>
-                                                         <button type="button" class="btn btn-danger"
+                                                             class="btn btn-default btn-sm"><i
+                                                                 class="ti ti-edit fs-5"></i></a>
+                                                         <button type="button" class="btn btn-default btn-sm"
                                                              onclick="hapusArsip(<?php echo $p['arsip_id']; ?>)">
-                                                             <i class="ti ti-trash fs-7"></i>
+                                                             <i class="ti ti-trash fs-5"></i>
                                                          </button>
                                                      </div>
                                                  </td>
