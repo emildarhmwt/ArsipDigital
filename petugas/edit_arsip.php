@@ -183,7 +183,7 @@
                                             ?>
                                              <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
                                                  <div class="notification-content">
-                                                     <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> menunduh</h6>
+                                                     <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
                                                      <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
                                                          <?php echo $p['arsip_nama'] ?></p>
                                                      <small
