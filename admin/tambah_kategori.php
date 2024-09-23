@@ -2,7 +2,7 @@
 include '../koneksi.php';
 session_start();
 if ($_SESSION['status'] != "admin_login") {
-    header("location:../login.php?alert=belum_login");
+    header("location:../login/loginadmin.php?alert=belum_login");
 }
 ?>
 <!doctype html>
