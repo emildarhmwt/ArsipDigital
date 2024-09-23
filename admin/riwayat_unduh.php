@@ -229,7 +229,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <thead class="fs-4">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
+                                                <th class="fs-3">Waktu Unduh</th>
                                                 <th class="fs-3">User</th>
                                                 <th class="fs-3">Arsip yang diunduh</th>
                                             </tr>

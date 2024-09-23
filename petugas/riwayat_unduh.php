@@ -237,7 +237,7 @@
                                          <thead class="fs-4">
                                              <tr>
                                                  <th class="fs-3" style="width: 5%;">No</th>
-                                                 <th class="fs-3" style="width: 20%;">Waktu Upload</th>
+                                                 <th class="fs-3" style="width: 20%;">Waktu Unduh</th>
                                                  <th class="fs-3" style="width: 25%;">User</th>
                                                  <th class="fs-3" style="width: 50%;">Arsip yang diunduh</th>
                                              </tr>
