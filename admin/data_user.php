@@ -98,6 +98,28 @@ if ($_SESSION['status'] != "admin_login") {
         font-style: normal;
         font-weight: 400;
     }
+
+    .btn-custom {
+        background-color: #bcddeb !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom:hover {
+        background-color: #266d8b !important;
+        color: white !important;
+    }
+
+    .btn-custom2 {
+        background-color: #ede0a0 !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom2:hover {
+        background-color: #bdb57b !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -221,7 +243,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <input type="text" class="form-control me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                        <button type="button" class="btn btn-primary"
+                                        <button type="button" class="btn btn-custom"
                                             style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                             onclick="tambahPetugas()">
                                             <i class="bi bi-plus-square"></i> Tambah User

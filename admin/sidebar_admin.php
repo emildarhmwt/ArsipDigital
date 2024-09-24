@@ -7,6 +7,37 @@
         <title>Arsip Digital</title>
         <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
         <link rel="stylesheet" href="../assets/css/styles.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Acme&family=Coiny&family=Concert+One&family=Outfit:wght@100..900&family=Pacifico&family=Playpen+Sans:wght@100..800&family=Playwrite+DE+Grund:wght@100..400&family=Righteous&family=Sacramento&family=Varela+Round&family=Yatra+One&display=swap"
+            rel="stylesheet">
+        <style>
+        .concert-one-regular {
+            font-family: "Concert One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .playpen-sans {
+            font-family: "Playpen Sans", cursive;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .outfit {
+            font-family: "Outfit", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .judul-sidebar {
+            font-family: "Outfit", sans-serif;
+            font-size: 18px;
+        }
+        </style>
     </head>
 
     <body>
@@ -30,7 +61,7 @@
                         <ul id="sidebarnav" class="mb-4 pb-2">
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
-                                <span class="hide-menu">Home</span>
+                                <span class="hide-menu judul-sidebar">HOME</span>
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_admin.php"
@@ -38,28 +69,28 @@
                                     <span class="aside-icon p-2 bg-light-primary rounded-3">
                                         <i class="ti ti-layout-dashboard fs-7 text-primary"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Dashboard</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Dashboard</span>
                                 </a>
                             </li>
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
-                                <span class="hide-menu">Menu</span>
+                                <span class="hide-menu judul-sidebar">MENU</span>
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
                                     <span class="aside-icon p-2 bg-light-warning rounded-3">
                                         <i class="ti ti-file-analytics fs-7 text-warning"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Data </span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data </span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link sidebar-link danger-hover-bg" href="data_kategori.php"
+                                <a class="sidebar-link sidebar-link primary-hover-bg" href="data_kategori.php"
                                     aria-expanded="false">
-                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
-                                        <i class="ti ti-category fs-7 text-danger"></i>
+                                    <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                        <i class="ti ti-category fs-7 text-primary"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Data Kategori</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data Kategori</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -68,21 +99,21 @@
                                     <span class="aside-icon p-2 bg-light-warning rounded-3">
                                         <i class="ti ti-archive fs-7 text-warning"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Data Arsip</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data Arsip</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link sidebar-link danger-hover-bg" href="riwayat_unduh.php"
+                                <a class="sidebar-link sidebar-link primary-hover-bg" href="riwayat_unduh.php"
                                     aria-expanded="false">
-                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
-                                        <i class="ti ti-book-download fs-7 text-danger"></i>
+                                    <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                        <i class="ti ti-book-download fs-7 text-primary"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Riwayat Unduh</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Riwayat Unduh</span>
                                 </a>
                             </li>
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
-                                <span class="hide-menu">Pengguna</span>
+                                <span class="hide-menu judul-sidebar">PENGGUNA</span>
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link sidebar-link warning-hover-bg" href="data_petugas.php"
@@ -90,21 +121,21 @@
                                     <span class="aside-icon p-2 bg-light-warning rounded-3">
                                         <i class="ti ti-user-plus fs-7 text-warning"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Data Petugas</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data Petugas</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link sidebar-link danger-hover-bg" href="data_user.php"
+                                <a class="sidebar-link sidebar-link primary-hover-bg" href="data_user.php"
                                     aria-expanded="false">
-                                    <span class="aside-icon p-2 bg-light-danger rounded-3">
-                                        <i class="ti ti-user-plus fs-7 text-danger"></i>
+                                    <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                        <i class="ti ti-user-plus fs-7 text-primary"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Data User</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data User</span>
                                 </a>
                             </li>
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
-                                <span class="hide-menu">Profil</span>
+                                <span class="hide-menu judul-sidebar">PROFIL</span>
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link sidebar-link warning-hover-bg" href="ganti_password.php"
@@ -112,7 +143,7 @@
                                     <span class="aside-icon p-2 bg-light-warning rounded-3">
                                         <i class="ti ti-key fs-7 text-warning"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Ganti Password</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Ganti Password</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -121,7 +152,7 @@
                                     <span class="aside-icon p-2 bg-light-danger rounded-3">
                                         <i class="ti ti-logout fs-7 text-danger"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1">Logout</span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Logout</span>
                                 </a>
                             </li>
                         </ul>

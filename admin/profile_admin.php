@@ -14,6 +14,7 @@ if ($_SESSION['status'] != "admin_login") {
     <title>Arsip Digital</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -97,6 +98,17 @@ if ($_SESSION['status'] != "admin_login") {
 
     .textinfo {
         font-size: 12px;
+    }
+
+    .btn-custom {
+        background-color: #bcddeb !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom:hover {
+        background-color: #266d8b !important;
+        color: white !important;
     }
     </style>
 </head>
@@ -276,7 +288,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         </div>
                                         <div class="form-group">
                                             <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                                <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
                                                     Submit</button>
                                             </div>
                                         </div>

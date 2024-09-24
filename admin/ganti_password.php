@@ -98,6 +98,17 @@ if ($_SESSION['status'] != "admin_login") {
         font-style: normal;
         font-weight: 400;
     }
+
+    .btn-custom {
+        background-color: #bcddeb !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom:hover {
+        background-color: #266d8b !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -228,7 +239,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 </label>
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
                                             Submit</button>
                                     </form>
                                 </div>

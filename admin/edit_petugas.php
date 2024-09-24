@@ -102,6 +102,28 @@ if ($_SESSION['status'] != "admin_login") {
         font-style: normal;
         font-weight: 400;
     }
+
+    .btn-custom {
+        background-color: #bcddeb !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom:hover {
+        background-color: #266d8b !important;
+        color: white !important;
+    }
+
+    .btn-custom2 {
+        background-color: #ede0a0 !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom2:hover {
+        background-color: #bdb57b !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -236,9 +258,9 @@ if ($_SESSION['status'] != "admin_login") {
                                             <input class="form-control" name="foto" type="file">
                                             <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                         </div>
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i>
+                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
                                             Submit</button>
-                                        <button type="button" class="btn btn-primary" onclick="goBack()"><i
+                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
                                                 class="bi bi-arrow-left-circle"></i>
                                             Back</button>
                                     </form>

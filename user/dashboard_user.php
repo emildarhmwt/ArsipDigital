@@ -19,7 +19,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Acme&family=Coiny&family=Concert+One&family=Pacifico&family=Playpen+Sans:wght@100..800&family=Playwrite+DE+Grund:wght@100..400&family=Righteous&family=Sacramento&family=Varela+Round&family=Yatra+One&display=swap"
         rel="stylesheet">
     <style>
     .navbar-judul {
@@ -175,11 +175,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                             <div class="card-body p-4">
                                 <div class="row align-items-center">
                                     <div class="col-lg-12 d-flex align-items-center">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-8">
                                             <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip :
                                             </h5>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-4 justify-content-end">
                                             <?php
                                                             $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
                                                         ?>

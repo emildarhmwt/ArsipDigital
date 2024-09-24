@@ -349,11 +349,11 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="card-body p-4">
                                         <div class="row align-items-center">
                                             <div class="col-lg-12 d-flex align-items-center">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-8">
                                                     <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip :
                                                     </h5>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     <?php
                                                             $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
                                                         ?>

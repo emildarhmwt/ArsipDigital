@@ -98,6 +98,17 @@
          font-style: normal;
          font-weight: 400;
      }
+
+     .btn-custom2 {
+         background-color: #ede0a0 !important;
+         color: black !important;
+         cursor: pointer;
+     }
+
+     .btn-custom2:hover {
+         background-color: #bdb57b !important;
+         color: white !important;
+     }
      </style>
  </head>
 
@@ -205,7 +216,7 @@
                      <div class="card-body">
                          <h5 class="card-title fw-semibold mb-4">Preview Arsip</h5>
 
-                         <a href="arsip_saya.php" class="btn btn-secondary mb-3">
+                         <a href="arsip_saya.php" class="btn btn-custom2 mb-3">
                              <i class="bi bi-arrow-left"></i> Back
                          </a>
                          <div class="card mb-4">

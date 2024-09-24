@@ -59,6 +59,28 @@ if ($_SESSION['status'] != "user_login") {
         overflow-wrap: break-word;
         white-space: normal;
     }
+
+    .btn-custom {
+        background-color: #bcddeb !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom:hover {
+        background-color: #266d8b !important;
+        color: white !important;
+    }
+
+    .btn-custom2 {
+        background-color: #ede0a0 !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom2:hover {
+        background-color: #bdb57b !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -159,9 +181,14 @@ if ($_SESSION['status'] != "user_login") {
                                         </select>
                                     </div>
                                     <div class="d-flex justify-content-center mt-3">
-                                        <button type="submit" class="btn btn-primary mx-3"><i class="bi bi-search"></i>
-                                            Search Data</button>
-                                        <button type="button" class="btn btn-primary mx-3" onclick="fetchAllData()">All
+                                        <button type="submit"
+                                            class="btn btn-custom mx-3 text-center justify-content-center"><i
+                                                class="ti ti-file-search fs-5"></i>
+                                            Cari Data</button>
+                                        <button type="button"
+                                            class="btn btn-custom2 mx-3 text-center justify-content-center"
+                                            onclick="fetchAllData()">
+                                            <i class="ti ti-clear-all fs-5 justify-content-center"></i>Semua
                                             Data</button>
                                     </div>
                                 </form>

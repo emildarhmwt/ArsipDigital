@@ -105,6 +105,17 @@
          overflow-wrap: break-word;
          white-space: normal;
      }
+
+     .btn-custom {
+         background-color: #bcddeb !important;
+         color: black !important;
+         cursor: pointer;
+     }
+
+     .btn-custom:hover {
+         background-color: #266d8b !important;
+         color: white !important;
+     }
      </style>
  </head>
 
@@ -230,7 +241,7 @@
                                          <input type="text" class="form-control me-2" id="searchInput"
                                              placeholder="Cari..."
                                              style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                         <button type="button" class="btn btn-primary"
+                                         <button type="button" class="btn btn-custom"
                                              style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                              onclick="tambahArsip()">
                                              <i class="ti ti-book-upload fs-5"></i> Upload Arsip
