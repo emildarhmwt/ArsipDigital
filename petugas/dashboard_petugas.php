@@ -14,6 +14,7 @@
      <title>Arsip Digital</title>
      <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
      <link rel="stylesheet" href="../assets/css/styles.min.css" />
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link
@@ -197,34 +198,124 @@
              </header>
              <!--  Header End -->
              <div class="container-fluid">
-                 <!--  Row 1 -->
+                 <div class="row">
+                     <div class="col-lg-4">
+                         <div class="card overflow-hidden">
+                             <div class="card-body p-4">
+                                 <div class="d-flex align-items-center mb-2">
+                                     <span
+                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                         <i class="ti ti-thumb-up fs-8"></i>
+                                     </span>
+                                     <div class="ms-2">
+                                         <h5 class="card-title mb-2 fw-semibold fs-4">Data Selesai</h5>
+                                         <h5 class="card-title mb-0 fw-semibold fs-3">18</h5>
+                                     </div>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-lg-4">
+                         <div class="card overflow-hidden">
+                             <div class="card-body p-4">
+                                 <div class="d-flex align-items-center mb-2">
+                                     <span
+                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                         <i class="ti ti-category fs-8"></i>
+                                     </span>
+                                     <div class="ms-2">
+                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
+                                         <?php
+                                        $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
+                                        ?>
+
+                                         <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                 class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
+                                         </h5>
+                                     </div>
+
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="col-lg-4">
+                         <div class="card overflow-hidden">
+                             <div class="card-body p-4">
+                                 <div class="d-flex align-items-center mb-2">
+                                     <span
+                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                         <i class="ti ti-users fs-8"></i>
+                                     </span>
+                                     <div class="ms-2">
+                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
+                                         <?php
+                                        $jumlah_user = mysqli_query($koneksi, "select * from user");
+                                        ?>
+                                         <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                 class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
+                                         </h5>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <!-- Row 1 -->
                  <div class="row">
                      <div class="col-lg-8 d-flex align-items-strech">
-                         <div class="card w-100">
+                         <div class="card w-100 h-300">
                              <div class="card-body">
                                  <div class="d-flex align-items-center justify-content-between mb-10">
                                      <div class="">
-                                         <h5 class="card-title fw-semibold">Profit & Expenses</h5>
+                                         <h5 class="card-title fw-semibold">Grafik Pengunduhan Arsip</h5>
                                      </div>
-                                     <div class="dropdown">
-                                         <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                             aria-expanded="false"
-                                             class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
-                                             <i class="ti ti-dots-vertical fs-7 d-block"></i>
-                                         </button>
-                                         <ul class="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dropdownMenuButton1">
-                                             <li><a class="dropdown-item" href="#">Action</a></li>
-                                             <li>
-                                                 <a class="dropdown-item" href="#">Another action</a>
-                                             </li>
-                                             <li>
-                                                 <a class="dropdown-item" href="#">Something else here</a>
-                                             </li>
-                                         </ul>
+                                     <div class="row">
+                                         <div class="col-lg-12 d-flex align-items-center">
+                                             <button type="button" class="btn btn-outline-secondary btn-sm me-3"
+                                                 id="fetchAllData">Semua Data</button>
+                                             <div class="dropdown mx-2">
+                                                 <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                     aria-expanded="false"
+                                                     class="rounded-circle btn-outline-secondary rounded-circle btn-sm px-1 btn shadow-none">
+                                                     <i class="ti ti-search fs-6 d-block"></i>
+                                                 </button>
+                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                     aria-labelledby="dropdownMenuButton2">
+                                                     <div class="message-body">
+                                                         <form id="dateFilterForm">
+                                                             <div class="row">
+                                                                 <div class="col-lg-6 mb-1">
+                                                                     <label for="grupSearch" class="form-label">
+                                                                         Tanggal
+                                                                         Awal :</label>
+                                                                     <input type="date" class="form-control"
+                                                                         id="startDate" name="startDate">
+                                                                 </div>
+                                                                 <div class="col-lg-6 mb-1">
+                                                                     <label for="grupSearch" class="form-label">
+                                                                         Tanggal
+                                                                         Akhir :</label>
+                                                                     <input type="date" class="form-control"
+                                                                         id="endDate" name="endDate">
+                                                                 </div>
+                                                             </div>
+                                                             <div class="d-flex justify-content-center mt-3">
+                                                                 <button type="submit" class="btn btn-primary mx-3"><i
+                                                                         class="bi bi-search"></i> Search
+                                                                     Data</button>
+                                                             </div>
+                                                         </form>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                         </div>
                                      </div>
                                  </div>
-                                 <div id="profit"></div>
+                                 <canvas id="downloadChart"></canvas>
                              </div>
                          </div>
                      </div>
@@ -234,299 +325,191 @@
                                  <!-- Yearly Breakup -->
                                  <div class="card overflow-hidden">
                                      <div class="card-body p-4">
-                                         <h5 class="card-title mb-10 fw-semibold">Traffic Distribution</h5>
                                          <div class="row align-items-center">
-                                             <div class="col-7">
-                                                 <h4 class="fw-semibold mb-3">$36,358</h4>
-                                                 <div class="d-flex align-items-center mb-2">
-                                                     <span
-                                                         class="me-1 rounded-circle bg-light-success round-20 d-flex align-items-center justify-content-center">
-                                                         <i class="ti ti-arrow-up-left text-success"></i>
-                                                     </span>
-                                                     <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                                                     <p class="fs-3 mb-0">last year</p>
+                                             <div class="col-lg-12 d-flex align-items-center">
+                                                 <div class="col-lg-6">
+                                                     <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip :
+                                                     </h5>
                                                  </div>
-                                                 <div class="d-flex align-items-center">
-                                                     <div class="me-3">
+                                                 <div class="col-lg-6">
+                                                     <?php
+                                                        $id_petugas = $_SESSION['id']; // Get the current user's ID
+                                                        $jumlah_arsip = mysqli_query($koneksi, "SELECT * FROM arsip WHERE arsip_petugas='$id_petugas'");
+                                                     ?>
+                                                     <h5
+                                                         class="card-title mb-10 fw-semibold mt-3 fs-7 justify-content-end">
                                                          <span
-                                                             class="round-8 bg-primary rounded-circle me-2 d-inline-block"></span>
-                                                         <span class="fs-2">Oragnic</span>
-                                                     </div>
-                                                     <div>
-                                                         <span
-                                                             class="round-8 bg-danger rounded-circle me-2 d-inline-block"></span>
-                                                         <span class="fs-2">Refferal</span>
-                                                     </div>
+                                                             class="counter justify-content-end"><?php echo mysqli_num_rows($jumlah_arsip); ?>
+                                                     </h5>
                                                  </div>
-                                             </div>
-                                             <div class="col-5">
-                                                 <div class="d-flex justify-content-center">
-                                                     <div id="grade"></div>
-                                                 </div>
+                                                 <!-- <h5v
+                                                        class="col-lg-6 d-flex align-items-center justify-content-end">
+                                                        <button type="button"
+                                                            class="btn btn-outline-secondary btn-sm me-2">
+                                                            Semua Data</button>
+                                                        <div class="dropdown mx-2">
+                                                            <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                                aria-expanded="false"
+                                                                class="rounded-circle btn-outline-secondary rounded-circle px-2 btn shadow-none">
+                                                                <i class="ti ti-search fs-4 d-block"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                                aria-labelledby="dropdownMenuButton2">
+                                                                <div class="message-body">
+                                                                    <form method="get" action="">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 mb-1">
+                                                                                <label for="grupSearch"
+                                                                                    class="form-label">
+                                                                                    Tanggal
+                                                                                    Awal :</label>
+                                                                                <input type="date" class="form-control"
+                                                                                    id="startDate" name="startDate">
+                                                                            </div>
+                                                                            <div class="col-lg-6 mb-1">
+                                                                                <label for="grupSearch"
+                                                                                    class="form-label">
+                                                                                    Tanggal
+                                                                                    Akhir :</label>
+                                                                                <input type="date" class="form-control"
+                                                                                    id="endDate" name="endDate">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-center mt-3">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary mx-3"><i
+                                                                                    class="bi bi-search"></i> Search
+                                                                                Data</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div> -->
                                              </div>
                                          </div>
                                      </div>
-                                 </div>
-                             </div>
-                             <div class="col-lg-12 col-sm-6">
-                                 <!-- Monthly Earnings -->
-                                 <div class="card">
-                                     <div class="card-body">
-                                         <div class="row alig n-items-start">
-                                             <div class="col-8">
-                                                 <h5 class="card-title mb-10 fw-semibold"> Product Sales</h5>
-                                                 <h4 class="fw-semibold mb-3">$6,820</h4>
-                                                 <div class="d-flex align-items-center pb-1">
-                                                     <span
-                                                         class="me-2 rounded-circle bg-light-danger round-20 d-flex align-items-center justify-content-center">
-                                                         <i class="ti ti-arrow-down-right text-danger"></i>
-                                                     </span>
-                                                     <p class="text-dark me-1 fs-3 mb-0">+9%</p>
-                                                     <p class="fs-3 mb-0">last year</p>
-                                                 </div>
-                                             </div>
-                                             <div class="col-4">
-                                                 <div class="d-flex justify-content-end">
-                                                     <div
-                                                         class="text-white bg-danger rounded-circle p-7 d-flex align-items-center justify-content-center">
-                                                         <i class="ti ti-currency-dollar fs-6"></i>
-                                                     </div>
-                                                 </div>
+                                     <div class="row align-items-center">
+                                         <div class="col-lg-12 mb-4">
+                                             <div class="d-flex justify-content-center">
+                                                 <canvas id="categoryPieChart" width="200px" height="200px"></canvas>
                                              </div>
                                          </div>
                                      </div>
-                                     <div id="earning"></div>
                                  </div>
                              </div>
                          </div>
                      </div>
-                 </div>
-                 <div class="row">
-                     <div class="col-lg-4 d-flex align-items-stretch">
-                         <div class="card w-100">
-                             <div class="card-body p-4">
-                                 <div class="mb-4">
-                                     <h5 class="card-title fw-semibold">Upcoming Schedules</h5>
-                                 </div>
-                                 <ul class="timeline-widget mb-0 position-relative mb-n5">
-                                     <li class="timeline-item d-flex position-relative overflow-hidden">
-                                         <div class="timeline-time text-dark flex-shrink-0 text-end">09:30</div>
-                                         <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                             <span
-                                                 class="timeline-badge border-2 border border-primary flex-shrink-0 my-2"></span>
-                                             <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                         </div>
-                                         <div class="timeline-desc fs-3 text-dark mt-n1">Payment received from John Doe
-                                             of $385.90</div>
-                                     </li>
-                                     <li class="timeline-item d-flex position-relative overflow-hidden">
-                                         <div class="timeline-time text-dark flex-shrink-0 text-end">10:00 am</div>
-                                         <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                             <span
-                                                 class="timeline-badge border-2 border border-info flex-shrink-0 my-2"></span>
-                                             <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                         </div>
-                                         <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded
-                                             <a href="javascript:void(0)"
-                                                 class="text-primary d-block fw-normal">#ML-3467</a>
-                                         </div>
-                                     </li>
-                                     <li class="timeline-item d-flex position-relative overflow-hidden">
-                                         <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
-                                         <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                             <span
-                                                 class="timeline-badge border-2 border border-success flex-shrink-0 my-2"></span>
-                                             <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                         </div>
-                                         <div class="timeline-desc fs-3 text-dark mt-n1">Payment was made of $64.95 to
-                                             Michael</div>
-                                     </li>
-                                     <li class="timeline-item d-flex position-relative overflow-hidden">
-                                         <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
-                                         <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                             <span
-                                                 class="timeline-badge border-2 border border-warning flex-shrink-0 my-2"></span>
-                                             <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                         </div>
-                                         <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New sale recorded
-                                             <a href="javascript:void(0)"
-                                                 class="text-primary d-block fw-normal">#ML-3467</a>
-                                         </div>
-                                     </li>
-                                     <li class="timeline-item d-flex position-relative overflow-hidden">
-                                         <div class="timeline-time text-dark flex-shrink-0 text-end">09:30 am</div>
-                                         <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                             <span
-                                                 class="timeline-badge border-2 border border-danger flex-shrink-0 my-2"></span>
-                                             <span class="timeline-badge-border d-block flex-shrink-0"></span>
-                                         </div>
-                                         <div class="timeline-desc fs-3 text-dark mt-n1 fw-semibold">New arrival
-                                             recorded
-                                         </div>
-                                     </li>
-                                     <li class="timeline-item d-flex position-relative overflow-hidden">
-                                         <div class="timeline-time text-dark flex-shrink-0 text-end">12:00 am</div>
-                                         <div class="timeline-badge-wrap d-flex flex-column align-items-center">
-                                             <span
-                                                 class="timeline-badge border-2 border border-success flex-shrink-0 my-2"></span>
-                                         </div>
-                                         <div class="timeline-desc fs-3 text-dark mt-n1">Payment Done</div>
-                                     </li>
-                                 </ul>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="col-lg-8 d-flex align-items-stretch">
-                         <div class="card w-100">
-                             <div class="card-body p-4">
-                                 <div class="d-flex mb-4 justify-content-between align-items-center">
-                                     <h5 class="mb-0 fw-bold">Top Paying Clients</h5>
 
-                                     <div class="dropdown">
-                                         <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                             aria-expanded="false"
-                                             class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
-                                             <i class="ti ti-dots-vertical fs-7 d-block"></i>
-                                         </button>
-                                         <ul class="dropdown-menu dropdown-menu-end"
-                                             aria-labelledby="dropdownMenuButton1">
-                                             <li><a class="dropdown-item" href="#">Action</a></li>
-                                             <li>
-                                                 <a class="dropdown-item" href="#">Another action</a>
-                                             </li>
-                                             <li>
-                                                 <a class="dropdown-item" href="#">Something else here</a>
-                                             </li>
-                                         </ul>
+                     <div class=" row">
+                         <div class="col-lg-12 d-flex align-items-stretch">
+                             <div class="card w-100">
+                                 <div class="card-body p-4">
+                                     <div class="d-flex mb-4 justify-content-between align-items-center">
+                                         <h5 class="mb-0 fw-bold">Data </h5>
                                      </div>
-                                 </div>
 
-                                 <div class="table-responsive" data-simplebar>
-                                     <table class="table table-borderless align-middle text-nowrap">
-                                         <thead>
-                                             <tr>
-                                                 <th scope="col">Profile</th>
-                                                 <th scope="col">Hour Rate</th>
-                                                 <th scope="col">Extra classes</th>
-                                                 <th scope="col">Status</th>
-                                             </tr>
-                                         </thead>
-                                         <tbody>
-                                             <tr>
-                                                 <td>
-                                                     <div class="d-flex align-items-center">
-                                                         <div class="me-4">
-                                                             <img src="../assets/images/profile/user1.jpg" width="50"
-                                                                 class="rounded-circle" alt="" />
+                                     <div class="table-responsive" style="max-height: 400px; overflow-y: auto;"
+                                         data-simplebar>
+                                         <table class="table table-borderless align-middle text-nowrap">
+                                             <thead>
+                                                 <tr>
+                                                     <th scope="col">Nama File</th>
+                                                     <th scope="col">Status</th>
+                                                     <th scope="col"></th>
+                                                 </tr>
+                                             </thead>
+                                             <tbody>
+                                                 <tr>
+                                                     <td>
+                                                         <div class="d-flex align-items-center">
+                                                             <div class="me-4">
+                                                                 <img src="../assets/images/profile/user1.jpg"
+                                                                     width="50" class="rounded-circle" alt="" />
+                                                             </div>
+                                                             <div>
+                                                                 <h6 class="mb-1 fw-bolder">
+                                                                     Mark J. Freeman</h6>
+                                                                 <p class="fs-3 mb-0">Prof.
+                                                                     English</p>
+                                                             </div>
                                                          </div>
+                                                     </td>
+                                                     <td>
+                                                         <span
+                                                             class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
+                                                     </td>
+                                                     <td>
+                                                         <div class="dropdown">
+                                                             <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                                 aria-expanded="false"
+                                                                 class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
+                                                                 <i class="ti ti-dots-vertical fs-7 d-block"></i>
+                                                             </button>
+                                                             <ul class="dropdown-menu dropdown-menu-end"
+                                                                 aria-labelledby="dropdownMenuButton1">
+                                                                 <li><a class="dropdown-item" href="#">Action</a>
+                                                                 </li>
+                                                                 <li>
+                                                                     <a class="dropdown-item" href="#">Another
+                                                                         action</a>
+                                                                 </li>
+                                                                 <li>
+                                                                     <a class="dropdown-item" href="#">Something
+                                                                         else
+                                                                         here</a>
+                                                                 </li>
+                                                             </ul>
+                                                         </div>
+                                                     </td>
+                                                 </tr>
 
-                                                         <div>
-                                                             <h6 class="mb-1 fw-bolder">Mark J. Freeman</h6>
-                                                             <p class="fs-3 mb-0">Prof. English</p>
+                                                 <tr>
+                                                     <td>
+                                                         <div class="d-flex align-items-center">
+                                                             <div class="me-4">
+                                                                 <img src="../assets/images/profile/user1.jpg"
+                                                                     width="50" class="rounded-circle" alt="" />
+                                                             </div>
+                                                             <div>
+                                                                 <h6 class="mb-1 fw-bolder">
+                                                                     Mark J. Freeman</h6>
+                                                                 <p class="fs-3 mb-0">Prof.
+                                                                     English</p>
+                                                             </div>
                                                          </div>
-                                                     </div>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0">$150/hour</p>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0 text-success">
-                                                         +53
-                                                     </p>
-                                                 </td>
-                                                 <td>
-                                                     <span
-                                                         class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
-                                                 </td>
-                                             </tr>
-
-                                             <tr>
-                                                 <td>
-                                                     <div class="d-flex align-items-center">
-                                                         <div class="me-4">
-                                                             <img src="../assets/images/profile/user2.jpg" width="50"
-                                                                 class="rounded-circle" alt="" />
+                                                     </td>
+                                                     <td>
+                                                         <span
+                                                             class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
+                                                     </td>
+                                                     <td>
+                                                         <div class="dropdown">
+                                                             <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                                 aria-expanded="false"
+                                                                 class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
+                                                                 <i class="ti ti-dots-vertical fs-7 d-block"></i>
+                                                             </button>
+                                                             <ul class="dropdown-menu dropdown-menu-end"
+                                                                 aria-labelledby="dropdownMenuButton1">
+                                                                 <li><a class="dropdown-item" href="#">Action</a>
+                                                                 </li>
+                                                                 <li>
+                                                                     <a class="dropdown-item" href="#">Another
+                                                                         action</a>
+                                                                 </li>
+                                                                 <li>
+                                                                     <a class="dropdown-item" href="#">Something
+                                                                         else
+                                                                         here</a>
+                                                                 </li>
+                                                             </ul>
                                                          </div>
-
-                                                         <div>
-                                                             <h6 class="mb-1 fw-bolder">Nina R. Oldman</h6>
-                                                             <p class="fs-3 mb-0">Prof. History</p>
-                                                         </div>
-                                                     </div>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0">$150/hour</p>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0 text-success">
-                                                         +68
-                                                     </p>
-                                                 </td>
-                                                 <td>
-                                                     <span
-                                                         class="badge bg-light-primary rounded-pill text-primary px-3 py-2 fs-3">In
-                                                         Class</span>
-                                                 </td>
-                                             </tr>
-
-                                             <tr>
-                                                 <td>
-                                                     <div class="d-flex align-items-center">
-                                                         <div class="me-4">
-                                                             <img src="../assets/images/profile/user3.jpg" width="50"
-                                                                 class="rounded-circle" alt="" />
-                                                         </div>
-
-                                                         <div>
-                                                             <h6 class="mb-1 fw-bolder">Arya H. Shah</h6>
-                                                             <p class="fs-3 mb-0">Prof. Maths</p>
-                                                         </div>
-                                                     </div>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0">$150/hour</p>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0 text-success">
-                                                         +94
-                                                     </p>
-                                                 </td>
-                                                 <td>
-                                                     <span
-                                                         class="badge bg-light-danger rounded-pill text-danger px-3 py-2 fs-3">Absent</span>
-                                                 </td>
-                                             </tr>
-
-                                             <tr>
-                                                 <td>
-                                                     <div class="d-flex align-items-center">
-                                                         <div class="me-4">
-                                                             <img src="../assets/images/profile/user4.jpg" width="50"
-                                                                 class="rounded-circle" alt="" />
-                                                         </div>
-
-                                                         <div>
-                                                             <h6 class="mb-1 fw-bolder">June R. Smith</h6>
-                                                             <p class="fs-3 mb-0">Prof. Arts</p>
-                                                         </div>
-                                                     </div>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0">$150/hour</p>
-                                                 </td>
-                                                 <td>
-                                                     <p class="fs-3 fw-normal mb-0 text-success">
-                                                         +27
-                                                     </p>
-                                                 </td>
-                                                 <td>
-                                                     <span
-                                                         class="badge bg-light-warning rounded-pill text-warning px-3 py-2 fs-3">On
-                                                         Leave</span>
-                                                 </td>
-                                             </tr>
-                                         </tbody>
-                                     </table>
+                                                     </td>
+                                                 </tr>
+                                             </tbody>
+                                         </table>
+                                     </div>
                                  </div>
                              </div>
                          </div>
@@ -534,21 +517,196 @@
                  </div>
              </div>
          </div>
-     </div>
-     <script>
-     fetch('sidebar_petugas.php')
-         .then(response => response.text())
-         .then(data => {
-             document.getElementById('sidebar').innerHTML = data;
+         <script>
+         fetch('sidebar_petugas.php')
+             .then(response => response.text())
+             .then(data => {
+                 document.getElementById('sidebar').innerHTML = data;
+             });
+
+         const categoryData =
+             <?php
+                $id_petugas = $_SESSION['id']; // Get the current user's ID
+                $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id AND arsip_petugas='$id_petugas' GROUP BY kategori_nama");
+                $categories = [];
+                while ($row = mysqli_fetch_assoc($category_query)) {
+                    $categories[] = $row;
+                }
+                echo json_encode($categories);
+                ?>;
+
+         const labels = categoryData.map(item => item.kategori_nama);
+         const data = categoryData.map(item => item.count);
+
+         // Create pie chart
+         const ctx = document.getElementById('categoryPieChart').getContext('2d');
+         const categoryPieChart = new Chart(ctx, {
+             type: 'doughnut',
+             data: {
+                 labels: labels,
+                 datasets: [{
+                     label: 'Jumlah Arsip per Kategori',
+                     data: data,
+                     backgroundColor: [
+                         'rgba(204, 39, 39, 0.2)',
+                         'rgba(204, 180, 39, 0.2)',
+                         'rgba(142, 204, 39, 0.2)',
+                         'rgba(39, 204, 49, 0.2)',
+                         'rgba(39, 204, 160, 0.2)',
+                         'rgba(39, 125, 204, 0.2)',
+                         'rgba(42, 39, 204, 0.2)',
+                         'rgba(128, 39, 204, 0.2)',
+                         'rgba(204, 39, 197, 0.2)',
+                         'rgba(204, 39, 115, 0.2)',
+                         'rgba(204, 39, 39, 0.2)'
+                     ],
+                     borderColor: [
+                         'rgba(204, 39, 39, 1)',
+                         'rgba(204, 180, 39, 1)',
+                         'rgba(142, 204, 39, 1)',
+                         'rgba(39, 204, 49, 1)',
+                         'rgba(39, 204, 160, 1)',
+                         'rgba(39, 125, 204, 1)',
+                         'rgba(42, 39, 204, 1)',
+                         'rgba(128, 39, 204, 1)',
+                         'rgba(204, 39, 197, 1)',
+                         'rgba(204, 39, 115, 1)',
+                         'rgba(204, 39, 39, 1)'
+                     ],
+                     borderWidth: 1
+                 }]
+             },
+             options: {
+                 responsive: true,
+                 maintainAspectRatio: false,
+                 layout: {
+                     padding: {
+                         bottom: 20 // Add padding at the bottom to make space for labels
+                     }
+                 },
+                 plugins: {
+                     legend: {
+                         display: true, // Menyembunyikan legend
+                         position: 'bottom', // Menempatkan legend di atas
+                         labels: {
+                             boxWidth: 10, // Lebar kotak legend
+                             padding: 15, // Jarak antar label
+                             font: {
+                                 size: 12, // Ukuran font label
+                             },
+                             tooltip: {
+                                 callbacks: {
+                                     label: function(tooltipItem) {
+                                         const label = tooltipItem.label || '';
+                                         const value = tooltipItem.raw || 0;
+                                         return `${label} : ${value}`; // Menampilkan nama kategori dan jumlah saat hover
+                                     }
+                                 }
+                             }
+                         }
+                     }
+                 }
+             }
          });
-     </script>
-     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="../assets/js/sidebarmenu.js"></script>
-     <script src="../assets/js/app.min.js"></script>
-     <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-     <script src="../assets/js/dashboard.js"></script>
+
+         document.getElementById('categoryPieChart').parentNode.style.height =
+             '350px'; // Mengatur tinggi chart container
+         document.getElementById('categoryPieChart').parentNode.style.overflowY =
+             'auto'; // Mengaktifkan scroll pada y-axis
+         categoryPieChart.update();
+
+         // fetch(`get_download_data.php`)
+         //     .then(response => response.json())
+         //     .then(data => {
+         //         const ctx = document.getElementById('downloadChart').getContext('2d');
+         //         const downloadChart = new Chart(ctx, {
+         //             type: 'line', // or 'line', 'pie', etc.
+         //             data: {
+         //                 labels: data.labels, // Dates
+         //                 datasets: [{
+         //                     label: 'Jumlah Unduhan',
+         //                     data: data.values, // Download counts
+         //                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
+         //                     borderColor: 'rgba(75, 192, 192, 1)',
+         //                     borderWidth: 1
+         //                 }]
+         //             },
+         //             options: {
+         //                 scales: {
+         //                     y: {
+         //                         beginAtZero: true
+         //                     }
+         //                 }
+         //             }
+         //         });
+         //     });
+
+         let downloadChart; // Declare a variable to hold the chart instance
+
+         const fetchData = (startDate = '', endDate = '') => {
+             const url = startDate && endDate ? `get_download_data.php?startDate=${startDate}&endDate=${endDate}` :
+                 'get_download_data.php';
+             fetch(url)
+                 .then(response => response.json())
+                 .then(data => {
+                     const ctx = document.getElementById('downloadChart').getContext('2d');
+
+                     // Destroy the existing chart if it exists
+                     if (downloadChart) {
+                         downloadChart.destroy();
+                     }
+
+                     // Create a new chart instance
+                     downloadChart = new Chart(ctx, {
+                         type: 'line',
+                         data: {
+                             labels: data.labels,
+                             datasets: [{
+                                 label: 'Jumlah Unduhan',
+                                 data: data.values,
+                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                 borderColor: 'rgba(75, 192, 192, 1)',
+                                 borderWidth: 1
+                             }]
+                         },
+                         options: {
+                             scales: {
+                                 y: {
+                                     beginAtZero: true
+                                 }
+                             }
+                         }
+                     });
+                 })
+                 .catch(error => console.error('Error fetching data:', error));
+         };
+
+         document.querySelector('#dateFilterForm').addEventListener('submit', function(event) {
+             event.preventDefault();
+             const startDate = document.getElementById('startDate').value;
+             const endDate = document.getElementById('endDate').value;
+             fetchData(startDate, endDate);
+         });
+
+         // Add event listener for "Semua Data" button
+         document.getElementById('fetchAllData').addEventListener('click', function() {
+             // Clear the date inputs
+             document.getElementById('startDate').value = '';
+             document.getElementById('endDate').value = '';
+             // Call fetchData without parameters to get all data
+             fetchData();
+         });
+
+         // Call fetchData on page load
+         fetchData();
+         </script>
+         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+         <script src="../assets/js/sidebarmenu.js"></script>
+         <script src="../assets/js/app.min.js"></script>
+         <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+         <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+         <script src="../assets/js/dashboard.js"></script>
  </body>
 
  </html>
