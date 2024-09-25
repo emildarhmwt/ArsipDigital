@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }

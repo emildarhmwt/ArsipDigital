@@ -64,7 +64,7 @@
                             <span class="hide-menu judul-sidebar">HOME</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_avp.php"
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="dashboard_gm.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-primary rounded-3">
                                     <i class="ti ti-layout-dashboard fs-7 text-primary"></i>

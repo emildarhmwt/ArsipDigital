@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
@@ -100,7 +100,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [AVP] </p>
+                                        [GM] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -361,7 +361,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
         </div>
     </div>
     <script>
-    fetch('sidebar_avp.php')
+    fetch('sidebar_gm.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
