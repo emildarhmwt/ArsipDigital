@@ -292,7 +292,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                         href="#?id=<?php echo $p['doc1_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a></td>
                                                 <td>
-                                                    <?php if ($p['status'] != 'Done' && $p['status'] != 'Rejected(VP)') { ?>
+                                                    <?php if ($p['status'] != 'Confirm(VP)' && $p['status'] != 'Rejected(AVP)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Rejected(GM)' && $p['status'] != 'Done(Doc1)')  { ?>
                                                     <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
                                                         class="btn btn-success">Confirm</a>
                                                     <button class="btn btn-danger"
@@ -363,30 +363,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
         document.getElementById('rejectModal' + id).style.display = 'none';
     }
 
-    function tambahArsip() {
-        window.location.href = 'tambah_pks.php';
-    }
-
-    function hapusArsip(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`arsip_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Arsip berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus arsip');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus arsip');
-                });
-        }
-    }
 
     // Fungsi untuk menangani paginasi dan pencarian
     document.addEventListener('DOMContentLoaded', function() {

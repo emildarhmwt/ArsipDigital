@@ -250,7 +250,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <button type="button" class="btn btn-custom"
                                             style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                             onclick="tambahArsip()">
-                                            <i class="ti ti-book-upload fs-5"></i> Upload Arsip
+                                            <i class="ti ti-book-upload fs-5"></i> Upload Doc Kajian
                                         </button>
                                     </div>
                                 </div>
@@ -307,21 +307,32 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 </td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
                                                 <td><?php echo $p['doc1_ket'] ?></td>
-                                                <td><?php echo $p['status'] ?></td>
+                                                <td>
+                                                    <?php echo $p['status']; ?>
+                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
                                                 <td> <a target="_blank" class="btn btn-default btn-sm"
                                                         href="#?id=<?php echo $p['doc1_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a></td>
                                                 <td class="text-center">
-                                                    <div class="btn-group">
+                                                    <div class="btn-group-vertical">
                                                         <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['doc1_file']; ?>"><i class="fa fa-download"></i></a> -->
-                                                        <a target="_blank" class="btn btn-default btn-sm"
-                                                            href="arsip_download.php?id=<?php echo $p['doc1_id']; ?>"
-                                                            download><i class="ti ti-download fs-7"></i></a>
-                                                        <a target="_blank"
+                                                        <?php if ($p['status'] === 'Done(Doc1)'): ?>
+                                                        <a target="_blank" class="btn btn-primary btn-sm" href=""><i
+                                                                class="ti ti-book-upload fs-5"></i> Doc KAK & HPS
+                                                        </a>
+                                                        <?php else: ?>
+                                                        <span class="btn btn-default btn-sm" disabled> <i
+                                                                class="ti ti-book-upload fs-5"></i> Doc KAK &
+                                                            HPS</span>
+                                                        <?php endif; ?>
+                                                        <!-- <a target="_blank"
                                                             href="arsip_preview.php?id=<?php echo $p['doc1_id']; ?>"
                                                             class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-eye fs-7 me-1"></i>
-                                                        </a>
+                                                            <i class="ti ti-book-upload fs-5"></i> Doc Kontrak PKS
+                                                        </a> -->
                                                     </div>
                                                 </td>
                                             </tr>

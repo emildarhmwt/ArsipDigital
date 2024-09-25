@@ -166,7 +166,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [AVP] </p>
+                                        [GM] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -268,7 +268,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id ORDER BY doc1_id DESC");
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id AND (status='Confirm(VP)' OR status='Done(Doc1)' OR status='Rejected(GM)') ORDER BY doc1_id DESC");
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
@@ -282,16 +282,48 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                 </td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
                                                 <td><?php echo $p['doc1_ket'] ?></td>
-                                                <td><?php echo $p['status'] ?></td>
-                                                <td> <a target="_blank" class="btn btn-default btn-sm"
+                                                <td>
+                                                    <?php echo $p['status']; ?>
+                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td> <a target="_blank" class="btn btn-deault btn-sm"
                                                         href="#?id=<?php echo $p['doc1_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a></td>
                                                 <td>
-                                                    <?php if ($p['status'] != 'Done' && $p['status'] != 'Rejected(VP)') { ?>
+                                                    <?php if ($p['status'] != 'Done(Doc1)' && $p['status'] != 'Rejected(GM)') { ?>
                                                     <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
                                                         class="btn btn-success">Confirm</a>
-                                                    <a href="reject.php?id=<?php echo $p['doc1_id']; ?>"
-                                                        class="btn btn-danger">Reject</a>
+                                                    <button class="btn btn-danger"
+                                                        onclick="openRejectModal(<?php echo $p['doc1_id']; ?>)">Reject</button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal" id="rejectModal<?php echo $p['doc1_id']; ?>"
+                                                        style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
+                                                        <div class="modal-content" style="padding: 10px;">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Alasan Penolakan</h5>
+                                                                <button type="button" class="close"
+                                                                    onclick="closeRejectModal(<?php echo $p['doc1_id']; ?>)">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form method="POST"
+                                                                    action="reject.php?id=<?php echo $p['doc1_id']; ?>">
+                                                                    <div class="mb-3">
+                                                                        <label for="alasan" class="form-label">Masukkan
+                                                                            Alasan</label>
+                                                                        <textarea name="alasan" class="form-control"
+                                                                            required style="height: 80px;"></textarea>
+                                                                    </div>
+                                                                    <button type="submit"
+                                                                        class="btn btn-primary">Kirim</button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        onclick="closeRejectModal(<?php echo $p['doc1_id']; ?>)">Batal</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <?php } else { ?>
                                                     <button class="btn btn-success" disabled>Confirmed</button>
                                                     <button class="btn btn-danger" disabled>Rejected</button>
@@ -317,35 +349,18 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
         </div>
     </div>
     <script>
-    fetch('sidebar_avp.php')
+    fetch('sidebar_gm.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function tambahArsip() {
-        window.location.href = 'tambah_pks.php';
+    function openRejectModal(id) {
+        document.getElementById('rejectModal' + id).style.display = 'block';
     }
 
-    function hapusArsip(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`arsip_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Arsip berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus arsip');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus arsip');
-                });
-        }
+    function closeRejectModal(id) {
+        document.getElementById('rejectModal' + id).style.display = 'none';
     }
 
     // Fungsi untuk menangani paginasi dan pencarian
