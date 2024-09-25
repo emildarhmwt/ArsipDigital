@@ -133,15 +133,24 @@
                                     <span class="hide-menu ms-2 ps-1 judul-sidebar">Data User</span>
                                 </a>
                             </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link sidebar-link warning-hover-bg" href="data_userpks.php"
+                                    aria-expanded="false">
+                                    <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                        <i class="ti ti-user-plus fs-7 text-warning"></i>
+                                    </span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data User PKS</span>
+                                </a>
+                            </li>
                             <li class="nav-small-cap">
                                 <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
                                 <span class="hide-menu judul-sidebar">PROFIL</span>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link sidebar-link warning-hover-bg" href="ganti_password.php"
+                                <a class="sidebar-link sidebar-link primary-hover-bg" href="ganti_password.php"
                                     aria-expanded="false">
-                                    <span class="aside-icon p-2 bg-light-warning rounded-3">
-                                        <i class="ti ti-key fs-7 text-warning"></i>
+                                    <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                        <i class="ti ti-key fs-7 text-primary"></i>
                                     </span>
                                     <span class="hide-menu ms-2 ps-1 judul-sidebar">Ganti Password</span>
                                 </a>

@@ -105,16 +105,16 @@
                                 <h3 class="text-center mb-4 judul"> Login User </h3>
                                 <img src="../assets/images/login.png" alt="Logo" class="img-login">
                                 <p class="text-center judul">Sistem Informasi Arsip Digital</p>
-                                <?php 
-                                    if(isset($_GET['alert'])){
-                                        if($_GET['alert'] == "gagal"){
-                                            echo "<div class='alert alert-danger'>LOGIN GAGAL! USERNAME DAN PASSWORD SALAH!</div>";
-                                        }else if($_GET['alert'] == "logout"){
-                                              echo "<div class='alert alert-success'>ANDA TELAH BERHASIL LOGOUT</div>";
-                                         } else if ($_GET['alert'] == "belum_login") {
-                                             echo "<div class='alert alert-warning'>ANDA HARUS LOGIN UNTUK MENGAKSES DASHBOARD</div>";
-                                        }
-                                    }   
+                                <?php
+                                if (isset($_GET['alert'])) {
+                                    if ($_GET['alert'] == "gagal") {
+                                        echo "<div class='alert alert-danger'>LOGIN GAGAL! USERNAME DAN PASSWORD SALAH!</div>";
+                                    } else if ($_GET['alert'] == "logout") {
+                                        echo "<div class='alert alert-success'>ANDA TELAH BERHASIL LOGOUT</div>";
+                                    } else if ($_GET['alert'] == "belum_login") {
+                                        echo "<div class='alert alert-warning'>ANDA HARUS LOGIN UNTUK MENGAKSES DASHBOARD</div>";
+                                    }
+                                }
                                 ?>
                                 <form action="periksa_login_user.php" method="post" id="loginForm">
                                     <div class="mb-3">
@@ -127,7 +127,7 @@
                                         <input type="password" placeholder="Password" required="required"
                                             autocomplete="off" name="password" id="password" class="form-control">
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
                                         <div class="form-check">
                                             <input class="form-check-input primary" type="checkbox" value=""
                                                 id="showPassword">
@@ -135,6 +135,17 @@
                                                 Show Password
                                             </label>
                                         </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="hak" class="form-label sub-judul">Hak Akses</label>
+                                        <select class="form-select" name="akses" id="akses" required>
+                                            <option selected disabled>Hak Akses</option>
+                                            <option value="user">User</option>
+                                            <option value="asmen">Asisten Manager</option>
+                                            <option value="avp">Asisten Vice President</option>
+                                            <option value="vp">Vice President</option>
+                                            <option value="gm">General Manager UPTE</option>
+                                        </select>
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <input type="submit" value="Login"
