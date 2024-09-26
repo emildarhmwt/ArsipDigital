@@ -268,7 +268,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                             <?php
                                             $no = 1;
                                             // Only select documents that are confirmed
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id AND (status='Confirm(AVP)' OR status='Confirm(VP)' OR status='Done(Doc1)' OR status='Rejected(VP)') ORDER BY doc1_id DESC");
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id AND (status='Approve(AVP)' OR status='Approve(VP)' OR status='Done(Doc1)' OR status='Rejected(VP)') ORDER BY doc1_id DESC");
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
@@ -292,9 +292,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                         href="#?id=<?php echo $p['doc1_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a></td>
                                                 <td>
-                                                    <?php if ($p['status'] != 'Confirm(GM)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Done(Doc1)') { ?>
+                                                    <?php if ($p['status'] != 'Approve(GM)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Done(Doc1)') { ?>
                                                     <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
-                                                        class="btn btn-success">Confirm</a>
+                                                        class="btn btn-success">Approve</a>
                                                     <button class="btn btn-danger"
                                                         onclick="openRejectModal(<?php echo $p['doc1_id']; ?>)">Reject</button>
 
@@ -325,7 +325,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                         </div>
                                                     </div>
                                                     <?php } else { ?>
-                                                    <button class="btn btn-success" disabled>Confirmed</button>
+                                                    <button class="btn btn-success" disabled>Approved</button>
                                                     <button class="btn btn-danger" disabled>Rejected</button>
                                                     <?php } ?>
                                                 </td>

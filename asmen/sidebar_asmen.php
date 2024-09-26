@@ -94,7 +94,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link judul-sidebar" href="data_kak_hps.php"> <i
-                                                class="ti ti-corner-down-right fs-6"></i> Doc KAK & HPS</a>
+                                                class="ti ti-corner-down-right fs-6"></i> Doc Pendukung</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link judul-sidebar" href="data_kontrak_pks.php"> <i

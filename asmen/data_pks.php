@@ -315,7 +315,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 </td>
                                                 <td> <a target="_blank" class="btn btn-default btn-sm"
                                                         href="#?id=<?php echo $p['doc1_file']; ?>"><i
-                                                            class="ti ti-download fs-7"></i></a></td>
+                                                            class="ti ti-download fs-7"></i></a>
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group-vertical">
                                                         <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['doc1_file']; ?>"><i class="fa fa-download"></i></a> -->
@@ -323,12 +324,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                         <a target="_blank" class="btn btn-primary btn-sm"
                                                             href="tambah_kak_hps.php?doc1_id=<?php echo $p['doc1_id']; ?>"><i
                                                                 class="ti ti-book-upload fs-5"></i>
-                                                            Doc KAK & HPS
+                                                            Doc Pendukung
                                                         </a>
                                                         <?php else: ?>
                                                         <span class="btn btn-default btn-sm" disabled> <i
-                                                                class="ti ti-book-upload fs-5"></i> Doc KAK &
-                                                            HPS</span>
+                                                                class="ti ti-book-upload fs-5"></i> Doc Pendukung
+                                                        </span>
                                                         <?php endif; ?>
                                                         <!-- <a target="_blank"
                                                             href="arsip_preview.php?id=<?php echo $p['doc1_id']; ?>"

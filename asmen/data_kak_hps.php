@@ -287,7 +287,64 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             </tr>
                                         </thead>
                                         <tbody>
-
+                                            <?php
+                                            $no = 1;
+                                            if (isset($_GET['kategori'])) {
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,doc2,user_pks WHERE doc2_petugas=pks_id AND doc1_nama=doc1_nama ORDER BY doc2_id DESC");
+                                            } else {
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,doc2,user_pks WHERE doc2_petugas=pks_id AND doc1_nama=doc1_nama ORDER BY doc2_id DESC");
+                                            }
+                                            while ($p = mysqli_fetch_array($arsip)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc2_waktu_upload'])) ?>
+                                                </td>
+                                                <td>
+                                                    <b>KODE</b> : <?php echo $p['doc2_kode'] ?><br>
+                                                    <b>Nama Doc Kajian </b> : <?php echo $p['doc1_nama'] ?><br>
+                                                    <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
+                                                    <b>Jenis</b> : <?php echo $p['doc2_jenis'] ?><br>
+                                                </td>
+                                                <td><?php echo $p['pks_nama'] ?></td>
+                                                <td><?php echo $p['doc2_ket'] ?></td>
+                                                <td>
+                                                    <?php echo $p['doc2_status']; ?>
+                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td> <a target="_blank" class="btn btn-default btn-sm"
+                                                        href="#?id=<?php echo $p['doc2_file']; ?>"><i
+                                                            class="ti ti-download fs-7"></i></a>
+                                                    <a href="hapus_dp.php?id=<?php echo $p['doc2_id']; ?>"
+                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">Hapus</a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group-vertical">
+                                                        <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['doc2_file']; ?>"><i class="fa fa-download"></i></a> -->
+                                                        <?php if ($p['doc2_status'] === 'Done(Doc2)'): ?>
+                                                        <a target="_blank" class="btn btn-primary btn-sm"
+                                                            href="tambah_kak_hps.php?doc1_id=<?php echo $p['doc2_id']; ?>"><i
+                                                                class="ti ti-book-upload fs-5"></i>
+                                                            Doc Kontrak PKS
+                                                        </a>
+                                                        <?php else: ?>
+                                                        <span class="btn btn-default btn-sm" disabled> <i
+                                                                class="ti ti-book-upload fs-5"></i> Doc Kontrak PKS
+                                                        </span>
+                                                        <?php endif; ?>
+                                                        <!-- <a target="_blank"
+                                                            href="arsip_preview.php?id=<?php echo $p['doc2_id']; ?>"
+                                                            class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-book-upload fs-5"></i> Doc Kontrak PKS
+                                                        </a> -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            }
+                                            ?>
                                         </tbody>
                                     </table>
                                 </div>

@@ -1,7 +1,6 @@
 <?php
-include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
@@ -166,7 +165,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [GM] </p>
+                                        [ASMEN] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -251,6 +250,28 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     </div>
                                 </div>
 
+                                <center>
+                                    <?php
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "gagal") {
+                                    ?>
+                                    <div class="alert alert-danger">File arsip gagal diupload. Krena demi keamanan file
+                                        .php tidak diperbolehkan.</div>
+                                    <?php
+                                        } elseif ($_GET['alert'] == "doc1_id_missing") {
+                                        ?>
+                                    <div class="alert alert-danger">ID dokumen 1 tidak ditemukan. Silakan periksa
+                                        kembali.</div>
+                                    <?php
+                                        } else {
+                                        ?>
+                                    <div class="alert alert-success">Arsip berhasil tersimpan.</div>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </center>
+
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
@@ -268,31 +289,37 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id AND (status='Approve(VP)' OR status='Done(Doc1)' OR status='Rejected(GM)') ORDER BY doc1_id DESC");
+                                            if (isset($_GET['kategori'])) {
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,doc2,user_pks WHERE doc2_petugas=pks_id AND doc1_nama=doc1_nama ORDER BY doc2_id DESC");
+                                            } else {
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,doc2,user_pks WHERE doc2_petugas=pks_id AND doc1_nama=doc1_nama ORDER BY doc2_id DESC");
+                                            }
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc1_waktu_upload'])) ?>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc2_waktu_upload'])) ?>
                                                 </td>
                                                 <td>
-                                                    <b>KODE</b> : <?php echo $p['doc1_kode'] ?><br>
-                                                    <b>Nama</b> : <?php echo $p['doc1_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc1_jenis'] ?><br>
+                                                    <b>KODE</b> : <?php echo $p['doc2_kode'] ?><br>
+                                                    <b>Nama Doc Kajian </b> : <?php echo $p['doc1_nama'] ?><br>
+                                                    <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
+                                                    <b>Jenis</b> : <?php echo $p['doc2_jenis'] ?><br>
                                                 </td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc1_ket'] ?></td>
+                                                <td><?php echo $p['doc2_ket'] ?></td>
                                                 <td>
-                                                    <?php echo $p['status']; ?>
-                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
+                                                    <?php echo $p['doc2_status']; ?>
+                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td> <a target="_blank" class="btn btn-deault btn-sm"
-                                                        href="#?id=<?php echo $p['doc1_file']; ?>"><i
-                                                            class="ti ti-download fs-7"></i></a></td>
+                                                <td> <a target="_blank" class="btn btn-default btn-sm"
+                                                        href="#?id=<?php echo $p['doc2_file']; ?>"><i
+                                                            class="ti ti-download fs-7"></i></a>
+                                                </td>
                                                 <td>
-                                                    <?php if ($p['status'] != 'Done(Doc1)' && $p['status'] != 'Rejected(GM)') { ?>
+                                                    <?php if ($p['status'] != 'Approve(VP)' && $p['status'] != 'Rejected(AVP)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Rejected(GM)' && $p['status'] != 'Done(Doc1)')  { ?>
                                                     <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
                                                         class="btn btn-success">Approve</a>
                                                     <button class="btn btn-danger"
@@ -349,19 +376,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
         </div>
     </div>
     <script>
-    fetch('sidebar_gm.php')
+    fetch('sidebar_avp.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function openRejectModal(id) {
-        document.getElementById('rejectModal' + id).style.display = 'block';
-    }
-
-    function closeRejectModal(id) {
-        document.getElementById('rejectModal' + id).style.display = 'none';
-    }
 
     // Fungsi untuk menangani paginasi dan pencarian
     document.addEventListener('DOMContentLoaded', function() {

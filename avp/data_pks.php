@@ -292,9 +292,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                         href="#?id=<?php echo $p['doc1_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a></td>
                                                 <td>
-                                                    <?php if ($p['status'] != 'Confirm(VP)' && $p['status'] != 'Rejected(AVP)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Rejected(GM)' && $p['status'] != 'Done(Doc1)')  { ?>
+                                                    <?php if ($p['status'] != 'Approve(VP)' && $p['status'] != 'Rejected(AVP)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Rejected(GM)' && $p['status'] != 'Done(Doc1)')  { ?>
                                                     <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
-                                                        class="btn btn-success">Confirm</a>
+                                                        class="btn btn-success">Approve</a>
                                                     <button class="btn btn-danger"
                                                         onclick="openRejectModal(<?php echo $p['doc1_id']; ?>)">Reject</button>
 
@@ -325,7 +325,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                         </div>
                                                     </div>
                                                     <?php } else { ?>
-                                                    <button class="btn btn-success" disabled>Confirmed</button>
+                                                    <button class="btn btn-success" disabled>Approved</button>
                                                     <button class="btn btn-danger" disabled>Rejected</button>
                                                     <?php } ?>
                                                 </td>
