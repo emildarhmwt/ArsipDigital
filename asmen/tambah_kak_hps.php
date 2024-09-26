@@ -4,6 +4,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
+
+$doc1_id = $_GET['doc1_id'] ?? null;
 ?>
 <!doctype html>
 <html lang="en">
@@ -236,6 +238,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             <div class="card">
                                 <div class="card-body">
                                     <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
+                                        <input type="hidden" name="doc1_id"
+                                            value="<?php echo htmlspecialchars($doc1_id); ?>">
                                         <div class="mb-3">
                                             <label for="shift" class="form-label">Kode Dokumen</label>
                                             <input type="text" class="form-control" name="kode" placeholder="Input Data"

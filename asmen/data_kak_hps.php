@@ -252,19 +252,24 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
                                 <center>
                                     <?php
-                                        if (isset($_GET['alert'])) {
-                                            if ($_GET['alert'] == "gagal") {
-                                        ?>
-                                    <div class="alert alert-danger">File arsip gagal diupload. krena demi keamanan file
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "gagal") {
+                                    ?>
+                                    <div class="alert alert-danger">File arsip gagal diupload. Krena demi keamanan file
                                         .php tidak diperbolehkan.</div>
                                     <?php
-                                            } else {
-                                            ?>
+                                        } elseif ($_GET['alert'] == "doc1_id_missing") {
+                                        ?>
+                                    <div class="alert alert-danger">ID dokumen 1 tidak ditemukan. Silakan periksa
+                                        kembali.</div>
+                                    <?php
+                                        } else {
+                                        ?>
                                     <div class="alert alert-success">Arsip berhasil tersimpan.</div>
                                     <?php
-                                            }
                                         }
-                                        ?>
+                                    }
+                                    ?>
                                 </center>
 
                                 <div class="table-responsive products-table" data-simplebar>
