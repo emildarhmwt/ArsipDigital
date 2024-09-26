@@ -36,6 +36,7 @@
     .judul-sidebar {
         font-family: "Outfit", sans-serif;
         font-size: 18px;
+        color: black;
     }
     </style>
 </head>
@@ -78,12 +79,30 @@
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link sidebar-link warning-hover-bg" href="data_pks.php"
-                                aria-expanded="false">
+                                aria-expanded="false" data-bs-toggle="collapse" data-bs-target="#pksDropdown"
+                                aria-controls="pksDropdown">
                                 <span class="aside-icon p-2 bg-light-warning rounded-3">
                                     <i class="ti ti-file-analytics fs-7 text-warning"></i>
                                 </span>
                                 <span class="hide-menu ms-2 ps-1 judul-sidebar">Pengajuan Kontrak PKS</span>
                             </a>
+                            <div class="collapse" id="pksDropdown">
+                                <ul class="nav flex-column ms-3">
+                                    <li class="nav-item">
+                                        <a class="nav-link judul-sidebar" href="data_pks.php"><i
+                                                class="ti ti-corner-down-right fs-6"></i> Doc Kajian</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link judul-sidebar" href="data_pendukung.php"> <i
+                                                class="ti ti-corner-down-right fs-6"></i> Doc Pendukung</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link judul-sidebar" href="data_kontrak_pks.php"> <i
+                                                class="ti ti-corner-down-right fs-6"></i>Doc Kontrak
+                                            PKS</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link sidebar-link primary-hover-bg" href="data_arsip.php"

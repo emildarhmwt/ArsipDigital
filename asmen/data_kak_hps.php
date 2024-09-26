@@ -250,7 +250,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
 
-                                <center>
+                                <!-- <center>
                                     <?php
                                     if (isset($_GET['alert'])) {
                                         if ($_GET['alert'] == "gagal") {
@@ -270,7 +270,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         }
                                     }
                                     ?>
-                                </center>
+                                </center> -->
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
@@ -289,11 +289,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            if (isset($_GET['kategori'])) {
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,doc2,user_pks WHERE doc2_petugas=pks_id AND doc1_nama=doc1_nama ORDER BY doc2_id DESC");
-                                            } else {
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,doc2,user_pks WHERE doc2_petugas=pks_id AND doc1_nama=doc1_nama ORDER BY doc2_id DESC");
-                                            }
+                                            $arsip = mysqli_query($koneksi, "SELECT doc1.*, doc2.*, user_pks.* FROM doc2 
+                                                JOIN doc1 ON doc1.doc1_id = doc2.doc2_doc1_id 
+                                                JOIN user_pks ON doc2.doc2_petugas = user_pks.pks_id 
+                                                ORDER BY doc2.doc2_id DESC");
+
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
@@ -314,11 +314,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                     <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td> <a target="_blank" class="btn btn-default btn-sm"
+                                                <td>
+                                                    <a target="_blank" class="btn btn-default btn-sm"
                                                         href="#?id=<?php echo $p['doc2_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a>
-                                                    <a href="hapus_dp.php?id=<?php echo $p['doc2_id']; ?>"
-                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">Hapus</a>
+                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <a href="edit.php?id=<?php echo $p['doc2_id']; ?>"
+                                                        class="btn btn-warning btn-sm">
+                                                        <i class="ti ti-pencil fs-7"></i>
+                                                    </a>
+                                                    <a href="oke.php?id=<?php echo $p['doc2_id']; ?>"
+                                                        class="btn btn-danger btn-sm">
+                                                        <i class="bi bi-check fs-5"></i>
+                                                    </a>
+                                                    <?php endif; ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group-vertical">

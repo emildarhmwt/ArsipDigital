@@ -1,7 +1,6 @@
 <?php
-include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
@@ -251,6 +250,28 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     </div>
                                 </div>
 
+                                <center>
+                                    <?php
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "gagal") {
+                                    ?>
+                                    <div class="alert alert-danger">File arsip gagal diupload. Krena demi keamanan file
+                                        .php tidak diperbolehkan.</div>
+                                    <?php
+                                        } elseif ($_GET['alert'] == "doc1_id_missing") {
+                                        ?>
+                                    <div class="alert alert-danger">ID dokumen 1 tidak ditemukan. Silakan periksa
+                                        kembali.</div>
+                                    <?php
+                                        } else {
+                                        ?>
+                                    <div class="alert alert-success">Arsip berhasil tersimpan.</div>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+                                </center>
+
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
@@ -268,68 +289,110 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id ORDER BY doc1_id DESC");
+                                            $arsip = mysqli_query($koneksi, "SELECT doc1.*, doc2.*, user_pks.* FROM doc2 
+                                            JOIN doc1 ON doc1.doc1_id = doc2.doc2_doc1_id 
+                                            JOIN user_pks ON doc2.doc2_petugas = user_pks.pks_id 
+                                            WHERE (doc2_status='Approve(AVP)' OR doc2_status='Approve(VP)' OR doc2_status='Done(Doc2)' OR doc2_status='Rejected(VP)')
+                                            ORDER BY doc2.doc2_id DESC");
+
+                                            $previous_doc1_id = null; // Menyimpan ID dokumen sebelumnya
+
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc1_waktu_upload'])) ?>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc2_waktu_upload'])) ?>
                                                 </td>
                                                 <td>
-                                                    <b>KODE</b> : <?php echo $p['doc1_kode'] ?><br>
-                                                    <b>Nama</b> : <?php echo $p['doc1_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc1_jenis'] ?><br>
+                                                    <b>KODE</b> : <?php echo $p['doc2_kode'] ?><br>
+                                                    <b>Nama Doc Kajian </b> : <?php echo $p['doc1_nama'] ?><br>
+                                                    <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
+                                                    <b>Jenis</b> : <?php echo $p['doc2_jenis'] ?><br>
                                                 </td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc1_ket'] ?></td>
+                                                <td><?php echo $p['doc2_ket'] ?></td>
                                                 <td>
-                                                    <?php echo $p['status']; ?>
-                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
+                                                    <?php echo $p['doc2_status']; ?>
+                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td> <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="#?id=<?php echo $p['doc1_file']; ?>"><i
-                                                            class="ti ti-download fs-7"></i></a></td>
                                                 <td>
-                                                    <?php if ($p['status'] != 'Approve(VP)' && $p['status'] != 'Rejected(AVP)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Rejected(GM)' && $p['status'] != 'Done(Doc1)')  { ?>
-                                                    <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
+                                                    <a target="_blank" class="btn btn-default btn-sm"
+                                                        href="#?id=<?php echo $p['doc2_file']; ?>">
+                                                        <i class="ti ti-download fs-7"></i>
+                                                    </a>
+                                                    <a href="hapus_dp.php?id=<?php echo $p['doc2_id']; ?>"
+                                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?');">Hapus</a>
+                                                </td>
+                                                <td>
+                                                    <?php if ($p['doc2_doc1_id'] != $previous_doc1_id) { // Cek jika ID dokumen berbeda 
+                                                        ?>
+                                                    <?php if ($p['doc2_status'] != 'Rejected(AVP)' && $p['doc2_status'] != 'Rejected(VP)' && $p['doc2_status'] != 'Rejected(GM)' && $p['doc2_status'] != 'Done(Doc2)') { ?>
+                                                    <a href="confirm_dp.php?id=<?php echo $p['doc2_id']; ?>"
                                                         class="btn btn-success">Approve</a>
                                                     <button class="btn btn-danger"
-                                                        onclick="openRejectModal(<?php echo $p['doc1_id']; ?>)">Reject</button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal" id="rejectModal<?php echo $p['doc1_id']; ?>"
-                                                        style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
-                                                        <div class="modal-content" style="padding: 10px;">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Alasan Penolakan</h5>
-                                                                <button type="button" class="close"
-                                                                    onclick="closeRejectModal(<?php echo $p['doc1_id']; ?>)">&times;</button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form method="POST"
-                                                                    action="reject.php?id=<?php echo $p['doc1_id']; ?>">
-                                                                    <div class="mb-3">
-                                                                        <label for="alasan" class="form-label">Masukkan
-                                                                            Alasan</label>
-                                                                        <textarea name="alasan" class="form-control"
-                                                                            required style="height: 80px;"></textarea>
-                                                                    </div>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Kirim</button>
-                                                                    <button type="button" class="btn btn-danger"
-                                                                        onclick="closeRejectModal(<?php echo $p['doc1_id']; ?>)">Batal</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                        onclick="openRejectModal(<?php echo $p['doc2_id']; ?>)">Reject</button>
                                                     <?php } else { ?>
                                                     <button class="btn btn-success" disabled>Approved</button>
                                                     <button class="btn btn-danger" disabled>Rejected</button>
                                                     <?php } ?>
+                                                    <?php $previous_doc1_id = $p['doc2_doc1_id']; // Simpan ID dokumen saat ini 
+                                                            ?>
+                                                    <?php } else { ?>
+                                                    <!-- Kosongkan opsi jika ID dokumen sama -->
+                                                    <?php } ?>
                                                 </td>
-                                            </tr>
+                                            </tr><!-- Modal Reject -->
+                                            <div class="modal" id="rejectModal<?php echo $p['doc2_id']; ?>"
+                                                style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
+                                                <div class="modal-content" style="padding: 10px;">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Alasan Penolakan</h5>
+                                                        <button type="button" class="close"
+                                                            onclick="closeRejectModal(<?php echo $p['doc2_id']; ?>)">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST"
+                                                            action="reject_dp.php?id=<?php echo $p['doc2_id']; ?>">
+                                                            <div class="mb-3">
+                                                                <label for="alasan" class="form-label">Masukkan
+                                                                    Alasan</label>
+                                                                <textarea name="alasan" class="form-control" required
+                                                                    style="height: 80px;"></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                onclick="closeRejectModal(<?php echo $p['doc2_id']; ?>)">Batal</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Modal Reject -->
+                                            <div class="modal" id="rejectModal<?php echo $p['doc2_id']; ?>"
+                                                style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
+                                                <div class="modal-content" style="padding: 10px;">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Alasan Penolakan</h5>
+                                                        <button type="button" class="close"
+                                                            onclick="closeRejectModal(<?php echo $p['doc2_id']; ?>)">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="POST"
+                                                            action="reject_dp.php?id=<?php echo $p['doc2_id']; ?>">
+                                                            <div class="mb-3">
+                                                                <label for="alasan" class="form-label">Masukkan
+                                                                    Alasan</label>
+                                                                <textarea name="alasan" class="form-control" required
+                                                                    style="height: 80px;"></textarea>
+                                                            </div>
+                                                            <button type="submit" class="btn btn-primary">Kirim</button>
+                                                            <button type="button" class="btn btn-danger"
+                                                                onclick="closeRejectModal(<?php echo $p['doc2_id']; ?>)">Batal</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <?php
                                             }
                                             ?>
@@ -349,7 +412,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
         </div>
     </div>
     <script>
-    fetch('sidebar_avp.php')
+    fetch('sidebar_vp.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;

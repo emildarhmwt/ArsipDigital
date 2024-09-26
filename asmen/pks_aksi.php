@@ -22,7 +22,7 @@ if($jenis == "php") {
     $nama_file = $rand.'_'.$filename;
 
     // Insert into doc1 for AVP confirmation with status 'uploaded'
-    mysqli_query($koneksi, "INSERT into doc1 (doc1_waktu_upload, doc1_petugas, doc1_kode, doc1_nama, doc1_jenis, doc1_ket, doc1_file, status) VALUES ('$waktu', '$petugas', '$kode', '$nama', '$jenis', '$keterangan', '$nama_file', 'uploaded')") or die(mysqli_error($koneksi));
+    mysqli_query($koneksi, "INSERT into doc1 (doc1_waktu_upload, doc1_petugas, doc1_kode, doc1_nama, doc1_jenis, doc1_ket, doc1_file, status) VALUES ('$waktu', '$petugas', '$kode', '$nama', '$jenis', '$keterangan', '$nama_file', 'Uploaded')") or die(mysqli_error($koneksi));
     
     header("location:data_pks.php?alert=sukses"); 
 }
