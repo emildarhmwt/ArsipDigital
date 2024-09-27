@@ -283,67 +283,50 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <th class="fs-3">Keterangan</th>
                                                 <th class="fs-3">Status</th>
                                                 <th class="fs-3">File</th>
-                                                <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT doc1.*, doc2.*, user_pks.* FROM doc2 
-                                                JOIN doc1 ON doc1.doc1_id = doc2.doc2_doc1_id 
-                                                JOIN user_pks ON doc2.doc2_petugas = user_pks.pks_id 
-                                                ORDER BY doc2.doc2_id DESC");
+                                            $arsip = mysqli_query($koneksi, "SELECT  doc2.*, doc3.*, user_pks.* 
+                                            FROM doc3 
+                                            JOIN doc2 ON doc2.doc2_id = doc3.doc3_doc2_id 
+                                            JOIN user_pks ON doc3.doc3_petugas = user_pks.pks_id
+                                            ORDER BY doc3.doc3_id DESC");
 
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc2_waktu_upload'])) ?>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc3_waktu_upload'])) ?>
                                                 </td>
                                                 <td>
-                                                    <b>KODE</b> : <?php echo $p['doc2_kode'] ?><br>
-                                                    <b>Nama Doc Kajian </b> : <?php echo $p['doc1_nama'] ?><br>
+                                                    <b>KODE</b> : <?php echo $p['doc3_kode'] ?><br>
                                                     <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc2_jenis'] ?><br>
+                                                    <b>Nama Doc Kontrak </b> : <?php echo $p['doc3_nama'] ?><br>
+                                                    <b>Jenis</b> : <?php echo $p['doc3_jenis'] ?><br>
                                                 </td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc2_ket'] ?></td>
+                                                <td><?php echo $p['doc3_ket'] ?></td>
                                                 <td>
-                                                    <?php echo $p['doc2_status']; ?>
-                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
+                                                    <?php echo $p['doc3_status']; ?>
+                                                    <?php if (in_array($p['doc3_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc3_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
                                                     <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="#?id=<?php echo $p['doc2_file']; ?>"><i
+                                                        href="#?id=<?php echo $p['doc3_file']; ?>"><i
                                                             class="ti ti-download fs-7"></i></a>
-                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <a href="edit.php?id=<?php echo $p['doc2_id']; ?>"
+                                                    <?php if (in_array($p['doc3_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <a href="edit.php?id=<?php echo $p['doc3_id']; ?>"
                                                         class="btn btn-warning btn-sm">
                                                         <i class="ti ti-pencil fs-7"></i>
                                                     </a>
-                                                    <a href="oke.php?id=<?php echo $p['doc2_id']; ?>"
+                                                    <a href="oke.php?id=<?php echo $p['doc3_id']; ?>"
                                                         class="btn btn-danger btn-sm">
                                                         <i class="bi bi-check fs-5"></i>
                                                     </a>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <?php 
-                                                    static $lastDocId = null; // Static variable to keep track of the last doc2_doc1_id
-                                                    if ($p['doc2_doc1_id'] !== $lastDocId): 
-                                                        $lastDocId = $p['doc2_doc1_id']; // Update lastDocId
-                                                        if ($p['doc2_status'] === 'Done(Doc2)'): ?>
-                                                    <a href="tambah_kontrak.php?doc2_id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-primary btn-sm"> <i
-                                                            class="ti ti-book-upload fs-5"></i>Doc Kontrak PKS</a>
-                                                    <?php else: ?>
-                                                    <span class="btn btn-default btn-sm" disabled><i
-                                                            class="ti ti-book-upload fs-5"></i>Doc Kontrak PKS</span>
-                                                    <?php endif; 
-                                                    else: ?>
-                                                    <!-- Kosongkan opsi jika ID dokumen sama -->
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
@@ -371,31 +354,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function tambahArsip() {
-        window.location.href = 'tambah_pks.php';
-    }
-
-    function hapusArsip(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`arsip_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Arsip berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus arsip');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus arsip');
-                });
-        }
-    }
 
     // Fungsi untuk menangani paginasi dan pencarian
     document.addEventListener('DOMContentLoaded', function() {

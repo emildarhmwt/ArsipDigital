@@ -45,7 +45,7 @@ if ($files && isset($files['name']) && is_array($files['name']) && count(array_f
             $nama_file = $rand.'_'.$filename;
 
             // Insert into doc2 with reference to doc1_id for each file
-   $insertQuery = "INSERT into doc2 (doc2_waktu_upload, doc2_petugas, doc2_kode, doc2_nama, doc2_jenis, doc2_ket, doc2_file, doc2_status, doc2_doc1_id) VALUES ('$waktu', '$petugas', '$kode', '$nama', '$jenis', '$keterangan', '$nama_file', 'Uploaded', '$doc2_doc1_id')";
+            $insertQuery = "INSERT into doc2 (doc2_waktu_upload, doc2_petugas, doc2_kode, doc2_nama, doc2_jenis, doc2_ket, doc2_file, doc2_status, doc2_doc1_id) VALUES ('$waktu', '$petugas', '$kode', '$nama', '$jenis', '$keterangan', '$nama_file', 'Uploaded', '$doc2_doc1_id')";
             
             if (!mysqli_query($koneksi, $insertQuery)) {
                 // Log the error for debugging
