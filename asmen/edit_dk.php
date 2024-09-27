@@ -5,7 +5,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     exit;
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -100,12 +99,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-weight: 400;
     }
 
-    .table td {
-        word-break: break-word;
-        overflow-wrap: break-word;
-        white-space: normal;
-    }
-
     .btn-custom {
         background-color: #bcddeb !important;
         color: black !important;
@@ -115,6 +108,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     .btn-custom:hover {
         background-color: #266d8b !important;
         color: white !important;
+    }
+
+    .btn-custom2 {
+        background-color: #ede0a0 !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom2:hover {
+        background-color: #bdb57b !important;
+        color: white !important;
+    }
+
+    .textinfo {
+        font-size: 12px;
     }
     </style>
 </head>
@@ -225,118 +233,51 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
-                        <!-- table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                        <select id="rowsPerPageSelect" class="form-select"
-                                            style="width: auto; display: inline-block;">
-                                            <option value="5">5</option>
-                                            <option value="10" selected>10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span> data per halaman</span>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                    </div>
-                                </div>
-
-                                <!-- <center>
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-4">Edit Dokumen Kajian</h5>
+                            <div class="card">
+                                <div class="card-body">
                                     <?php
-                                    if (isset($_GET['alert'])) {
-                                        if ($_GET['alert'] == "gagal") {
+                                    $id = $_GET['id'];
+                                    $data = mysqli_query($koneksi, "select * from doc1 where doc1_id='$id'");
+                                    while ($d = mysqli_fetch_array($data)) {
                                     ?>
-                                    <div class="alert alert-danger">File arsip gagal diupload. Krena demi keamanan file
-                                        .php tidak diperbolehkan.</div>
+                                    <form method="post" action="edit_dk_aksi.php" enctype="multipart/form-data">
+                                        <div class="mb-3">
+                                            <label for="shift" class="form-label">Kode Dokumen</label>
+                                            <input type="hidden" name="id" value="<?php echo $d['doc1_id']; ?>">
+                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
+                                                required="required" value="<?php echo $d['doc1_kode']; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="shift" class="form-label">Nama Dokumen</label>
+                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
+                                                required="required" value="<?php echo $d['doc1_nama']; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea1"
+                                                class="form-label">Keterangan</label>
+                                            <input type="text" class="form-control" rows="10" name="keterangan"
+                                                placeholder="Input Data" required="required"
+                                                value="<?php echo $d['doc1_ket']; ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">File</label>
+                                            <input class="form-control" type="file" name="file">
+                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah dokumen</p>
+                                        </div>
+                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
+                                            Submit</button>
+                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
+                                                class="bi bi-arrow-left-circle"></i>
+                                            Back</button>
+                                    </form>
                                     <?php
-                                        } elseif ($_GET['alert'] == "doc1_id_missing") {
-                                        ?>
-                                    <div class="alert alert-danger">ID dokumen 1 tidak ditemukan. Silakan periksa
-                                        kembali.</div>
-                                    <?php
-                                        } else {
-                                        ?>
-                                    <div class="alert alert-success">Arsip berhasil tersimpan.</div>
-                                    <?php
-                                        }
                                     }
                                     ?>
-                                </center> -->
-
-                                <div class="table-responsive products-table" data-simplebar>
-                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
-                                            <tr>
-                                                <th class="fs-3">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
-                                                <th class="fs-3">Nama Berkas</th>
-                                                <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Keterangan</th>
-                                                <th class="fs-3">Status</th>
-                                                <th class="fs-3">File</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT  doc2.*, doc3.*, user_pks.* 
-                                            FROM doc3 
-                                            JOIN doc2 ON doc2.doc2_id = doc3.doc3_doc2_id 
-                                            JOIN user_pks ON doc3.doc3_petugas = user_pks.pks_id
-                                            ORDER BY doc3.doc3_id DESC");
-
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc3_waktu_upload'])) ?>
-                                                </td>
-                                                <td>
-                                                    <b>KODE</b> : <?php echo $p['doc3_kode'] ?><br>
-                                                    <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
-                                                    <b>Nama Doc Kontrak </b> : <?php echo $p['doc3_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc3_jenis'] ?><br>
-                                                </td>
-                                                <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc3_ket'] ?></td>
-                                                <td>
-                                                    <?php echo $p['doc3_status']; ?>
-                                                    <?php if (in_array($p['doc3_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc3_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="preview_kontrak.php?id=<?php echo $p['doc3_id']; ?>"> <i
-                                                            class="ti ti-eye fs-7"></i></a>
-                                                    <?php if (in_array($p['doc3_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <a href="edit_kontrak.php?id=<?php echo $p['doc3_id']; ?>"
-                                                        class="btn btn-warning btn-sm">
-                                                        <i class="ti ti-pencil fs-7"></i>
-                                                    </a>
-                                                    <?php endif; ?>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
                                 </div>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>
@@ -351,80 +292,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    // Fungsi untuk menangani paginasi dan pencarian
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector('.table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-        const searchInput = document.getElementById('searchInput');
-        const paginationContainer = document.getElementById('paginationContainer');
-
-        let currentPage = 1;
-        let rowsPerPage = parseInt(rowsPerPageSelect.value);
-
-        function displayTable(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedRows = rows.slice(start, end);
-
-            tbody.innerHTML = '';
-            paginatedRows.forEach(row => tbody.appendChild(row));
-
-            updatePagination();
-        }
-
-        function updatePagination() {
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-            paginationContainer.innerHTML = '';
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayTable(currentPage);
-                });
-
-                li.appendChild(a);
-                paginationContainer.appendChild(li);
-            }
-        }
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredRows = rows.filter(row => {
-                return Array.from(row.cells).some(cell =>
-                    cell.textContent.toLowerCase().includes(searchTerm)
-                );
-            });
-
-            tbody.innerHTML = '';
-            filteredRows.forEach(row => tbody.appendChild(row));
-
-            currentPage = 1;
-            updatePagination();
-        }
-
-        rowsPerPageSelect.addEventListener('change', () => {
-            rowsPerPage = parseInt(rowsPerPageSelect.value);
-            currentPage = 1;
-            displayTable(currentPage);
-        });
-
-        searchInput.addEventListener('input', filterTable);
-
-        // Inisialisasi tampilan tabel
-        displayTable(currentPage);
-    });
+    function goBack() {
+        window.location.href = 'data_pks.php';
+    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

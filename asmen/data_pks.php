@@ -315,11 +315,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 </td>
                                                 <td>
                                                     <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="#?id=<?php echo $p['doc1_file']; ?>"><i
-                                                            class="ti ti-download fs-7"></i></a>
+                                                        href="preview_dk.php?id=<?php echo $p['doc1_id']; ?>"><i
+                                                            class="ti ti-eye fs-7"></i></a>
                                                     <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <a href="edit.php?id=<?php echo $p['doc1_id']; ?>"
-                                                        class="btn btn-warning btn-sm">
+                                                    <a href="edit_dk.php?id=<?php echo $p['doc1_id']; ?>"
+                                                        class="btn btn-warning btn-sm mx-1">
                                                         <i class="ti ti-pencil fs-7"></i>
                                                     </a>
                                                     <?php endif; ?>

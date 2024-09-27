@@ -199,25 +199,7 @@
              <!--  Header End -->
              <div class="container-fluid">
                  <div class="row">
-                     <div class="col-lg-4">
-                         <div class="card overflow-hidden">
-                             <div class="card-body p-4">
-                                 <div class="d-flex align-items-center mb-2">
-                                     <span
-                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
-                                         <i class="ti ti-thumb-up fs-8"></i>
-                                     </span>
-                                     <div class="ms-2">
-                                         <h5 class="card-title mb-2 fw-semibold fs-4">Data Selesai</h5>
-                                         <h5 class="card-title mb-0 fw-semibold fs-3">18</h5>
-                                     </div>
-
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="col-lg-4">
+                     <div class="col-lg-6">
                          <div class="card overflow-hidden">
                              <div class="card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
@@ -241,7 +223,7 @@
                              </div>
                          </div>
                      </div>
-                     <div class="col-lg-4">
+                     <div class="col-lg-6">
                          <div class="card overflow-hidden">
                              <div class="card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
@@ -395,120 +377,6 @@
                                                  <canvas id="categoryPieChart" width="200px" height="200px"></canvas>
                                              </div>
                                          </div>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-
-                     <div class=" row">
-                         <div class="col-lg-12 d-flex align-items-stretch">
-                             <div class="card w-100">
-                                 <div class="card-body p-4">
-                                     <div class="d-flex mb-4 justify-content-between align-items-center">
-                                         <h5 class="mb-0 fw-bold">Data </h5>
-                                     </div>
-
-                                     <div class="table-responsive" style="max-height: 400px; overflow-y: auto;"
-                                         data-simplebar>
-                                         <table class="table table-borderless align-middle text-nowrap">
-                                             <thead>
-                                                 <tr>
-                                                     <th scope="col">Nama File</th>
-                                                     <th scope="col">Status</th>
-                                                     <th scope="col"></th>
-                                                 </tr>
-                                             </thead>
-                                             <tbody>
-                                                 <tr>
-                                                     <td>
-                                                         <div class="d-flex align-items-center">
-                                                             <div class="me-4">
-                                                                 <img src="../assets/images/profile/user1.jpg"
-                                                                     width="50" class="rounded-circle" alt="" />
-                                                             </div>
-                                                             <div>
-                                                                 <h6 class="mb-1 fw-bolder">
-                                                                     Mark J. Freeman</h6>
-                                                                 <p class="fs-3 mb-0">Prof.
-                                                                     English</p>
-                                                             </div>
-                                                         </div>
-                                                     </td>
-                                                     <td>
-                                                         <span
-                                                             class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
-                                                     </td>
-                                                     <td>
-                                                         <div class="dropdown">
-                                                             <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                                 aria-expanded="false"
-                                                                 class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
-                                                                 <i class="ti ti-dots-vertical fs-7 d-block"></i>
-                                                             </button>
-                                                             <ul class="dropdown-menu dropdown-menu-end"
-                                                                 aria-labelledby="dropdownMenuButton1">
-                                                                 <li><a class="dropdown-item" href="#">Action</a>
-                                                                 </li>
-                                                                 <li>
-                                                                     <a class="dropdown-item" href="#">Another
-                                                                         action</a>
-                                                                 </li>
-                                                                 <li>
-                                                                     <a class="dropdown-item" href="#">Something
-                                                                         else
-                                                                         here</a>
-                                                                 </li>
-                                                             </ul>
-                                                         </div>
-                                                     </td>
-                                                 </tr>
-
-                                                 <tr>
-                                                     <td>
-                                                         <div class="d-flex align-items-center">
-                                                             <div class="me-4">
-                                                                 <img src="../assets/images/profile/user1.jpg"
-                                                                     width="50" class="rounded-circle" alt="" />
-                                                             </div>
-                                                             <div>
-                                                                 <h6 class="mb-1 fw-bolder">
-                                                                     Mark J. Freeman</h6>
-                                                                 <p class="fs-3 mb-0">Prof.
-                                                                     English</p>
-                                                             </div>
-                                                         </div>
-                                                     </td>
-                                                     <td>
-                                                         <span
-                                                             class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
-                                                     </td>
-                                                     <td>
-                                                         <div class="dropdown">
-                                                             <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                                 aria-expanded="false"
-                                                                 class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
-                                                                 <i class="ti ti-dots-vertical fs-7 d-block"></i>
-                                                             </button>
-                                                             <ul class="dropdown-menu dropdown-menu-end"
-                                                                 aria-labelledby="dropdownMenuButton1">
-                                                                 <li><a class="dropdown-item" href="#">Action</a>
-                                                                 </li>
-                                                                 <li>
-                                                                     <a class="dropdown-item" href="#">Another
-                                                                         action</a>
-                                                                 </li>
-                                                                 <li>
-                                                                     <a class="dropdown-item" href="#">Something
-                                                                         else
-                                                                         here</a>
-                                                                 </li>
-                                                             </ul>
-                                                         </div>
-                                                     </td>
-                                                 </tr>
-                                             </tbody>
-                                         </table>
                                      </div>
                                  </div>
                              </div>

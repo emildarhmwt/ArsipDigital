@@ -234,7 +234,7 @@ $doc1_id = $_GET['doc1_id'] ?? null;
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Upload Arsip</h5>
+                            <h5 class="card-title fw-semibold mb-4">Upload Dokumen Pendukung</h5>
                             <div class="card">
                                 <div class="card-body">
                                     <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">

@@ -4,14 +4,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
-
-$doc2_id = isset($_GET['doc2_id']) ? intval($_GET['doc2_id']) : null;
-
-if (!$doc2_id) {
-    // Redirect to an error page or show a message if doc2_id is not provided
-    header("location:data_kontrak.php?alert=doc2_id_missing");
-    exit;
-}
 ?>
 <!doctype html>
 <html lang="en">
@@ -107,17 +99,6 @@ if (!$doc2_id) {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
-        color: white !important;
-    }
-
     .btn-custom2 {
         background-color: #ede0a0 !important;
         color: black !important;
@@ -137,6 +118,7 @@ if (!$doc2_id) {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -196,83 +178,98 @@ if (!$doc2_id) {
                                     </div>
                                 </div>
                             </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-bell-ringing"></i>
-                                    <div class="notification bg-primary rounded-circle"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                    aria-labelledby="drop2">
-                                    <div class="message-body">
-                                        <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
-                                        <div class="message-list">
-                                            <?php
-                                            $id_saya = $_SESSION['id'];
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
-                                            <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
-                                                <div class="notification-content">
-                                                    <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
-                                                    <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
-                                                        <?php echo $p['arsip_nama'] ?></p>
-                                                    <small
-                                                        class="text-muted fs-2"><?php echo date('H:i d-m-Y', strtotime($p['riwayat_waktu'])) ?></small>
-                                                </div>
-                                            </a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <a href="riwayat_unduh.php"
-                                            class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </nav>
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Upload Dokumen Kontrak</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form method="post" action="kontrak_aksi.php" enctype="multipart/form-data">
-                                        <input type="hidden" name="doc2_id"
-                                            value="<?php echo htmlspecialchars($doc2_id); ?>">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <textarea class="form-control" rows="10" placeholder="Input Data"
-                                                name="keterangan" required></textarea>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFileMultiple" class="form-label">File</label>
-                                            <input class="form-control" type="file" name="file[]" multiple required>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
-                                    </form>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Preview Dokumen Kajian</h5>
+                        <a href="data_kak_hps.php" class="btn btn-custom2 mb-3">
+                            <i class="bi bi-arrow-left"></i> Back
+                        </a>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <?php
+                                    $id = $_GET['id'];
+                                    $data = mysqli_query($koneksi, "SELECT * FROM doc2,user_pks WHERE doc2_petugas=pks_id and doc2_id='$id'");
+                                    while ($d = mysqli_fetch_array($data)) {
+                                    ?>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Waktu Upload</th>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($d['doc2_waktu_upload'])) ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kode Dokumen</th>
+                                                <td><?php echo $d['doc2_kode']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nama Dokumen Kajian</th>
+                                                <td><?php echo $d['doc2_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jenis File</th>
+                                                <td><?php echo $d['doc2_jenis']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>ASMEN Pengupload</th>
+                                                <td><?php echo $d['pks_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Keterangan</th>
+                                                <td><?php echo $d['doc2_ket']; ?></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <?php
+                                                if ($d['doc2_jenis'] == "png" || $d['doc2_jenis'] == "jpg" || $d['doc2_jenis'] == "gif" || $d['doc2_jenis'] == "jpeg") {
+                                                ?>
+                                        <img src="../berkas_pks/<?php echo $d['doc2_file']; ?>" class="img-fluid"
+                                            alt="<?php echo $d['doc2_nama']; ?>">
+                                        <?php
+                                                } elseif ($d['doc2_jenis'] == "pdf") {
+                                                ?>
+                                        <embed src="../berkas_pks/<?php echo $d['doc2_file']; ?>" type="application/pdf"
+                                            width="100%" height="600px" />
+                                        <?php
+                                                } elseif ($d['doc2_jenis'] == "xlsx" || $d['doc2_jenis'] == "xls") {
+                                                ?>
+                                        <div id="excel-preview"></div>
+                                        <script>
+                                        fetch('../berkas_pks/<?php echo $d['doc2_file']; ?>')
+                                            .then(response => response.arrayBuffer())
+                                            .then(data => {
+                                                const workbook = XLSX.read(data, {
+                                                    type: 'array'
+                                                });
+                                                const sheetName = workbook.SheetNames[0];
+                                                const worksheet = workbook.Sheets[sheetName];
+                                                const html = XLSX.utils.sheet_to_html(worksheet);
+                                                document.getElementById('excel-preview').innerHTML = html;
+                                            });
+                                        </script>
+                                        <?php
+                                                } else {
+                                                ?>
+                                        <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
+                                                href="../berkas_pks/?php echo $d['doc2_file']; ?>">Download di
+                                                sini.</a>
+                                        </p>
+                                        <?php
+                                                }
+                                                ?>
+                                    </div>
                                 </div>
+                                <?php
+                                    }
+                                    ?>
                             </div>
                         </div>
                     </div>
@@ -286,10 +283,6 @@ if (!$doc2_id) {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function goBack() {
-        window.location.href = 'data_kak_hps.php';
-    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

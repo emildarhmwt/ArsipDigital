@@ -232,7 +232,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Upload Arsip</h5>
+                            <h5 class="card-title fw-semibold mb-4">Upload Dokumen Kajian</h5>
                             <div class="card">
                                 <div class="card-body">
                                     <form method="post" action="pks_aksi.php" enctype="multipart/form-data">

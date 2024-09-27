@@ -77,14 +77,6 @@
                             <span class="hide-menu judul-sidebar">MENU</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
-                                <span class="aside-icon p-2 bg-light-warning rounded-3">
-                                    <i class="ti ti-file-analytics fs-7 text-warning"></i>
-                                </span>
-                                <span class="hide-menu ms-2 ps-1 judul-sidebar">Data </span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item">
                             <a class="sidebar-link sidebar-link primary-hover-bg" href="data_kategori.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-primary rounded-3">

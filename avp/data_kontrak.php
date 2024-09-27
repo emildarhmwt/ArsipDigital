@@ -294,7 +294,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                             JOIN doc2 ON doc2.doc2_id = doc3.doc3_doc2_id 
                                             JOIN user_pks ON doc3.doc3_petugas = user_pks.pks_id
                                             ORDER BY doc3.doc3_id DESC");
-
                                             $previous_doc1_id = null; // Menyimpan ID dokumen sebelumnya
 
                                             while ($p = mysqli_fetch_array($arsip)) {
