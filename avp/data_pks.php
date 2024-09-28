@@ -1,5 +1,4 @@
 <?php
-include '../koneksi.php';
 session_start();
 if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
@@ -117,6 +116,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
         background-color: #266d8b !important;
         color: white !important;
     }
+
+    .pilihan-doc a {
+        cursor: pointer;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .pilihan-doc-kajian a {
+        color: black;
+        text-decoration: underline;
+    }
     </style>
 </head>
 
@@ -166,7 +176,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [AVP] </p>
+                                        [ASMEN] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -186,40 +196,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                 </div>
                             </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-bell-ringing"></i>
-                                    <div class="notification bg-primary rounded-circle"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                    aria-labelledby="drop2">
-                                    <div class="message-body">
-                                        <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
-                                        <div class="message-list">
-                                            <?php
-                                            $id_saya = $_SESSION['id'];
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
-                                            <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
-                                                <div class="notification-content">
-                                                    <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
-                                                    <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
-                                                        <?php echo $p['arsip_nama'] ?></p>
-                                                    <small
-                                                        class="text-muted fs-2"><?php echo date('H:i d-m-Y', strtotime($p['riwayat_waktu'])) ?></small>
-                                                </div>
-                                            </a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <a href="riwayat_unduh.php"
-                                            class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -229,6 +205,26 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
+                        <div class="row text-center justify-content-center pilihan-doc mb-2">
+                            <div class="col-lg-2 border-end">
+                                <a href="#"> Semua Doc </a>
+                            </div>
+                            <div class="col-lg-2 border-end pilihan-doc-kajian">
+                                <a href="data_pks.php"> Doc Kajian</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
+                                <a href="data_kak_hps.php">Doc KAK & HPS</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
+                                <a href="data_kontrak.php"> Doc Kontrak</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
+                                <a> Approve </a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a> Reject </a>
+                            </div>
+                        </div>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -244,90 +240,73 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                         </select>
                                         <span> data per halaman</span>
                                     </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                    </div>
                                 </div>
+
+                                <center>
+                                    <?php
+                                        if (isset($_GET['alert'])) {
+                                            if ($_GET['alert'] == "gagal") {
+                                        ?>
+                                    <div class="alert alert-danger">File arsip gagal diupload. krena demi
+                                        keamanan
+                                        file
+                                        .php tidak diperbolehkan.</div>
+                                    <?php
+                                            } else {
+                                            ?>
+                                    <div class="alert alert-success">Arsip berhasil tersimpan.</div>
+                                    <?php
+                                            }
+                                        }
+                                        ?>
+                                </center>
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
                                             <tr>
-                                                <th class="fs-3">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
-                                                <th class="fs-3">Nama Berkas</th>
+                                                <th class="fs-3" style="width: 5%;">No</th>
+                                                <th class="fs-3">Nama Permintaan</th>
                                                 <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Keterangan</th>
-                                                <th class="fs-3">Status</th>
-                                                <th class="fs-3">File</th>
+                                                <th class="fs-3">Prioritas</th>
+                                                <th class="fs-3">Tanggal Dibutuhkan</th>
+                                                <!-- <th class="fs-3">Status</th> -->
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id ORDER BY doc1_id DESC");
-                                            while ($p = mysqli_fetch_array($arsip)) {
+                                            include '../koneksi.php';
+                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc1_waktu_upload'])) ?>
-                                                </td>
-                                                <td>
-                                                    <b>KODE</b> : <?php echo $p['doc1_kode'] ?><br>
-                                                    <b>Nama</b> : <?php echo $p['doc1_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc1_jenis'] ?><br>
-                                                </td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc1_ket'] ?></td>
-                                                <td>
-                                                    <?php echo $p['status']; ?>
-                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                <td><?php echo $p['dock_kategori'] ?></td>
+                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                </td>
+                                                <!-- <td>
+                                                    <?php echo $p['dock_status']; ?>
+                                                    <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
                                                     <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
-                                                </td>
-                                                <td> <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="#?id=<?php echo $p['doc1_file']; ?>"><i
-                                                            class="ti ti-download fs-7"></i></a></td>
-                                                <td>
-                                                    <?php if ($p['status'] != 'Approve(VP)' && $p['status'] != 'Rejected(AVP)' && $p['status'] != 'Rejected(VP)' && $p['status'] != 'Rejected(GM)' && $p['status'] != 'Done(Doc1)')  { ?>
-                                                    <a href="confirm.php?id=<?php echo $p['doc1_id']; ?>"
-                                                        class="btn btn-success">Approve</a>
-                                                    <button class="btn btn-danger"
-                                                        onclick="openRejectModal(<?php echo $p['doc1_id']; ?>)">Reject</button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal" id="rejectModal<?php echo $p['doc1_id']; ?>"
-                                                        style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
-                                                        <div class="modal-content" style="padding: 10px;">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title">Alasan Penolakan</h5>
-                                                                <button type="button" class="close"
-                                                                    onclick="closeRejectModal(<?php echo $p['doc1_id']; ?>)">&times;</button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <form method="POST"
-                                                                    action="reject.php?id=<?php echo $p['doc1_id']; ?>">
-                                                                    <div class="mb-3">
-                                                                        <label for="alasan" class="form-label">Masukkan
-                                                                            Alasan</label>
-                                                                        <textarea name="alasan" class="form-control"
-                                                                            required style="height: 80px;"></textarea>
-                                                                    </div>
-                                                                    <button type="submit"
-                                                                        class="btn btn-primary">Kirim</button>
-                                                                    <button type="button" class="btn btn-danger"
-                                                                        onclick="closeRejectModal(<?php echo $p['doc1_id']; ?>)">Batal</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
+                                                </td> -->
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <a target="_blank" class="btn btn-default btn-sm"
+                                                            href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
+                                                                class="ti ti-eye fs-5"></i></a>
+                                                        <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
+                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-pencil fs-5"></i>
+                                                        </a>
+                                                        <?php endif; ?> -->
                                                     </div>
-                                                    <?php } else { ?>
-                                                    <button class="btn btn-success" disabled>Approved</button>
-                                                    <button class="btn btn-danger" disabled>Rejected</button>
-                                                    <?php } ?>
                                                 </td>
                                             </tr>
                                             <?php
@@ -336,7 +315,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                         </tbody>
                                     </table>
                                 </div>
-                                <nav aria-label="Page navigation">
+                                <nav aria-label="Page navdivtion">
                                     <ul class="pagination justify-content-center mt-3" id="paginationContainer">
                                         <!-- Pagination items will be added here by JavaScript -->
                                     </ul>
@@ -347,102 +326,97 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-    fetch('sidebar_avp.php')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('sidebar').innerHTML = data;
-        });
-
-    function openRejectModal(id) {
-        document.getElementById('rejectModal' + id).style.display = 'block';
-    }
-
-    function closeRejectModal(id) {
-        document.getElementById('rejectModal' + id).style.display = 'none';
-    }
-
-    // Fungsi untuk menangani paginasi dan pencarian
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector('.table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-        const searchInput = document.getElementById('searchInput');
-        const paginationContainer = document.getElementById('paginationContainer');
-
-        let currentPage = 1;
-        let rowsPerPage = parseInt(rowsPerPageSelect.value);
-
-        function displayTable(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedRows = rows.slice(start, end);
-
-            tbody.innerHTML = '';
-            paginatedRows.forEach(row => tbody.appendChild(row));
-
-            updatePagination();
-        }
-
-        function updatePagination() {
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-            paginationContainer.innerHTML = '';
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayTable(currentPage);
-                });
-
-                li.appendChild(a);
-                paginationContainer.appendChild(li);
-            }
-        }
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredRows = rows.filter(row => {
-                return Array.from(row.cells).some(cell =>
-                    cell.textContent.toLowerCase().includes(searchTerm)
-                );
+        <script>
+        fetch('sidebar_avp.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
             });
 
-            tbody.innerHTML = '';
-            filteredRows.forEach(row => tbody.appendChild(row));
-
-            currentPage = 1;
-            updatePagination();
+        function tambahArsip() {
+            window.location.href = 'tambah_dokumen_kajian.php';
         }
 
-        rowsPerPageSelect.addEventListener('change', () => {
-            rowsPerPage = parseInt(rowsPerPageSelect.value);
-            currentPage = 1;
+        // Fungsi untuk menangani paginasi dan pencarian
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+            const searchInput = document.getElementById('searchInput');
+            const paginationContainer = document.getElementById('paginationContainer');
+
+            let currentPage = 1;
+            let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+            function displayTable(page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                const paginatedRows = rows.slice(start, end);
+
+                tbody.innerHTML = '';
+                paginatedRows.forEach(row => tbody.appendChild(row));
+
+                updatePagination();
+            }
+
+            function updatePagination() {
+                const pageCount = Math.ceil(rows.length / rowsPerPage);
+                paginationContainer.innerHTML = '';
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.classList.add('page-item');
+                    if (i === currentPage) li.classList.add('active');
+
+                    const a = document.createElement('a');
+                    a.classList.add('page-link');
+                    a.href = '#';
+                    a.textContent = i;
+
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        displayTable(currentPage);
+                    });
+
+                    li.appendChild(a);
+                    paginationContainer.appendChild(li);
+                }
+            }
+
+            function filterTable() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredRows = rows.filter(row => {
+                    return Array.from(row.cells).some(cell =>
+                        cell.textContent.toLowerCase().includes(searchTerm)
+                    );
+                });
+
+                tbody.innerHTML = '';
+                filteredRows.forEach(row => tbody.appendChild(row));
+
+                currentPage = 1;
+                updatePagination();
+            }
+
+            rowsPerPageSelect.addEventListener('change', () => {
+                rowsPerPage = parseInt(rowsPerPageSelect.value);
+                currentPage = 1;
+                displayTable(currentPage);
+            });
+
+            searchInput.addEventListener('input', filterTable);
+
+            // Inisialisasi tampilan tabel
             displayTable(currentPage);
         });
-
-        searchInput.addEventListener('input', filterTable);
-
-        // Inisialisasi tampilan tabel
-        displayTable(currentPage);
-    });
-    </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        </script>
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/sidebarmenu.js"></script>
+        <script src="../assets/js/app.min.js"></script>
+        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
 </body>
 
 </html>

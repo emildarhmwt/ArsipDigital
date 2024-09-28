@@ -1,9 +1,10 @@
 <?php
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
+
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!doctype html>
@@ -232,8 +233,15 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         $no = 1;
                         include '../koneksi.php';
                         // Perbaiki query untuk menggunakan alias yang benar
-                        $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id WHERE dock_id = '$id' ORDER BY dock_id DESC");
-                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                        $arsip = mysqli_query($koneksi, "
+                        SELECT dockajian.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama 
+                        FROM dockajian 
+                        JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
+                        LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
+                        WHERE dock_id = '$id' 
+                        ORDER BY dock_id DESC
+                    ");
+                     while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
                         <div class="row">
                             <div class="card">
@@ -387,6 +395,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             href=" ./data_pks.php">
                                             <i class="ti ti-arrow-narrow-left fs-7"></i></i> Kembali
                                         </a>
+
                                     </div>
                                     <?php
                                     }
@@ -394,10 +403,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                                 <div class="table-responsive products-table" data-simplebar>
                                     <?php
+                                            
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            $arsip = mysqli_query($koneksi, "
+                                            SELECT dockajian.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama 
+                                            FROM dockajian 
+                                            JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
+                                            LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
+                                            LEFT JOIN user_pks AS user_pks3 ON dockajian.dock_vp = user_pks3.pks_id 
+                                            WHERE dock_id = '$id' 
+                                            ORDER BY dock_id DESC
+                                        ");
                                             while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
@@ -407,7 +425,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <th class="fs-3">Nama Permintaan</th>
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Status</th>
-                                                <th class="fs-3">Opsi</th>
+                                                <!-- <th class="fs-3">Opsi</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -415,51 +433,85 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo $p['pks_nama'] ?></td>
+                                                <td><?php echo $p['petugas_nama'] ?></td>
                                                 <td>
-                                                    <?php echo $p['dock_status']; ?>
-                                                    <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <?php echo $p['dock_status_asmen']; ?>
+                                                    <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?> -->
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?></td>
+                                                <td>
+                                                    <?php echo !empty($p['dock_status_avp']) ? $p['dock_status_avp'] : '-'; ?>
+                                                    <?php if ($p['dock_status_avp'] == 'Rejected (AVP)'): ?>
                                                     <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <!-- <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
-                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-pencil fs-5"></i>
-                                                        </a>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </td> -->
-                                                <!-- <td>
-                                                    <form method="POST" action="update_status.php">
-                                                        <input type="hidden" name="dock_id"
-                                                            value="<?php echo $p['dock_id']; ?>">
-                                                        <input type="hidden" name="action" value="approve">
-                                                        <button type="submit" class="btn btn-success">Approve</button>
-                                                    </form>
-                                                    <form method="POST" action="update_status.php">
-                                                        <input type="hidden" name="dock_id"
-                                                            value="<?php echo $p['dock_id']; ?>">
-                                                        <input type="hidden" name="action" value="reject">
-                                                        <button type="submit" class="btn btn-danger">Reject</button>
-                                                    </form>
-                                                </td> -->
                                             </tr>
 
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
+                                                <td>
+                                                    <?php echo !empty($p['dock_status_vp']) ? $p['dock_status_vp'] : '-'; ?>
+                                                    <?php if ($p['dock_status_vp'] == 'Rejected (VP)'): ?>
+                                                    <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
                                     <?php
                                             }
                                             ?>
                                 </div>
-                                <nav aria-label="Page navdivtion">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
+                                <div class="row d-inline-flex mt-3 text-center justify-content-center">
+                                    <a class="btn btn-primary d-inline-flex justify-content-center align-items-center mx-2"
+                                        href="confirm.php?id=<?php echo $id; ?>"
+                                        style="width: auto; padding: 5px 10px;">Approve
+                                    </a>
+                                    <button
+                                        class="btn btn-danger d-inline-flex justify-content-center align-items-center mx-2"
+                                        onclick="openRejectModal(<?php echo $id; ?>)"
+                                        style="width: auto; padding: 5px 10px;">
+                                        Reject
+                                    </button>
+
+                                    <div class="modal" id="rejectModal<?php echo $id; ?>"
+                                        style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
+                                        <div class="modal-content" style="padding: 10px;">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Alasan Penolakan</h5>
+                                                <!-- <button type="button" class="close"
+                                                    onclick="closeRejectModal(<?php echo $id; ?>)">&times;</button> -->
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="reject.php?id=<?php echo $id; ?>">
+                                                    <div class="mb-3">
+                                                        <label for="alasan" class="form-label">Masukkan Alasan</label>
+                                                        <textarea name="alasan" class="form-control" required
+                                                            style="height: 80px;"></textarea>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Kirim</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        onclick="closeRejectModal(<?php echo $id; ?>)">Batal</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            <nav aria-label="Page navdivtion">
+                                <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                    <!-- Pagination items will be added here by JavaScript -->
+                                </ul>
+                            </nav>
                         </div>
 
                     </div>
@@ -468,11 +520,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         </div>
     </div>
     <script>
-    fetch('sidebar_asmen.php')
+    fetch('sidebar_vp.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
+
+    function openRejectModal(id) {
+        document.getElementById('rejectModal' + id).style.display = 'block';
+    }
+
+    function closeRejectModal(id) {
+        document.getElementById('rejectModal' + id).style.display = 'none';
+    }
     </script>
     <script src=" ../assets/libs/jquery/dist/jquery.min.js">
     </script>

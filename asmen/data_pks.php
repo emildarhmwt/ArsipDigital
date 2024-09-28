@@ -247,7 +247,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <button type="button" class="btn btn-custom"
                                             style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                             onclick="tambahArsip()">
-                                            <i class="ti ti-book-upload fs-5"></i> Create Doc Kajian
+                                            <i class="ti ti-plus fs-5"></i>Create
                                         </button>
                                     </div>
                                 </div>
@@ -280,9 +280,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
-                                                <th class="fs-3">Status</th>
+                                                <!-- <th class="fs-3">Status</th> -->
                                                 <th class="fs-3">Opsi</th>
-                                                <th class="fs-3">Doc KAK & HPS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -290,7 +289,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
                                             while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
@@ -300,40 +299,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <td><?php echo $p['dock_kategori'] ?></td>
                                                 <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                     <?php echo $p['dock_status']; ?>
                                                     <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
                                                     <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
-                                                </td>
+                                                </td> -->
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <a target="_blank" class="btn btn-default btn-sm"
                                                             href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
                                                                 class="ti ti-eye fs-5"></i></a>
-                                                        <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                        <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
                                                         <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
                                                             class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
                                                             <i class="ti ti-pencil fs-5"></i>
                                                         </a>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group-vertical">
-                                                        <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['dock_file']; ?>"><i class="fa fa-download"></i></a> -->
-                                                        <?php if ($p['dock_status'] === 'Done(Doc1)'): ?>
-                                                        <a target="_blank" class="btn btn-primary btn-sm"
-                                                            href="tambah_kak_hps.php?doc1_id=<?php echo $p['dock_id']; ?>"><i
-                                                                class="ti ti-book-upload fs-5"></i>
-                                                            Doc Pendukung
-                                                        </a>
-                                                        <?php else: ?>
-                                                        <span class="btn btn-default btn-sm" disabled> <i
-                                                                class="ti ti-book-upload fs-5"></i> Doc
-                                                            Pendukung
-                                                        </span>
-                                                        <?php endif; ?>
+                                                        <?php endif; ?> -->
                                                     </div>
                                                 </td>
                                             </tr>

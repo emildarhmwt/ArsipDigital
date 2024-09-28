@@ -2,14 +2,12 @@
 include '../koneksi.php';
 session_start();
 
-$id = $_GET['id'];
+$id = $_GET['id']; // Ambil ID dokumen dari parameter GET
+$user_id = $_SESSION['id']; // Ambil ID pengguna dari sesi
 
-// Update the document status to 'Confirm(AVP)' and change the upload time and petugas
-mysqli_query($koneksi, "UPDATE doc1 SET doc1_waktu_upload=NOW(), doc1_petugas='".$_SESSION['id']."', status='Approve(AVP)' WHERE doc1_id='$id'");
+// Update the document status to 'Approved (AVP)' and change the upload time and petugas
+mysqli_query($koneksi, "UPDATE dockajian SET dock_avp='$user_id', dock_status_avp='Approved (AVP)' WHERE dock_id='$id'");
 
-// // Optionally delete from AVP
-// mysqli_query($koneksi, "DELETE FROM doc1 WHERE doc1_id='$id'");
-
-header("Location: data_pks.php");
+header("Location: preview_kajian.php?id=$id"); // Redirect ke preview_kajian dengan ID dokumen
 exit;
 ?>
