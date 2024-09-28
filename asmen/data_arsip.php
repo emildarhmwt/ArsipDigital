@@ -1,11 +1,10 @@
 <?php
+include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
+if ($_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
-    exit;
 }
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -25,51 +24,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
         rel="stylesheet">
     <style>
-    .notification-dropdown {
-        width: 280px;
-        right: 0;
-        left: auto;
-        max-height: 400px;
-        overflow-y: auto;
-        z-index: 1050;
-        /* Tambahkan z-index yang lebih tinggi */
-    }
-
-    .notification-dropdown .message-body {
-        padding: 10px;
-    }
-
-    .notification-dropdown .message-title {
-        font-size: 14px;
-    }
-
-    .notification-dropdown .dropdown-item {
-        padding: 8px 10px;
-    }
-
-    .notification-dropdown .notification-content h6 {
-        font-size: 12px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content p {
-        font-size: 11px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content small {
-        font-size: 10px;
-    }
-
-    .notification-dropdown .btn-sm {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-
-    .navbar-nav .nav-item.dropdown {
-        position: relative;
-    }
-
     .navbar-judul {
         font-size: 20px;
         font-weight: bold;
@@ -116,6 +70,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #266d8b !important;
         color: white !important;
     }
+
+    .btn-custom2 {
+        background-color: #ede0a0 !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom2:hover {
+        background-color: #bdb57b !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -125,6 +90,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -194,6 +160,42 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <form method="get" action="">
+                                    <div class="mb-3">
+                                        <label for="grupSearch" class="form-label">Filter Kategori</label>
+                                        <select class="form-select" name="kategori">
+                                            <option selected disabled>Pilih Kategori</option>
+                                            <?php
+                                            $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                            while ($k = mysqli_fetch_array($kategori)) {
+                                            ?>
+                                            <option <?php if (isset($_GET['kategori'])) {
+                                                        if ($_GET['kategori'] == $k['kategori_id']) {
+                                                            echo "selected='selected'";
+                                                        }
+                                                    } ?> value="<?php echo $k['kategori_id']; ?>">
+                                                <?php echo $k['kategori_nama']; ?></option>
+                                            <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <button type="submit"
+                                            class="btn btn-custom mx-3 text-center justify-content-center"><i
+                                                class="ti ti-file-search fs-5"></i>
+                                            Cari Data</button>
+                                        <button type="button"
+                                            class="btn btn-custom2 mx-3 text-center justify-content-center"
+                                            onclick="fetchAllData()">
+                                            <i class="ti ti-clear-all fs-5 justify-content-center"></i>Semua
+                                            Data</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -216,101 +218,54 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
 
-                                <!-- <center>
-                                    <?php
-                                    if (isset($_GET['alert'])) {
-                                        if ($_GET['alert'] == "gagal") {
-                                    ?>
-                                    <div class="alert alert-danger">File arsip gagal diupload. Krena demi keamanan file
-                                        .php tidak diperbolehkan.</div>
-                                    <?php
-                                        } elseif ($_GET['alert'] == "doc1_id_missing") {
-                                        ?>
-                                    <div class="alert alert-danger">ID dokumen 1 tidak ditemukan. Silakan periksa
-                                        kembali.</div>
-                                    <?php
-                                        } else {
-                                        ?>
-                                    <div class="alert alert-success">Arsip berhasil tersimpan.</div>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </center> -->
-
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
                                             <tr>
-                                                <th class="fs-3">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
-                                                <th class="fs-3">Nama Berkas</th>
-                                                <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Keterangan</th>
-                                                <th class="fs-3">Status</th>
-                                                <th class="fs-3">File</th>
-                                                <th class="fs-3">Opsi</th>
+                                                <th class="fs-3" style="width: 5%;">No</th>
+                                                <th class="fs-3" style="width: 10%;">Waktu Upload</th>
+                                                <th class="fs-3" style="width: 25%;">Arsip</th>
+                                                <th class="fs-3" style="width: 15%;">Kategori</th>
+                                                <th class="fs-3" style="width: 10%;">Petugas</th>
+                                                <th class="fs-3" style="width: 30%;">Keterangan</th>
+                                                <th class="fs-3" style="width: 5%;">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT doc1.*, doc2.*, user_pks.* FROM doc2 
-                                                JOIN doc1 ON doc1.doc1_id = doc2.doc2_doc1_id 
-                                                JOIN user_pks ON doc2.doc2_petugas = user_pks.pks_id 
-                                                ORDER BY doc2.doc2_id DESC");
-
+                                            if (isset($_GET['kategori'])) {
+                                                $kategori = $_GET['kategori'];
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_kategori='$kategori' ORDER BY arsip_id DESC");
+                                            } else {
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id ORDER BY arsip_id DESC");
+                                            }
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc2_waktu_upload'])) ?>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['arsip_waktu_upload'])) ?>
                                                 </td>
                                                 <td>
-                                                    <b>KODE</b> : <?php echo $p['doc2_kode'] ?><br>
-                                                    <b>Nama Doc Kajian </b> : <?php echo $p['doc1_nama'] ?><br>
-                                                    <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc2_jenis'] ?><br>
+                                                    <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>
+                                                    <b>Nama</b> : <?php echo $p['arsip_nama'] ?><br>
+                                                    <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
                                                 </td>
-                                                <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc2_ket'] ?></td>
-                                                <td>
-                                                    <?php echo $p['doc2_status']; ?>
-                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?>
-                                                </td>
-                                                <td>
-                                                    <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="preview_dp.php?id=<?php echo $p['doc2_id']; ?>"> <i
-                                                            class="ti ti-eye fs-7"></i></a>
-                                                    <?php if (in_array($p['doc2_status'], haystack: ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <a href="edit_kak_hps.php?id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-warning btn-sm">
-                                                        <i class="ti ti-pencil fs-7"></i>
-                                                    </a>
-                                                    <a href="oke.php?id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-danger btn-sm">
-                                                        <i class="bi bi-check fs-5"></i>
-                                                    </a>
-                                                    <?php endif; ?>
-                                                </td>
+                                                <td><?php echo $p['kategori_nama'] ?></td>
+                                                <td><?php echo $p['petugas_nama'] ?></td>
+                                                <td><?php echo $p['arsip_keterangan'] ?></td>
                                                 <td class="text-center">
-                                                    <?php 
-                                                    static $lastDocId = null; // Static variable to keep track of the last doc2_doc1_id
-                                                    if ($p['doc2_doc1_id'] !== $lastDocId): 
-                                                        $lastDocId = $p['doc2_doc1_id']; // Update lastDocId
-                                                        if ($p['doc2_status'] === 'Done(Doc2)'): ?>
-                                                    <a href="tambah_kontrak.php?doc2_id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-primary btn-sm"> <i
-                                                            class="ti ti-book-upload fs-5"></i>Doc Kontrak PKS</a>
-                                                    <?php else: ?>
-                                                    <span class="btn btn-default btn-sm" disabled><i
-                                                            class="ti ti-book-upload fs-5"></i>Doc Kontrak PKS</span>
-                                                    <?php endif; 
-                                                    else: ?>
-                                                    <!-- Kosongkan opsi jika ID dokumen sama -->
-                                                    <?php endif; ?>
+                                                    <div class="btn-group">
+                                                        <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['arsip_file']; ?>"><i class="fa fa-download"></i></a> -->
+                                                        <a target="_blank" class="btn btn-default btn-sm"
+                                                            href="arsip_download.php?id=<?php echo $p['arsip_id']; ?>"
+                                                            download><i class="ti ti-download fs-7"></i></a>
+                                                        <a target="_blank"
+                                                            href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
+                                                            class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-eye fs-7 me-1"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php
@@ -338,29 +293,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function tambahArsip() {
-        window.location.href = 'tambah_pks.php';
-    }
-
-    function hapusArsip(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`arsip_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Arsip berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus arsip');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus arsip');
-                });
-        }
+    function fetchAllData() {
+        document.querySelector('select[name="kategori"]').value = '';
+        window.location.href = window.location.pathname;
     }
 
     // Fungsi untuk menangani paginasi dan pencarian

@@ -99,17 +99,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
-        color: white !important;
-    }
-
     .btn-custom2 {
         background-color: #ede0a0 !important;
         color: black !important;
@@ -120,10 +109,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #bdb57b !important;
         color: white !important;
     }
-
-    .textinfo {
-        font-size: 12px;
-    }
     </style>
 </head>
 
@@ -133,6 +118,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -199,52 +185,97 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Edit Dokumen Kajian</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Preview Dokumen Kajian</h5>
+                        <?php
+                        $no = 1;
+                        include '../koneksi.php';
+                        // Perbaiki query untuk menggunakan alias yang benar
+                        $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                        ?>
+                        <div class="row">
                             <div class="card">
                                 <div class="card-body">
-                                    <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "select * from doc1 where doc1_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                    <form method="post" action="edit_dk_aksi.php" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="hidden" name="id" value="<?php echo $d['doc1_id']; ?>">
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc1_kode']; ?>">
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Nama Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_nama'] ?></td>
+                                                </p>
+
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Deskripsi Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_desk'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_jenis'] ?></td>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc1_nama']; ?>">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Kategori Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_kategori'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_aspek'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Lokasi Penyerahan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_lokasi'] ?></td>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <input type="text" class="form-control" rows="10" name="keterangan"
-                                                placeholder="Input Data" required="required"
-                                                value="<?php echo $d['doc1_ket']; ?>">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                    :</span>
+                                                </label>
+                                                <p>
+                                                    <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                    </td>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">File</label>
-                                            <input class="form-control" type="file" name="file">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah dokumen</p>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
                                     </form>
-                                    <?php
-                                    }
-                                    ?>
                                 </div>
                             </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-3">
+                                                <label for="shift" class="form-label">Komentar :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_comment'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -257,10 +288,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function goBack() {
-        window.location.href = 'data_pks.php';
-    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

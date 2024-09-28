@@ -22,6 +22,51 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         href="https://fonts.googleapis.com/css2?family=Acme&family=Coiny&family=Concert+One&family=Pacifico&family=Playpen+Sans:wght@100..800&family=Playwrite+DE+Grund:wght@100..400&family=Righteous&family=Sacramento&family=Varela+Round&family=Yatra+One&display=swap"
         rel="stylesheet">
     <style>
+    .notification-dropdown {
+        width: 280px;
+        right: 0;
+        left: auto;
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1050;
+        /* Tambahkan z-index yang lebih tinggi */
+    }
+
+    .notification-dropdown .message-body {
+        padding: 10px;
+    }
+
+    .notification-dropdown .message-title {
+        font-size: 14px;
+    }
+
+    .notification-dropdown .dropdown-item {
+        padding: 8px 10px;
+    }
+
+    .notification-dropdown .notification-content h6 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .notification-dropdown .notification-content p {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+
+    .notification-dropdown .notification-content small {
+        font-size: 10px;
+    }
+
+    .notification-dropdown .btn-sm {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+
+    .navbar-nav .nav-item.dropdown {
+        position: relative;
+    }
+
     .navbar-judul {
         font-size: 20px;
         font-weight: bold;
@@ -119,6 +164,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </nav>

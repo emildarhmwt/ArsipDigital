@@ -1,8 +1,8 @@
 <?php
+include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
+if ($_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
-    exit;
 }
 ?>
 <!doctype html>
@@ -24,51 +24,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
         rel="stylesheet">
     <style>
-    .notification-dropdown {
-        width: 280px;
-        right: 0;
-        left: auto;
-        max-height: 400px;
-        overflow-y: auto;
-        z-index: 1050;
-        /* Tambahkan z-index yang lebih tinggi */
-    }
-
-    .notification-dropdown .message-body {
-        padding: 10px;
-    }
-
-    .notification-dropdown .message-title {
-        font-size: 14px;
-    }
-
-    .notification-dropdown .dropdown-item {
-        padding: 8px 10px;
-    }
-
-    .notification-dropdown .notification-content h6 {
-        font-size: 12px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content p {
-        font-size: 11px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content small {
-        font-size: 10px;
-    }
-
-    .notification-dropdown .btn-sm {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-
-    .navbar-nav .nav-item.dropdown {
-        position: relative;
-    }
-
     .navbar-judul {
         font-size: 20px;
         font-weight: bold;
@@ -98,32 +53,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-style: normal;
         font-weight: 400;
     }
-
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
-        color: white !important;
-    }
-
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
-        color: white !important;
-    }
-
-    .textinfo {
-        font-size: 12px;
-    }
     </style>
 </head>
 
@@ -133,6 +62,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -199,51 +129,96 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Edit Dokumen Kajian</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "select * from doc1 where doc1_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                    <form method="post" action="edit_dk_aksi.php" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="hidden" name="id" value="<?php echo $d['doc1_id']; ?>">
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc1_kode']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc1_nama']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <input type="text" class="form-control" rows="10" name="keterangan"
-                                                placeholder="Input Data" required="required"
-                                                value="<?php echo $d['doc1_ket']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">File</label>
-                                            <input class="form-control" type="file" name="file">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah dokumen</p>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
-                                    </form>
-                                    <?php
-                                    }
-                                    ?>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Preview Arsip</h5>
+
+                        <a href="data_arsip.php" class="btn btn-secondary mb-3">
+                            <i class="bi bi-arrow-left"></i> Back
+                        </a>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <?php
+                                $id = $_GET['id'];
+                                $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
+                                while ($d = mysqli_fetch_array($data)) {
+                                ?>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Kode Arsip</th>
+                                                <td><?php echo $d['arsip_kode']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Waktu Upload</th>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($d['arsip_waktu_upload'])) ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nama File</th>
+                                                <td><?php echo $d['arsip_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kategori</th>
+                                                <td><?php echo $d['kategori_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jenis File</th>
+                                                <td><?php echo $d['arsip_jenis']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Petugas Pengupload</th>
+                                                <td><?php echo $d['petugas_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Keterangan</th>
+                                                <td><?php echo $d['arsip_keterangan']; ?></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <?php
+                                                if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
+                                                ?>
+                                        <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
+                                            alt="<?php echo $d['arsip_nama']; ?>">
+                                        <?php
+                                                } elseif ($d['arsip_jenis'] == "pdf") {
+                                                ?>
+                                        <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
+                                            width="100%" height="600px" />
+                                        <?php
+                                                } elseif ($d['arsip_jenis'] == "xlsx" || $d['arsip_jenis'] == "xls") {
+                                                ?>
+                                        <div id="excel-preview"></div>
+                                        <script>
+                                        fetch('../arsip/<?php echo $d['arsip_file']; ?>')
+                                            .then(response => response.arrayBuffer())
+                                            .then(data => {
+                                                const workbook = XLSX.read(data, {
+                                                    type: 'array'
+                                                });
+                                                const sheetName = workbook.SheetNames[0];
+                                                const worksheet = workbook.Sheets[sheetName];
+                                                const html = XLSX.utils.sheet_to_html(worksheet);
+                                                document.getElementById('excel-preview').innerHTML = html;
+                                            });
+                                        </script>
+                                        <?php
+                                                } else {
+                                                ?>
+                                        <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
+                                                href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
+                                        </p>
+                                        <?php
+                                                }
+                                                ?>
+                                    </div>
                                 </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -257,10 +232,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function goBack() {
-        window.location.href = 'data_pks.php';
-    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,8 +1,8 @@
 <?php
+include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
+if ($_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
-    exit;
 }
 ?>
 <!doctype html>
@@ -15,58 +15,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
         rel="stylesheet">
     <style>
-    .notification-dropdown {
-        width: 280px;
-        right: 0;
-        left: auto;
-        max-height: 400px;
-        overflow-y: auto;
-        z-index: 1050;
-        /* Tambahkan z-index yang lebih tinggi */
-    }
-
-    .notification-dropdown .message-body {
-        padding: 10px;
-    }
-
-    .notification-dropdown .message-title {
-        font-size: 14px;
-    }
-
-    .notification-dropdown .dropdown-item {
-        padding: 8px 10px;
-    }
-
-    .notification-dropdown .notification-content h6 {
+    .textinfo {
         font-size: 12px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content p {
-        font-size: 11px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content small {
-        font-size: 10px;
-    }
-
-    .notification-dropdown .btn-sm {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-
-    .navbar-nav .nav-item.dropdown {
-        position: relative;
     }
 
     .navbar-judul {
@@ -108,21 +64,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     .btn-custom:hover {
         background-color: #266d8b !important;
         color: white !important;
-    }
-
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
-        color: white !important;
-    }
-
-    .textinfo {
-        font-size: 12px;
     }
     </style>
 </head>
@@ -199,53 +140,91 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
+                <div class="page-breadcrumb">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <h1 class="mb-5 fw-bold">Profile</h1>
+                        </div>
+                    </div>
+                </div>
                 <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Edit Dokumen Kajian</h5>
+                    <div class="row">
+                        <!-- Column -->
+                        <div class="col-lg-4 col-xlg-3 col-md-5">
+                            <?php
+                            $id = $_SESSION['id'];
+                            $saya = mysqli_query($koneksi, "select * from user_pks where pks_id='$id'");
+                            $s = mysqli_fetch_assoc($saya);
+                            ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "select * from doc1 where doc1_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                    <form method="post" action="edit_dk_aksi.php" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="hidden" name="id" value="<?php echo $d['doc1_id']; ?>">
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc1_kode']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc1_nama']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <input type="text" class="form-control" rows="10" name="keterangan"
-                                                placeholder="Input Data" required="required"
-                                                value="<?php echo $d['doc1_ket']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">File</label>
-                                            <input class="form-control" type="file" name="file">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah dokumen</p>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
-                                    </form>
-                                    <?php
-                                    }
-                                    ?>
+                                    <center class="m-t-30">
+                                        <?php
+                                        if ($s['pks_foto'] == "") {
+                                        ?>
+                                        <img class="img-user" src="../gambar/sistem/user.png" width="150" height="150">
+                                        <?php
+                                        } else {
+                                        ?>
+                                        <img class="img-user" src="../gambar/asmen/<?php echo $s['pks_foto']; ?>"
+                                            width="150" height="150">
+                                        <?php
+                                        }
+                                        ?>
+                                        <h4 class="card-title m-t-10"><?php echo $s['pks_nama']; ?></h4>
+                                        <h6 class="card-subtitle">User</h6>
+                                    </center>
                                 </div>
                             </div>
                         </div>
+                        <!-- Column -->
+                        <!-- Column -->
+                        <div class="col-lg-8 col-xlg-9 col-md-7">
+                            <?php
+                            if (isset($_GET['alert'])) {
+                                if ($_GET['alert'] == "sukses") {
+                                    echo "<div class='alert alert-success'>Profile anda berhasil diganti!</div>";
+                                }
+                            }
+                            ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="form-horizontal form-material mx-2" action="profile_act.php"
+                                        method="post" enctype="multipart/form-data">
+                                        <div class="form-group mb-3">
+                                            <label class="col-md-12">Nama</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" placeholder="Masukkan Nama .."
+                                                    name="nama" required="required"
+                                                    value="<?php echo $s['pks_nama'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="example-email" class="col-md-12">Username</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control"
+                                                    placeholder="Masukkan Username .." name="username"
+                                                    required="required" value="<?php echo $s['pks_username'] ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div class="mb-3">
+                                                <label for="foto" class="form-label">Foto</label>
+                                                <input class="form-control" type="file" name="foto">
+                                                <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12">
+                                                <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
+                                                    Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Column -->
                     </div>
                 </div>
             </div>
@@ -257,16 +236,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function goBack() {
-        window.location.href = 'data_pks.php';
-    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 
 </html>

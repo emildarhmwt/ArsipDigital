@@ -116,6 +116,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #266d8b !important;
         color: white !important;
     }
+
+    .pilihan-doc a {
+        cursor: pointer;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .pilihan-doc a.selected {
+        color: black;
+        text-decoration: underline;
+    }
     </style>
 </head>
 
@@ -185,40 +196,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                 </div>
                             </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-bell-ringing"></i>
-                                    <div class="notification bg-primary rounded-circle"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                    aria-labelledby="drop2">
-                                    <div class="message-body">
-                                        <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
-                                        <div class="message-list">
-                                            <?php
-                                            $id_saya = $_SESSION['id'];
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
-                                            <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
-                                                <div class="notification-content">
-                                                    <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
-                                                    <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
-                                                        <?php echo $p['arsip_nama'] ?></p>
-                                                    <small
-                                                        class="text-muted fs-2"><?php echo date('H:i d-m-Y', strtotime($p['riwayat_waktu'])) ?></small>
-                                                </div>
-                                            </a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <a href="riwayat_unduh.php"
-                                            class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -228,6 +205,26 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
+                        <div class="row text-center justify-content-center pilihan-doc">
+                            <div class="col-lg-2">
+                                <a href="#"> Semua Doc </a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a href="data_pks.php"> Doc Kajian</a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a href="data_kak_hps.php">Doc KAK & HPS</a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a href="data_kontrak.php"> Doc Kontrak</a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a> Approve </a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a> Reject </a>
+                            </div>
+                        </div>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -250,7 +247,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <button type="button" class="btn btn-custom"
                                             style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                             onclick="tambahArsip()">
-                                            <i class="ti ti-book-upload fs-5"></i> Upload Doc Kajian
+                                            <i class="ti ti-book-upload fs-5"></i> Create Doc Kajian
                                         </button>
                                     </div>
                                 </div>
@@ -260,7 +257,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         if (isset($_GET['alert'])) {
                                             if ($_GET['alert'] == "gagal") {
                                         ?>
-                                    <div class="alert alert-danger">File arsip gagal diupload. krena demi keamanan file
+                                    <div class="alert alert-danger">File arsip gagal diupload. krena demi
+                                        keamanan
+                                        file
                                         .php tidak diperbolehkan.</div>
                                     <?php
                                             } else {
@@ -276,206 +275,192 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
                                             <tr>
-                                                <th class="fs-3">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
-                                                <th class="fs-3">Nama Berkas</th>
+                                                <th class="fs-3" style="width: 5%;">No</th>
+                                                <th class="fs-3">Nama Permintaan</th>
                                                 <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Keterangan</th>
+                                                <th class="fs-3">Prioritas</th>
+                                                <th class="fs-3">Tanggal Dibutuhkan</th>
                                                 <th class="fs-3">Status</th>
-                                                <th class="fs-3">File</th>
                                                 <th class="fs-3">Opsi</th>
+                                                <th class="fs-3">Doc KAK & HPS</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            if (isset($_GET['kategori'])) {
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id ORDER BY doc1_id DESC");
-                                            } else {
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM doc1,user_pks WHERE doc1_petugas=pks_id ORDER BY doc1_id DESC");
-                                            }
-                                            while ($p = mysqli_fetch_array($arsip)) {
+                                            include '../koneksi.php';
+                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc1_waktu_upload'])) ?>
-                                                </td>
-                                                <td>
-                                                    <b>KODE</b> : <?php echo $p['doc1_kode'] ?><br>
-                                                    <b>Nama</b> : <?php echo $p['doc1_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc1_jenis'] ?><br>
-                                                </td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc1_ket'] ?></td>
+                                                <td><?php echo $p['dock_kategori'] ?></td>
+                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                </td>
                                                 <td>
-                                                    <?php echo $p['status']; ?>
-                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <?php echo $p['dock_status']; ?>
+                                                    <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
                                                     <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td>
-                                                    <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="preview_dk.php?id=<?php echo $p['doc1_id']; ?>"><i
-                                                            class="ti ti-eye fs-7"></i></a>
-                                                    <?php if (in_array($p['status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <a href="edit_dk.php?id=<?php echo $p['doc1_id']; ?>"
-                                                        class="btn btn-warning btn-sm mx-1">
-                                                        <i class="ti ti-pencil fs-7"></i>
-                                                    </a>
-                                                    <?php endif; ?>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+                                                        <a target="_blank" class="btn btn-default btn-sm"
+                                                            href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
+                                                                class="ti ti-eye fs-5"></i></a>
+                                                        <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
+                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-pencil fs-5"></i>
+                                                        </a>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group-vertical">
-                                                        <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['doc1_file']; ?>"><i class="fa fa-download"></i></a> -->
-                                                        <?php if ($p['status'] === 'Done(Doc1)'): ?>
+                                                        <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['dock_file']; ?>"><i class="fa fa-download"></i></a> -->
+                                                        <?php if ($p['dock_status'] === 'Done(Doc1)'): ?>
                                                         <a target="_blank" class="btn btn-primary btn-sm"
-                                                            href="tambah_kak_hps.php?doc1_id=<?php echo $p['doc1_id']; ?>"><i
+                                                            href="tambah_kak_hps.php?doc1_id=<?php echo $p['dock_id']; ?>"><i
                                                                 class="ti ti-book-upload fs-5"></i>
                                                             Doc Pendukung
                                                         </a>
                                                         <?php else: ?>
                                                         <span class="btn btn-default btn-sm" disabled> <i
-                                                                class="ti ti-book-upload fs-5"></i> Doc Pendukung
+                                                                class="ti ti-book-upload fs-5"></i> Doc
+                                                            Pendukung
                                                         </span>
                                                         <?php endif; ?>
-                                                        <!-- <a target="_blank"
-                                                            href="arsip_preview.php?id=<?php echo $p['doc1_id']; ?>"
-                                                            class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-book-upload fs-5"></i> Doc Kontrak PKS
-                                                        </a> -->
                                                     </div>
                                                 </td>
                                             </tr>
                                             <?php
                                             }
                                             ?>
+                                            div
                                         </tbody>
                                     </table>
                                 </div>
-                                <nav aria-label="Page navigation">
+                                <nav aria-label="Page navdivtion">
                                     <ul class="pagination justify-content-center mt-3" id="paginationContainer">
                                         <!-- Pagination items will be added here by JavaScript -->
                                     </ul>
                                 </nav>
                             </div>
                         </div>
+                        </>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-    fetch('sidebar_asmen.php')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('sidebar').innerHTML = data;
-        });
-
-    function tambahArsip() {
-        window.location.href = 'tambah_pks.php';
-    }
-
-    function hapusArsip(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`arsip_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Arsip berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus arsip');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus arsip');
-                });
-        }
-    }
-
-    // Fungsi untuk menangani paginasi dan pencarian
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector('.table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-        const searchInput = document.getElementById('searchInput');
-        const paginationContainer = document.getElementById('paginationContainer');
-
-        let currentPage = 1;
-        let rowsPerPage = parseInt(rowsPerPageSelect.value);
-
-        function displayTable(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedRows = rows.slice(start, end);
-
-            tbody.innerHTML = '';
-            paginatedRows.forEach(row => tbody.appendChild(row));
-
-            updatePagination();
-        }
-
-        function updatePagination() {
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-            paginationContainer.innerHTML = '';
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayTable(currentPage);
-                });
-
-                li.appendChild(a);
-                paginationContainer.appendChild(li);
-            }
-        }
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredRows = rows.filter(row => {
-                return Array.from(row.cells).some(cell =>
-                    cell.textContent.toLowerCase().includes(searchTerm)
-                );
+        <script>
+        fetch('sidebar_asmen.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
             });
 
-            tbody.innerHTML = '';
-            filteredRows.forEach(row => tbody.appendChild(row));
-
-            currentPage = 1;
-            updatePagination();
+        function tambahArsip() {
+            window.location.href = 'tambah_dokumen_kajian.php';
         }
 
-        rowsPerPageSelect.addEventListener('change', () => {
-            rowsPerPage = parseInt(rowsPerPageSelect.value);
-            currentPage = 1;
+        // Fungsi untuk menangani paginasi dan pencarian
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+            const searchInput = document.getElementById('searchInput');
+            const paginationContainer = document.getElementById('paginationContainer');
+
+            let currentPage = 1;
+            let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+            function displayTable(page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                const paginatedRows = rows.slice(start, end);
+
+                tbody.innerHTML = '';
+                paginatedRows.forEach(row => tbody.appendChild(row));
+
+                updatePagination();
+            }
+
+            function updatePagination() {
+                const pageCount = Math.ceil(rows.length / rowsPerPage);
+                paginationContainer.innerHTML = '';
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.classList.add('page-item');
+                    if (i === currentPage) li.classList.add('active');
+
+                    const a = document.createElement('a');
+                    a.classList.add('page-link');
+                    a.href = '#';
+                    a.textContent = i;
+
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        displayTable(currentPage);
+                    });
+
+                    li.appendChild(a);
+                    paginationContainer.appendChild(li);
+                }
+            }
+
+            function filterTable() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredRows = rows.filter(row => {
+                    return Array.from(row.cells).some(cell =>
+                        cell.textContent.toLowerCase().includes(searchTerm)
+                    );
+                });
+
+                tbody.innerHTML = '';
+                filteredRows.forEach(row => tbody.appendChild(row));
+
+                currentPage = 1;
+                updatePagination();
+            }
+
+            rowsPerPageSelect.addEventListener('change', () => {
+                rowsPerPage = parseInt(rowsPerPageSelect.value);
+                currentPage = 1;
+                displayTable(currentPage);
+            });
+
+            searchInput.addEventListener('input', filterTable);
+
+            // Inisialisasi tampilan tabel
             displayTable(currentPage);
         });
 
-        searchInput.addEventListener('input', filterTable);
+        const items = document.querySelectorAll('.pilihan-doc a');
 
-        // Inisialisasi tampilan tabel
-        displayTable(currentPage);
-    });
-    </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        items.forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault(); // Mencegah reload halaman
+
+                // Remove 'selected' class from all items
+                items.forEach(el => el.classList.remove('selected'));
+
+                // Add 'selected' class to the clicked item
+                this.classList.add('selected');
+            });
+        });
+        </script>
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/sidebarmenu.js"></script>
+        <script src="../assets/js/app.min.js"></script>
+        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
 </body>
 
 </html>

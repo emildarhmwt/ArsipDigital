@@ -197,40 +197,6 @@ if (!$doc2_id) {
                                 </div>
                             </li>
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-bell-ringing"></i>
-                                    <div class="notification bg-primary rounded-circle"></div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                    aria-labelledby="drop2">
-                                    <div class="message-body">
-                                        <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
-                                        <div class="message-list">
-                                            <?php
-                                            $id_saya = $_SESSION['id'];
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
-                                            <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
-                                                <div class="notification-content">
-                                                    <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
-                                                    <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
-                                                        <?php echo $p['arsip_nama'] ?></p>
-                                                    <small
-                                                        class="text-muted fs-2"><?php echo date('H:i d-m-Y', strtotime($p['riwayat_waktu'])) ?></small>
-                                                </div>
-                                            </a>
-                                            <?php
-                                            }
-                                            ?>
-                                        </div>
-                                        <a href="riwayat_unduh.php"
-                                            class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </nav>
