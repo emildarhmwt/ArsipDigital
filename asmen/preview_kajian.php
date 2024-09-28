@@ -109,6 +109,45 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #bdb57b !important;
         color: white !important;
     }
+
+    .timeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #ccc;
+        z-index: 1;
+    }
+
+    .timeline-item {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .timeline-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #00bfff;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .timeline-item p {
+        margin: 0;
+        font-size: 14px;
+        color: #00bfff;
+    }
     </style>
 </head>
 
@@ -277,6 +316,134 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         }
                             ?>
                         </div>
+
+                        <div class="row text-center justify-content-center border d-flex border-dark align-items-center"
+                            style="border-radius: 10px; height: 50px;">
+                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center">
+                                Doc Kajian
+                            </div>
+                            <div class=" col-lg-4 border-end d-flex justify-content-center
+                                align-items-center">
+                                Doc KAK & HPS
+                            </div>
+                            <div class=" col-lg-4 d-flex justify-content-center
+                                align-items-center">
+                                Doc Kontrak
+                            </div>
+                        </div>
+
+                        <div class="row text-center justify-content-center align-items-center mt-4">
+                            <div class="col-lg-12">
+
+                                <div class="timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-dot"></div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="text-center">
+                                        <p>Uploaded <br> by </p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Approve(AVP) <br> by</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Approve(VP) <br> by</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Done <br> by</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <?php
+                                    $no = 1;
+                                    include '../koneksi.php';
+                                    // Perbaiki query untuk menggunakan alias yang benar
+                                    $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                    ?>
+                                <div class="row mb-3">
+                                    <div class="col-md-12 d-flex justify-content-end align-items-center">
+                                        <a target="_blank"
+                                            class="btn btn-default btn-sm d-flex justify-content-end align-items-center""
+                                            href=" ../berkas_pks/<?php echo $p['dock_file']; ?>">
+                                            <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen
+                                        </a>
+                                    </div>
+                                    <?php
+                                    }
+                                        ?>
+                                </div>
+                                <div class="table-responsive products-table" data-simplebar>
+                                    <?php
+                                            $no = 1;
+                                            include '../koneksi.php';
+                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                            ?>
+                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                        <thead class="fs-4">
+                                            <tr>
+                                                <th class="fs-3" style="width: 5%;">No</th>
+                                                <th class="fs-3">Nama Permintaan</th>
+                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3">Status</th>
+                                                <th class="fs-3">Opsi</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['pks_nama'] ?></td>
+                                                <td>
+                                                    <?php echo $p['dock_status']; ?>
+                                                    <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td class="text-center">
+                                                    <div class="btn-group">
+
+                                                        <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
+                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-pencil fs-5"></i>
+                                                        </a>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                            }
+                                            ?>
+                                </div>
+                                <nav aria-label="Page navdivtion">
+                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                        <!-- Pagination items will be added here by JavaScript -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -289,7 +456,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
     </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src=" ../assets/libs/jquery/dist/jquery.min.js">
+    </script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>

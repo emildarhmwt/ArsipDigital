@@ -123,7 +123,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         text-decoration: none;
     }
 
-    .pilihan-doc a.selected {
+    .pilihan-doc-kajian a {
         color: black;
         text-decoration: underline;
     }
@@ -205,20 +205,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
-                        <div class="row text-center justify-content-center pilihan-doc">
-                            <div class="col-lg-2">
+                        <div class="row text-center justify-content-center pilihan-doc mb-2">
+                            <div class="col-lg-2 border-end">
                                 <a href="#"> Semua Doc </a>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 border-end pilihan-doc-kajian">
                                 <a href="data_pks.php"> Doc Kajian</a>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 border-end">
                                 <a href="data_kak_hps.php">Doc KAK & HPS</a>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 border-end">
                                 <a href="data_kontrak.php"> Doc Kontrak</a>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-2 border-end">
                                 <a> Approve </a>
                             </div>
                             <div class="col-lg-2">
@@ -340,7 +340,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             <?php
                                             }
                                             ?>
-                                            div
                                         </tbody>
                                     </table>
                                 </div>
@@ -351,7 +350,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                 </nav>
                             </div>
                         </div>
-                        </>
                     </div>
                 </div>
             </div>
@@ -440,20 +438,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
             // Inisialisasi tampilan tabel
             displayTable(currentPage);
-        });
-
-        const items = document.querySelectorAll('.pilihan-doc a');
-
-        items.forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault(); // Mencegah reload halaman
-
-                // Remove 'selected' class from all items
-                items.forEach(el => el.classList.remove('selected'));
-
-                // Add 'selected' class to the clicked item
-                this.classList.add('selected');
-            });
         });
         </script>
         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
