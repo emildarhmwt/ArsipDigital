@@ -335,7 +335,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                  $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
-                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center <?php echo ($p['dock_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
+                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
                                 style="border-radius: 10px; height: 48px; color:black;">
                                 <a href="preview_kajian.php"> Doc Kajian </a>
                             </div>

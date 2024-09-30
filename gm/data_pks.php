@@ -276,19 +276,29 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                             <?php
                                             $no = 1;
                                             include '../koneksi.php';
-                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            // Perbaiki query untuk menghindari status "Rejected (AVP)"
                                             $arsip = mysqli_query($koneksi, "
-                                            SELECT dockajian.*, user_pks.pks_nama, doc_kak_hps.dockh_status_gm AS status_gm, doc_kak_hps.dockh_status_vp AS status_vp, doc_kak_hps.dockh_status_avp AS status_avp
+                                            SELECT dockajian.*, user_pks.pks_nama, 
+                                            doc_kak_hps.dockh_status_gm AS status_gm, 
+                                            doc_kak_hps.dockh_status_vp AS status_vp, 
+                                            doc_kak_hps.dockh_status_avp AS status_avp, 
+                                            doc_kak_hps.dockh_status_asmen AS status_asmen
                                             FROM dockajian 
                                             JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
-                                            LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id 
-                                            WHERE dockajian.dock_status_vp != 'Rejected (VP)' AND doc_kak_hps.dockh_status_vp != 'Rejected (VP)'
+                                            LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             ORDER BY dockajian.dock_id DESC
                                             ");
+
+                                            if (!$arsip) {
+                                                die("Query Error: " . mysqli_error($koneksi));
+                                            }
+
                                             while ($p = mysqli_fetch_assoc($arsip)) {
-                                                // Tambahkan kondisi untuk memeriksa dock_status_avp
-                                                if ($p['dock_status_vp'] == 'Rejected (VP)') {
-                                                    continue; // Lewati iterasi ini jika statusnya Rejected(AVP)
+                                                // Perbaiki kondisi filter
+                                                if (
+                                                    ($p['status_vp'] == 'Rejected (VP)' || $p['dock_status_vp'] == 'Rejected (VP)' || $p['status_avp'] == 'Rejected (AVP)' ||$p['dock_status_avp'] == 'Rejected (AVP)')
+                                                ) {
+                                                    continue; // Lewati iterasi ini dan jangan tampilkan data
                                                 }
                                             ?>
                                             <tr>
@@ -302,7 +312,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                     <?php
                                                         if (!empty($p['dock_status_gm'])) {
                                                             echo $p['dock_status_gm'];
-                                                        } elseif (!empty($p['dock_status_vp']) && $p['dock_status_vp'] != 'Rejected (VP)') {
+                                                        } elseif (!empty($p['dock_status_vp'])) {
                                                             echo $p['dock_status_vp'];
                                                         } elseif (!empty($p['dock_status_avp'])) {
                                                             echo $p['dock_status_avp'];
@@ -319,8 +329,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                             echo $p['status_vp'];
                                                         } elseif (!empty($p['status_avp'])) {
                                                             echo $p['status_avp'];
-                                                        } else {
+                                                        } elseif (!empty($p['status_asmen'])) {
                                                             echo $p['status_asmen'];
+                                                        } else {
+                                                            echo '-';
                                                         }
                                                         ?>
                                                 </td>
@@ -361,10 +373,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             });
-
-        function tambahArsip() {
-            window.location.href = 'tambah_dokumen_kajian.php';
-        }
 
         // Fungsi untuk menangani paginasi dan pencarian
         document.addEventListener('DOMContentLoaded', function() {

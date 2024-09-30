@@ -276,7 +276,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                             <?php
                                             $no = 1;
                                             include '../koneksi.php';
-                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            // Perbaiki query untuk menghindari status "Rejected (AVP)"
                                             $arsip = mysqli_query($koneksi, "
                                             SELECT dockajian.*, user_pks.pks_nama, 
                                             doc_kak_hps.dockh_status_gm AS status_gm, 
@@ -288,12 +288,18 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             ORDER BY dockajian.dock_id DESC
                                             ");
+
+                                            if (!$arsip) {
+                                                die("Query Error: " . mysqli_error($koneksi));
+                                            }
+
                                             while ($p = mysqli_fetch_assoc($arsip)) {
-                                                  if (
-                                                    ($p['dock_status_asmen'] == 'Uploaded' && $p['status_asmen'] == 'Uploaded') ||
-                                                    ($p['status_avp'] == 'Rejected (AVP)' && $p['dock_status_avp'] == 'Rejected (AVP)')
+                                                // Perbaiki kondisi filter
+                                                if (
+                                                    ($p['dock_status_asmen'] == 'Uploaded' || $p['status_asmen'] == 'Uploaded') &&
+                                                    ($p['status_avp'] == 'Rejected (AVP)' || $p['dock_status_avp'] == 'Rejected (AVP)')
                                                 ) {
-                                                    continue; // Lewati iterasi ini
+                                                    continue; // Lewati iterasi ini dan jangan tampilkan data
                                                 }
                                             ?>
                                             <tr>
@@ -314,7 +320,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                         } else {
                                                             echo $p['dock_status_asmen'];
                                                         }
-                                                    ?>
+                                                        ?>
                                                 </td>
                                                 <td>
                                                     <?php
@@ -329,7 +335,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                         } else {
                                                             echo '-';
                                                         }
-                                                    ?>
+                                                        ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">

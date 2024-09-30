@@ -336,7 +336,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
-                                style=" border-radius: 10px; height: 48px; color:black; background-color: #00bfff;">
+                                style=" border-radius: 10px; height: 48px; color:black;">
                                 <?php
                                 // Pastikan dockh_id ada di array $p
                                 $id_dockh = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
