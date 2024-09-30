@@ -295,14 +295,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                 </td>
                                                 <td>
                                                     <?php
-                                                        if (!empty($p['dock_status_vp'])) {
+                                                        if (!empty($p['dock_status_gm'])) {
+                                                            echo $p['dock_status_gm'];
+                                                        } elseif (!empty($p['dock_status_vp'])) {
                                                             echo $p['dock_status_vp'];
                                                         } elseif (!empty($p['dock_status_avp']) && $p['dock_status_avp'] != 'Rejected (AVP)') {
                                                             echo $p['dock_status_avp'];
-                                                        } elseif (!empty($p['dock_status_asmen'])) {
-                                                            echo $p['dock_status_asmen'];
                                                         } else {
-                                                            echo $p['dock_status'];
+                                                            echo $p['dock_status_asmen'];
                                                         }
                                                         ?>
                                                 </td>

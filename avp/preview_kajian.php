@@ -403,15 +403,16 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                                 <div class="table-responsive products-table" data-simplebar>
                                     <?php
-                                            
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
                                             $arsip = mysqli_query($koneksi, "
-                                            SELECT dockajian.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama 
+                                            SELECT dockajian.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama
                                             FROM dockajian 
                                             JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
                                             LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
+                                            LEFT JOIN user_pks AS user_pks3 ON dockajian.dock_vp = user_pks3.pks_id 
+                                            LEFT JOIN user_pks AS user_pks4 ON dockajian.dock_gm = user_pks4.pks_id
                                             WHERE dock_id = '$id' 
                                             ORDER BY dock_id DESC
                                         ");
@@ -448,6 +449,30 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <td>
                                                     <?php echo !empty($p['dock_status_avp']) ? $p['dock_status_avp'] : '-'; ?>
                                                     <?php if ($p['dock_status_avp'] == 'Rejected (AVP)'): ?>
+                                                    <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
+                                                <td>
+                                                    <?php echo !empty($p['dock_status_vp']) ? $p['dock_status_vp'] : '-'; ?>
+                                                    <?php if ($p['dock_status_vp'] == 'Rejected (VP)'): ?>
+                                                    <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
+                                                <td>
+                                                    <?php echo !empty($p['dock_status_gm']) ? $p['dock_status_gm'] : '-'; ?>
+                                                    <?php if ($p['dock_status_vp'] == 'Rejected (GM)'): ?>
                                                     <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>

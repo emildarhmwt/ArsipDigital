@@ -5,7 +5,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     exit;
 }
 
-$doc1_id = $_GET['doc1_id'] ?? null;
+
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!doctype html>
 <html lang="en">
@@ -200,45 +201,111 @@ $doc1_id = $_GET['doc1_id'] ?? null;
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Upload Dokumen Pendukung</h5>
-                            <div class="card">
+                            <h5 class="card-title fw-semibold mb-4">Create Dokumen PKS</h5>
+                            <?php
+                                    $no = 1;
+                                    include '../koneksi.php';
+                                    // Perbaiki query untuk menggunakan alias yang benar
+                                    $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id WHERE dock_id = '$id' ORDER BY dock_id DESC");
+                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                    ?>
+                            <div class="row">
                                 <div class="card-body">
-                                    <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
-                                        <input type="hidden" name="doc1_id"
-                                            value="<?php echo htmlspecialchars($doc1_id); ?>">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required>
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Nama Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_nama'] ?></td>
+                                                </p>
+
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Deskripsi Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_desk'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jenis Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_jenis'] ?></td>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Kategori Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_kategori'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_aspek'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Lokasi Penyerahan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dock_lokasi'] ?></td>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <textarea class="form-control" rows="10" placeholder="Input Data"
-                                                name="keterangan" required></textarea>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                    :</span>
+                                                </label>
+                                                <p>
+                                                    <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                    </td>
+                                                </p>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="formFileMultiple" class="form-label">File</label>
-                                            <input class="form-control" type="file" name="file[]" multiple required>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
                                     </form>
                                 </div>
                             </div>
+                            <?php
+                                    }
+                                        ?>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
+                                    <textarea class="form-control" rows="10" placeholder="Input Data" name="comment"
+                                        required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Lampiran File KAK :</label>
+                                    <input class="form-control" type="file" name="file">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Lampiran File HPS :</label>
+                                    <input class="form-control" type="file" name="file">
+                                </div>
+                                <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
+                                    Submit</button>
+                                <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
+                                        class="bi bi-arrow-left-circle"></i>
+                                    Back</button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_asmen.php')

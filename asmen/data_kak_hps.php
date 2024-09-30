@@ -116,6 +116,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #266d8b !important;
         color: white !important;
     }
+
+    .pilihan-doc a {
+        cursor: pointer;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .pilihan-doc-kajian a {
+        color: black;
+        text-decoration: underline;
+    }
     </style>
 </head>
 
@@ -194,6 +205,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
+                        <div class="row text-center justify-content-center pilihan-doc mb-2">
+                            <div class="col-lg-2 border-end ">
+                                <a href="data_pks.php"> Doc Kajian</a>
+                            </div>
+                            <div class="col-lg-2 border-end pilihan-doc-kajian">
+                                <a href="data_kak_hps.php">Doc KAK & HPS</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
+                                <a href="data_kontrak.php"> Doc Kontrak</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
+                                <a> Approve </a>
+                            </div>
+                            <div class="col-lg-2">
+                                <a> Reject </a>
+                            </div>
+                        </div>
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -216,101 +244,84 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
 
-                                <!-- <center>
+                                <center>
                                     <?php
-                                    if (isset($_GET['alert'])) {
-                                        if ($_GET['alert'] == "gagal") {
-                                    ?>
-                                    <div class="alert alert-danger">File arsip gagal diupload. Krena demi keamanan file
+                                        if (isset($_GET['alert'])) {
+                                            if ($_GET['alert'] == "gagal") {
+                                        ?>
+                                    <div class="alert alert-danger">File arsip gagal diupload. krena demi
+                                        keamanan
+                                        file
                                         .php tidak diperbolehkan.</div>
                                     <?php
-                                        } elseif ($_GET['alert'] == "doc1_id_missing") {
-                                        ?>
-                                    <div class="alert alert-danger">ID dokumen 1 tidak ditemukan. Silakan periksa
-                                        kembali.</div>
-                                    <?php
-                                        } else {
-                                        ?>
+                                            } else {
+                                            ?>
                                     <div class="alert alert-success">Arsip berhasil tersimpan.</div>
                                     <?php
+                                            }
                                         }
-                                    }
-                                    ?>
-                                </center> -->
+                                        ?>
+                                </center>
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
                                             <tr>
-                                                <th class="fs-3">No</th>
-                                                <th class="fs-3">Waktu Upload</th>
-                                                <th class="fs-3">Nama Berkas</th>
+                                                <th class="fs-3" style="width: 5%;">No</th>
+                                                <th class="fs-3">Nama Permintaan</th>
                                                 <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Keterangan</th>
+                                                <th class="fs-3">Prioritas</th>
+                                                <th class="fs-3">Tanggal Dibutuhkan</th>
                                                 <th class="fs-3">Status</th>
-                                                <th class="fs-3">File</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $no = 1;
-                                            $arsip = mysqli_query($koneksi, "SELECT doc1.*, doc2.*, user_pks.* FROM doc2 
-                                                JOIN doc1 ON doc1.doc1_id = doc2.doc2_doc1_id 
-                                                JOIN user_pks ON doc2.doc2_petugas = user_pks.pks_id 
-                                                ORDER BY doc2.doc2_id DESC");
-
-                                            while ($p = mysqli_fetch_array($arsip)) {
+                                            include '../koneksi.php';
+                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['doc2_waktu_upload'])) ?>
-                                                </td>
-                                                <td>
-                                                    <b>KODE</b> : <?php echo $p['doc2_kode'] ?><br>
-                                                    <b>Nama Doc Kajian </b> : <?php echo $p['doc1_nama'] ?><br>
-                                                    <b>Nama Doc Pendukung </b> : <?php echo $p['doc2_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['doc2_jenis'] ?><br>
-                                                </td>
+                                                <td><?php echo $p['dock_nama'] ?></td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['doc2_ket'] ?></td>
-                                                <td>
-                                                    <?php echo $p['doc2_status']; ?>
-                                                    <?php if (in_array($p['doc2_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc2_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?>
+                                                <td><?php echo $p['dock_kategori'] ?></td>
+                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
                                                 </td>
                                                 <td>
-                                                    <a target="_blank" class="btn btn-default btn-sm"
-                                                        href="preview_dp.php?id=<?php echo $p['doc2_id']; ?>"> <i
-                                                            class="ti ti-eye fs-7"></i></a>
-                                                    <?php if (in_array($p['doc2_status'], haystack: ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <a href="edit_kak_hps.php?id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-warning btn-sm">
-                                                        <i class="ti ti-pencil fs-7"></i>
-                                                    </a>
-                                                    <a href="oke.php?id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-danger btn-sm">
-                                                        <i class="bi bi-check fs-5"></i>
-                                                    </a>
-                                                    <?php endif; ?>
+                                                    <?php
+                                                        if (!empty($p['dock_status_gm'])) {
+                                                            echo $p['dock_status_gm'];
+                                                        } elseif (!empty($p['dock_status_vp']) ) {
+                                                            echo $p['dock_status_vp'];
+                                                        } elseif (!empty($p['dock_status_avp'])) {
+                                                            echo $p['dock_status_avp'];
+                                                        } else {
+                                                            echo $p['dock_status_asmen'];
+                                                        }
+                                                        ?>
                                                 </td>
                                                 <td class="text-center">
-                                                    <?php 
-                                                    static $lastDocId = null; // Static variable to keep track of the last doc2_doc1_id
-                                                    if ($p['doc2_doc1_id'] !== $lastDocId): 
-                                                        $lastDocId = $p['doc2_doc1_id']; // Update lastDocId
-                                                        if ($p['doc2_status'] === 'Done(Doc2)'): ?>
-                                                    <a href="tambah_kontrak.php?doc2_id=<?php echo $p['doc2_id']; ?>"
-                                                        class="btn btn-primary btn-sm"> <i
-                                                            class="ti ti-book-upload fs-5"></i>Doc Kontrak PKS</a>
-                                                    <?php else: ?>
-                                                    <span class="btn btn-default btn-sm" disabled><i
-                                                            class="ti ti-book-upload fs-5"></i>Doc Kontrak PKS</span>
-                                                    <?php endif; 
-                                                    else: ?>
-                                                    <!-- Kosongkan opsi jika ID dokumen sama -->
-                                                    <?php endif; ?>
+                                                    <div class="btn-group">
+                                                        <a target="_blank" class="btn btn-default btn-sm"
+                                                            href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
+                                                                class="ti ti-eye fs-5"></i></a>
+                                                        <?php if (($p['dock_status_avp'] == 'Rejected (AVP)' OR $p['dock_status_vp'] == 'Rejected (VP)' OR $p['dock_status_gm'] === 'Rejected (GM)')): ?>
+                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
+                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-pencil fs-5"></i>
+                                                        </a>
+                                                        <?php endif; ?>
+                                                        <?php if (in_array($p['dock_status_gm'], ['Done'])): ?>
+                                                        <a href="tambah_kak_hps.php?id=<?php echo $p['dock_id']; ?>"
+                                                            class="btn btn-primary btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-upload fs-5"></i>
+                                                        </a>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <?php
@@ -319,7 +330,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         </tbody>
                                     </table>
                                 </div>
-                                <nav aria-label="Page navigation">
+                                <nav aria-label="Page navdivtion">
                                     <ul class="pagination justify-content-center mt-3" id="paginationContainer">
                                         <!-- Pagination items will be added here by JavaScript -->
                                     </ul>
@@ -330,119 +341,97 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-    fetch('sidebar_asmen.php')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('sidebar').innerHTML = data;
-        });
-
-    function tambahArsip() {
-        window.location.href = 'tambah_pks.php';
-    }
-
-    function hapusArsip(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`arsip_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Arsip berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus arsip');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus arsip');
-                });
-        }
-    }
-
-    // Fungsi untuk menangani paginasi dan pencarian
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector('.table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-        const searchInput = document.getElementById('searchInput');
-        const paginationContainer = document.getElementById('paginationContainer');
-
-        let currentPage = 1;
-        let rowsPerPage = parseInt(rowsPerPageSelect.value);
-
-        function displayTable(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedRows = rows.slice(start, end);
-
-            tbody.innerHTML = '';
-            paginatedRows.forEach(row => tbody.appendChild(row));
-
-            updatePagination();
-        }
-
-        function updatePagination() {
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-            paginationContainer.innerHTML = '';
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayTable(currentPage);
-                });
-
-                li.appendChild(a);
-                paginationContainer.appendChild(li);
-            }
-        }
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredRows = rows.filter(row => {
-                return Array.from(row.cells).some(cell =>
-                    cell.textContent.toLowerCase().includes(searchTerm)
-                );
+        <script>
+        fetch('sidebar_asmen.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
             });
 
-            tbody.innerHTML = '';
-            filteredRows.forEach(row => tbody.appendChild(row));
-
-            currentPage = 1;
-            updatePagination();
+        function tambahArsip() {
+            window.location.href = 'tambah_dokumen_kajian.php';
         }
 
-        rowsPerPageSelect.addEventListener('change', () => {
-            rowsPerPage = parseInt(rowsPerPageSelect.value);
-            currentPage = 1;
+        // Fungsi untuk menangani paginasi dan pencarian
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = document.querySelector('.table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+            const searchInput = document.getElementById('searchInput');
+            const paginationContainer = document.getElementById('paginationContainer');
+
+            let currentPage = 1;
+            let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+            function displayTable(page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+                const paginatedRows = rows.slice(start, end);
+
+                tbody.innerHTML = '';
+                paginatedRows.forEach(row => tbody.appendChild(row));
+
+                updatePagination();
+            }
+
+            function updatePagination() {
+                const pageCount = Math.ceil(rows.length / rowsPerPage);
+                paginationContainer.innerHTML = '';
+
+                for (let i = 1; i <= pageCount; i++) {
+                    const li = document.createElement('li');
+                    li.classList.add('page-item');
+                    if (i === currentPage) li.classList.add('active');
+
+                    const a = document.createElement('a');
+                    a.classList.add('page-link');
+                    a.href = '#';
+                    a.textContent = i;
+
+                    a.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        currentPage = i;
+                        displayTable(currentPage);
+                    });
+
+                    li.appendChild(a);
+                    paginationContainer.appendChild(li);
+                }
+            }
+
+            function filterTable() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const filteredRows = rows.filter(row => {
+                    return Array.from(row.cells).some(cell =>
+                        cell.textContent.toLowerCase().includes(searchTerm)
+                    );
+                });
+
+                tbody.innerHTML = '';
+                filteredRows.forEach(row => tbody.appendChild(row));
+
+                currentPage = 1;
+                updatePagination();
+            }
+
+            rowsPerPageSelect.addEventListener('change', () => {
+                rowsPerPage = parseInt(rowsPerPageSelect.value);
+                currentPage = 1;
+                displayTable(currentPage);
+            });
+
+            searchInput.addEventListener('input', filterTable);
+
+            // Inisialisasi tampilan tabel
             displayTable(currentPage);
         });
-
-        searchInput.addEventListener('input', filterTable);
-
-        // Inisialisasi tampilan tabel
-        displayTable(currentPage);
-    });
-    </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        </script>
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/sidebarmenu.js"></script>
+        <script src="../assets/js/app.min.js"></script>
+        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
 </body>
 
 </html>

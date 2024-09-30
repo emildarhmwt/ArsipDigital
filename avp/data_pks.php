@@ -270,7 +270,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
-                                                <!-- <th class="fs-3">Status</th> -->
+                                                <th class="fs-3">Status</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
@@ -289,12 +289,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                 <td><?php echo $p['dock_kategori'] ?></td>
                                                 <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
                                                 </td>
-                                                <!-- <td>
-                                                    <?php echo $p['dock_status']; ?>
-                                                    <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?>
-                                                </td> -->
+                                                <td>
+                                                    <?php
+                                                        if (!empty($p['dock_status_gm'])) {
+                                                            echo $p['dock_status_gm'];
+                                                        } elseif (!empty($p['dock_status_vp']) ) {
+                                                            echo $p['dock_status_vp'];
+                                                        } elseif (!empty($p['dock_status_avp'])) {
+                                                            echo $p['dock_status_avp'];
+                                                        } else {
+                                                            echo $p['dock_status_asmen'];
+                                                        }
+                                                        ?>
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <a target="_blank" class="btn btn-default btn-sm"

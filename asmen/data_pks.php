@@ -206,9 +206,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-2">
-                            <div class="col-lg-2 border-end">
-                                <a href="#"> Semua Doc </a>
-                            </div>
                             <div class="col-lg-2 border-end pilihan-doc-kajian">
                                 <a href="data_pks.php"> Doc Kajian</a>
                             </div>
@@ -280,7 +277,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
-                                                <!-- <th class="fs-3">Status</th> -->
+                                                <th class="fs-3">Status</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
@@ -299,23 +296,36 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <td><?php echo $p['dock_kategori'] ?></td>
                                                 <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
                                                 </td>
-                                                <!-- <td>
-                                                    <?php echo $p['dock_status']; ?>
-                                                    <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?>
-                                                </td> -->
+                                                <td>
+                                                    <?php
+                                                        if (!empty($p['dock_status_gm'])) {
+                                                            echo $p['dock_status_gm'];
+                                                        } elseif (!empty($p['dock_status_vp']) ) {
+                                                            echo $p['dock_status_vp'];
+                                                        } elseif (!empty($p['dock_status_avp'])) {
+                                                            echo $p['dock_status_avp'];
+                                                        } else {
+                                                            echo $p['dock_status_asmen'];
+                                                        }
+                                                        ?>
+                                                </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <a target="_blank" class="btn btn-default btn-sm"
                                                             href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
                                                                 class="ti ti-eye fs-5"></i></a>
-                                                        <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
+                                                        <?php if (($p['dock_status_avp'] == 'Rejected (AVP)' OR $p['dock_status_vp'] == 'Rejected (VP)' OR $p['dock_status_gm'] === 'Rejected (GM)')): ?>
                                                         <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
                                                             class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
                                                             <i class="ti ti-pencil fs-5"></i>
                                                         </a>
-                                                        <?php endif; ?> -->
+                                                        <?php endif; ?>
+                                                        <?php if (in_array($p['dock_status_gm'], ['Done'])): ?>
+                                                        <a href="tambah_kak_hps.php?id=<?php echo $p['dock_id']; ?>"
+                                                            class="btn btn-primary btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            <i class="ti ti-upload fs-5"></i>
+                                                        </a>
+                                                        <?php endif; ?>
                                                     </div>
                                                 </td>
                                             </tr>
