@@ -241,7 +241,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         WHERE dock_id = '$id' 
                         ORDER BY dock_id DESC
                     ");
-                     while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
                         <div class="row">
                             <div class="card">
@@ -328,48 +328,89 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
                         <div class="row text-center justify-content-center border d-flex border-dark align-items-center"
                             style="border-radius: 10px; height: 50px;">
-                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center">
-                                Doc Kajian
+                            <?php
+                                $no = 1;
+                                include '../koneksi.php';
+                                // Perbaiki query untuk menggunakan alias yang benar
+                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
+                                while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                ?>
+                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center <?php echo ($p['dock_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
+                                style="border-radius: 10px; height: 48px; color:black;">
+                                <a href="preview_kajian.php"> Doc Kajian </a>
                             </div>
                             <div class=" col-lg-4 border-end d-flex justify-content-center
                                 align-items-center">
-                                Doc KAK & HPS
+                                <?php
+                                // Pastikan dockh_id ada di array $p
+                                $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
+                                if ($id_dockh) {
+                                ?>
+                                <a href="preview_dp.php?id=<?php echo $id_dockh; ?>"> Doc KAK & HPS </a>
+                                <?php
+                                } else {
+                                ?>
+                                <span>Doc KAK & HPS tidak tersedia</span>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">
                                 Doc Kontrak
                             </div>
+                            <?php
+                                }
+                                ?>
                         </div>
 
                         <div class="row text-center justify-content-center align-items-center mt-4">
                             <div class="col-lg-12">
 
                                 <div class="timeline">
+                                    <?php
+                                        $no = 1;
+                                        include '../koneksi.php';
+                                        // Perbaiki query untuk menggunakan alias yang benar
+                                        $arsip = mysqli_query($koneksi, "SELECT dockajian.*  FROM dockajian WHERE dock_id = '$id' ORDER BY dock_id DESC");
+                                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                        ?>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dock_status_asmen'] == 'Uploaded') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dock_status_avp'] == 'Approved (AVP)') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dock_status_vp'] == 'Approved (VP)') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dock_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
+                                    <?php
+                                        }
+                                        ?>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="text-center">
-                                        <p>Uploaded <br> by </p>
+                                        <p>Uploaded</p>
                                     </div>
                                     <div class="text-center">
-                                        <p>Approve(AVP) <br> by</p>
+                                        <p>Approve(AVP)</p>
                                     </div>
                                     <div class="text-center">
-                                        <p>Approve(VP) <br> by</p>
+                                        <p>Approve(VP)</p>
                                     </div>
                                     <div class="text-center">
-                                        <p>Done <br> by</p>
+                                        <p>Done</p>
                                     </div>
                                 </div>
                             </div>

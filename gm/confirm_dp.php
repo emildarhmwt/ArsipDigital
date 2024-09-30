@@ -2,16 +2,12 @@
 include '../koneksi.php';
 session_start();
 
-$id = $_GET['id'];
+$id = $_GET['id']; // Ambil ID dokumen dari parameter GET
+$user_id = $_SESSION['id']; // Ambil ID pengguna dari sesi
 
-// Ambil doc2_doc1_id berdasarkan id yang diberikan
-$result = mysqli_query($koneksi, "SELECT doc2_doc1_id FROM doc2 WHERE doc2_id='$id'");
-$row = mysqli_fetch_assoc($result);
-$doc1_id = $row['doc2_doc1_id'];
+// Update the document status to 'Approved (AVP)' and change the upload time and petugas
+mysqli_query($koneksi, "UPDATE doc_kak_hps SET dockh_gm='$user_id', dockh_status_gm='Done' WHERE dockh_dock_id='$id'");
 
-// Update status untuk semua dokumen dengan doc2_doc1_id yang sama
-mysqli_query($koneksi, "UPDATE doc2 SET doc2_waktu_upload=NOW(), doc2_petugas='".$_SESSION['id']."', doc2_status='Done(Doc2)' WHERE doc2_doc1_id='$doc1_id'");
-
-header("Location: data_pendukung.php");
+header("Location: preview_dp.php?id=$id"); // Redirect ke preview_kajian dengan ID dokumen
 exit;
 ?>

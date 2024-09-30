@@ -206,22 +206,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-2">
-                            <div class="col-lg-2 border-end">
-                                <a href="#"> Semua Doc </a>
+                            <div class="col-lg-4 border-end pilihan-doc-kajian">
+                                <a href="data_pks.php"> Semua Data</a>
                             </div>
-                            <div class="col-lg-2 border-end pilihan-doc-kajian">
-                                <a href="data_pks.php"> Doc Kajian</a>
-                            </div>
-                            <div class="col-lg-2 border-end">
-                                <a href="data_kak_hps.php">Doc KAK & HPS</a>
-                            </div>
-                            <div class="col-lg-2 border-end">
-                                <a href="data_kontrak.php"> Doc Kontrak</a>
-                            </div>
-                            <div class="col-lg-2 border-end">
+                            <div class="col-lg-4 border-end">
                                 <a> Approve </a>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 <a> Reject </a>
                             </div>
                         </div>
@@ -240,25 +231,30 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                         </select>
                                         <span> data per halaman</span>
                                     </div>
+                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                        <input type="text" class="form-control me-2" id="searchInput"
+                                            placeholder="Cari..."
+                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                    </div>
                                 </div>
 
                                 <center>
                                     <?php
-                                        if (isset($_GET['alert'])) {
-                                            if ($_GET['alert'] == "gagal") {
-                                        ?>
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "gagal") {
+                                    ?>
                                     <div class="alert alert-danger">File arsip gagal diupload. krena demi
                                         keamanan
                                         file
                                         .php tidak diperbolehkan.</div>
                                     <?php
-                                            } else {
-                                            ?>
+                                        } else {
+                                        ?>
                                     <div class="alert alert-success">Arsip berhasil tersimpan.</div>
                                     <?php
-                                            }
                                         }
-                                        ?>
+                                    }
+                                    ?>
                                 </center>
 
                                 <div class="table-responsive products-table" data-simplebar>
@@ -270,7 +266,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
-                                                <th class="fs-3">Status</th>
+                                                <th class="fs-3">Status Doc Kajian</th>
+                                                <th class="fs-3">Status Doc KAK & HPS</th>
+                                                <!-- <th class="fs-3">Status Doc Kontrak</th> -->
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
@@ -279,8 +277,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
-                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                            $arsip = mysqli_query($koneksi, "
+                                            SELECT dockajian.*, user_pks.pks_nama, doc_kak_hps.dockh_status_gm AS status_gm, doc_kak_hps.dockh_status_vp AS status_vp, doc_kak_hps.dockh_status_avp AS status_avp, doc_kak_hps.dockh_status_asmen AS status_asmen
+                                            FROM dockajian 
+                                            JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
+                                            LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
+                                            ORDER BY dockajian.dock_id DESC
+                                            ");
+                                            while ($p = mysqli_fetch_assoc($arsip)) {
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
@@ -299,6 +303,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                             echo $p['dock_status_avp'];
                                                         } else {
                                                             echo $p['dock_status_asmen'];
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if (!empty($p['status_gm'])) {
+                                                            echo $p['status_gm'];
+                                                        } elseif (!empty($p['status_vp'])) {
+                                                            echo $p['status_vp'];
+                                                        } elseif (!empty($p['status_avp'])) {
+                                                            echo $p['status_avp'];
+                                                        } elseif (!empty($p['status_asmen'])) {
+                                                            echo $p['status_asmen'];
+                                                        } else {
+                                                            echo '-';
                                                         }
                                                         ?>
                                                 </td>
@@ -339,10 +358,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             });
-
-        function tambahArsip() {
-            window.location.href = 'tambah_dokumen_kajian.php';
-        }
 
         // Fungsi untuk menangani paginasi dan pencarian
         document.addEventListener('DOMContentLoaded', function() {

@@ -1,10 +1,9 @@
 <?php
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
-
 $id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!doctype html>
@@ -150,6 +149,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         font-size: 14px;
         color: #00bfff;
     }
+
+    .bg-blue {
+        background-color: #00bfff;
+    }
+
+    .bg-gray {
+        background-color: #ccc;
+    }
     </style>
 </head>
 
@@ -230,20 +237,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Preview Dokumen Kajian</h5>
                         <?php
-
                         $no = 1;
                         include '../koneksi.php';
                         // Perbaiki query untuk menggunakan alias yang benar
-                        $arsip = mysqli_query($koneksi, "
-                        SELECT dockajian.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama,user_pks4.pks_nama AS gm_nama 
-                        FROM dockajian 
-                        JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
-                        LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
-                        LEFT JOIN user_pks AS user_pks3 ON dockajian.dock_vp = user_pks3.pks_id 
-                        LEFT JOIN user_pks AS user_pks4 ON dockajian.dock_gm = user_pks4.pks_id
-                        WHERE dock_id = '$id' 
-                        ORDER BY dock_id DESC
-                    ");
+                        $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
                         while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
                         <div class="row">
@@ -254,7 +251,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <div class="col-lg-4 mb-3">
                                                 <label for="shift" class="form-label">Nama Permintaan :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_nama'] ?></td>
+                                                    <td><?php echo $p['dockh_nama'] ?></td>
                                                 </p>
 
                                             </div>
@@ -262,13 +259,13 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <label for="shift" class="form-label">Deskripsi Permintaan
                                                     :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_desk'] ?></td>
+                                                    <td><?php echo $p['dockh_desk'] ?></td>
                                                 </p>
                                             </div>
                                             <div class="col-lg-4 mb-3">
                                                 <label for="shift" class="form-label">Jenis Permintaan :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_jenis'] ?></td>
+                                                    <td><?php echo $p['dockh_jenis'] ?></td>
                                                 </p>
                                             </div>
                                         </div>
@@ -277,21 +274,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <label for="shift" class="form-label">Kategori Permintaan
                                                     :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_kategori'] ?></td>
+                                                    <td><?php echo $p['dockh_kategori'] ?></td>
                                                 </p>
                                             </div>
                                             <div class="col-lg-4 mb-3">
                                                 <label for="shift" class="form-label">Aspek K3/Lingkungan
                                                     :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_aspek'] ?></td>
+                                                    <td><?php echo $p['dockh_aspek'] ?></td>
                                                 </p>
                                             </div>
                                             <div class="col-lg-4 mb-3">
                                                 <label for="shift" class="form-label">Lokasi Penyerahan
                                                     :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_lokasi'] ?></td>
+                                                    <td><?php echo $p['dockh_lokasi'] ?></td>
                                                 </p>
                                             </div>
                                         </div>
@@ -301,7 +298,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                     :</span>
                                                 </label>
                                                 <p>
-                                                    <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                    <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
                                                     </td>
                                                 </p>
                                             </div>
@@ -317,7 +314,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <div class="col-lg-12 mb-3">
                                                 <label for="shift" class="form-label">Komentar :</label>
                                                 <p>
-                                                    <td><?php echo $p['dock_comment'] ?></td>
+                                                    <td><?php echo $p['dockh_comment'] ?></td>
                                                 </p>
                                             </div>
                                         </div>
@@ -335,21 +332,17 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
+                                 $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
-                                style="border-radius: 10px; height: 48px; color:black;">
-                                <a href=""> Doc Kajian </a>
-                            </div>
-                            <div class=" col-lg-4 border-end d-flex justify-content-center
-                                align-items-center">
+                                style=" border-radius: 10px; height: 48px; color:black; ">
                                 <?php
                                 // Pastikan dockh_id ada di array $p
-                                $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
+                                $id_dockh = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
                                 if ($id_dockh) {
                                 ?>
-                                <a href="preview_dp.php?id=<?php echo $id_dockh; ?>"> Doc KAK & HPS </a>
+                                <a href="preview_kajian.php?id=<?php echo $id_dockh; ?>"> Doc Kajian </a>
                                 <?php
                                 } else {
                                 ?>
@@ -357,6 +350,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 <?php
                                 }
                                 ?>
+                            </div>
+                            <div class=" col-lg-4 border-end d-flex justify-content-center
+                                align-items-center" style="border-radius: 10px; height: 48px; color:black;">
+                                <a here=""> Doc KAK & HPS </a>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">
@@ -371,31 +368,49 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class="col-lg-12">
 
                                 <div class="timeline">
+                                    <?php
+                                        $no = 1;
+                                        include '../koneksi.php';
+                                        // Perbaiki query untuk menggunakan alias yang benar
+                                        $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*  FROM doc_kak_hps WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
+                                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                        ?>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_asmen'] == 'Uploaded') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_avp'] == 'Approved (AVP)') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_vp'] == 'Approved (VP)') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
                                     <div class="timeline-item">
-                                        <div class="timeline-dot"></div>
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
+                                    <?php
+                                        }
+                                        ?>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="text-center">
-                                        <p>Uploaded <br> by </p>
+                                        <p>Uploaded</p>
                                     </div>
                                     <div class="text-center">
-                                        <p>Approve(AVP) <br> by</p>
+                                        <p>Approve(AVP)</p>
                                     </div>
                                     <div class="text-center">
-                                        <p>Approve(VP) <br> by</p>
+                                        <p>Approve(VP)</p>
                                     </div>
                                     <div class="text-center">
-                                        <p>Done <br> by</p>
+                                        <p>Done </p>
                                     </div>
                                 </div>
                             </div>
@@ -407,21 +422,25 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     $no = 1;
                                     include '../koneksi.php';
                                     // Perbaiki query untuk menggunakan alias yang benar
-                                    $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id WHERE dock_id = '$id' ORDER BY dock_id DESC");
+                                    $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
                                     while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                     ?>
                                 <div class="row mb-3">
                                     <div class="col-md-12 d-flex justify-content-end align-items-center">
                                         <a target="_blank"
                                             class="btn btn-default btn-sm d-flex justify-content-end align-items-center""
-                                            href=" ../berkas_pks/<?php echo $p['dock_file']; ?>">
-                                            <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen
+                                            href=" ../berkas_pks/<?php echo $p['dockh_file_kak']; ?>">
+                                            <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen KAK
+                                        </a>
+                                        <a target="_blank"
+                                            class="btn btn-default btn-sm d-flex justify-content-end align-items-center""
+                                            href=" ../berkas_pks/<?php echo $p['dockh_file_hps']; ?>">
+                                            <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen HPS
                                         </a>
                                         <a class="btn btn-default btn-sm d-flex justify-content-end align-items-center mx-2"
-                                            href=" ./data_pks.php">
+                                            href="data_pks.php">
                                             <i class="ti ti-arrow-narrow-left fs-7"></i></i> Kembali
                                         </a>
-
                                     </div>
                                     <?php
                                     }
@@ -429,19 +448,18 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                                 <div class="table-responsive products-table" data-simplebar>
                                     <?php
-
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
                                             $arsip = mysqli_query($koneksi, "
-                                            SELECT dockajian.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama
-                                            FROM dockajian 
-                                            JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
-                                            LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
-                                            LEFT JOIN user_pks AS user_pks3 ON dockajian.dock_vp = user_pks3.pks_id 
-                                            LEFT JOIN user_pks AS user_pks4 ON dockajian.dock_gm = user_pks4.pks_id
-                                            WHERE dock_id = '$id' 
-                                            ORDER BY dock_id DESC
+                                            SELECT doc_kak_hps.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama
+                                            FROM doc_kak_hps
+                                            JOIN user_pks ON doc_kak_hps.dockh_petugas = user_pks.pks_id 
+                                            LEFT JOIN user_pks AS user_pks2 ON doc_kak_hps.dockh_avp = user_pks2.pks_id 
+                                            LEFT JOIN user_pks AS user_pks3 ON doc_kak_hps.dockh_vp = user_pks3.pks_id 
+                                            LEFT JOIN user_pks AS user_pks4 ON doc_kak_hps.dockh_gm = user_pks4.pks_id
+                                            WHERE dockh_dock_id = '$id' 
+                                            ORDER BY dockh_dock_id DESC
                                         ");
                                             while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
@@ -452,58 +470,56 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <th class="fs-3">Nama Permintaan</th>
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Status</th>
-                                                <!-- <th class="fs-3">Opsi</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
 
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
                                                 <td><?php echo $p['petugas_nama'] ?></td>
                                                 <td>
-                                                    <?php echo $p['dock_status_asmen']; ?>
-                                                    <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?> -->
+                                                    <?php echo $p['dockh_status_asmen']; ?>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?>
+                                                </td>
                                                 <td>
-                                                    <?php echo !empty($p['dock_status_avp']) ? $p['dock_status_avp'] : '-'; ?>
-                                                    <?php if ($p['dock_status_avp'] == 'Rejected (AVP)'): ?>
-                                                    <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
+                                                    <?php echo !empty($p['dockh_status_avp']) ? $p['dockh_status_avp'] : '-'; ?>
+                                                    <?php if ($p['dockh_status_avp'] == 'Rejected (AVP)'): ?>
+                                                    <span>(<?php echo $p['dockh_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
                                                 <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                                 <td>
-                                                    <?php echo !empty($p['dock_status_vp']) ? $p['dock_status_vp'] : '-'; ?>
-                                                    <?php if ($p['dock_status_vp'] == 'Rejected (VP)'): ?>
-                                                    <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
+                                                    <?php echo !empty($p['dockh_status_vp']) ? $p['dockh_status_vp'] : '-'; ?>
+                                                    <?php if ($p['dockh_status_vp'] == 'Rejected (VP)'): ?>
+                                                    <span>(<?php echo $p['dockh_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
 
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
                                                 <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
                                                 <td>
-                                                    <?php echo !empty($p['dock_status_gm']) ? $p['dock_status_gm'] : '-'; ?>
-                                                    <?php if ($p['dock_status_vp'] == 'Rejected (GM)'): ?>
-                                                    <span>(<?php echo $p['dock_alasan_reject']; ?>)</span>
+                                                    <?php echo !empty($p['dockh_status_gm']) ? $p['dockh_status_gm'] : '-'; ?>
+                                                    <?php if ($p['dockh_status_vp'] == 'Rejected (GM)'): ?>
+                                                    <span>(<?php echo $p['dockh_alasan_reject']; ?>)</span>
                                                     <?php endif; ?>
                                                 </td>
                                             </tr>
+
                                         </tbody>
                                     </table>
                                     <?php
@@ -512,7 +528,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                                 <div class="row d-inline-flex mt-3 text-center justify-content-center">
                                     <a class="btn btn-primary d-inline-flex justify-content-center align-items-center mx-2"
-                                        href="confirm.php?id=<?php echo $id; ?>"
+                                        href="confirm_dp.php?id=<?php echo $id; ?>"
                                         style="width: auto; padding: 5px 10px;">Approve
                                     </a>
                                     <button
@@ -531,7 +547,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                     onclick="closeRejectModal(<?php echo $id; ?>)">&times;</button> -->
                                             </div>
                                             <div class="modal-body">
-                                                <form method="POST" action="reject.php?id=<?php echo $id; ?>">
+                                                <form method="POST" action="reject_dp.php?id=<?php echo $id; ?>">
                                                     <div class="mb-3">
                                                         <label for="alasan" class="form-label">Masukkan Alasan</label>
                                                         <textarea name="alasan" class="form-control" required
@@ -545,12 +561,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                 </div>
+                                <nav aria-label="Page navdivtion">
+                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                        <!-- Pagination items will be added here by JavaScript -->
+                                    </ul>
+                                </nav>
                             </div>
-                            <nav aria-label="Page navdivtion">
-                                <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                    <!-- Pagination items will be added here by JavaScript -->
-                                </ul>
-                            </nav>
                         </div>
 
                     </div>
@@ -559,7 +575,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         </div>
     </div>
     <script>
-    fetch('sidebar_gm.php')
+    fetch('sidebar_vp.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;

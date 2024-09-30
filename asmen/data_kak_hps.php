@@ -281,42 +281,42 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id ORDER BY dock_id DESC");
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id ORDER BY dockh_dock_id DESC");
                                             while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['dock_kategori'] ?></td>
-                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                <td><?php echo $p['dockh_kategori'] ?></td>
+                                                <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
                                                 </td>
                                                 <td>
                                                     <?php
-                                                        if (!empty($p['dock_status_gm'])) {
-                                                            echo $p['dock_status_gm'];
-                                                        } elseif (!empty($p['dock_status_vp']) ) {
-                                                            echo $p['dock_status_vp'];
-                                                        } elseif (!empty($p['dock_status_avp'])) {
-                                                            echo $p['dock_status_avp'];
+                                                        if (!empty($p['dockh_status_gm'])) {
+                                                            echo $p['dockh_status_gm'];
+                                                        } elseif (!empty($p['dockh_status_vp']) ) {
+                                                            echo $p['dockh_status_vp'];
+                                                        } elseif (!empty($p['dockh_status_avp'])) {
+                                                            echo $p['dockh_status_avp'];
                                                         } else {
-                                                            echo $p['dock_status_asmen'];
+                                                            echo $p['dockh_status_asmen'];
                                                         }
                                                         ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <a target="_blank" class="btn btn-default btn-sm"
-                                                            href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
+                                                            href="preview_dp.php?id=<?php echo $p['dockh_dock_id']; ?>"><i
                                                                 class="ti ti-eye fs-5"></i></a>
-                                                        <?php if (($p['dock_status_avp'] == 'Rejected (AVP)' OR $p['dock_status_vp'] == 'Rejected (VP)' OR $p['dock_status_gm'] === 'Rejected (GM)')): ?>
-                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
+                                                        <?php if (($p['dockh_status_avp'] == 'Rejected (AVP)' OR $p['dockh_status_vp'] == 'Rejected (VP)' OR $p['dockh_status_gm'] === 'Rejected (GM)')): ?>
+                                                        <a href="edit_kak_hps.php?id=<?php echo $p['dockh_dock_id']; ?>"
                                                             class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
                                                             <i class="ti ti-pencil fs-5"></i>
                                                         </a>
                                                         <?php endif; ?>
-                                                        <?php if (in_array($p['dock_status_gm'], ['Done'])): ?>
-                                                        <a href="tambah_kak_hps.php?id=<?php echo $p['dock_id']; ?>"
+                                                        <?php if (in_array($p['dockh_status_gm'], ['Done'])): ?>
+                                                        <a href="tambah_kontrak.php?id=<?php echo $p['dockh_dock_id']; ?>"
                                                             class="btn btn-primary btn-sm text-center d-flex align-items-center justify-content-center">
                                                             <i class="ti ti-upload fs-5"></i>
                                                         </a>

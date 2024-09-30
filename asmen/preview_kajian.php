@@ -332,16 +332,28 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                $arsip = mysqli_query($koneksi, "SELECT dockajian.*  FROM dockajian WHERE dock_id = '$id' ORDER BY dock_id DESC");
+                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border-end d-flex justify-content-center align-items-center <?php echo ($p['dock_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
                                 style="border-radius: 10px; height: 48px; color:black;">
-                                Doc Kajian
+                                <a href="preview_kajian.php"> Doc Kajian </a>
                             </div>
                             <div class=" col-lg-4 border-end d-flex justify-content-center
                                 align-items-center">
-                                Doc KAK & HPS
+                                <?php
+                                // Pastikan dockh_id ada di array $p
+                                $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
+                                if ($id_dockh) {
+                                ?>
+                                <a href="preview_dp.php?id=<?php echo $id_dockh; ?>"> Doc KAK & HPS </a>
+                                <?php
+                                } else {
+                                ?>
+                                <span>Doc KAK & HPS tidak tersedia</span>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">

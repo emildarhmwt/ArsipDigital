@@ -4,6 +4,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!doctype html>
 <html lang="en">
@@ -109,6 +110,53 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #bdb57b !important;
         color: white !important;
     }
+
+    .timeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #ccc;
+        z-index: 1;
+    }
+
+    .timeline-item {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .timeline-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #00bfff;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .timeline-item p {
+        margin: 0;
+        font-size: 14px;
+        color: #00bfff;
+    }
+
+    .bg-blue {
+        background-color: #00bfff;
+    }
+
+    .bg-gray {
+        background-color: #ccc;
+    }
     </style>
 </head>
 
@@ -178,6 +226,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
@@ -187,91 +236,305 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Preview Dokumen Kajian</h5>
-                        <a href="data_kak_hps.php" class="btn btn-custom2 mb-3">
-                            <i class="bi bi-arrow-left"></i> Back
-                        </a>
-                        <div class="card mb-4">
-                            <div class="card-body">
+                        <?php
+                        $no = 1;
+                        include '../koneksi.php';
+                        // Perbaiki query untuk menggunakan alias yang benar
+                        $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
+                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                        ?>
+                        <div class="row">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Nama Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_nama'] ?></td>
+                                                </p>
+
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Deskripsi Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_desk'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_jenis'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Kategori Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_kategori'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_aspek'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Lokasi Penyerahan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_lokasi'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                    :</span>
+                                                </label>
+                                                <p>
+                                                    <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
+                                                    </td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-12 mb-3">
+                                                <label for="shift" class="form-label">Komentar :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_comment'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                            ?>
+                        </div>
+
+                        <div class="row text-center justify-content-center border d-flex border-dark align-items-center"
+                            style="border-radius: 10px; height: 50px;">
+                            <?php
+                                $no = 1;
+                                include '../koneksi.php';
+                                // Perbaiki query untuk menggunakan alias yang benar
+                                 $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
+                                while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                ?>
+                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
+                                style=" border-radius: 10px; height: 48px; color:black; background-color: #00bfff;">
                                 <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "SELECT * FROM doc2,user_pks WHERE doc2_petugas=pks_id and doc2_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <table class="table">
-                                            <tr>
-                                                <th>Waktu Upload</th>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($d['doc2_waktu_upload'])) ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Kode Dokumen</th>
-                                                <td><?php echo $d['doc2_kode']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nama Dokumen Kajian</th>
-                                                <td><?php echo $d['doc2_nama']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Jenis File</th>
-                                                <td><?php echo $d['doc2_jenis']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>ASMEN Pengupload</th>
-                                                <td><?php echo $d['pks_nama']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Keterangan</th>
-                                                <td><?php echo $d['doc2_ket']; ?></td>
-                                            </tr>
-                                        </table>
+                                // Pastikan dockh_id ada di array $p
+                                $id_dockh = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
+                                if ($id_dockh) {
+                                ?>
+                                <a href="preview_kajian.php?id=<?php echo $id_dockh; ?>"> Doc Kajian </a>
+                                <?php
+                                } else {
+                                ?>
+                                <span>Doc KAK & HPS tidak tersedia</span>
+                                <?php
+                                }
+                                ?>
+                            </div>
+                            <div class=" col-lg-4 border-end d-flex justify-content-center
+                                align-items-center <?php echo ($p['dockh_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
+                                style="border-radius: 10px; height: 48px; color:black;">
+                                <a here="preview_dp.php"> Doc KAK & HPS </a>
+                            </div>
+                            <div class=" col-lg-4 d-flex justify-content-center
+                                align-items-center">
+                                Doc Kontrak
+                            </div>
+                            <?php
+                                }
+                                ?>
+                        </div>
+
+                        <div class="row text-center justify-content-center align-items-center mt-4">
+                            <div class="col-lg-12">
+
+                                <div class="timeline">
+                                    <?php
+                                        $no = 1;
+                                        include '../koneksi.php';
+                                        // Perbaiki query untuk menggunakan alias yang benar
+                                        $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*  FROM doc_kak_hps WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
+                                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                        ?>
+                                    <div class="timeline-item">
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_asmen'] == 'Uploaded') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
                                     </div>
-                                    <div class="col-lg-8">
-                                        <?php
-                                                if ($d['doc2_jenis'] == "png" || $d['doc2_jenis'] == "jpg" || $d['doc2_jenis'] == "gif" || $d['doc2_jenis'] == "jpeg") {
-                                                ?>
-                                        <img src="../berkas_pks/<?php echo $d['doc2_file']; ?>" class="img-fluid"
-                                            alt="<?php echo $d['doc2_nama']; ?>">
-                                        <?php
-                                                } elseif ($d['doc2_jenis'] == "pdf") {
-                                                ?>
-                                        <embed src="../berkas_pks/<?php echo $d['doc2_file']; ?>" type="application/pdf"
-                                            width="100%" height="600px" />
-                                        <?php
-                                                } elseif ($d['doc2_jenis'] == "xlsx" || $d['doc2_jenis'] == "xls") {
-                                                ?>
-                                        <div id="excel-preview"></div>
-                                        <script>
-                                        fetch('../berkas_pks/<?php echo $d['doc2_file']; ?>')
-                                            .then(response => response.arrayBuffer())
-                                            .then(data => {
-                                                const workbook = XLSX.read(data, {
-                                                    type: 'array'
-                                                });
-                                                const sheetName = workbook.SheetNames[0];
-                                                const worksheet = workbook.Sheets[sheetName];
-                                                const html = XLSX.utils.sheet_to_html(worksheet);
-                                                document.getElementById('excel-preview').innerHTML = html;
-                                            });
-                                        </script>
-                                        <?php
-                                                } else {
-                                                ?>
-                                        <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
-                                                href="../berkas_pks/?php echo $d['doc2_file']; ?>">Download di
-                                                sini.</a>
-                                        </p>
-                                        <?php
-                                                }
-                                                ?>
+                                    <div class="timeline-item">
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_avp'] == 'Approved (AVP)') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_vp'] == 'Approved (VP)') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div
+                                            class="timeline-dot <?php echo ($p['dockh_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>">
+                                        </div>
+                                    </div>
+                                    <?php
+                                        }
+                                        ?>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="text-center">
+                                        <p>Uploaded</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Approve(AVP)</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Approve(VP)</p>
+                                    </div>
+                                    <div class="text-center">
+                                        <p>Done </p>
                                     </div>
                                 </div>
-                                <?php
-                                    }
-                                    ?>
                             </div>
                         </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <?php
+                                    $no = 1;
+                                    include '../koneksi.php';
+                                    // Perbaiki query untuk menggunakan alias yang benar
+                                    $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
+                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                    ?>
+                                <div class="row mb-3">
+                                    <div class="col-md-12 d-flex justify-content-end align-items-center">
+                                        <a target="_blank"
+                                            class="btn btn-default btn-sm d-flex justify-content-end align-items-center""
+                                            href=" ../berkas_pks/<?php echo $p['dockh_file_kak']; ?>">
+                                            <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen KAK
+                                        </a>
+                                        <a target="_blank"
+                                            class="btn btn-default btn-sm d-flex justify-content-end align-items-center""
+                                            href=" ../berkas_pks/<?php echo $p['dockh_file_hps']; ?>">
+                                            <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen HPS
+                                        </a>
+                                        <a class="btn btn-default btn-sm d-flex justify-content-end align-items-center mx-2"
+                                            href=" ./data_kak_hps.php">
+                                            <i class="ti ti-arrow-narrow-left fs-7"></i></i> Kembali
+                                        </a>
+                                    </div>
+                                    <?php
+                                    }
+                                        ?>
+                                </div>
+                                <div class="table-responsive products-table" data-simplebar>
+                                    <?php
+                                            $no = 1;
+                                            include '../koneksi.php';
+                                            // Perbaiki query untuk menggunakan alias yang benar
+                                            $arsip = mysqli_query($koneksi, "
+                                            SELECT doc_kak_hps.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama
+                                            FROM doc_kak_hps
+                                            JOIN user_pks ON doc_kak_hps.dockh_petugas = user_pks.pks_id 
+                                            LEFT JOIN user_pks AS user_pks2 ON doc_kak_hps.dockh_avp = user_pks2.pks_id 
+                                            LEFT JOIN user_pks AS user_pks3 ON doc_kak_hps.dockh_vp = user_pks3.pks_id 
+                                            LEFT JOIN user_pks AS user_pks4 ON doc_kak_hps.dockh_gm = user_pks4.pks_id
+                                            WHERE dockh_dock_id = '$id' 
+                                            ORDER BY dockh_dock_id DESC
+                                        ");
+                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                            ?>
+                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                        <thead class="fs-4">
+                                            <tr>
+                                                <th class="fs-3" style="width: 5%;">No</th>
+                                                <th class="fs-3">Nama Permintaan</th>
+                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo $p['petugas_nama'] ?></td>
+                                                <td>
+                                                    <?php echo $p['dockh_status_asmen']; ?>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo !empty($p['dockh_status_avp']) ? $p['dockh_status_avp'] : '-'; ?>
+                                                    <?php if ($p['dockh_status_avp'] == 'Rejected (AVP)'): ?>
+                                                    <span>(<?php echo $p['dockh_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
+                                                <td>
+                                                    <?php echo !empty($p['dockh_status_vp']) ? $p['dockh_status_vp'] : '-'; ?>
+                                                    <?php if ($p['dockh_status_vp'] == 'Rejected (VP)'): ?>
+                                                    <span>(<?php echo $p['dockh_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><?php echo $no++; ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
+                                                <td>
+                                                    <?php echo !empty($p['dockh_status_gm']) ? $p['dockh_status_gm'] : '-'; ?>
+                                                    <?php if ($p['dockh_status_vp'] == 'Rejected (GM)'): ?>
+                                                    <span>(<?php echo $p['dockh_alasan_reject']; ?>)</span>
+                                                    <?php endif; ?>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                    <?php
+                                            }
+                                            ?>
+                                </div>
+                                <nav aria-label="Page navdivtion">
+                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                        <!-- Pagination items will be added here by JavaScript -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -284,7 +547,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
     </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src=" ../assets/libs/jquery/dist/jquery.min.js">
+    </script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>

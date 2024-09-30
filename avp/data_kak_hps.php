@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
+if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
@@ -206,13 +206,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-2">
-                            <div class="col-lg-4 border-end pilihan-doc-kajian">
-                                <a href="data_pks.php"> Semua Data</a>
+                            <div class="col-lg-2 border-end ">
+                                <a href="data_pks.php"> Doc Kajian</a>
                             </div>
-                            <div class="col-lg-4 border-end">
+                            <div class="col-lg-2 border-end pilihan-doc-kajian">
+                                <a href="data_kak_hps.php">Doc KAK & HPS</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
+                                <a href="data_kontrak.php"> Doc Kontrak</a>
+                            </div>
+                            <div class="col-lg-2 border-end">
                                 <a> Approve </a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-2">
                                 <a> Reject </a>
                             </div>
                         </div>
@@ -266,9 +272,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                 <th class="fs-3">Petugas</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
-                                                <th class="fs-3">Status Doc Kajian</th>
-                                                <th class="fs-3">Status Doc KAK & HPS</th>
-                                                <!-- <th class="fs-3">Status Doc Kontrak</th> -->
+                                                <th class="fs-3">Status</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
@@ -277,64 +281,35 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                             $no = 1;
                                             include '../koneksi.php';
                                             // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "
-                                            SELECT dockajian.*, user_pks.pks_nama, doc_kak_hps.dockh_status_gm AS status_gm, doc_kak_hps.dockh_status_vp AS status_vp, doc_kak_hps.dockh_status_avp AS status_avp
-                                            FROM dockajian 
-                                            JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
-                                            LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id 
-                                            WHERE dockajian.dock_status_vp != 'Rejected (VP)' AND doc_kak_hps.dockh_status_vp != 'Rejected (VP)'
-                                            ORDER BY dockajian.dock_id DESC
-                                            ");
-                                            while ($p = mysqli_fetch_assoc($arsip)) {
-                                                // Tambahkan kondisi untuk memeriksa dock_status_avp
-                                                if ($p['dock_status_vp'] == 'Rejected (VP)') {
-                                                    continue; // Lewati iterasi ini jika statusnya Rejected(AVP)
-                                                }
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id ORDER BY dockh_dock_id DESC");
+                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
                                                 <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['dock_kategori'] ?></td>
-                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                <td><?php echo $p['dockh_kategori'] ?></td>
+                                                <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
                                                 </td>
                                                 <td>
                                                     <?php
-                                                        if (!empty($p['dock_status_gm'])) {
-                                                            echo $p['dock_status_gm'];
-                                                        } elseif (!empty($p['dock_status_vp']) && $p['dock_status_vp'] != 'Rejected (VP)') {
-                                                            echo $p['dock_status_vp'];
-                                                        } elseif (!empty($p['dock_status_avp'])) {
-                                                            echo $p['dock_status_avp'];
+                                                        if (!empty($p['dockh_status_gm'])) {
+                                                            echo $p['dockh_status_gm'];
+                                                        } elseif (!empty($p['dockh_status_vp'])) {
+                                                            echo $p['dockh_status_vp'];
+                                                        } elseif (!empty($p['dockh_status_avp'])) {
+                                                            echo $p['dockh_status_avp'];
                                                         } else {
-                                                            echo $p['dock_status_asmen'];
-                                                        }
-                                                        ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        if (!empty($p['status_gm'])) {
-                                                            echo $p['status_gm'];
-                                                        } elseif (!empty($p['status_vp'])) {
-                                                            echo $p['status_vp'];
-                                                        } elseif (!empty($p['status_avp'])) {
-                                                            echo $p['status_avp'];
-                                                        } else {
-                                                            echo $p['status_asmen'];
+                                                            echo $p['dockh_status_asmen'];
                                                         }
                                                         ?>
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
                                                         <a target="_blank" class="btn btn-default btn-sm"
-                                                            href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
-                                                                class="ti ti-eye fs-5"></i></a>
-                                                        <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
-                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-pencil fs-5"></i>
+                                                            href="preview_dp.php?id=<?php echo $p['dockh_dock_id']; ?>">
+                                                            <i class="ti ti-eye fs-5"></i>
                                                         </a>
-                                                        <?php endif; ?> -->
                                                     </div>
                                                 </td>
                                             </tr>
@@ -356,7 +331,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
             </div>
         </div>
         <script>
-        fetch('sidebar_gm.php')
+        fetch('sidebar_avp.php')
             .then(response => response.text())
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;

@@ -283,16 +283,17 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
+                                    <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
                                     <textarea class="form-control" rows="10" placeholder="Input Data" name="comment"
                                         required></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Lampiran File KAK :</label>
-                                    <input class="form-control" type="file" name="file">
+                                    <input class="form-control" type="file" name="file_kak" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="formFile" class="form-label">Lampiran File HPS :</label>
-                                    <input class="form-control" type="file" name="file">
+                                    <input class="form-control" type="file" name="file_hps" required>
                                 </div>
                                 <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
                                     Submit</button>
