@@ -332,17 +332,17 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                 $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
+                                 $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id, doc_kontrak.dockt_dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id LEFT JOIN doc_kontrak ON doc_kak_hps.dockh_dock_id = doc_kontrak.dockt_dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
-                                style=" border-radius: 10px; height: 48px; color:black;">
+                                style="border-radius: 10px; height: 48px; color:black;">
                                 <?php
-                                // Pastikan dockh_id ada di array $p
-                                $id_dockh = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dockh) {
+                                // Pastikan dock_id ada di array $p
+                                $id_dock = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
+                                if ($id_dock) {
                                 ?>
-                                <a href="preview_kajian.php?id=<?php echo $id_dockh; ?>"> Doc Kajian </a>
+                                <a href="preview_kajian.php?id=<?php echo $id_dock; ?>"> Doc Kajian </a>
                                 <?php
                                 } else {
                                 ?>
@@ -351,13 +351,26 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 }
                                 ?>
                             </div>
-                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
+                            <div class=" col-lg-4 border-end d-flex justify-content-center
+                                align-items-center <?php echo ($p['dockh_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
                                 style="border-radius: 10px; height: 48px; color:black;">
-                                <a href=""> Doc KAK & HPS </a>
+                                <a href="preview_dp.php?id=<?php echo $id; ?>"> Doc KAK & HPS </a>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">
-                                Doc Kontrak
+                                <?php
+                                // Pastikan dockt_id ada di array $p
+                                $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
+                                if ($id_dockt) {
+                                ?>
+                                <a href="preview_kontrak.php?id=<?php echo $id_dockt; ?>"> Doc Kontrak </a>
+                                <?php
+                                } else {
+                                ?>
+                                <span>Doc Kontrak tidak tersedia</span>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <?php
                                 }

@@ -4,6 +4,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
+
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!doctype html>
 <html lang="en">
@@ -202,37 +204,92 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Edit Dokumen Pendukung</h5>
+                            <h5 class="card-title fw-semibold mb-4">Edit Dokumen KAK & HPS</h5>
+                            <?php
+                            $no = 1;
+                            include '../koneksi.php';
+                            // Perbaiki query untuk menggunakan alias yang benar
+                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
+                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                            ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "select * from doc2 where doc2_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Nama Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_nama'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Deskripsi Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_desk'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_jenis'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Kategori Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_kategori'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_aspek'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Lokasi Penyerahan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_lokasi'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                    :</span>
+                                                </label>
+                                                <p>
+                                                    <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
+                                                    </td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
                                     <form method="post" action="edit_kak_hps_aksi.php" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="hidden" name="id" value="<?php echo $d['doc2_id']; ?>">
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc2_kode']; ?>">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Komentar
+                                                :</label>
+                                            <textarea class="form-control" rows="10" placeholder="Input Data"
+                                                name="comment"><?php echo $p['dockh_comment'] ?></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc2_nama']; ?>">
+                                            <label for="formFile" class="form-label">Lampiran File KAK</label>
+                                            <input class="form-control" type="file" name="file_kak">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <input type="text" class="form-control" rows="10" name="keterangan"
-                                                placeholder="Input Data" required="required"
-                                                value="<?php echo $d['doc2_ket']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">File</label>
-                                            <input class="form-control" type="file" name="file">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah dokumen</p>
+                                            <label for="formFile" class="form-label">Lampiran File HPS</label>
+                                            <input class="form-control" type="file" name="file_hps">
                                         </div>
                                         <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
                                             Submit</button>
@@ -240,11 +297,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 class="bi bi-arrow-left-circle"></i>
                                             Back</button>
                                     </form>
-                                    <?php
-                                    }
-                                    ?>
                                 </div>
                             </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

@@ -268,7 +268,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
                                                 <th class="fs-3">Status Doc Kajian</th>
                                                 <th class="fs-3">Status Doc KAK & HPS</th>
-                                                <!-- <th class="fs-3">Status Doc Kontrak</th> -->
+                                                <th class="fs-3">Status Doc Kontrak</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
@@ -282,10 +282,15 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                             doc_kak_hps.dockh_status_gm AS status_gm, 
                                             doc_kak_hps.dockh_status_vp AS status_vp, 
                                             doc_kak_hps.dockh_status_avp AS status_avp, 
-                                            doc_kak_hps.dockh_status_asmen AS status_asmen
+                                            doc_kak_hps.dockh_status_asmen AS status_asmen,
+                                            doc_kontrak.dockt_status_gm AS kontrak_status_gm, 
+                                            doc_kontrak.dockt_status_vp AS kontrak_status_vp, 
+                                            doc_kontrak.dockt_status_avp AS kontrak_status_avp, 
+                                            doc_kontrak.dockt_status_asmen AS kontrak_status_asmen
                                             FROM dockajian 
                                             JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
+                                            LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id
                                             ORDER BY dockajian.dock_id DESC
                                             ");
 
@@ -331,6 +336,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                             echo $p['status_avp'];
                                                         } elseif (!empty($p['status_asmen'])) {
                                                             echo $p['status_asmen'];
+                                                        } else {
+                                                            echo '-';
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if (!empty($p['kontrak_status_gm'])) {
+                                                            echo $p['kontrak_status_gm'];
+                                                        } elseif (!empty($p['kontrak_status_vp'])) {
+                                                            echo $p['kontrak_status_vp'];
+                                                        } elseif (!empty($p['kontrak_status_avp'])) {
+                                                            echo $p['kontrak_status_avp'];
+                                                        } elseif (!empty($p['kontrak_status_asmen'])) {
+                                                            echo $p['kontrak_status_asmen'];
                                                         } else {
                                                             echo '-';
                                                         }

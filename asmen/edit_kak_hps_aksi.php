@@ -4,39 +4,57 @@ session_start();
 date_default_timezone_set('Asia/Jakarta');
 
 $id  = $_POST['id'];
-$kode  = $_POST['kode'];
-$nama  = $_POST['nama'];
-
+$comment = $_POST['comment']; // Tambahkan ini
 $rand = rand();
-$filename = $_FILES['file']['name'];
-$keterangan = $_POST['keterangan'];
+$filename_kak = $_FILES['file_kak']['name']; // Tambahkan ini
+$filename_hps = $_FILES['file_hps']['name']; // Tambahkan ini
 
-if($filename == ""){
-
-	mysqli_query($koneksi, "UPDATE doc2 set doc2_waktu_upload=NOW(), doc2_petugas='".$_SESSION['id']."', doc2_kode='$kode', doc2_nama='$nama', doc2_ket='$keterangan', doc2_status='Uploaded'  where doc2_id='$id'")or die(mysqli_error($koneksi));
-	header("location:data_kak_hps.php");
-
+if($filename_kak == "" && $filename_hps == ""){
+    mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_petugas='".$_SESSION['id']."', dockh_avp=NULL, dockh_vp=NULL, dockh_gm=NULL, dockh_comment='$comment', dockh_status_asmen='Uploaded', dockh_status_avp=NULL, dockh_status_vp=NULL, dockh_status_gm=NULL, dockh_alasan_reject=NULL where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+    header("location:data_kak_hps.php");
 }else{
-
-	$jenis = pathinfo($filename, PATHINFO_EXTENSION);
-
-	if($jenis == "php") {
-		header("location:data_kak_hps.php?alert=gagal");
-	}else{
-
-		// hapus file lama
-		$lama = mysqli_query($koneksi,"SELECT * from doc2 where doc2_id='$id'");
-		$l = mysqli_fetch_assoc($lama);
-		$nama_file_lama = $l['doc2_file'];
-        
-		 if (file_exists("../berkas_pks/".$nama_file_lama)) {
-            unlink("../berkas_pks/".$nama_file_lama);
+    if($filename_kak != ""){
+        $jenis_kak = pathinfo($filename_kak, PATHINFO_EXTENSION);
+        if($jenis_kak == "php") {
+            header("location:data_kak_hps.php?alert=gagal");
+            exit();
+        }else{
+            // hapus file lama
+            $lama = mysqli_query($koneksi,"SELECT * from doc_kak_hps where dockh_dock_id='$id'");
+            $l = mysqli_fetch_assoc($lama);
+            $nama_file_lama_kak = $l['dockh_file_kak'];
+            if (file_exists("../berkas_pks/".$nama_file_lama_kak)) {
+                unlink("../berkas_pks/".$nama_file_lama_kak);
+            }
+            // upload file baru
+            move_uploaded_file($_FILES['file_kak']['tmp_name'], '../berkas_pks/'.$rand.'_'.$filename_kak);
+            $nama_file_kak = $rand.'_'.$filename_kak;
+            mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_file_kak='$nama_file_kak' where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
         }
-
-		// upload file baru
-		move_uploaded_file($_FILES['file']['tmp_name'], '../berkas_pks/'.$rand.'_'.$filename);
-		$nama_file = $rand.'_'.$filename;
-		mysqli_query($koneksi, "UPDATE doc2 set doc2_waktu_upload=NOW(), doc2_petugas='".$_SESSION['id']."',doc2_kode='$kode', doc2_nama='$nama', doc2_jenis='$jenis', doc2_ket='$keterangan', doc2_file='$nama_file' ,doc2_status='Uploaded' where doc2_id='$id'")or die(mysqli_error($koneksi));
-		header("location:data_kak_hps.php?alert=sukses");
-	}
+    }
+    
+    if($filename_hps != ""){
+        $jenis_hps = pathinfo($filename_hps, PATHINFO_EXTENSION);
+        if($jenis_hps == "php") {
+            header("location:data_kak_hps.php?alert=gagal");
+            exit();
+        }else{
+            // hapus file lama
+            $lama = mysqli_query($koneksi,"SELECT * from doc_kak_hps where dockh_dock_id='$id'");
+            $l = mysqli_fetch_assoc($lama);
+            $nama_file_lama_hps = $l['dockh_file_hps'];
+            if (file_exists("../berkas_pks/".$nama_file_lama_hps)) {
+                unlink("../berkas_pks/".$nama_file_lama_hps);
+            }
+            // upload file baru
+            move_uploaded_file($_FILES['file_hps']['tmp_name'], '../berkas_pks/'.$rand.'_'.$filename_hps);
+            $nama_file_hps = $rand.'_'.$filename_hps;
+            mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_file_hps='$nama_file_hps' where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+        }
+    }
+    
+    // Update comment and status
+    mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_petugas='".$_SESSION['id']."',dockh_avp=NULL, dockh_vp=NULL, dockh_gm=NULL, dockh_comment='$comment', dockh_status_asmen='Uploaded', dockh_status_avp=NULL, dockh_status_vp=NULL, dockh_status_gm=NULL, dockh_alasan_reject=NULL where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+    header("location:data_kak_hps.php?alert=sukses");
 }
+?>

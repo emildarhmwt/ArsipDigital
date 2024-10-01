@@ -332,12 +332,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
+                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id, doc_kontrak.dockt_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
-                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center <?php echo ($p['dock_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
+                            <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
                                 style="border-radius: 10px; height: 48px; color:black;">
-                                <a href="preview_kajian.php"> Doc Kajian </a>
+                                <a href="preview_kajian.php?id=<?php echo $id; ?>"> Doc Kajian </a>
                             </div>
                             <div class=" col-lg-4 border-end d-flex justify-content-center
                                 align-items-center">
@@ -357,7 +357,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">
-                                Doc Kontrak
+                                <?php
+                                // Pastikan dockt_id ada di array $p
+                                $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
+                                if ($id_dockt) {
+                                ?>
+                                <a href="preview_kontrak.php?id=<?php echo $id_dockt; ?>"> Doc Kontrak </a>
+                                <?php
+                                } else {
+                                ?>
+                                <span>Doc Kontrak tidak tersedia</span>
+                                <?php
+                                }
+                                ?>
                             </div>
                             <?php
                                 }
@@ -433,7 +445,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <i class="ti ti-eye fs-7 mx-1"></i> Review Dokumen
                                         </a>
                                         <a class="btn btn-default btn-sm d-flex justify-content-end align-items-center mx-2"
-                                            href=" ./data_pks.php">
+                                            href="data_pks.php">
                                             <i class="ti ti-arrow-narrow-left fs-7"></i></i> Kembali
                                         </a>
 

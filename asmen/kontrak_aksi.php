@@ -1,67 +1,50 @@
-<?php
+<?php 
 include '../koneksi.php';
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
-$waktu = date('Y-m-d H:i:s');
 $result = mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_level = 'ASMEN' LIMIT 1");
 $row = mysqli_fetch_assoc($result);
-$petugas = $row['pks_id'] ?? null;
-$kode  = $_POST['kode'];
-$nama  = $_POST['nama'];
-$doc3_doc2_id = $_POST['doc2_id'] ?? null;  
+$petugas = $row['pks_id'] ?? null; 
+$dockt_dock_id = $_POST['dock_id'] ?? null;  // Retrieve dock_id from POST data
 
-if ($doc3_doc2_id) {
-    $doc3_doc2_id = intval($doc3_doc2_id); // Cast to an integer to prevent SQL injection
-    
-    // Check if the doc2_id exists in the doc2 table
-    $checkDoc2 = mysqli_query($koneksi, "SELECT * FROM doc2 WHERE doc2_id = '$doc3_doc2_id'");
-    
-    if (mysqli_num_rows($checkDoc2) == 0) {
-        header("location:data_kontrak.php?alert=doc2_not_found");
-        exit;
+if ($dockt_dock_id) {
+    // Debugging output
+    error_log("Received dock_id: " . $dockt_dock_id); // Log the received ID for debugging
+
+    // Ensure the ID is an integer to prevent SQL injection
+    $dockt_dock_id = intval($dockt_dock_id);
+    $checkDoc1 = mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_id = '$dockt_dock_id'");
+    if (mysqli_num_rows($checkDoc1) == 0) {
+        header("location:data_kontrak.php?alert=dock_id_not_found");
+        exit; // Exit if dock_id does not exist
     }
+
+    $result2 = mysqli_query($koneksi, "SELECT dock_nama, dock_desk, dock_jenis, dock_kategori, dock_aspek, dock_tanggal, dock_lokasi FROM dockajian WHERE dock_id = '$dockt_dock_id'");
+    $row2 = mysqli_fetch_assoc($result2);
+    $nama =$row2['dock_nama'] ?? null;
+    $desk =$row2['dock_desk'] ?? null;
+    $jenis2 =$row2['dock_jenis'] ?? null;
+    $kategori =$row2['dock_kategori'] ?? null;
+    $aspek =$row2['dock_aspek'] ?? null;
+    $tanggal =$row2['dock_tanggal'] ?? null;
+    $lokasi =$row2['dock_lokasi'] ?? null;
 } else {
-    header("location:data_kontrak.php?alert=doc2_id_missing");
-    exit;
+    header("location:data_kontrak.php?alert=dock_id_missing");
+    exit; // Exit if dock_id is missing
 }
 
-$keterangan = $_POST['keterangan'];
-$files = $_FILES['file'] ?? null; // Get the file array
+$rand = rand();
+$filename = $_FILES['file']['name'];
+$comment  = $_POST['comment'];
 
-if ($files && isset($files['name']) && is_array($files['name']) && count(array_filter($files['name']))) {
-    // Loop through each uploaded file
-    for ($i = 0; $i < count($files['name']); $i++) {
-        $rand = rand();
-        $filename = $files['name'][$i];
-        $jenis = pathinfo($filename, PATHINFO_EXTENSION);
 
-        if ($jenis == "php") {
-            header("location:data_kontrak.php?alert=gagal");
-            exit; // Exit to prevent further processing
-        } else {
-            move_uploaded_file($files['tmp_name'][$i], '../berkas_pks/'.$rand.'_'.$filename);
-            $nama_file = $rand.'_'.$filename;
+    move_uploaded_file($_FILES['file']['tmp_name'], '../berkas_pks/' . $rand . '_' . $filename);
+    $nama_file = $rand . '_' . $filename;
 
-            // Insert into doc2 with reference to doc1_id for each file
-            $insertQuery = "INSERT INTO doc3 
-                            (doc3_waktu_upload, doc3_petugas, doc3_kode, doc3_nama, doc3_jenis, doc3_ket, doc3_file, doc3_status, doc3_doc2_id) 
-                            VALUES 
-                            ('$waktu', '$petugas', '$kode', '$nama', '$jenis', '$keterangan', '$nama_file', 'Uploaded', '$doc3_doc2_id')";
-            
-            if (!mysqli_query($koneksi, $insertQuery)) {
-                // Log the error for debugging
-                $error = mysqli_error($koneksi);
-                error_log("Insert error: " . mysqli_error($koneksi));
-                header("location:data_kontrak.php?alert=insert_failed");
-                echo "Error inserting data: " . $error;
-                exit; // Exit if insert fails
-            }
-        }
-    }
-} else {
-    header("location:data_kontrak.php?alert=files_not_uploaded");
-    exit; // Exit if no files were uploaded
-}
+    // Insert into doc1 for AVP confirmation with status 'uploaded'
+    mysqli_query($koneksi, 
+    "INSERT into doc_kontrak (dockt_dock_id, dockt_petugas, dockt_nama, dockt_desk, dockt_jenis, dockt_kategori, dockt_aspek, dockt_tanggal, dockt_lokasi, dockt_file, dockt_comment, dockt_status_asmen) 
+    VALUES ('$dockt_dock_id','$petugas', '$nama', '$desk', '$jenis2', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded')") or die(mysqli_error($koneksi));
 
-header("location:data_kontrak.php?alert=sukses");
+    header("location:data_kontrak.php?alert=sukses");

@@ -2,21 +2,17 @@
 include '../koneksi.php';
 session_start();
 
-$id = $_GET['id'];
+$id = $_GET['id']; // Ambil ID dokumen dari parameter GET
+$user_id = $_SESSION['id']; // Ambil ID pengguna dari sesi
 
 // Cek jika form dikirim
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $alasan = $_POST['alasan'];
+    $alasan = $_POST['alasan']; // Ambil alasan dari form
 
-    // Ambil doc2_doc1_id berdasarkan id yang diberikan
-    $result = mysqli_query($koneksi, "SELECT doc3_doc2_id FROM doc3 WHERE doc3_id='$id'");
-    $row = mysqli_fetch_assoc($result);
-    $doc2_id = $row['doc3_doc2_id'];
-
-    // Update status dan alasan penolakan untuk semua dokumen dengan doc2_doc1_id yang sama
-    mysqli_query($koneksi, "UPDATE doc3 SET doc3_status='Rejected(VP)', doc3_alasan_reject='$alasan' WHERE doc3_doc2_id='$doc2_id'");
+    // Update status dan alasan penolakan
+    mysqli_query($koneksi, "UPDATE doc_kontrak SET dockt_vp='$user_id', dockt_status_vp='Rejected (VP)', dockt_alasan_reject='$alasan' WHERE dockt_dock_id='$id'");
     
-    header("Location: data_kontrak.php");
+    header("Location: preview_kontrak.php?id=$id"); // Redirect ke preview_kajian dengan ID dokumen
     exit;
 }
 ?>
