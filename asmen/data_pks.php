@@ -245,38 +245,39 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
                                 <center>
                                     <?php
-                                        if (isset($_GET['alert'])) {
-                                            if ($_GET['alert'] == "gagal") {
-                                        ?>
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "gagal") {
+                                    ?>
                                     <div class="alert alert-danger">File arsip gagal diupload. krena demi
                                         keamanan
                                         file
                                         .php tidak diperbolehkan.</div>
                                     <?php
-                                            } else {
-                                            ?>
+                                        } else {
+                                        ?>
                                     <div class="alert alert-success">Arsip berhasil tersimpan.</div>
                                     <?php
-                                            }
                                         }
-                                        ?>
+                                    }
+                                    ?>
                                 </center>
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4 text-center">
+                                        <thead class="fs-4 text-center align-middle">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3" style="width: 15%;">Nama Permintaan</th>
-                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3" style="width: 13%;">Pelaku saat ini</th>
                                                 <th class="fs-3" style="width: 9%;">Prioritas</th>
                                                 <th class="fs-3 text-center" style="width: 11%;">Tanggal <br> Dibutuhkan
+                                                <th class="fs-3 text-center" style="width: 10%;">Last Update
                                                 </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc Kajian
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kajian
                                                 </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc KAK &
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK &
                                                     HPS</th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc Kontrak
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kontrak
                                                     PKS</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
@@ -307,7 +308,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 die("Query Error: " . mysqli_error($koneksi));
                                             }
                                             while ($p = mysqli_fetch_assoc($arsip)) {
-                                                
+
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
@@ -315,12 +316,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <td><?php echo $p['pks_nama'] ?></td>
                                                 <td><?php echo $p['dock_kategori'] ?></td>
                                                 <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                <td>
+                                                    <?php
+                                                        $dock_waktu = date('H:i:s', strtotime($p['dock_waktu']));
+                                                        $tanggal = date('d M Y', strtotime($p['dock_waktu']));
+                                                        echo $dock_waktu . '<br>' . $tanggal;
+                                                        ?>
+                                                </td>
                                                 </td>
                                                 <td>
                                                     <?php
                                                         if (!empty($p['dock_status_gm'])) {
                                                             echo $p['dock_status_gm'];
-                                                        } elseif (!empty($p['dock_status_vp']) ) {
+                                                        } elseif (!empty($p['dock_status_vp'])) {
                                                             echo $p['dock_status_vp'];
                                                         } elseif (!empty($p['dock_status_avp'])) {
                                                             echo $p['dock_status_avp'];
@@ -364,7 +372,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                         <a target="_blank" class="btn btn-default btn-sm"
                                                             href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
                                                                 class="ti ti-eye fs-5"></i></a>
-                                                        <?php if (($p['dock_status_avp'] == 'Rejected (AVP)' OR $p['dock_status_vp'] == 'Rejected (VP)' OR $p['dock_status_gm'] === 'Rejected (GM)')): ?>
+                                                        <?php if (($p['dock_status_avp'] == 'Rejected (AVP)' or $p['dock_status_vp'] == 'Rejected (VP)' or $p['dock_status_gm'] === 'Rejected (GM)')): ?>
                                                         <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
                                                             class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
                                                             <i class="ti ti-pencil fs-5"></i>

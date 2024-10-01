@@ -66,6 +66,11 @@
         font-family: 'Varela Round', sans-serif;
     }
 
+    .sub-judul2 {
+        font-family: 'Varela Round', sans-serif;
+        font-weight: bold;
+    }
+
     .page-wrapper {
         position: relative;
         min-height: 100vh;
@@ -102,9 +107,9 @@
                     <div class="col-md-8 col-lg-6 col-xxl-3">
                         <div class="card mb-0">
                             <div class="card-body">
-                                <h3 class="text-center mb-4 judul"> Login Admin / Petugas </h3>
+                                <h3 class="text-center mb-4 sub-judul2"> Login Admin / Petugas </h3>
                                 <img src="../assets/images/login.png" alt="Logo" class="img-login">
-                                <p class="text-center judul">Sistem Informasi Arsip Digital</p>
+                                <p class="text-center sub-judul2">Sistem Informasi Arsip Digital</p>
                                 <?php 
                                 // pesan notifikasi
 

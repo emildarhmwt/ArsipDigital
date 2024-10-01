@@ -278,9 +278,71 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         ?>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
+                    <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
+                        <div class="card">
+                            <div class="card-body">
+                                <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Cost Center :</label>
+                                            <input class="form-control" type="text" name="cost" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Satuan :</label>
+                                            <select class="form-select" name="satuan" required>
+                                                <option selected disabled>Pilih</option>
+                                                <option value="Lot">Lot</option>
+                                                <option value="Ea">Ea</option>
+                                                <option value="Pcs">Pcs</option>
+                                                <option value="Unit">Unit</option>
+                                                <option value="Set">Set</option>
+                                                <option value="Gross">Gross</option>
+                                                <option value="Roll">Roll</option>
+                                                <option value="Pack">Pack</option>
+                                                <option value="Batch">Batch</option>
+                                                <option value="Box">Box</option>
+                                                <option value="Pair">Pair</option>
+                                                <option value="Lusin">Lusin</option>
+                                                <option value="Carton">Carton</option>
+                                                <option value="Barrel">Barrel</option>
+
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label for="formFile" class="form-label">Harga Satuan :</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="harga" required>
+                                            <span class="input-group-text">IDR</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Jumlah (qty) :</label>
+                                            <input class="form-control" type="text" name="jumlah" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="formFile" class="form-label">Harga Total :</label>
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="harga_total" name="harga_total"
+                                                readonly>
+                                            <span class="input-group-text">IDR</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
                                 <div class="mb-3">
                                     <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
                                     <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
@@ -300,13 +362,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
                                         class="bi bi-arrow-left-circle"></i>
                                     Back</button>
-                            </form>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_asmen.php')
@@ -318,6 +379,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
     function goBack() {
         window.location.href = 'data_pks.php';
     }
+
+    const hargaInput = document.querySelector('input[name="harga"]');
+    const jumlahInput = document.querySelector('input[name="jumlah"]');
+    const totalInput = document.getElementById('harga_total');
+
+    function calculateTotal() {
+        const harga = parseFloat(hargaInput.value) || 0;
+        const jumlah = parseFloat(jumlahInput.value) || 0;
+        totalInput.value = harga * jumlah;
+    }
+
+    hargaInput.addEventListener('input', calculateTotal);
+    jumlahInput.addEventListener('input', calculateTotal);
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

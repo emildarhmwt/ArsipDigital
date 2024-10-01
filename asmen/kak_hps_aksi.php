@@ -33,7 +33,11 @@ if ($dockh_dock_id) {
     header("location:data_kak_hps.php?alert=dock_id_missing");
     exit; // Exit if dock_id is missing
 }
-
+$cost = $_POST['cost'];
+$satuan = $_POST['satuan'];
+$harga = $_POST['harga'];
+$jumlah = $_POST['jumlah'];
+$harga_total = $harga * $jumlah;
 $comment = $_POST['comment'];
 $files_kak = $_FILES['file_kak'] ?? null;
 $files_hps = $_FILES['file_hps'] ?? null;
@@ -71,7 +75,7 @@ if ($files_hps && $files_hps['error'] == 0) {
         $nama_file_hps = $rand.'_'.$files_hps['name'];
 
         // Insert into doc_kak_hps for both files
-        $insertKakHpsQuery = "INSERT INTO doc_kak_hps (dockh_dock_id, dockh_petugas,dockh_nama,dockh_desk,dockh_jenis,dockh_kategori, dockh_aspek, dockh_tanggal, dockh_lokasi, dockh_file_kak, dockh_file_hps, dockh_comment, dockh_status_asmen) VALUES ('$dockh_dock_id', '$petugas', '$nama','$desk','$jenis2','$kategori','$aspek','$tanggal','$lokasi','$nama_file_kak', '$nama_file_hps', '$comment', 'Uploaded')";
+        $insertKakHpsQuery = "INSERT INTO doc_kak_hps (dockh_dock_id, dockh_petugas,dockh_nama,dockh_desk,dockh_jenis,dockh_kategori, dockh_aspek, dockh_tanggal, dockh_lokasi, dockh_cost, dockh_satuan, dockh_harga, dockh_jumlah, dockh_harga_total, dockh_file_kak, dockh_file_hps, dockh_comment, dockh_status_asmen) VALUES ('$dockh_dock_id', '$petugas', '$nama','$desk','$jenis2','$kategori','$aspek','$tanggal','$lokasi','$cost','$satuan','$harga','$jumlah','$harga_total', '$nama_file_kak', '$nama_file_hps', '$comment', 'Uploaded')";
         
         if (!mysqli_query($koneksi, $insertKakHpsQuery)) {
             error_log("Insert error: " . mysqli_error($koneksi));

@@ -311,6 +311,48 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 <div class="card-body">
                                     <form method="get" enctype="multipart/form-data">
                                         <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Cost Center :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_cost'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Satuan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_satuan'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Harga Satuan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_harga'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jumlah (qty) :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_jumlah'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Harga Total :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_harga_total'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
                                             <div class="col-lg-12 mb-3">
                                                 <label for="shift" class="form-label">Komentar :</label>
                                                 <p>
@@ -322,7 +364,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                             </div>
                             <?php
-                        }
+                                }
                             ?>
                         </div>
 
@@ -332,24 +374,24 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                 $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id, doc_kontrak.dockt_dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id LEFT JOIN doc_kontrak ON doc_kak_hps.dockh_dock_id = doc_kontrak.dockt_dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
+                                $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id, doc_kontrak.dockt_dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id LEFT JOIN doc_kontrak ON doc_kak_hps.dockh_dock_id = doc_kontrak.dockt_dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
                                 style="border-radius: 10px; height: 48px; color:black;">
                                 <?php
-                                // Pastikan dock_id ada di array $p
-                                $id_dock = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dock) {
-                                ?>
+                                        // Pastikan dock_id ada di array $p
+                                        $id_dock = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
+                                        if ($id_dock) {
+                                        ?>
                                 <a href="preview_kajian.php?id=<?php echo $id_dock; ?>"> Doc Kajian </a>
                                 <?php
-                                } else {
-                                ?>
+                                        } else {
+                                        ?>
                                 <span>Doc Kajian tidak tersedia</span>
                                 <?php
-                                }
-                                ?>
+                                        }
+                                        ?>
                             </div>
                             <div class=" col-lg-4 border-end d-flex justify-content-center
                                 align-items-center" style="border-radius: 10px; height: 48px; color:black;">
@@ -358,18 +400,18 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">
                                 <?php
-                                // Pastikan dockt_id ada di array $p
-                                $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dockt) {
-                                ?>
+                                        // Pastikan dockt_id ada di array $p
+                                        $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
+                                        if ($id_dockt) {
+                                        ?>
                                 <a href="preview_kontrak.php?id=<?php echo $id_dockt; ?>"> Doc Kontrak </a>
                                 <?php
-                                } else {
-                                ?>
+                                        } else {
+                                        ?>
                                 <span>Doc Kontrak tidak tersedia</span>
                                 <?php
-                                }
-                                ?>
+                                        }
+                                        ?>
                             </div>
                             <?php
                                 }
@@ -480,8 +522,9 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3">Nama Permintaan</th>
-                                                <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Status</th>
+                                                <th class="fs-3">Updated</th>
+                                                <th class="fs-3">Pelaku saat ini</th>
+                                                <th class="fs-3">Proses</th>
                                             </tr>
                                         </thead>
                                         <tbody>

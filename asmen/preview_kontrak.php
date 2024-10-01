@@ -463,8 +463,9 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3">Nama Permintaan</th>
-                                                <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Status</th>
+                                                <th class="fs-3">Updated</th>
+                                                <th class="fs-3">Pelaku saat ini</th>
+                                                <th class="fs-3">Proses</th>
                                             </tr>
                                         </thead>
                                         <tbody>

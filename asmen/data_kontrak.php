@@ -259,19 +259,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4 text-center">
+                                        <thead class="fs-4 text-center align-middle">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3" style="width: 15%;">Nama Permintaan</th>
-                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3" style="width: 13%;">Pelaku saat ini</th>
                                                 <th class="fs-3" style="width: 9%;">Prioritas</th>
                                                 <th class="fs-3 text-center" style="width: 11%;">Tanggal <br> Dibutuhkan
                                                 </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc Kajian
+                                                <th class="fs-3 text-center" style="width: 11%;">Last Update
                                                 </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc KAK &
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kajian
+                                                </th>
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK &
                                                     HPS</th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc Kontrak
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kontrak
                                                     PKS</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>

@@ -258,13 +258,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
+                                        <thead class="fs-4 align-middle">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3">Nama Permintaan</th>
-                                                <th class="fs-3">Petugas</th>
+                                                <th class="fs-3">Pelaku saat ini</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
+                                                <th class="fs-3">Last Updated</th>
                                                 <th class="fs-3">Status Doc Kajian</th>
                                                 <th class="fs-3">Status Doc KAK & HPS</th>
                                                 <th class="fs-3">Status Doc Kontrak</th>

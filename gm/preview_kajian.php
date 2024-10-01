@@ -458,12 +458,11 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             ?>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                         <thead class="fs-4">
-                                            <tr>
+                                           <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
                                                 <th class="fs-3">Nama Permintaan</th>
-                                                <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Status</th>
-                                                <!-- <th class="fs-3">Opsi</th> -->
+                                                <th class="fs-3">Pelaku saat ini</th>
+                                                <th class="fs-3">Proses</th>
                                             </tr>
                                         </thead>
                                         <tbody>

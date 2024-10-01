@@ -42,6 +42,11 @@
         font-family: 'Varela Round', sans-serif;
     }
 
+    .sub-judul2 {
+        font-family: 'Varela Round', sans-serif;
+        font-weight: bold;
+    }
+
     .pacifico-regular {
         font-family: "Pacifico", cursive;
         font-weight: 400;
@@ -61,7 +66,7 @@
         <div class="row min-vh-100">
             <div class="col-lg-5 d-flex align-items-center justify-content-center">
                 <div class="p-4 p-md-5">
-                    <h2 class="judul mb-3">Sistem Informasi Arsip Digital</h2>
+                    <h2 class="sub-judul2 mb-3">Sistem Informasi Arsip Digital</h2>
                     <p class="sub-judul mb-5"> Manajemen file arsip dengan mudah dan cepat</p>
                     <form id="loginForm">
                         <div class="mb-4">

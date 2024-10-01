@@ -3,6 +3,7 @@ include '../koneksi.php';
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
+$waktu = date('Y-m-d H:i:s'); 
 $result = mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_level = 'ASMEN' LIMIT 1");
 $row = mysqli_fetch_assoc($result);
 $petugas = $row['pks_id'] ?? null;
@@ -26,8 +27,8 @@ if ($jenis == "php") {
 
     // Insert into doc1 for AVP confirmation with status 'uploaded'
     mysqli_query($koneksi, 
-    "INSERT into dockajian (dock_petugas, dock_nama, dock_desk, dock_jenis, dock_kategori, dock_aspek, dock_tanggal, dock_lokasi, dock_file, dock_comment, dock_status_asmen) 
-    VALUES ('$petugas', '$nama', '$deskripsi', '$jenis', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded')") or die(mysqli_error($koneksi));
+    "INSERT into dockajian (dock_petugas, dock_waktu, dock_nama, dock_desk, dock_jenis, dock_kategori, dock_aspek, dock_tanggal, dock_lokasi, dock_file, dock_comment, dock_status_asmen) 
+    VALUES ('$petugas', '$waktu','$nama', '$deskripsi', '$jenis', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded')") or die(mysqli_error($koneksi));
 
     header("location:data_pks.php?alert=sukses");
 }
