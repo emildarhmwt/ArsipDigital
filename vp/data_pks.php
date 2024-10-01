@@ -265,6 +265,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                 <th class="fs-3">Pelaku saat ini</th>
                                                 <th class="fs-3">Prioritas</th>
                                                 <th class="fs-3">Tanggal Dibutuhkan</th>
+                                                <th class="fs-3">Last Updated</th>
                                                 <th class="fs-3">Status Doc Kajian</th>
                                                 <th class="fs-3">Status Doc KAK & HPS</th>
                                                 <th class="fs-3">Status Doc Kontrak</th>
