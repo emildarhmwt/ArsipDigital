@@ -484,18 +484,15 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dock_waktu_asmen'] ?></td>
                                                 <td><?php echo $p['petugas_nama'] ?></td>
-                                                <td>
-                                                    <?php echo $p['dock_status_asmen']; ?>
-                                                    <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                    <span>(<?php echo $p['doc1_alasan_reject']; ?>)</span>
-                                                    <?php endif; ?> -->
-                                                </td>
+                                                <td> <?php echo $p['dock_status_asmen']; ?> </td>
                                             </tr>
 
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo ($p['dock_waktu_avp']) ?$p['dock_waktu_avp'] : '-' ?>
                                                 <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?></td>
                                                 <td>
                                                     <?php echo !empty($p['dock_status_avp']) ? $p['dock_status_avp'] : '-'; ?>
@@ -508,6 +505,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo ($p['dock_waktu_gm']) ?$p['dock_waktu_gm'] : '-' ?>
+                                                <td><?php echo ($p['dock_waktu_vp']) ?$p['dock_waktu_vp'] : '-' ?>
                                                 <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                                 <td>
                                                     <?php echo !empty($p['dock_status_vp']) ? $p['dock_status_vp'] : '-'; ?>
