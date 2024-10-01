@@ -176,7 +176,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
+                                        [VP] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -195,7 +195,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -204,8 +203,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-2">
+                        <h5 class="card-title fw-semibold mb-3 mt-2 text-center">Dokumen Kontrak PKS</h5>
+                        <!-- <div class="row text-center justify-content-center pilihan-doc mb-2">
                             <div class="col-lg-4 border-end pilihan-doc-kajian">
                                 <a href="data_pks.php"> Semua Data</a>
                             </div>
@@ -215,7 +214,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                             <div class="col-lg-4">
                                 <a> Reject </a>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
@@ -300,8 +299,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                             while ($p = mysqli_fetch_assoc($arsip)) {
                                                 // Perbaiki kondisi filter
                                                 if (
-                                                    ($p['dock_status_asmen'] == 'Uploaded' || $p['status_asmen'] == 'Uploaded') &&
-                                                    ($p['status_avp'] == 'Rejected (AVP)' || $p['dock_status_avp'] == 'Rejected (AVP)')
+                                                    ($p['status_asmen'] == 'Uploaded') &&
+                                                    ($p['status_avp'] == 'Rejected (AVP)' || $p['dock_status_avp'] == 'Rejected (AVP)' || $p['kontrak_status_avp'] == 'Rejected (AVP)')
                                                 ) {
                                                     continue; // Lewati iterasi ini dan jangan tampilkan data
                                                 }
@@ -361,12 +360,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                                         <a target="_blank" class="btn btn-default btn-sm"
                                                             href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
                                                                 class="ti ti-eye fs-5"></i></a>
-                                                        <!-- <?php if (in_array($p['dock_status'], ['Rejected(AVP)', 'Rejected(VP)', 'Rejected(GM)'])): ?>
-                                                        <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
-                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-pencil fs-5"></i>
-                                                        </a>
-                                                        <?php endif; ?> -->
                                                     </div>
                                                 </td>
                                             </tr>

@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 session_start();
-if ($_SESSION['status'] != "asmen_login") {
+if ($_SESSION['status'] != "vp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
 }
 ?>
@@ -15,16 +15,15 @@ if ($_SESSION['status'] != "asmen_login") {
     <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
         rel="stylesheet">
     <style>
-    .textinfo {
-        font-size: 12px;
-    }
-
     .navbar-judul {
         font-size: 20px;
         font-weight: bold;
@@ -54,17 +53,6 @@ if ($_SESSION['status'] != "asmen_login") {
         font-style: normal;
         font-weight: 400;
     }
-
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
-        color: white !important;
-    }
     </style>
 </head>
 
@@ -74,6 +62,7 @@ if ($_SESSION['status'] != "asmen_login") {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -114,7 +103,7 @@ if ($_SESSION['status'] != "asmen_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
+                                        [VP] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -133,105 +122,111 @@ if ($_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </nav>
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="page-breadcrumb">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h1 class="mb-5 fw-bold">Profile</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Column -->
-                        <div class="col-lg-4 col-xlg-3 col-md-5">
-                            <?php
-                            $id = $_SESSION['id'];
-                            $saya = mysqli_query($koneksi, "select * from user_pks where pks_id='$id'");
-                            $s = mysqli_fetch_assoc($saya);
-                            ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <center class="m-t-30">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-4">Preview Arsip</h5>
+
+                        <a href="data_arsip.php" class="btn btn-secondary mb-3">
+                            <i class="bi bi-arrow-left"></i> Back
+                        </a>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <?php
+                                $id = $_GET['id'];
+                                $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
+                                while ($d = mysqli_fetch_array($data)) {
+                                ?>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <table class="table">
+                                            <tr>
+                                                <th>Kode Arsip</th>
+                                                <td><?php echo $d['arsip_kode']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Waktu Upload</th>
+                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($d['arsip_waktu_upload'])) ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Nama File</th>
+                                                <td><?php echo $d['arsip_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Kategori</th>
+                                                <td><?php echo $d['kategori_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Jenis File</th>
+                                                <td><?php echo $d['arsip_jenis']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Petugas Pengupload</th>
+                                                <td><?php echo $d['petugas_nama']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th>Keterangan</th>
+                                                <td><?php echo $d['arsip_keterangan']; ?></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-lg-8">
                                         <?php
-                                        if ($s['pks_foto'] == "") {
-                                        ?>
-                                        <img class="img-user" src="../gambar/sistem/user.png" width="150" height="150">
+                                                if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
+                                                ?>
+                                        <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
+                                            alt="<?php echo $d['arsip_nama']; ?>">
                                         <?php
-                                        } else {
-                                        ?>
-                                        <img class="img-user" src="../gambar/asmen/<?php echo $s['pks_foto']; ?>"
-                                            width="150" height="150">
+                                                } elseif ($d['arsip_jenis'] == "pdf") {
+                                                ?>
+                                        <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
+                                            width="100%" height="600px" />
                                         <?php
-                                        }
-                                        ?>
-                                        <h4 class="card-title m-t-10"><?php echo $s['pks_nama']; ?></h4>
-                                        <h6 class="card-subtitle">Asisten Manajer</h6>
-                                    </center>
+                                                } elseif ($d['arsip_jenis'] == "xlsx" || $d['arsip_jenis'] == "xls") {
+                                                ?>
+                                        <div id="excel-preview"></div>
+                                        <script>
+                                        fetch('../arsip/<?php echo $d['arsip_file']; ?>')
+                                            .then(response => response.arrayBuffer())
+                                            .then(data => {
+                                                const workbook = XLSX.read(data, {
+                                                    type: 'array'
+                                                });
+                                                const sheetName = workbook.SheetNames[0];
+                                                const worksheet = workbook.Sheets[sheetName];
+                                                const html = XLSX.utils.sheet_to_html(worksheet);
+                                                document.getElementById('excel-preview').innerHTML = html;
+                                            });
+                                        </script>
+                                        <?php
+                                                } else {
+                                                ?>
+                                        <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
+                                                href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
+                                        </p>
+                                        <?php
+                                                }
+                                                ?>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-lg-8 col-xlg-9 col-md-7">
-                            <?php
-                            if (isset($_GET['alert'])) {
-                                if ($_GET['alert'] == "sukses") {
-                                    echo "<div class='alert alert-success'>Profile anda berhasil diganti!</div>";
+                                <?php
                                 }
-                            }
-                            ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2" action="profile_act.php"
-                                        method="post" enctype="multipart/form-data">
-                                        <div class="form-group mb-3">
-                                            <label class="col-md-12">Nama</label>
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control" placeholder="Masukkan Nama .."
-                                                    name="nama" required="required"
-                                                    value="<?php echo $s['pks_nama'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="example-email" class="col-md-12">Username</label>
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control"
-                                                    placeholder="Masukkan Username .." name="username"
-                                                    required="required" value="<?php echo $s['pks_username'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <div class="mb-3">
-                                                <label for="foto" class="form-label">Foto</label>
-                                                <input class="form-control" type="file" name="foto">
-                                                <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                                    Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                                ?>
                             </div>
                         </div>
-                        <!-- Column -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <script>
-    fetch('sidebar_asmen.php')
+    fetch('sidebar_vp.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
@@ -241,9 +236,7 @@ if ($_SESSION['status'] != "asmen_login") {
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    <script src="../assets/js/dashboard.js"></script>
 </body>
 
 </html>

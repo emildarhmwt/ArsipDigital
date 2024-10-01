@@ -352,8 +352,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 ?>
                             </div>
                             <div class=" col-lg-4 border-end d-flex justify-content-center
-                                align-items-center <?php echo ($p['dockh_status_gm'] == 'Done') ? 'bg-blue' : 'bg-gray'; ?>"
-                                style="border-radius: 10px; height: 48px; color:black;">
+                                align-items-center" style="border-radius: 10px; height: 48px; color:black;">
                                 <a href="preview_dp.php?id=<?php echo $id; ?>"> Doc KAK & HPS </a>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center

@@ -204,22 +204,16 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
+                        <h5 class="card-title fw-semibold mb-5 mt-2 text-center">Dokumen Kontrak PKS</h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-2">
-                            <div class="col-lg-2 border-end ">
+                            <div class="col-lg-4 border-end ">
                                 <a href="data_pks.php"> Doc Kajian</a>
                             </div>
-                            <div class="col-lg-2 border-end">
+                            <div class="col-lg-4 border-end">
                                 <a href="data_kak_hps.php">Doc KAK & HPS</a>
                             </div>
-                            <div class="col-lg-2 border-end pilihan-doc-kajian">
+                            <div class="col-lg-4 border-end pilihan-doc-kajian">
                                 <a href="data_kontrak.php"> Doc Kontrak</a>
-                            </div>
-                            <div class="col-lg-2 border-end">
-                                <a> Approve </a>
-                            </div>
-                            <div class="col-lg-2">
-                                <a> Reject </a>
                             </div>
                         </div>
                         <!-- table -->
@@ -265,23 +259,43 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
                                 <div class="table-responsive products-table" data-simplebar>
                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
+                                        <thead class="fs-4 text-center">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Nama Permintaan</th>
+                                                <th class="fs-3" style="width: 15%;">Nama Permintaan</th>
                                                 <th class="fs-3">Petugas</th>
-                                                <th class="fs-3">Prioritas</th>
-                                                <th class="fs-3">Tanggal Dibutuhkan</th>
-                                                <th class="fs-3">Status</th>
+                                                <th class="fs-3" style="width: 9%;">Prioritas</th>
+                                                <th class="fs-3 text-center" style="width: 11%;">Tanggal <br> Dibutuhkan
+                                                </th>
+                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc Kajian
+                                                </th>
+                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc KAK &
+                                                    HPS</th>
+                                                <th class="fs-3 text-center" style="width: 10%;">Status <br> Doc Kontrak
+                                                    PKS</th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody class="text-center">
                                             <?php
                                             $no = 1;
                                             include '../koneksi.php';
-                                            // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kontrak JOIN user_pks ON dockt_petugas=pks_id ORDER BY dockt_tanggal DESC");
+                                            $arsip = mysqli_query($koneksi, "
+                                            SELECT doc_kontrak.*, user_pks.pks_nama, 
+                                            dockajian.dock_status_gm AS status_gm, 
+                                            dockajian.dock_status_vp AS status_vp, 
+                                            dockajian.dock_status_avp AS status_avp, 
+                                            dockajian.dock_status_asmen AS status_asmen,
+                                            doc_kak_hps.dockh_status_gm AS kontrak_status_gm, 
+                                            doc_kak_hps.dockh_status_vp AS kontrak_status_vp, 
+                                            doc_kak_hps.dockh_status_avp AS kontrak_status_avp, 
+                                            doc_kak_hps.dockh_status_asmen AS kontrak_status_asmen
+                                            FROM doc_kontrak
+                                            JOIN user_pks ON doc_kontrak.dockt_petugas = user_pks.pks_id 
+                                            LEFT JOIN dockajian ON doc_kontrak.dockt_dock_id = dockajian.dock_id
+                                            LEFT JOIN doc_kak_hps ON doc_kontrak.dockt_dock_id = doc_kak_hps.dockh_dock_id
+                                            ORDER BY doc_kontrak.dockt_tanggal DESC
+                                            ");
                                             while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                             ?>
                                             <tr>
@@ -290,6 +304,36 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <td><?php echo $p['pks_nama'] ?></td>
                                                 <td><?php echo $p['dockt_kategori'] ?></td>
                                                 <td><?php echo date('d M Y', strtotime($p['dockt_tanggal'])); ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if (!empty($p['status_gm'])) {
+                                                            echo $p['status_gm'];
+                                                        } elseif (!empty($p['status_vp'])) {
+                                                            echo $p['status_vp'];
+                                                        } elseif (!empty($p['status_avp'])) {
+                                                            echo $p['status_avp'];
+                                                        } elseif (!empty($p['status_asmen'])) {
+                                                            echo $p['status_asmen'];
+                                                        } else {
+                                                            echo '-';
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td>
+                                                    <?php
+                                                        if (!empty($p['kontrak_status_gm'])) {
+                                                            echo $p['kontrak_status_gm'];
+                                                        } elseif (!empty($p['kontrak_status_vp'])) {
+                                                            echo $p['kontrak_status_vp'];
+                                                        } elseif (!empty($p['kontrak_status_avp'])) {
+                                                            echo $p['kontrak_status_avp'];
+                                                        } elseif (!empty($p['kontrak_status_asmen'])) {
+                                                            echo $p['kontrak_status_asmen'];
+                                                        } else {
+                                                            echo '-';
+                                                        }
+                                                        ?>
                                                 </td>
                                                 <td>
                                                     <?php

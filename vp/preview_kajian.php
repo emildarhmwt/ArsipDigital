@@ -200,7 +200,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
+                                        [VP] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -219,7 +219,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </nav>

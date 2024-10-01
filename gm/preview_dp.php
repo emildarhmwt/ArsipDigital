@@ -175,61 +175,68 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <ul class="navbar-nav">
                         <li class="nav-item d-block d-xl-none">
-                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
-                                href="javascript:void(0)">
-                                <i class="ti ti-menu-2"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
-                        </li>
-                    </ul>
-                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover d-flex align-items-center" href="javascript:void(0)"
-                                    id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <?php
+                            <a cl<header class="app-header">
+                                <nav class="navbar navbar-expand-lg navbar-light">
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item d-block d-xl-none">
+                                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
+                                                href="javascript:void(0)">
+                                                <i class="ti ti-menu-2"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                                        </li>
+                                    </ul>
+                                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link nav-icon-hover d-flex align-items-center"
+                                                    href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                    <?php
                                     include('../koneksi.php');
                                     $id_pks = $_SESSION['id'];
                                     $profil = mysqli_query($koneksi, "SELECT * FROM user_pks WHERE pks_id='$id_pks'");
                                     $profil = mysqli_fetch_assoc($profil);
                                     if ($profil['pks_foto'] == "") {
                                     ?>
-                                    <img src="../gambar/sistem/user.png" class="rounded-circle"
-                                        style="width: 50px;height: 50px; object-fit: cover;">
-                                    <?php
+                                                    <img src="../gambar/sistem/user.png" class="rounded-circle"
+                                                        style="width: 50px;height: 50px; object-fit: cover;">
+                                                    <?php
                                     } else {
                                     ?>
-                                    <img src="../gambar/asmen/<?php echo $profil['pks_foto'] ?>" class="rounded-circle"
-                                        style="width: 50px;height: 50px; object-fit: cover;">
-                                    <?php
+                                                    <img src="../gambar/asmen/<?php echo $profil['pks_foto'] ?>"
+                                                        class="rounded-circle"
+                                                        style="width: 50px;height: 50px; object-fit: cover;">
+                                                    <?php
                                     }
                                     ?>
-                                    <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
-                                    aria-labelledby="drop2">
-                                    <div class="message-body">
-                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-user fs-6"></i>
-                                            <p class="mb-0 fs-3">Profil Saya</p>
-                                        </a>
-                                        <a href="ganti_password.php"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
-                                            <i class="ti ti-key fs-6"></i>
-                                            <p class="mb-0 fs-3">Ganti Password</p>
-                                        </a>
-                                        <a href="../login/logout.php"
-                                            class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
+                                                    <p class="nama-profile mb-0">
+                                                        <?php echo htmlspecialchars($_SESSION['nama']); ?>
+                                                        [GM] </p>
+                                                </a>
+                                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                                    aria-labelledby="drop2">
+                                                    <div class="message-body">
+                                                        <a href="profile.php"
+                                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                                            <i class="ti ti-user fs-6"></i>
+                                                            <p class="mb-0 fs-3">Profil Saya</p>
+                                                        </a>
+                                                        <a href="ganti_password.php"
+                                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                                            <i class="ti ti-key fs-6"></i>
+                                                            <p class="mb-0 fs-3">Ganti Password</p>
+                                                        </a>
+                                                        <a href="../login/logout.php"
+                                                            class="btn btn-outline-primary mx-3 mt-2 d-block shadow-none">Logout</a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
-                            </li>
-
-                        </ul>
-                    </div>
-                </nav>
+                                </nav>
             </header>
             <!--  Header End -->
             <div class="container-fluid">

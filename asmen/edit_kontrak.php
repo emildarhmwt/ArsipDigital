@@ -4,6 +4,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     header("location:../login/loginuser.php?alert=belum_login");
     exit;
 }
+
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
 ?>
 <!doctype html>
 <html lang="en">
@@ -203,36 +205,86 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title fw-semibold mb-4">Edit Dokumen Kontrak</h5>
+                            <?php
+                            $no = 1;
+                            include '../koneksi.php';
+                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kontrak JOIN user_pks ON dockt_petugas=pks_id WHERE dockt_dock_id = '$id' ORDER BY dockt_dock_id DESC");
+                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                            ?>
                             <div class="card">
                                 <div class="card-body">
-                                    <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "SELECT * from doc3 where doc3_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Nama Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockt_nama'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Deskripsi Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockt_desk'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockt_jenis'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Kategori Permintaan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockt_kategori'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockt_aspek'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Lokasi Penyerahan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockt_lokasi'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                    :</span>
+                                                </label>
+                                                <p>
+                                                    <td><?php echo date('d M Y', strtotime($p['dockt_tanggal'])); ?>
+                                                    </td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
                                     <form method="post" action="edit_kontrak_aksi.php" enctype="multipart/form-data">
+                                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                                         <div class="mb-3">
-                                            <label for="shift" class="form-label">Kode Dokumen</label>
-                                            <input type="hidden" name="id" value="<?php echo $d['doc3_id']; ?>">
-                                            <input type="text" class="form-control" name="kode" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc3_kode']; ?>">
+                                            <label for="exampleFormControlTextarea1" class="form-label">Komentar
+                                                :</label>
+                                            <textarea class="form-control" rows="10" placeholder="Input Data"
+                                                name="comment"><?php echo $p['dockt_comment'] ?></textarea>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Dokumen</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required="required" value="<?php echo $d['doc3_nama']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <input type="text" class="form-control" rows="10" name="keterangan"
-                                                placeholder="Input Data" required="required"
-                                                value="<?php echo $d['doc3_ket']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">File</label>
+                                            <label for="formFile" class="form-label">Lampiran File</label>
                                             <input class="form-control" type="file" name="file">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah dokumen</p>
                                         </div>
                                         <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
                                             Submit</button>
@@ -240,11 +292,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 class="bi bi-arrow-left-circle"></i>
                                             Back</button>
                                     </form>
-                                    <?php
-                                    }
-                                    ?>
                                 </div>
                             </div>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>

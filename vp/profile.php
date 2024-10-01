@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 session_start();
-if ($_SESSION['status'] != "asmen_login") {
+if ($_SESSION['status'] != "vp_login") {
     header("location:../login/loginuser.php?alert=belum_login");
 }
 ?>
@@ -114,7 +114,7 @@ if ($_SESSION['status'] != "asmen_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
+                                        [VP] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -133,7 +133,6 @@ if ($_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -172,7 +171,7 @@ if ($_SESSION['status'] != "asmen_login") {
                                         }
                                         ?>
                                         <h4 class="card-title m-t-10"><?php echo $s['pks_nama']; ?></h4>
-                                        <h6 class="card-subtitle">Asisten Manajer</h6>
+                                        <h6 class="card-subtitle">Vice President</h6>
                                     </center>
                                 </div>
                             </div>
@@ -231,7 +230,7 @@ if ($_SESSION['status'] != "asmen_login") {
         </div>
     </div>
     <script>
-    fetch('sidebar_asmen.php')
+    fetch('sidebar_vp.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;

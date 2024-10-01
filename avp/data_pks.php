@@ -176,7 +176,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
+                                        [AVP] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -195,7 +195,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -204,8 +203,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-2">
+                        <h5 class="card-title fw-semibold mb-3 mt-2 text-center">Dokumen Kontrak PKS</h5>
+                        <!-- <div class="row text-center justify-content-center pilihan-doc mb-2">
                             <div class="col-lg-4 border-end pilihan-doc-kajian">
                                 <a href="data_pks.php"> Semua Data</a>
                             </div>
@@ -215,7 +214,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                             <div class="col-lg-4">
                                 <a> Reject </a>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- table -->
                         <div class="card">
                             <div class="card-body">
