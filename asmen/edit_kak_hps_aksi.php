@@ -10,7 +10,7 @@ $filename_kak = $_FILES['file_kak']['name']; // Tambahkan ini
 $filename_hps = $_FILES['file_hps']['name']; // Tambahkan ini
 
 if($filename_kak == "" && $filename_hps == ""){
-    mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_petugas='".$_SESSION['id']."', dockh_avp=NULL, dockh_vp=NULL, dockh_gm=NULL, dockh_comment='$comment', dockh_status_asmen='Uploaded', dockh_status_avp=NULL, dockh_status_vp=NULL, dockh_status_gm=NULL, dockh_alasan_reject=NULL where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+    mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_petugas='".$_SESSION['id']."', dockh_waktu_asmen=NOW(), dockh_waktu_avp=NULL, dockh_waktu_vp=NULL, dockh_waktu_gm=NULL,dockh_avp=NULL, dockh_vp=NULL, dockh_gm=NULL, dockh_comment='$comment', dockh_status_asmen='Uploaded (Asmen)', dockh_status_avp=NULL, dockh_status_vp=NULL, dockh_status_gm=NULL, dockh_alasan_reject=NULL where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
     header("location:data_kak_hps.php");
 }else{
     if($filename_kak != ""){
@@ -54,7 +54,7 @@ if($filename_kak == "" && $filename_hps == ""){
     }
     
     // Update comment and status
-    mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_petugas='".$_SESSION['id']."',dockh_avp=NULL, dockh_vp=NULL, dockh_gm=NULL, dockh_comment='$comment', dockh_status_asmen='Uploaded', dockh_status_avp=NULL, dockh_status_vp=NULL, dockh_status_gm=NULL, dockh_alasan_reject=NULL where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+    mysqli_query($koneksi, "UPDATE doc_kak_hps set dockh_petugas='".$_SESSION['id']."', dockh_waktu_asmen=NOW(), dockh_waktu_avp=NULL, dockh_waktu_vp=NULL, dockh_waktu_gm=NULL,dockh_avp=NULL, dockh_vp=NULL, dockh_gm=NULL, dockh_comment='$comment', dockh_status_asmen='Uploaded (Asmen)', dockh_status_avp=NULL, dockh_status_vp=NULL, dockh_status_gm=NULL, dockh_alasan_reject=NULL where dockh_dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
     header("location:data_kak_hps.php?alert=sukses");
 }
 ?>

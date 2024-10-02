@@ -9,7 +9,7 @@ $rand = rand();
 $filename = $_FILES['file']['name'];
 
 if($filename == ""){
-    mysqli_query($koneksi, "UPDATE dockajian set dock_petugas='".$_SESSION['id']."', dock_avp=NULL, dock_vp=NULL, dock_gm=NULL, dock_comment='$comment', dock_status_asmen='Uploaded', dock_status_avp=NULL, dock_status_vp=NULL, dock_status_gm=NULL where dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+    mysqli_query($koneksi, "UPDATE dockajian set dock_petugas='".$_SESSION['id']."', dock_waktu_asmen=NOW(), dock_waktu_avp=NULL, dock_waktu_vp=NULL, dock_waktu_gm=NULL, dock_avp=NULL, dock_vp=NULL, dock_gm=NULL, dock_comment='$comment', dock_status_asmen='Uploaded (Asmen)', dock_status_avp=NULL, dock_status_vp=NULL, dock_status_gm=NULL where dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
     header("location:data_pks.php");
 }else{
     $jenis = pathinfo($filename, PATHINFO_EXTENSION);
@@ -26,7 +26,7 @@ if($filename == ""){
         // upload file baru
         move_uploaded_file($_FILES['file']['tmp_name'], '../berkas_pks/'.$rand.'_'.$filename);
         $nama_file = $rand.'_'.$filename;
-        mysqli_query($koneksi, "UPDATE dockajian set dock_petugas='".$_SESSION['id']."', dock_avp=NULL, dock_vp=NULL, dock_gm=NULL, dock_file='$nama_file', dock_comment='$comment', dock_status_asmen='Uploaded', dock_status_avp=NULL, dock_status_vp=NULL, dock_status_gm=NULL where dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
+        mysqli_query($koneksi, "UPDATE dockajian set dock_petugas='".$_SESSION['id']."',dock_waktu_asmen=NOW(), dock_waktu_avp=NULL, dock_waktu_vp=NULL, dock_waktu_gm=NULL, dock_avp=NULL, dock_vp=NULL, dock_gm=NULL, dock_file='$nama_file', dock_comment='$comment', dock_status_asmen='Uploaded (Asmen)', dock_status_avp=NULL, dock_status_vp=NULL, dock_status_gm=NULL where dock_id='$id'")or die(mysqli_error($koneksi)); // Perbarui query
         header("location:data_pks.php?alert=sukses");
     }
 }
