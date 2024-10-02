@@ -283,10 +283,18 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                             doc_kak_hps.dockh_status_vp AS status_vp, 
                                             doc_kak_hps.dockh_status_avp AS status_avp, 
                                             doc_kak_hps.dockh_status_asmen AS status_asmen,
+                                            doc_kak_hps.dockh_waktu_asmen AS waktu_asmen,
+                                            doc_kak_hps.dockh_waktu_avp AS waktu_avp,
+                                            doc_kak_hps.dockh_waktu_vp AS waktu_vp,
+                                            doc_kak_hps.dockh_waktu_gm AS waktu_gm,
                                             doc_kontrak.dockt_status_gm AS kontrak_status_gm, 
                                             doc_kontrak.dockt_status_vp AS kontrak_status_vp, 
                                             doc_kontrak.dockt_status_avp AS kontrak_status_avp, 
-                                            doc_kontrak.dockt_status_asmen AS kontrak_status_asmen
+                                            doc_kontrak.dockt_status_asmen AS kontrak_status_asmen,
+                                            doc_kontrak.dockt_waktu_asmen AS kontrak_waktu_asmen,
+                                            doc_kontrak.dockt_waktu_avp AS kontrak_waktu_avp,
+                                            doc_kontrak.dockt_waktu_vp AS kontrak_waktu_vp,
+                                            doc_kontrak.dockt_waktu_gm AS kontrak_waktu_gm
                                             FROM dockajian 
                                             JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
@@ -304,9 +312,62 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                 </td>
                                                 <td>
                                                     <?php
+                                                        if (!empty($p['kontrak_waktu_gm'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_gm']));
+                                                            $tanggal = date('d M Y', strtotime($p['kontrak_waktu_gm']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['kontrak_waktu_vp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_vp']));
+                                                            $tanggal = date('d M Y', strtotime($p['kontrak_waktu_vp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['kontrak_waktu_avp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_avp']));
+                                                            $tanggal = date('d M Y', strtotime($p['kontrak_waktu_avp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['kontrak_waktu_asmen'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_asmen']));
+                                                            $tanggal = date('d M Y', strtotime($p['kontrak_waktu_asmen']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['waktu_gm'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['waktu_gm']));
+                                                            $tanggal = date('d M Y', strtotime($p['waktu_gm']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['waktu_vp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['waktu_vp']));
+                                                            $tanggal = date('d M Y', strtotime($p['waktu_vp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif  (!empty($p['waktu_avp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['waktu_avp']));
+                                                            $tanggal = date('d M Y', strtotime($p['waktu_avp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif  (!empty($p['waktu_asmen'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['waktu_asmen']));
+                                                            $tanggal = date('d M Y', strtotime($p['waktu_asmen']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['dock_waktu_gm'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['dock_waktu_gm']));
+                                                            $tanggal = date('d M Y', strtotime($p['dock_waktu_gm']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['dock_waktu_vp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['dock_waktu_vp']));
+                                                            $tanggal = date('d M Y', strtotime($p['dock_waktu_vp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif  (!empty($p['dock_waktu_avp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['dock_waktu_avp']));
+                                                            $tanggal = date('d M Y', strtotime($p['dock_waktu_avp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } else {
+                                                            $dock_waktu_asmen = date('H:i:s', strtotime($p['dock_waktu_asmen']));
+                                                            $tanggal_asmen = date('d M Y', strtotime($p['dock_waktu_asmen']));
+                                                            echo $dock_waktu_asmen . '<br>' . $tanggal_asmen;
+                                                        }
+                                                        ?>
+                                                </td>
+                                                <td>
+                                                    <?php
                                                         if (!empty($p['dock_status_gm'])) {
                                                             echo $p['dock_status_gm'];
-                                                        } elseif (!empty($p['dock_status_vp']) ) {
+                                                        } elseif (!empty($p['dock_status_vp'])) {
                                                             echo $p['dock_status_vp'];
                                                         } elseif (!empty($p['dock_status_avp'])) {
                                                             echo $p['dock_status_avp'];

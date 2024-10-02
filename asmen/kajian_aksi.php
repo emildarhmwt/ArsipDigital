@@ -28,7 +28,7 @@ if ($jenis == "php") {
     // Insert into doc1 for AVP confirmation with status 'uploaded'
     mysqli_query($koneksi, 
     "INSERT into dockajian (dock_petugas, dock_waktu_asmen, dock_nama, dock_desk, dock_jenis, dock_kategori, dock_aspek, dock_tanggal, dock_lokasi, dock_file, dock_comment, dock_status_asmen) 
-    VALUES ('$petugas', '$waktu','$nama', '$deskripsi', '$jenis', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded')") or die(mysqli_error($koneksi));
+    VALUES ('$petugas', '$waktu','$nama', '$deskripsi', '$jenis', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded (Asmen)')") or die(mysqli_error($koneksi));
 
     header("location:data_pks.php?alert=sukses");
 }

@@ -493,8 +493,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo ($p['dock_waktu_avp']) ?$p['dock_waktu_avp'] : '-' ?>
+                                                </td>
                                                 <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?>
-                                                <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?></td>
+                                                </td>
                                                 <td>
                                                     <?php echo !empty($p['dock_status_avp']) ? $p['dock_status_avp'] : '-'; ?>
                                                     <?php if ($p['dock_status_avp'] == 'Rejected (AVP)'): ?>
@@ -506,7 +508,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo ($p['dock_waktu_vp']) ?$p['dock_waktu_vp'] : '-' ?>
+                                                <td><?php echo ($p['dock_waktu_vp']) ?$p['dock_waktu_vp'] : '-' ?></td>
                                                 <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                                 <td>
                                                     <?php echo !empty($p['dock_status_vp']) ? $p['dock_status_vp'] : '-'; ?>
@@ -519,7 +521,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo ($p['dock_waktu_gm']) ?$p['dock_waktu_gm'] : '-' ?>
+                                                <td><?php echo ($p['dock_waktu_gm']) ?$p['dock_waktu_gm'] : '-' ?></td>
                                                 <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
                                                 <td>
                                                     <?php echo !empty($p['dock_status_gm']) ? $p['dock_status_gm'] : '-'; ?>

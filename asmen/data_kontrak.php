@@ -309,6 +309,29 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 </td>
                                                 <td>
                                                     <?php
+                                                        if (!empty($p['dockt_waktu_gm'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['dockt_waktu_gm']));
+                                                            $tanggal = date('d M Y', strtotime($p['dockt_waktu_gm']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['dockt_waktu_vp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['dockt_waktu_vp']));
+                                                            $tanggal = date('d M Y', strtotime($p['dockt_waktu_vp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['dockt_waktu_avp'])) {
+                                                            $dock_waktu = date('H:i:s', strtotime($p['dockt_waktu_avp']));
+                                                            $tanggal = date('d M Y', strtotime($p['dockt_waktu_avp']));
+                                                            echo $dock_waktu . '<br>' . $tanggal;
+                                                        } elseif (!empty($p['dockt_waktu_asmen'])) {
+                                                            $dock_waktu_asmen = date('H:i:s', strtotime($p['dockt_waktu_asmen']));
+                                                            $tanggal_asmen = date('d M Y', strtotime($p['dockt_waktu_asmen']));
+                                                            echo $dock_waktu_asmen . '<br>' . $tanggal_asmen;
+                                                        } else {
+                                                            echo '-';
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php
                                                         if (!empty($p['status_gm'])) {
                                                             echo $p['status_gm'];
                                                         } elseif (!empty($p['status_vp'])) {

@@ -489,15 +489,16 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo $p['dockh_waktu_asmen'] ?></td>
                                                 <td><?php echo $p['petugas_nama'] ?></td>
-                                                <td>
-                                                    <?php echo $p['dockh_status_asmen']; ?>
-                                                </td>
+                                                <td><?php echo $p['dockh_status_asmen']; ?></td>
                                             </tr>
 
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo ($p['dockh_waktu_avp']) ?$p['dockh_waktu_avp'] : '-' ?>
+                                                </td>
                                                 <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?>
                                                 </td>
                                                 <td>
@@ -511,6 +512,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo ($p['dockh_waktu_vp']) ?$p['dockh_waktu_vp'] : '-' ?>
+                                                </td>
                                                 <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                                 <td>
                                                     <?php echo !empty($p['dockh_status_vp']) ? $p['dockh_status_vp'] : '-'; ?>
@@ -523,6 +526,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dockh_nama'] ?></td>
+                                                <td><?php echo ($p['dockh_waktu_gm']) ?$p['dockh_waktu_gm'] : '-' ?>
+                                                </td>
                                                 <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
                                                 <td>
                                                     <?php echo !empty($p['dockh_status_gm']) ? $p['dockh_status_gm'] : '-'; ?>

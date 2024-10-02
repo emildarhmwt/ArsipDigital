@@ -3,6 +3,7 @@ include '../koneksi.php';
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
+$waktu = date('Y-m-d H:i:s'); 
 $result = mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_level = 'ASMEN' LIMIT 1");
 $row = mysqli_fetch_assoc($result);
 $petugas = $row['pks_id'] ?? null; 
@@ -75,7 +76,8 @@ if ($files_hps && $files_hps['error'] == 0) {
         $nama_file_hps = $rand.'_'.$files_hps['name'];
 
         // Insert into doc_kak_hps for both files
-        $insertKakHpsQuery = "INSERT INTO doc_kak_hps (dockh_dock_id, dockh_petugas,dockh_nama,dockh_desk,dockh_jenis,dockh_kategori, dockh_aspek, dockh_tanggal, dockh_lokasi, dockh_cost, dockh_satuan, dockh_harga, dockh_jumlah, dockh_harga_total, dockh_file_kak, dockh_file_hps, dockh_comment, dockh_status_asmen) VALUES ('$dockh_dock_id', '$petugas', '$nama','$desk','$jenis2','$kategori','$aspek','$tanggal','$lokasi','$cost','$satuan','$harga','$jumlah','$harga_total', '$nama_file_kak', '$nama_file_hps', '$comment', 'Uploaded')";
+        $insertKakHpsQuery = "INSERT INTO doc_kak_hps (dockh_dock_id, dockh_petugas,dockh_waktu_asmen,dockh_nama,dockh_desk,dockh_jenis,dockh_kategori, dockh_aspek, dockh_tanggal, dockh_lokasi, dockh_cost, dockh_satuan, dockh_harga, dockh_jumlah, dockh_harga_total, dockh_file_kak, dockh_file_hps, dockh_comment, dockh_status_asmen) 
+        VALUES ('$dockh_dock_id', '$petugas', '$waktu' ,'$nama','$desk','$jenis2','$kategori','$aspek','$tanggal','$lokasi','$cost','$satuan','$harga','$jumlah','$harga_total', '$nama_file_kak', '$nama_file_hps', '$comment', 'Uploaded (Asmen)')";
         
         if (!mysqli_query($koneksi, $insertKakHpsQuery)) {
             error_log("Insert error: " . mysqli_error($koneksi));

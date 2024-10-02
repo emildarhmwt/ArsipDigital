@@ -3,6 +3,7 @@ include '../koneksi.php';
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 
+$waktu = date('Y-m-d H:i:s'); 
 $result = mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_level = 'ASMEN' LIMIT 1");
 $row = mysqli_fetch_assoc($result);
 $petugas = $row['pks_id'] ?? null; 
@@ -44,7 +45,7 @@ $comment  = $_POST['comment'];
 
     // Insert into doc1 for AVP confirmation with status 'uploaded'
     mysqli_query($koneksi, 
-    "INSERT into doc_kontrak (dockt_dock_id, dockt_petugas, dockt_nama, dockt_desk, dockt_jenis, dockt_kategori, dockt_aspek, dockt_tanggal, dockt_lokasi, dockt_file, dockt_comment, dockt_status_asmen) 
-    VALUES ('$dockt_dock_id','$petugas', '$nama', '$desk', '$jenis2', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded')") or die(mysqli_error($koneksi));
+    "INSERT into doc_kontrak (dockt_dock_id, dockt_petugas, dockt_waktu_asmen, dockt_nama, dockt_desk, dockt_jenis, dockt_kategori, dockt_aspek, dockt_tanggal, dockt_lokasi, dockt_file, dockt_comment, dockt_status_asmen) 
+    VALUES ('$dockt_dock_id','$petugas', '$waktu','$nama', '$desk', '$jenis2', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded (Asmen)')") or die(mysqli_error($koneksi));
 
     header("location:data_kontrak.php?alert=sukses");
