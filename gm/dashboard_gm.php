@@ -126,25 +126,76 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-2">
                                     <span
                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
-                                        <i class="ti ti-thumb-up fs-8"></i>
+                                        <i class="ti ti-file-analytics fs-8"></i>
                                     </span>
                                     <div class="ms-2">
-                                        <h5 class="card-title mb-2 fw-semibold fs-4">Data Selesai</h5>
-                                        <h5 class="card-title mb-0 fw-semibold fs-3">18</h5>
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Total Doc Kajian</h5>
+                                        <?php
+                                        $jumlah_kajian = mysqli_query($koneksi, "select * from dockajian");
+                                        ?>
+
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kajian); ?></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-file-analytics fs-8"></i>
+                                    </span>
+                                    <div class="ms-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Total Doc KAK & HPS</h5>
+                                        <?php
+                                        $jumlah_kak_hps = mysqli_query($koneksi, "select * from doc_kak_hps");
+                                        ?>
+
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kak_hps); ?></span>
+                                        </h5>
                                     </div>
 
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-file-analytics fs-8"></i>
+                                    </span>
+                                    <div class="ms-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Total Doc Kontrak</h5>
+                                        <?php
+                                        $jumlah_kontrak = mysqli_query($koneksi, "select * from doc_kontrak");
+                                        ?>
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kontrak); ?></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
                         <div class="card overflow-hidden">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-2">
@@ -154,7 +205,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         <i class="ti ti-category fs-8"></i>
                                     </span>
                                     <div class="ms-2">
-                                        <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Jumlah Kategori</h5>
                                         <?php
                                         $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
                                         ?>

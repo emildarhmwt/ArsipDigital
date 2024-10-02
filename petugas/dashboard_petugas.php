@@ -324,50 +324,6 @@
                                                              class="counter justify-content-end"><?php echo mysqli_num_rows($jumlah_arsip); ?>
                                                      </h5>
                                                  </div>
-                                                 <!-- <h5v
-                                                        class="col-lg-6 d-flex align-items-center justify-content-end">
-                                                        <button type="button"
-                                                            class="btn btn-outline-secondary btn-sm me-2">
-                                                            Semua Data</button>
-                                                        <div class="dropdown mx-2">
-                                                            <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                                                                aria-expanded="false"
-                                                                class="rounded-circle btn-outline-secondary rounded-circle px-2 btn shadow-none">
-                                                                <i class="ti ti-search fs-4 d-block"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                                                aria-labelledby="dropdownMenuButton2">
-                                                                <div class="message-body">
-                                                                    <form method="get" action="">
-                                                                        <div class="row">
-                                                                            <div class="col-lg-6 mb-1">
-                                                                                <label for="grupSearch"
-                                                                                    class="form-label">
-                                                                                    Tanggal
-                                                                                    Awal :</label>
-                                                                                <input type="date" class="form-control"
-                                                                                    id="startDate" name="startDate">
-                                                                            </div>
-                                                                            <div class="col-lg-6 mb-1">
-                                                                                <label for="grupSearch"
-                                                                                    class="form-label">
-                                                                                    Tanggal
-                                                                                    Akhir :</label>
-                                                                                <input type="date" class="form-control"
-                                                                                    id="endDate" name="endDate">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="d-flex justify-content-center mt-3">
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary mx-3"><i
-                                                                                    class="bi bi-search"></i> Search
-                                                                                Data</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div> -->
                                              </div>
                                          </div>
                                      </div>
