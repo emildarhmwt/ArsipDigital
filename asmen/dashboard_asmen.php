@@ -15,58 +15,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     <title>Arsip Digital</title>
     <link rel="shortcut icon" type="image/png" href="../assets/images/logo.png" />
     <link rel="stylesheet" href="../assets/css/styles.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Acme&family=Coiny&family=Concert+One&family=Pacifico&family=Playpen+Sans:wght@100..800&family=Playwrite+DE+Grund:wght@100..400&family=Righteous&family=Sacramento&family=Varela+Round&family=Yatra+One&display=swap"
         rel="stylesheet">
     <style>
-    .notification-dropdown {
-        width: 280px;
-        right: 0;
-        left: auto;
-        max-height: 400px;
-        overflow-y: auto;
-        z-index: 1050;
-        /* Tambahkan z-index yang lebih tinggi */
-    }
-
-    .notification-dropdown .message-body {
-        padding: 10px;
-    }
-
-    .notification-dropdown .message-title {
-        font-size: 14px;
-    }
-
-    .notification-dropdown .dropdown-item {
-        padding: 8px 10px;
-    }
-
-    .notification-dropdown .notification-content h6 {
-        font-size: 12px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content p {
-        font-size: 11px;
-        margin-bottom: 2px;
-    }
-
-    .notification-dropdown .notification-content small {
-        font-size: 10px;
-    }
-
-    .notification-dropdown .btn-sm {
-        font-size: 12px;
-        padding: 4px 8px;
-    }
-
-    .navbar-nav .nav-item.dropdown {
-        position: relative;
-    }
-
     .navbar-judul {
         font-size: 20px;
         font-weight: bold;
@@ -75,7 +31,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: white;
     }
 
     .pacifico-regular {
@@ -95,6 +51,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-optical-sizing: auto;
         font-style: normal;
         font-weight: 400;
+    }
+
+    .nama-profile {
+        color: white;
     }
     </style>
 </head>
@@ -145,7 +105,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [ASMEN] </p>
+                                        [AVP] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
@@ -164,7 +124,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </nav>
@@ -172,19 +131,163 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-file-analytics fs-8"></i>
+                                    </span>
+                                    <div class="ms-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Total Doc Kajian</h5>
+                                        <?php
+                                        $jumlah_kajian = mysqli_query($koneksi, "select * from dockajian");
+                                        ?>
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kajian); ?></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-file-analytics fs-8"></i>
+                                    </span>
+                                    <div class="ms-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Total Doc KAK & HPS</h5>
+                                        <?php
+                                        $jumlah_kak_hps = mysqli_query($koneksi, "select * from doc_kak_hps");
+                                        ?>
+
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kak_hps); ?></span>
+                                        </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-file-analytics fs-8"></i>
+                                    </span>
+                                    <div class="ms-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Total Doc Kontrak</h5>
+                                        <?php
+                                        $jumlah_kontrak = mysqli_query($koneksi, "select * from doc_kontrak");
+                                        ?>
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kontrak); ?></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card overflow-hidden">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-category fs-8"></i>
+                                    </span>
+                                    <div class="ms-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-2">Jumlah Kategori</h5>
+                                        <?php
+                                        $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
+                                        ?>
+
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
+                                        </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  Row 1 -->
+                <div class="row">
+                    <div class="col-lg-4 d-flex align-items-stretch">
                         <div class="card overflow-hidden w-100">
                             <div class="card-body p-4">
                                 <div class="row align-items-center">
                                     <div class="col-lg-12 d-flex align-items-center">
                                         <div class="col-lg-8">
-                                            <?php
-                                            $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
-                                            ?>
-                                            <h5 class="card-title fw-semibold mt-3 fs-7">Jumlah Arsip :
-                                                <?php echo mysqli_num_rows($jumlah_arsip); ?>
+                                            <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip :
                                             </h5>
                                         </div>
+                                        <div class="col-lg-4 justify-content-end">
+                                            <?php
+                                                            $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
+                                                        ?>
+                                            <h5 class="card-title mb-10 fw-semibold mt-3 fs-7 justify-content-end">
+                                                <span
+                                                    class="counter justify-content-end"><?php echo mysqli_num_rows($jumlah_arsip); ?>
+                                            </h5>
+                                        </div>
+                                        <!-- <h5v
+                                                        class="col-lg-6 d-flex align-items-center justify-content-end">
+                                                        <button type="button"
+                                                            class="btn btn-outline-secondary btn-sm me-2">
+                                                            Semua Data</button>
+                                                        <div class="dropdown mx-2">
+                                                            <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                                aria-expanded="false"
+                                                                class="rounded-circle btn-outline-secondary rounded-circle px-2 btn shadow-none">
+                                                                <i class="ti ti-search fs-4 d-block"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                                aria-labelledby="dropdownMenuButton2">
+                                                                <div class="message-body">
+                                                                    <form method="get" action="">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 mb-1">
+                                                                                <label for="grupSearch"
+                                                                                    class="form-label">
+                                                                                    Tanggal
+                                                                                    Awal :</label>
+                                                                                <input type="date" class="form-control"
+                                                                                    id="startDate" name="startDate">
+                                                                            </div>
+                                                                            <div class="col-lg-6 mb-1">
+                                                                                <label for="grupSearch"
+                                                                                    class="form-label">
+                                                                                    Tanggal
+                                                                                    Akhir :</label>
+                                                                                <input type="date" class="form-control"
+                                                                                    id="endDate" name="endDate">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="d-flex justify-content-center mt-3">
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary mx-3"><i
+                                                                                    class="bi bi-search"></i> Search
+                                                                                Data</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -197,565 +300,225 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card overflow-hidden" style="height: 222px;">
-                                    <div class=" card-body p-4">
-                                        <div class="align-items-center mb-2">
-                                            <span
-                                                class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                                style="width: 70px; height: 70px; line-height: 50px; color: #4e6a7d;">
-                                                <i class="ti ti-file-analytics fs-10"></i>
-                                            </span>
-                                            <div class="ms-2 mt-4">
-                                                <h5 class="card-title mb-2 fw-semibold fs-7">Total Doc Kajian</h5>
-                                                <?php
-                                                $jumlah_kajian = mysqli_query($koneksi, "select * from dockajian");
-                                                ?>
-                                                <h5 class="card-title mb-0 fw-semibold fs-8"><span
-                                                        class="counter"><?php echo mysqli_num_rows($jumlah_kajian); ?></span>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="card overflow-hidden" style="height: 222px;">
-                                    <div class="card-body p-4">
-                                        <div class="align-items-center mb-2">
-                                            <span
-                                                class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                                style="width: 70px; height: 70px; line-height: 50px; color: #4e6a7d;">
-                                                <i class="ti ti-file-analytics fs-10"></i>
-                                            </span>
-                                            <div class="ms-2 mt-4">
-                                                <h5 class="card-title mb-2 fw-semibold fs-7">Total Doc KAK & HPS</h5>
-                                                <?php
-                                                $jumlah_kak_hps = mysqli_query($koneksi, "select * from doc_kak_hps");
-                                                ?>
-                                                <h5 class="card-title mb-0 fw-semibold fs-8"><span
-                                                        class="counter"><?php echo mysqli_num_rows($jumlah_kak_hps); ?></span>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="card overflow-hidden" style="height: 222px;">
-                                    <div class="card-body p-4">
-                                        <div class=" align-items-center mb-2">
-                                            <span
-                                                class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                                style="width: 70px; height: 70px; line-height: 50px; color: #4e6a7d;">
-                                                <i class="ti ti-file-analytics fs-10"></i>
-                                            </span>
-                                            <div class="ms-2 mt-4">
-                                                <h5 class="card-title mb-2 fw-semibold fs-7">Total Doc Kontrak :</h5>
-                                                <?php
-                                                $jumlah_kontrak = mysqli_query($koneksi, "select * from doc_kontrak");
-                                                ?>
-                                                <h5 class="card-title mb-0 fw-semibold fs-8"><span
-                                                        class="counter"><?php echo mysqli_num_rows($jumlah_kontrak); ?></span>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="card overflow-hidden" style="height: 222px;">
-                                    <div class="card-body p-4">
-                                        <div class="align-items-center mb-2">
-                                            <span
-                                                class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                                style="width: 70px; height: 70px; line-height: 50px; color: #4e6a7d;">
-                                                <i class="ti ti-category fs-10"></i>
-                                            </span>
-                                            <div class="ms-2 mt-4">
-                                                <h5 class="card-title mb-2 fw-semibold fs-7">Jumlah Kategori</h5>
-                                                <?php
-                                                $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
-                                                ?>
-                                                <h5 class="card-title mb-0 fw-semibold fs-8"><span
-                                                        class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
-                                                </h5>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--  Row 1 -->
-
-
-                <div class="row">
-                    <div class="col-lg-6 d-flex align-items-stretch">
+                    <div class="col-lg-8 d-flex align-items-stretch">
                         <div class="card w-100 h-500">
                             <div class="card-body p-4">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-12 mb-4">
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h5 class="card-title fw-semibold">Grafik Kontrak PKS</h5>
-                                            <div class="d-flex">
-                                                <button type="button" class="btn btn-outline-secondary btn-sm me-3"
-                                                    id="fetchAllData">Semua Data</button>
-                                                <div class="dropdown mx-2">
-                                                    <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                        class="rounded-circle btn-outline-secondary rounded-circle btn-sm px-1 btn shadow-none">
-                                                        <i class="ti ti-search fs-6 d-block"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                                        aria-labelledby="dropdownMenuButton2">
-                                                        <div class="message-body">
-                                                            <form id="dateFilterForm">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 mb-1">
-                                                                        <label for="grupSearch" class="form-label">
-                                                                            Tahun :</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="startYear" name="startYear"
-                                                                            placeholder="Masukkan Tahun" min="2000"
-                                                                            max="2100">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex justify-content-center mt-3">
-                                                                    <button type="submit" class="btn btn-primary mx-3">
-                                                                        <i class="bi bi-search"></i> Search </button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <canvas id="statusBarChart" width="200px" height="350px"></canvas>
-                                        </div>
-                                    </div>
+                                <div class="d-flex mb-4 justify-content-between align-items-center">
+                                    <h5 class="mb-0 fw-bold">Data </h5>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="col-lg-6 d-flex align-items-stretch">
-                        <div class="card w-100 h-500">
-                            <div class="card-body p-4">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-12 mb-4">
-                                        <div class="d-flex align-items-center justify-content-between mb-3">
-                                            <h5 class="card-title fw-semibold">Grafik Dokumen Kajian</h5>
-                                            <div class="d-flex">
-                                                <button type="button" class="btn btn-outline-secondary btn-sm me-3"
-                                                    id="fetchAllData">Semua Data</button>
-                                                <div class="dropdown mx-2">
-                                                    <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                                                        aria-expanded="false"
-                                                        class="rounded-circle btn-outline-secondary rounded-circle btn-sm px-1 btn shadow-none">
-                                                        <i class="ti ti-search fs-6 d-block"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
-                                                        aria-labelledby="dropdownMenuButton2">
-                                                        <div class="message-body">
-                                                            <form id="dateFilterForm">
-                                                                <div class="row">
-                                                                    <div class="col-lg-12 mb-1">
-                                                                        <label for="grupSearch" class="form-label">
-                                                                            Tahun :</label>
-                                                                        <input type="number" class="form-control"
-                                                                            id="startYear" name="startYear"
-                                                                            placeholder="Masukkan Tahun" min="2000"
-                                                                            max="2100">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="d-flex justify-content-center mt-3">
-                                                                    <button type="submit" class="btn btn-primary mx-3">
-                                                                        <i class="bi bi-search"></i> Search </button>
-                                                                </div>
-                                                            </form>
+                                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;"
+                                    data-simplebar>
+                                    <table class="table table-borderless align-middle text-nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nama File</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-4">
+                                                            <img src="../assets/images/profile/user1.jpg" width="50"
+                                                                class="rounded-circle" alt="" />
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-bolder">
+                                                                Mark J. Freeman</h6>
+                                                            <p class="fs-3 mb-0">Prof.
+                                                                English</p>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <canvas id="statusDocChart" width="200px" height="350px"></canvas>
-                                        </div>
-                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
+                                                            class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
+                                                            <i class="ti ti-dots-vertical fs-7 d-block"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">Action</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="#">Another
+                                                                    action</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="#">Something
+                                                                    else
+                                                                    here</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="me-4">
+                                                            <img src="../assets/images/profile/user1.jpg" width="50"
+                                                                class="rounded-circle" alt="" />
+                                                        </div>
+                                                        <div>
+                                                            <h6 class="mb-1 fw-bolder">
+                                                                Mark J. Freeman</h6>
+                                                            <p class="fs-3 mb-0">Prof.
+                                                                English</p>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
+                                                </td>
+                                                <td>
+                                                    <div class="dropdown">
+                                                        <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
+                                                            class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
+                                                            <i class="ti ti-dots-vertical fs-7 d-block"></i>
+                                                        </button>
+                                                        <ul class="dropdown-menu dropdown-menu-end"
+                                                            aria-labelledby="dropdownMenuButton1">
+                                                            <li><a class="dropdown-item" href="#">Action</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="#">Another
+                                                                    action</a>
+                                                            </li>
+                                                            <li>
+                                                                <a class="dropdown-item" href="#">Something
+                                                                    else
+                                                                    here</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <script>
-            fetch('sidebar_asmen.php')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('sidebar').innerHTML = data;
-                });
+        </div>
+    </div>
+    <script>
+    fetch('sidebar_asmen.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
 
-            const categoryData =
-                <?php
-            $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id GROUP BY kategori_nama");
-            $categories = [];
-            while ($row = mysqli_fetch_assoc($category_query)) {
-                $categories[] = $row;
-            }
-            echo json_encode($categories);
-            ?>;
+    const categoryData =
+        <?php
+                $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id GROUP BY kategori_nama");
+                $categories = [];
+                while ($row = mysqli_fetch_assoc($category_query)) {
+                    $categories[] = $row;
+                }
+                echo json_encode($categories);
+                ?>;
 
-            const labels = categoryData.map(item => item.kategori_nama);
-            const data = categoryData.map(item => item.count);
+    const labels = categoryData.map(item => item.kategori_nama);
+    const data = categoryData.map(item => item.count);
 
-            // Create pie chart
-            const ctx = document.getElementById('categoryPieChart').getContext('2d');
-            const categoryPieChart = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Jumlah Arsip per Kategori',
-                        data: data,
-                        backgroundColor: [
-                            'rgba(204, 39, 39, 0.2)',
-                            'rgba(204, 180, 39, 0.2)',
-                            'rgba(142, 204, 39, 0.2)',
-                            'rgba(39, 204, 49, 0.2)',
-                            'rgba(39, 204, 160, 0.2)',
-                            'rgba(39, 125, 204, 0.2)',
-                            'rgba(42, 39, 204, 0.2)',
-                            'rgba(128, 39, 204, 0.2)',
-                            'rgba(204, 39, 197, 0.2)',
-                            'rgba(204, 39, 115, 0.2)',
-                            'rgba(204, 39, 39, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(204, 39, 39, 1)',
-                            'rgba(204, 180, 39, 1)',
-                            'rgba(142, 204, 39, 1)',
-                            'rgba(39, 204, 49, 1)',
-                            'rgba(39, 204, 160, 1)',
-                            'rgba(39, 125, 204, 1)',
-                            'rgba(42, 39, 204, 1)',
-                            'rgba(128, 39, 204, 1)',
-                            'rgba(204, 39, 197, 1)',
-                            'rgba(204, 39, 115, 1)',
-                            'rgba(204, 39, 39, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    layout: {
-                        padding: {
-                            bottom: 20 // Add padding at the bottom to make space for labels
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true, // Menyembunyikan legend
-                            position: 'bottom', // Menempatkan legend di atas
-                            labels: {
-                                boxWidth: 10, // Lebar kotak legend
-                                padding: 15, // Jarak antar label
-                                font: {
-                                    size: 12, // Ukuran font label
-                                },
-                                tooltip: {
-                                    callbacks: {
-                                        label: function(tooltipItem) {
-                                            const label = tooltipItem.label || '';
-                                            const value = tooltipItem.raw || 0;
-                                            return `${label} : ${value}`; // Menampilkan nama kategori dan jumlah saat hover
-                                        }
-                                    }
+    // Create pie chart
+    const ctx = document.getElementById('categoryPieChart').getContext('2d');
+    const categoryPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Jumlah Arsip per Kategori',
+                data: data,
+                backgroundColor: [
+                    'rgba(204, 39, 39, 0.2)',
+                    'rgba(204, 180, 39, 0.2)',
+                    'rgba(142, 204, 39, 0.2)',
+                    'rgba(39, 204, 49, 0.2)',
+                    'rgba(39, 204, 160, 0.2)',
+                    'rgba(39, 125, 204, 0.2)',
+                    'rgba(42, 39, 204, 0.2)',
+                    'rgba(128, 39, 204, 0.2)',
+                    'rgba(204, 39, 197, 0.2)',
+                    'rgba(204, 39, 115, 0.2)',
+                    'rgba(204, 39, 39, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(204, 39, 39, 1)',
+                    'rgba(204, 180, 39, 1)',
+                    'rgba(142, 204, 39, 1)',
+                    'rgba(39, 204, 49, 1)',
+                    'rgba(39, 204, 160, 1)',
+                    'rgba(39, 125, 204, 1)',
+                    'rgba(42, 39, 204, 1)',
+                    'rgba(128, 39, 204, 1)',
+                    'rgba(204, 39, 197, 1)',
+                    'rgba(204, 39, 115, 1)',
+                    'rgba(204, 39, 39, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    bottom: 20 // Add padding at the bottom to make space for labels
+                }
+            },
+            plugins: {
+                legend: {
+                    display: true, // Menyembunyikan legend
+                    position: 'bottom', // Menempatkan legend di atas
+                    labels: {
+                        boxWidth: 10, // Lebar kotak legend
+                        padding: 15, // Jarak antar label
+                        font: {
+                            size: 12, // Ukuran font label
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(tooltipItem) {
+                                    const label = tooltipItem.label || '';
+                                    const value = tooltipItem.raw || 0;
+                                    return `${label} : ${value}`; // Menampilkan nama kategori dan jumlah saat hover
                                 }
                             }
                         }
                     }
                 }
-            });
+            }
+        }
+    });
 
-            document.getElementById('categoryPieChart').parentNode.style.height =
-                '350px'; // Mengatur tinggi chart container
-            document.getElementById('categoryPieChart').parentNode.style.overflowY =
-                'auto'; // Mengaktifkan scroll pada y-axis
-            categoryPieChart.update();
-
-            // Data for bar chart
-            const barChartData = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                        label: 'Doc Kajian',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 205, 86, 0.2)',
-                        borderColor: 'rgba(255, 205, 86, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Doc KAK & HPS',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                        borderColor: 'rgba(255, 159, 64, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Doc Kontrak',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            };
-
-            // Create bar chart
-            const ctxBar = document.getElementById('statusBarChart').getContext('2d');
-            const statusBarChart = new Chart(ctxBar, {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-
-            // Data for the second bar chart
-            const statusDocData = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [{
-                        label: 'Uploaded (Asmen)',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Approved (AVP)',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                        borderColor: 'rgba(153, 102, 255, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Rejected (AVP)',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Approved (VP)',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 205, 86, 0.2)',
-                        borderColor: 'rgba(255, 205, 86, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Rejected (VP)',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Done',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Rejected (GM)',
-                        data: [
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 1")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 2")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 3")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 4")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 5")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 6")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 7")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 8")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 9")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 10")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 11")); ?>,
-                            <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 12")); ?>
-                        ],
-                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                        borderColor: 'rgba(255, 159, 64, 1)',
-                        borderWidth: 1
-                    }
-                ]
-            };
-
-            // Create the second bar chart
-            const ctxStatusDoc = document.getElementById('statusDocChart').getContext('2d');
-            const statusDocChart = new Chart(ctxStatusDoc, {
-                type: 'bar',
-                data: statusDocData,
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'bottom'
-                        }
-                    }
-                }
-            });
-            </script>
-            <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-            <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-            <script src="../assets/js/sidebarmenu.js"></script>
-            <script src="../assets/js/app.min.js"></script>
-            <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
-            <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-            <script src="../assets/js/dashboard.js"></script>
+    document.getElementById('categoryPieChart').parentNode.style.height =
+        '350px'; // Mengatur tinggi chart container
+    document.getElementById('categoryPieChart').parentNode.style.overflowY =
+        'auto'; // Mengaktifkan scroll pada y-axis
+    categoryPieChart.update();
+    </script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 
 </html>
