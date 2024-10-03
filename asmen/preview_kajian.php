@@ -71,14 +71,20 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -156,6 +162,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
     .bg-gray {
         background-color: #ccc;
+    }
+
+    .card-preview {
+        background-color: white !important;
     }
     </style>
 </head>
@@ -235,7 +245,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Preview Dokumen Kajian</h5>
                         <?php
                         $no = 1;
                         include '../koneksi.php';
@@ -244,7 +253,11 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
                         <div class="row">
-                            <div class="card">
+                            <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                                <div class="card-header"
+                                    style="background-color: black; width: 995px; margin-left: -12px;">
+                                    Header
+                                </div>
                                 <div class="card-body">
                                     <form method="get" enctype="multipart/form-data">
                                         <div class="row">
@@ -307,7 +320,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card card-preview">
                                 <div class="card-body">
                                     <form method="get" enctype="multipart/form-data">
                                         <div class="row">
@@ -332,7 +345,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id, doc_kontrak.dockt_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
+                                $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id, doc_kontrak.dockt_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border-end d-flex justify-content-center align-items-center"
@@ -342,34 +355,34 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class=" col-lg-4 border-end d-flex justify-content-center
                                 align-items-center">
                                 <?php
-                                // Pastikan dockh_id ada di array $p
-                                $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dockh) {
-                                ?>
+                                        // Pastikan dockh_id ada di array $p
+                                        $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
+                                        if ($id_dockh) {
+                                        ?>
                                 <a href="preview_dp.php?id=<?php echo $id_dockh; ?>"> Doc KAK & HPS </a>
                                 <?php
-                                } else {
-                                ?>
+                                        } else {
+                                        ?>
                                 <span>Doc KAK & HPS tidak tersedia</span>
                                 <?php
-                                }
-                                ?>
+                                        }
+                                        ?>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center
                                 align-items-center">
                                 <?php
-                                // Pastikan dockt_id ada di array $p
-                                $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dockt) {
-                                ?>
+                                        // Pastikan dockt_id ada di array $p
+                                        $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
+                                        if ($id_dockt) {
+                                        ?>
                                 <a href="preview_kontrak.php?id=<?php echo $id_dockt; ?>"> Doc Kontrak </a>
                                 <?php
-                                } else {
-                                ?>
+                                        } else {
+                                        ?>
                                 <span>Doc Kontrak tidak tersedia</span>
                                 <?php
-                                }
-                                ?>
+                                        }
+                                        ?>
                             </div>
                             <?php
                                 }
@@ -494,7 +507,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo ($p['dock_waktu_avp']) ?$p['dock_waktu_avp'] : '-' ?>
+                                                <td><?php echo ($p['dock_waktu_avp']) ? $p['dock_waktu_avp'] : '-' ?>
                                                 </td>
                                                 <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?>
                                                 </td>
@@ -509,7 +522,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo ($p['dock_waktu_vp']) ?$p['dock_waktu_vp'] : '-' ?>
+                                                <td><?php echo ($p['dock_waktu_vp']) ? $p['dock_waktu_vp'] : '-' ?>
                                                 </td>
                                                 <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                                 <td>
@@ -523,7 +536,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $p['dock_nama'] ?></td>
-                                                <td><?php echo ($p['dock_waktu_gm']) ?$p['dock_waktu_gm'] : '-' ?>
+                                                <td><?php echo ($p['dock_waktu_gm']) ? $p['dock_waktu_gm'] : '-' ?>
                                                 </td>
                                                 <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
                                                 <td>
