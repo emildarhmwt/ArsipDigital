@@ -71,14 +71,20 @@
      }
 
      .navbar-judul {
-         font-size: 20px;
+         font-size: 25px;
          font-weight: bold;
          margin-left: 20px;
-         font-family: "Playwrite DE Grund", cursive;
+         font-family: "Varela Round", sans-serif;
          display: flex;
          align-items: center;
          margin-top: 17px;
-         color: #4e6a7d;
+         color: #912005;
+     }
+
+     .nama-profile {
+         color: #912005;
+         font-family: "Varela Round", sans-serif;
+         font-size: 20px;
      }
 
      .pacifico-regular {
@@ -98,6 +104,15 @@
          font-optical-sizing: auto;
          font-style: normal;
          font-weight: 400;
+     }
+
+     .judul-tabel {
+         font-family: "Varela Round", sans-serif;
+     }
+
+     .banyak-data {
+         font-family: "Varela Round", sans-serif;
+         color: white;
      }
      </style>
  </head>
@@ -204,66 +219,64 @@
              <div class="container-fluid">
                  <div class="card">
                      <div class="card-body">
-                         <h5 class="card-title fw-semibold mb-4">Data Kategori</h5>
+                         <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA ARSIP
+                         </h5>
                          <!-- table -->
-                         <div class="card">
-                             <div class="card-body">
-                                 <div class="row mb-3">
-                                     <div class="col-md-6">
-                                         <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                         <select id="rowsPerPageSelect" class="form-select"
-                                             style="width: auto; display: inline-block;">
-                                             <option value="5">5</option>
-                                             <option value="10" selected>10</option>
-                                             <option value="15">15</option>
-                                             <option value="20">20</option>
-                                         </select>
-                                         <span> data per halaman</span>
-                                     </div>
-                                     <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                         <input type="text" class="form-control me-2" id="searchInput"
-                                             placeholder="Cari..."
-                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                     </div>
-                                 </div>
+                         <div class="row mb-3">
+                             <div class="col-md-6 banyak-data">
+                                 <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
+                                 <select id="rowsPerPageSelect" class="form-select"
+                                     style="width: auto; display: inline-block;">
+                                     <option value="5">5</option>
+                                     <option value="10" selected>10</option>
+                                     <option value="15">15</option>
+                                     <option value="20">20</option>
+                                 </select>
+                                 <span> data per halaman</span>
+                             </div>
+                             <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                 <input type="text" class="form-control me-2" id="searchInput" placeholder="Cari..."
+                                     style="max-width: 200px; height: 40px; font-size: .95rem;">
+                             </div>
+                         </div>
 
-                                 <div class="table-responsive products-table" data-simplebar>
-                                     <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                         <thead class="fs-4">
-                                             <tr>
-                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                 <th class="fs-3">Nama</th>
-                                                 <th class="fs-3">Keterangan</th>
-                                             </tr>
-                                         </thead>
-                                         <tbody>
-                                             <?php
+                         <div class="table-responsive products-table" data-simplebar>
+                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                 <thead class="fs-4">
+                                     <tr>
+                                         <th class="fs-3" style="width: 5%;">No</th>
+                                         <th class="fs-3">Nama</th>
+                                         <th class="fs-3">Keterangan</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <?php
                                             $no = 1;
                                             $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
                                             while ($p = mysqli_fetch_array($kategori)) {
                                             ?>
-                                             <tr>
-                                                 <td><?php echo $no++; ?></td>
-                                                 <td><?php echo $p['kategori_nama'] ?></td>
-                                                 <td><?php echo $p['kategori_keterangan'] ?></td>
-                                             </tr>
-                                             <?php
+                                     <tr>
+                                         <td><?php echo $no++; ?></td>
+                                         <td><?php echo $p['kategori_nama'] ?></td>
+                                         <td><?php echo $p['kategori_keterangan'] ?></td>
+                                     </tr>
+                                     <?php
                                             }
                                             ?>
-                                         </tbody>
-                                     </table>
-                                 </div>
-                                 <nav aria-label="Page navigation">
-                                     <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                         <!-- Pagination items will be added here by JavaScript -->
-                                     </ul>
-                                 </nav>
-                             </div>
+                                 </tbody>
+                             </table>
                          </div>
+                         <nav aria-label="Page navigation">
+                             <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                 <!-- Pagination items will be added here by JavaScript -->
+                             </ul>
+                         </nav>
                      </div>
                  </div>
              </div>
          </div>
+     </div>
+     </div>
      </div>
      <script>
      fetch('sidebar_petugas.php')

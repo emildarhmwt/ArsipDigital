@@ -215,7 +215,7 @@
              <div class="container-fluid">
                  <div class="card">
                      <div class="card-body">
-                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">DATA ARSIP
+                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">GANTI PASSWORD
                          </h5>
                          <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
                              <div class="card-body">

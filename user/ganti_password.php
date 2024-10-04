@@ -2,7 +2,7 @@
     include '../koneksi.php';
     session_start();
     if ($_SESSION['status'] != "user_login") {
-        header("location:../login/loginadmin.php?alert=belum_login");
+        header("location:../login/loginuser.php?alert=belum_login");
     }
     ?>
  <!doctype html>
@@ -213,7 +213,7 @@
              <div class="container-fluid">
                  <div class="card">
                      <div class="card-body">
-                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">DATA ARSIP
+                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">GANTI PASSWORD
                          </h5>
                          <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
                              <div class="card-body">
