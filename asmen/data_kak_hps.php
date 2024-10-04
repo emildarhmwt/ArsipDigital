@@ -281,7 +281,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">DOKUMEN KONTRAK PKS
                         </h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-2">
+                        <div class="row text-center justify-content-center pilihan-doc mb-5">
                             <div class="col-lg-4 border-end ">
                                 <a href="data_pks.php"> Doc Kajian</a>
                             </div>
@@ -293,78 +293,76 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             </div>
                         </div>
                         <!-- table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6 banyak-data">
-                                        <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                        <select id="rowsPerPageSelect" class="form-select"
-                                            style="width: auto; display: inline-block;">
-                                            <option value="5">5</option>
-                                            <option value="10" selected>10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span> data per halaman</span>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control text-white me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                    </div>
-                                </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 banyak-data">
+                                <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
+                                <select id="rowsPerPageSelect" class="form-select"
+                                    style="width: auto; display: inline-block;">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <span> data per halaman</span>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                <input type="text" class="form-control text-white me-2" id="searchInput"
+                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
+                            </div>
+                        </div>
 
-                                <center>
-                                    <?php
-                                        if (isset($_GET['alert'])) {
-                                            if ($_GET['alert'] == "gagal") {
-                                        ?>
-                                    <div class="alert alert-danger">File arsip gagal diupload. krena demi
-                                        keamanan
-                                        file
-                                        .php tidak diperbolehkan.</div>
-                                    <?php
-                                            } else {
-                                            ?>
-                                    <div class="alert alert-success">Arsip berhasil tersimpan.</div>
-                                    <?php
-                                            }
-                                        }
-                                        ?>
-                                </center>
+                        <center>
+                            <?php
+                            if (isset($_GET['alert'])) {
+                                if ($_GET['alert'] == "gagal") {
+                            ?>
+                            <div class="alert alert-danger">File arsip gagal diupload. krena demi
+                                keamanan
+                                file
+                                .php tidak diperbolehkan.</div>
+                            <?php
+                                } else {
+                                ?>
+                            <div class="alert alert-success">Arsip berhasil tersimpan.</div>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </center>
 
-                                <div class="table-responsive products-table" data-simplebar>
-                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4 text-center align-middle">
-                                            <tr>
-                                                <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
-                                                <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
-                                                <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
-                                                    &nbsp&nbsp&nbsp
-                                                </th>
-                                                <th class="fs-3 text-center" style="width: 15%;">&nbsp&nbsp&nbsp Tanggal
-                                                    &nbsp&nbsp&nbsp
-                                                    <br>
-                                                    &nbsp&nbsp&nbsp Dibutuhkan &nbsp&nbsp&nbsp
-                                                <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp Last Update
-                                                    &nbsp &nbsp
-                                                </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kajian
-                                                </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK&HPS
-                                                </th>
-                                                <th class="fs-3 text-center" style="width: 15%;">Proses <br> Doc Kontrak
-                                                </th>
-                                                <th class="fs-3">Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-center">
-                                            <?php
-                                            $no = 1;
-                                            include '../koneksi.php';
-                                            $arsip = mysqli_query($koneksi, "
-                                            SELECT doc_kak_hps.*, user_pks.pks_nama, 
+                        <div class="table-responsive products-table" data-simplebar>
+                            <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                <thead class="fs-4 text-center align-middle">
+                                    <tr>
+                                        <th class="fs-3" style="width: 5%;">No</th>
+                                        <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
+                                        <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
+                                        <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
+                                            &nbsp&nbsp&nbsp
+                                        </th>
+                                        <th class="fs-3 text-center" style="width: 15%;">&nbsp&nbsp&nbsp Tanggal
+                                            &nbsp&nbsp&nbsp
+                                            <br>
+                                            &nbsp&nbsp&nbsp Dibutuhkan &nbsp&nbsp&nbsp
+                                        <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp Last Update
+                                            &nbsp &nbsp
+                                        </th>
+                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kajian
+                                        </th>
+                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK&HPS
+                                        </th>
+                                        <th class="fs-3 text-center" style="width: 15%;">Proses <br> Doc Kontrak
+                                        </th>
+                                        <th class="fs-3">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <?php
+                                    $no = 1;
+                                    include '../koneksi.php';
+                                    $arsip = mysqli_query($koneksi, "
+                                            SELECT doc_kak_hps.*,
+                                            user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama, 
                                             dockajian.dock_status_gm AS status_gm, 
                                             dockajian.dock_status_vp AS status_vp, 
                                             dockajian.dock_status_avp AS status_avp, 
@@ -375,213 +373,225 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             doc_kontrak.dockt_status_asmen AS kontrak_status_asmen
                                             FROM doc_kak_hps
                                             JOIN user_pks ON doc_kak_hps.dockh_petugas = user_pks.pks_id 
+                                            LEFT JOIN user_pks AS user_pks2 ON doc_kak_hps.dockh_avp = user_pks2.pks_id 
+                                            LEFT JOIN user_pks AS user_pks3 ON doc_kak_hps.dockh_vp = user_pks3.pks_id 
+                                            LEFT JOIN user_pks AS user_pks4 ON doc_kak_hps.dockh_gm = user_pks4.pks_id
                                             LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id
                                             LEFT JOIN doc_kontrak ON doc_kak_hps.dockh_dock_id = doc_kontrak.dockt_dock_id
                                             ORDER BY doc_kak_hps.dockh_tanggal DESC
                                             ");
-                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
-                                            ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo $p['dockh_nama'] ?></td>
-                                                <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['dockh_kategori'] ?></td>
-                                                <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        if (!empty($p['dockh_waktu_gm'])) {
-                                                            $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_gm']));
-                                                            $tanggal = date('d M Y', strtotime($p['dockh_waktu_gm']));
-                                                            echo $dock_waktu . '<br>' . $tanggal;
-                                                        } elseif (!empty($p['dockh_waktu_vp'])) {
-                                                            $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_vp']));
-                                                            $tanggal = date('d M Y', strtotime($p['dockh_waktu_vp']));
-                                                            echo $dock_waktu . '<br>' . $tanggal;
-                                                        } elseif (!empty($p['dockh_waktu_avp'])) {
-                                                            $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_avp']));
-                                                            $tanggal = date('d M Y', strtotime($p['dockh_waktu_avp']));
-                                                            echo $dock_waktu . '<br>' . $tanggal;
-                                                        } elseif (!empty($p['dockh_waktu_asmen'])) {
-                                                            $dock_waktu_asmen = date('H:i:s', strtotime($p['dockh_waktu_asmen']));
-                                                            $tanggal_asmen = date('d M Y', strtotime($p['dockh_waktu_asmen']));
-                                                            echo $dock_waktu_asmen . '<br>' . $tanggal_asmen;
-                                                        } else {
-                                                            echo '-';
-                                                        }
-                                                    ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        if (!empty($p['status_gm'])) {
-                                                            echo $p['status_gm'];
-                                                        } elseif (!empty($p['status_vp'])) {
-                                                            echo $p['status_vp'];
-                                                        } elseif (!empty($p['status_avp'])) {
-                                                            echo $p['status_avp'];
-                                                        } elseif (!empty($p['status_asmen'])) {
-                                                            echo $p['status_asmen'];
-                                                        } else {
-                                                            echo '-';
-                                                        }
-                                                        ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        if (!empty($p['dockh_status_gm'])) {
-                                                            echo $p['dockh_status_gm'];
-                                                        } elseif (!empty($p['dockh_status_vp']) ) {
-                                                            echo $p['dockh_status_vp'];
-                                                        } elseif (!empty($p['dockh_status_avp'])) {
-                                                            echo $p['dockh_status_avp'];
-                                                        } else {
-                                                            echo $p['dockh_status_asmen'];
-                                                        }
-                                                        ?>
-                                                </td>
-                                                <td>
-                                                    <?php
-                                                        if (!empty($p['kontrak_status_gm'])) {
-                                                            echo $p['kontrak_status_gm'];
-                                                        } elseif (!empty($p['kontrak_status_vp'])) {
-                                                            echo $p['kontrak_status_vp'];
-                                                        } elseif (!empty($p['kontrak_status_avp'])) {
-                                                            echo $p['kontrak_status_avp'];
-                                                        } elseif (!empty($p['kontrak_status_asmen'])) {
-                                                            echo $p['kontrak_status_asmen'];
-                                                        } else {
-                                                            echo '-';
-                                                        }
-                                                        ?>
-                                                </td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <a target="_blank" class="btn btn-custom-eye btn-sm"
-                                                            href="preview_dp.php?id=<?php echo $p['dockh_dock_id']; ?>"><i
-                                                                class="ti ti-eye fs-5"></i></a>
-                                                        <?php if (($p['dockh_status_avp'] == 'Rejected (AVP)' OR $p['dockh_status_vp'] == 'Rejected (VP)' OR $p['dockh_status_gm'] === 'Rejected (GM)')): ?>
-                                                        <a href="edit_kak_hps.php?id=<?php echo $p['dockh_dock_id']; ?>"
-                                                            class="btn btn-custom-edit btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-pencil fs-5"></i>
-                                                        </a>
-                                                        <?php endif; ?>
-                                                        <?php if (in_array($p['dockh_status_gm'], ['Done'])): ?>
-                                                        <a href="tambah_kontrak.php?id=<?php echo $p['dockh_dock_id']; ?>"
-                                                            class="btn btn-custom-upload btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-upload fs-5"></i>
-                                                        </a>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td><?php echo $p['dockh_nama'] ?></td>
+                                        <td><?php
+                                                if (!empty($p['gm_nama'])) {
+                                                    echo $p['gm_nama'];
+                                                } elseif (!empty($p['vp_nama'])) {
+                                                    echo $p['vp_nama'];
+                                                } elseif (!empty($p['avp_nama'])) {
+                                                    echo $p['avp_nama'];
+                                                } else {
+                                                    echo $p['petugas_nama'];
+                                                }
+                                                ?></td>
+                                        <td><?php echo $p['dockh_kategori'] ?></td>
+                                        <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
+                                        </td>
+                                        <td>
                                             <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <nav aria-label="Page navdivtion">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
-                            </div>
+                                                if (!empty($p['dockh_waktu_gm'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_gm']));
+                                                    $tanggal = date('d M Y', strtotime($p['dockh_waktu_gm']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['dockh_waktu_vp'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_vp']));
+                                                    $tanggal = date('d M Y', strtotime($p['dockh_waktu_vp']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['dockh_waktu_avp'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_avp']));
+                                                    $tanggal = date('d M Y', strtotime($p['dockh_waktu_avp']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['dockh_waktu_asmen'])) {
+                                                    $dock_waktu_asmen = date('H:i:s', strtotime($p['dockh_waktu_asmen']));
+                                                    $tanggal_asmen = date('d M Y', strtotime($p['dockh_waktu_asmen']));
+                                                    echo $dock_waktu_asmen . '<br>' . $tanggal_asmen;
+                                                } else {
+                                                    echo '-';
+                                                }
+                                                ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if (!empty($p['status_gm'])) {
+                                                    echo $p['status_gm'];
+                                                } elseif (!empty($p['status_vp'])) {
+                                                    echo $p['status_vp'];
+                                                } elseif (!empty($p['status_avp'])) {
+                                                    echo $p['status_avp'];
+                                                } elseif (!empty($p['status_asmen'])) {
+                                                    echo $p['status_asmen'];
+                                                } else {
+                                                    echo '-';
+                                                }
+                                                ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if (!empty($p['dockh_status_gm'])) {
+                                                    echo $p['dockh_status_gm'];
+                                                } elseif (!empty($p['dockh_status_vp'])) {
+                                                    echo $p['dockh_status_vp'];
+                                                } elseif (!empty($p['dockh_status_avp'])) {
+                                                    echo $p['dockh_status_avp'];
+                                                } else {
+                                                    echo $p['dockh_status_asmen'];
+                                                }
+                                                ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if (!empty($p['kontrak_status_gm'])) {
+                                                    echo $p['kontrak_status_gm'];
+                                                } elseif (!empty($p['kontrak_status_vp'])) {
+                                                    echo $p['kontrak_status_vp'];
+                                                } elseif (!empty($p['kontrak_status_avp'])) {
+                                                    echo $p['kontrak_status_avp'];
+                                                } elseif (!empty($p['kontrak_status_asmen'])) {
+                                                    echo $p['kontrak_status_asmen'];
+                                                } else {
+                                                    echo '-';
+                                                }
+                                                ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a target="_blank" class="btn btn-custom-eye btn-sm"
+                                                    href="preview_dp.php?id=<?php echo $p['dockh_dock_id']; ?>"><i
+                                                        class="ti ti-eye fs-5"></i></a>
+                                                <?php if (($p['dockh_status_avp'] == 'Rejected (AVP)' or $p['dockh_status_vp'] == 'Rejected (VP)' or $p['dockh_status_gm'] === 'Rejected (GM)')): ?>
+                                                <a href="edit_kak_hps.php?id=<?php echo $p['dockh_dock_id']; ?>"
+                                                    class="btn btn-custom-edit btn-sm text-center d-flex align-items-center justify-content-center">
+                                                    <i class="ti ti-pencil fs-5"></i>
+                                                </a>
+                                                <?php endif; ?>
+                                                <?php if (in_array($p['dockh_status_gm'], ['Done'])): ?>
+                                                <a href="tambah_kontrak.php?id=<?php echo $p['dockh_dock_id']; ?>"
+                                                    class="btn btn-custom-upload btn-sm text-center d-flex align-items-center justify-content-center">
+                                                    <i class="ti ti-upload fs-5"></i>
+                                                </a>
+                                                <?php endif; ?>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
+                        <nav aria-label="Page navdivtion">
+                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                <!-- Pagination items will be added here by JavaScript -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
-        fetch('sidebar_asmen.php')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('sidebar').innerHTML = data;
-            });
+    </div>
+    <script>
+    fetch('sidebar_asmen.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('sidebar').innerHTML = data;
+        });
 
-        function tambahArsip() {
-            window.location.href = 'tambah_dokumen_kajian.php';
+    function tambahArsip() {
+        window.location.href = 'tambah_dokumen_kajian.php';
+    }
+
+    // Fungsi untuk menangani paginasi dan pencarian
+    document.addEventListener('DOMContentLoaded', function() {
+        const table = document.querySelector('.table');
+        const tbody = table.querySelector('tbody');
+        const rows = Array.from(tbody.querySelectorAll('tr'));
+        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
+        const searchInput = document.getElementById('searchInput');
+        const paginationContainer = document.getElementById('paginationContainer');
+
+        let currentPage = 1;
+        let rowsPerPage = parseInt(rowsPerPageSelect.value);
+
+        function displayTable(page) {
+            const start = (page - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const paginatedRows = rows.slice(start, end);
+
+            tbody.innerHTML = '';
+            paginatedRows.forEach(row => tbody.appendChild(row));
+
+            updatePagination();
         }
 
-        // Fungsi untuk menangani paginasi dan pencarian
-        document.addEventListener('DOMContentLoaded', function() {
-            const table = document.querySelector('.table');
-            const tbody = table.querySelector('tbody');
-            const rows = Array.from(tbody.querySelectorAll('tr'));
-            const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-            const searchInput = document.getElementById('searchInput');
-            const paginationContainer = document.getElementById('paginationContainer');
+        function updatePagination() {
+            const pageCount = Math.ceil(rows.length / rowsPerPage);
+            paginationContainer.innerHTML = '';
 
-            let currentPage = 1;
-            let rowsPerPage = parseInt(rowsPerPageSelect.value);
+            for (let i = 1; i <= pageCount; i++) {
+                const li = document.createElement('li');
+                li.classList.add('page-item');
+                if (i === currentPage) li.classList.add('active');
 
-            function displayTable(page) {
-                const start = (page - 1) * rowsPerPage;
-                const end = start + rowsPerPage;
-                const paginatedRows = rows.slice(start, end);
+                const a = document.createElement('a');
+                a.classList.add('page-link');
+                a.href = '#';
+                a.textContent = i;
 
-                tbody.innerHTML = '';
-                paginatedRows.forEach(row => tbody.appendChild(row));
-
-                updatePagination();
-            }
-
-            function updatePagination() {
-                const pageCount = Math.ceil(rows.length / rowsPerPage);
-                paginationContainer.innerHTML = '';
-
-                for (let i = 1; i <= pageCount; i++) {
-                    const li = document.createElement('li');
-                    li.classList.add('page-item');
-                    if (i === currentPage) li.classList.add('active');
-
-                    const a = document.createElement('a');
-                    a.classList.add('page-link');
-                    a.href = '#';
-                    a.textContent = i;
-
-                    a.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        currentPage = i;
-                        displayTable(currentPage);
-                    });
-
-                    li.appendChild(a);
-                    paginationContainer.appendChild(li);
-                }
-            }
-
-            function filterTable() {
-                const searchTerm = searchInput.value.toLowerCase();
-                const filteredRows = rows.filter(row => {
-                    return Array.from(row.cells).some(cell =>
-                        cell.textContent.toLowerCase().includes(searchTerm)
-                    );
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = i;
+                    displayTable(currentPage);
                 });
 
-                tbody.innerHTML = '';
-                filteredRows.forEach(row => tbody.appendChild(row));
-
-                currentPage = 1;
-                updatePagination();
+                li.appendChild(a);
+                paginationContainer.appendChild(li);
             }
+        }
 
-            rowsPerPageSelect.addEventListener('change', () => {
-                rowsPerPage = parseInt(rowsPerPageSelect.value);
-                currentPage = 1;
-                displayTable(currentPage);
+        function filterTable() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredRows = rows.filter(row => {
+                return Array.from(row.cells).some(cell =>
+                    cell.textContent.toLowerCase().includes(searchTerm)
+                );
             });
 
-            searchInput.addEventListener('input', filterTable);
+            tbody.innerHTML = '';
+            filteredRows.forEach(row => tbody.appendChild(row));
 
-            // Inisialisasi tampilan tabel
+            currentPage = 1;
+            updatePagination();
+        }
+
+        rowsPerPageSelect.addEventListener('change', () => {
+            rowsPerPage = parseInt(rowsPerPageSelect.value);
+            currentPage = 1;
             displayTable(currentPage);
         });
-        </script>
-        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="../assets/js/sidebarmenu.js"></script>
-        <script src="../assets/js/app.min.js"></script>
-        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+
+        searchInput.addEventListener('input', filterTable);
+
+        // Inisialisasi tampilan tabel
+        displayTable(currentPage);
+    });
+    </script>
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
 </body>
 
 </html>

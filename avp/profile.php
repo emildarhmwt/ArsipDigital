@@ -26,14 +26,20 @@ if ($_SESSION['status'] != "avp_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -55,14 +61,18 @@ if ($_SESSION['status'] != "avp_login") {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
+    .card-preview {
+        background-color: #0e45515c !important;
+        color: white !important;
     }
 
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .btn-custom-eye {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
         color: white !important;
     }
     </style>
@@ -133,101 +143,100 @@ if ($_SESSION['status'] != "avp_login") {
                                     </div>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="page-breadcrumb">
-                    <div class="row align-items-center">
-                        <div class="col-6">
-                            <h1 class="mb-5 fw-bold">Profile</h1>
-                        </div>
+                <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                    <div class=" card-header" style="background-color: #0e4551; width: 1047px; font-size: 25px;">
+                        Profil
                     </div>
-                </div>
-                <div class="container-fluid">
-                    <div class="row">
-                        <!-- Column -->
-                        <div class="col-lg-4 col-xlg-3 col-md-5">
-                            <?php
-                            $id = $_SESSION['id'];
-                            $saya = mysqli_query($koneksi, "select * from user_pks where pks_id='$id'");
-                            $s = mysqli_fetch_assoc($saya);
-                            ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <center class="m-t-30">
-                                        <?php
-                                        if ($s['pks_foto'] == "") {
-                                        ?>
-                                        <img class="img-user" src="../gambar/sistem/user.png" width="150" height="150">
-                                        <?php
-                                        } else {
-                                        ?>
-                                        <img class="img-user" src="../gambar/asmen/<?php echo $s['pks_foto']; ?>"
-                                            width="150" height="150">
-                                        <?php
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Column -->
+                            <div class="col-lg-4 col-xlg-3 col-md-5">
+                                <?php
+                                    $id = $_SESSION['id'];
+                                    $saya = mysqli_query($koneksi, "select * from user_pks where pks_id='$id'");
+                                    $s = mysqli_fetch_assoc($saya);
+                                    ?>
+                                <div class="card card-preview">
+                                    <div class="card-body">
+                                        <center class="m-t-30">
+                                            <?php
+                                                if ($s['pks_foto'] == "") {
+                                                ?>
+                                            <img class="img-user" src="../gambar/sistem/user.png" width="150"
+                                                height="150">
+                                            <?php
+                                                } else {
+                                                ?>
+                                            <img class="img-user" src="../gambar/asmen/<?php echo $s['pks_foto']; ?>"
+                                                width="150" height="150">
+                                            <?php
+                                                }
+                                                ?>
+                                            <h4 class="card-title m-t-10"><?php echo $s['pks_nama']; ?></h4>
+                                            <h6 class="card-subtitle">Asisten Manajer</h6>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-xlg-9 col-md-7">
+                                <?php
+                                    if (isset($_GET['alert'])) {
+                                        if ($_GET['alert'] == "sukses") {
+                                            echo "<div class='alert alert-success'>Profile anda berhasil diganti!</div>";
                                         }
-                                        ?>
-                                        <h4 class="card-title m-t-10"><?php echo $s['pks_nama']; ?></h4>
-                                        <h6 class="card-subtitle">Asisten Vice President</h6>
-                                    </center>
+                                    }
+                                    ?>
+                                <div class="card card-preview">
+                                    <div class="card-body">
+                                        <form class="form-horizontal form-material mx-2" action="profile_act.php"
+                                            method="post" enctype="multipart/form-data">
+                                            <div class="form-group mb-3">
+                                                <label class="col-md-12">Nama</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control text-white"
+                                                        placeholder="Masukkan Nama .." name="nama" required="required"
+                                                        value="<?php echo $s['pks_nama'] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <label for="example-email" class="col-md-12">Username</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control text-white"
+                                                        placeholder="Masukkan Username .." name="username"
+                                                        required="required" value="<?php echo $s['pks_username'] ?>">
+                                                </div>
+                                            </div>
+                                            <div class="form-group mb-3">
+                                                <div class="mb-3">
+                                                    <label for="foto" class="form-label">Foto</label>
+                                                    <input class="form-control text-white" type="file" name="foto">
+                                                    <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <button type="submit" class="btn btn-custom-eye"><i
+                                                            class="bi bi-send"></i>
+                                                        Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Column -->
-                        <!-- Column -->
-                        <div class="col-lg-8 col-xlg-9 col-md-7">
-                            <?php
-                            if (isset($_GET['alert'])) {
-                                if ($_GET['alert'] == "sukses") {
-                                    echo "<div class='alert alert-success'>Profile anda berhasil diganti!</div>";
-                                }
-                            }
-                            ?>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="form-horizontal form-material mx-2" action="profile_act.php"
-                                        method="post" enctype="multipart/form-data">
-                                        <div class="form-group mb-3">
-                                            <label class="col-md-12">Nama</label>
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control" placeholder="Masukkan Nama .."
-                                                    name="nama" required="required"
-                                                    value="<?php echo $s['pks_nama'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="example-email" class="col-md-12">Username</label>
-                                            <div class="col-md-12">
-                                                <input type="text" class="form-control"
-                                                    placeholder="Masukkan Username .." name="username"
-                                                    required="required" value="<?php echo $s['pks_username'] ?>">
-                                            </div>
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <div class="mb-3">
-                                                <label for="foto" class="form-label">Foto</label>
-                                                <input class="form-control" type="file" name="foto">
-                                                <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-12">
-                                                <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                                    Submit</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Column -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_avp.php')

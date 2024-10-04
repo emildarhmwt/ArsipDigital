@@ -23,14 +23,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
         rel="stylesheet">
     <style>
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {

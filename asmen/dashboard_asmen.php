@@ -24,14 +24,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         rel="stylesheet">
     <style>
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: white;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -51,10 +57,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-optical-sizing: auto;
         font-style: normal;
         font-weight: 400;
-    }
-
-    .nama-profile {
-        color: white;
     }
     </style>
 </head>
@@ -105,7 +107,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     }
                                     ?>
                                     <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                        [AVP] </p>
+                                        [Asmen] </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">

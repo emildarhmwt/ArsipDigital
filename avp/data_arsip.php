@@ -25,14 +25,20 @@ if ($_SESSION['status'] != "avp_login") {
         rel="stylesheet">
     <style>
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -60,26 +66,52 @@ if ($_SESSION['status'] != "avp_login") {
         white-space: normal;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .btn-custom-eye {
+        background-color: #11475e !important;
         color: white !important;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
         color: white !important;
+    }
+
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
+        color: white !important;
+    }
+
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    .card-preview {
+        background-color: #0e45515c !important;
+        color: white !important;
+    }
+
+    .form-select option {
+        color: black;
+    }
+
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
     }
     </style>
 </head>
@@ -150,6 +182,7 @@ if ($_SESSION['status'] != "avp_login") {
                                     </div>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
@@ -158,13 +191,14 @@ if ($_SESSION['status'] != "avp_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Arsip</h5>
-                        <div class="card mb-4">
-                            <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">DATA ARSIP
+                        </h5>
+                        <div class="card mb-5 card-preview" style="border-radius: 10px 10px 10px 10px;">
+                            <div class=" card-body">
                                 <form method="get" action="">
                                     <div class="mb-3">
-                                        <label for="grupSearch" class="form-label">Filter Kategori</label>
-                                        <select class="form-select" name="kategori">
+                                        <label for="grupSearch" class="form-label">Filter Kategori :</label>
+                                        <select class="form-select text-white" name="kategori">
                                             <option selected disabled>Pilih Kategori</option>
                                             <?php
                                             $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
@@ -183,11 +217,11 @@ if ($_SESSION['status'] != "avp_login") {
                                     </div>
                                     <div class="d-flex justify-content-center mt-3">
                                         <button type="submit"
-                                            class="btn btn-custom mx-3 text-center justify-content-center"><i
+                                            class="btn btn-custom-eye mx-3 text-center justify-content-center"><i
                                                 class="ti ti-file-search fs-5"></i>
                                             Cari Data</button>
                                         <button type="button"
-                                            class="btn btn-custom2 mx-3 text-center justify-content-center"
+                                            class="btn btn-custom-upload mx-3 text-center justify-content-center"
                                             onclick="fetchAllData()">
                                             <i class="ti ti-clear-all fs-5 justify-content-center"></i>Semua
                                             Data</button>
@@ -196,42 +230,39 @@ if ($_SESSION['status'] != "avp_login") {
                             </div>
                         </div>
                         <!-- table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                        <select id="rowsPerPageSelect" class="form-select"
-                                            style="width: auto; display: inline-block;">
-                                            <option value="5">5</option>
-                                            <option value="10" selected>10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span> data per halaman</span>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                    </div>
-                                </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 banyak-data">
+                                <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
+                                <select id="rowsPerPageSelect" class="form-select"
+                                    style="width: auto; display: inline-block;">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <span> data per halaman</span>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                <input type="text" class="form-control text-white me-2" id="searchInput"
+                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
+                            </div>
+                        </div>
 
-                                <div class="table-responsive products-table" data-simplebar>
-                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
-                                            <tr>
-                                                <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3" style="width: 10%;">Waktu Upload</th>
-                                                <th class="fs-3" style="width: 25%;">Arsip</th>
-                                                <th class="fs-3" style="width: 15%;">Kategori</th>
-                                                <th class="fs-3" style="width: 10%;">Petugas</th>
-                                                <th class="fs-3" style="width: 30%;">Keterangan</th>
-                                                <th class="fs-3" style="width: 5%;">Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
+                        <div class="table-responsive products-table" data-simplebar>
+                            <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                <thead class="fs-4">
+                                    <tr>
+                                        <th class="fs-3" style="width: 5%;">No</th>
+                                        <th class="fs-3" style="width: 10%;">Waktu Upload</th>
+                                        <th class="fs-3" style="width: 25%;">Arsip</th>
+                                        <th class="fs-3" style="width: 15%;">Kategori</th>
+                                        <th class="fs-3" style="width: 15%;">Petugas</th>
+                                        <th class="fs-3" style="width: 25%;">Keterangan</th>
+                                        <th class="fs-3" style="width: 5%;">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                             $no = 1;
                                             if (isset($_GET['kategori'])) {
                                                 $kategori = $_GET['kategori'];
@@ -241,49 +272,51 @@ if ($_SESSION['status'] != "avp_login") {
                                             }
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['arsip_waktu_upload'])) ?>
-                                                </td>
-                                                <td>
-                                                    <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>
-                                                    <b>Nama</b> : <?php echo $p['arsip_nama'] ?><br>
-                                                    <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
-                                                </td>
-                                                <td><?php echo $p['kategori_nama'] ?></td>
-                                                <td><?php echo $p['petugas_nama'] ?></td>
-                                                <td><?php echo $p['arsip_keterangan'] ?></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['arsip_file']; ?>"><i class="fa fa-download"></i></a> -->
-                                                        <a target="_blank" class="btn btn-default btn-sm"
-                                                            href="arsip_download.php?id=<?php echo $p['arsip_id']; ?>"
-                                                            download><i class="ti ti-download fs-7"></i></a>
-                                                        <a target="_blank"
-                                                            href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
-                                                            class="btn btn-default btn-sm text-center d-flex align-items-center justify-content-center">
-                                                            <i class="ti ti-eye fs-7 me-1"></i>
-                                                        </a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?php
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td>
+                                            <div><?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?></div>
+                                            <div><?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?></div>
+                                        </td>
+                                        <td>
+                                            <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>
+                                            <b>Nama</b> : <?php echo $p['arsip_nama'] ?><br>
+                                            <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
+                                        </td>
+                                        <td><?php echo $p['kategori_nama'] ?></td>
+                                        <td><?php echo $p['petugas_nama'] ?></td>
+                                        <td><?php echo $p['arsip_keterangan'] ?></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['arsip_file']; ?>"><i class="fa fa-download"></i></a> -->
+                                                <a target="_blank" class="btn btn-custom-edit btn-sm"
+                                                    href="arsip_download.php?id=<?php echo $p['arsip_id']; ?>"
+                                                    download><i class="ti ti-download fs-7"></i></a>
+                                                <a target="_blank"
+                                                    href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
+                                                    class="btn btn-custom-eye btn-sm text-center d-flex align-items-center justify-content-center">
+                                                    <i class="ti ti-eye fs-7 me-1"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
                                             }
                                             ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                <!-- Pagination items will be added here by JavaScript -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_avp.php')

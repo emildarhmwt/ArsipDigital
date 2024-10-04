@@ -271,8 +271,15 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         $no = 1;
                         include '../koneksi.php';
                         // Perbaiki query untuk menggunakan alias yang benar
-                        $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kontrak JOIN user_pks ON dockt_petugas=pks_id WHERE dockt_dock_id = '$id' ORDER BY dockt_dock_id DESC");
-                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                        $arsip = mysqli_query($koneksi, "
+                            SELECT doc_kontrak.*, doc_kak_hps.* 
+                            FROM doc_kontrak 
+                            JOIN user_pks ON dockt_petugas=pks_id 
+                            LEFT JOIN doc_kak_hps ON doc_kontrak.dockt_dock_id = doc_kak_hps.dockh_dock_id 
+                            WHERE dockt_dock_id = '$id' 
+                            ORDER BY dockt_dock_id DESC
+                        ");
+                        while ($p = mysqli_fetch_assoc($arsip)) { 
                         ?>
                         <div class="row">
                             <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
@@ -335,6 +342,52 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <p>
                                                     <td><?php echo date('d M Y', strtotime($p['dockt_tanggal'])); ?>
                                                     </td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="card card-preview">
+                                <div class="card-header"
+                                    style="background-color: #0e4551; width: 995px; margin-left: -12px;">
+                                    Requisition Item
+                                </div>
+                                <div class="card-body">
+                                    <form method="get" enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Cost Center :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_cost'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Satuan
+                                                    :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_satuan'] ?></td>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Harga Satuan :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_harga'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Jumlah (qty) :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_jumlah'] ?></td>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-4 mb-3">
+                                                <label for="shift" class="form-label">Harga Total :</label>
+                                                <p>
+                                                    <td><?php echo $p['dockh_harga_total'] ?></td>
                                                 </p>
                                             </div>
                                         </div>
