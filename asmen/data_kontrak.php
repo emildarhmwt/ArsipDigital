@@ -71,14 +71,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
     }
 
     .pacifico-regular {
@@ -107,25 +107,100 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     }
 
     .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
+        background-color: #eb9009 !important;
+
+        color: white !important;
         cursor: pointer;
     }
 
     .btn-custom:hover {
-        background-color: #266d8b !important;
+        background-color: #eb900970 !important;
         color: white !important;
     }
 
     .pilihan-doc a {
         cursor: pointer;
-        color: gray;
+        color: grey;
+        font-weight: bold;
         text-decoration: none;
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
     }
 
     .pilihan-doc-kajian a {
-        color: black;
+        color: white;
         text-decoration: underline;
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+    }
+
+    .outfit {
+        font-family: "Outfit", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .judul-sidebar {
+        font-family: "Outfit", sans-serif;
+        font-size: 25px;
+        color: white;
+    }
+
+    .varela-round-regular {
+        font-family: "Varela Round", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
+    }
+
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    .pilihan_dokumen {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
+    .btn-custom-eye {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
+        color: white !important;
     }
     </style>
 </head>
@@ -204,7 +279,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-5 mt-2 text-center">Dokumen Kontrak PKS</h5>
+                        <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">DOKUMEN KONTRAK PKS
+                        </h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-2">
                             <div class="col-lg-4 border-end ">
                                 <a href="data_pks.php"> Doc Kajian</a>
@@ -220,7 +296,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         <div class="card">
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 banyak-data">
                                         <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
                                         <select id="rowsPerPageSelect" class="form-select"
                                             style="width: auto; display: inline-block;">
@@ -232,7 +308,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <span> data per halaman</span>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
+                                        <input type="text" class="form-control text-white me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
                                     </div>
@@ -262,19 +338,24 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <thead class="fs-4 text-center align-middle">
                                             <tr>
                                                 <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3" style="width: 15%;">Nama Permintaan</th>
-                                                <th class="fs-3" style="width: 13%;">Pelaku saat ini</th>
-                                                <th class="fs-3" style="width: 9%;">Prioritas</th>
-                                                <th class="fs-3 text-center" style="width: 11%;">Tanggal <br> Dibutuhkan
+                                                <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
+                                                <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
+                                                <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
+                                                    &nbsp&nbsp&nbsp
                                                 </th>
-                                                <th class="fs-3 text-center" style="width: 11%;">Last Update
+                                                <th class="fs-3 text-center" style="width: 15%;">&nbsp&nbsp&nbsp Tanggal
+                                                    &nbsp&nbsp&nbsp
+                                                    <br>
+                                                    &nbsp&nbsp&nbsp Dibutuhkan &nbsp&nbsp&nbsp
+                                                <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp Last Update
+                                                    &nbsp &nbsp
                                                 </th>
                                                 <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kajian
                                                 </th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK &
-                                                    HPS</th>
-                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kontrak
-                                                    PKS</th>
+                                                <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK&HPS
+                                                </th>
+                                                <th class="fs-3 text-center" style="width: 15%;">Proses <br> Doc Kontrak
+                                                </th>
                                                 <th class="fs-3">Opsi</th>
                                             </tr>
                                         </thead>
@@ -375,12 +456,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 </td>
                                                 <td class="text-center">
                                                     <div class="btn-group">
-                                                        <a target="_blank" class="btn btn-default btn-sm"
+                                                        <a target="_blank" class="btn btn-custom-eye btn-sm"
                                                             href="preview_kontrak.php?id=<?php echo $p['dockt_dock_id']; ?>"><i
                                                                 class="ti ti-eye fs-5"></i></a>
                                                         <?php if (($p['dockt_status_avp'] == 'Rejected (AVP)' OR $p['dockt_status_vp'] == 'Rejected (VP)' OR $p['dockt_status_gm'] === 'Rejected (GM)')): ?>
                                                         <a href="edit_kontrak.php?id=<?php echo $p['dockt_dock_id']; ?>"
-                                                            class="btn btn-warning btn-sm text-center d-flex align-items-center justify-content-center">
+                                                            class="btn btn-custom-edit btn-sm text-center d-flex align-items-center justify-content-center">
                                                             <i class="ti ti-pencil fs-5"></i>
                                                         </a>
                                                         <?php endif; ?>

@@ -73,14 +73,20 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -102,25 +108,40 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
     }
 
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .card-preview {
+        background-color: #0e45515c !important;
         color: white !important;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    input::placeholder {
+        color: white !important;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    textarea::placeholder {
+        color: white !important;
+    }
+
+    .btn-custom-eye {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
         color: white !important;
     }
     </style>
@@ -198,206 +219,215 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Create Dokumen PKS</h5>
-                            <?php
-                                    $no = 1;
-                                    include '../koneksi.php';
-                                    // Perbaiki query untuk menggunakan alias yang benar
-                                    $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id WHERE dock_id = '$id' ORDER BY dock_id DESC");
-                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
-                                    ?>
-                            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">CREATE DOKUMEN KAK & HPS
+                        </h5>
+                        <?php
+                        $no = 1;
+                        include '../koneksi.php';
+                        // Perbaiki query untuk menggunakan alias yang benar
+                        $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id WHERE dock_id = '$id' ORDER BY dock_id DESC");
+                        while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                        ?>
+                        <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                                Header
+                            </div>
+                            <div class="card-body">
+                                <form method="get" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Nama Permintaan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                            </p>
+
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Deskripsi Permintaan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_desk'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Jenis Permintaan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_jenis'] ?></td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Kategori Permintaan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_kategori'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_aspek'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Lokasi Penyerahan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_lokasi'] ?></td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                :</span>
+                                            </label>
+                                            <p>
+                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                </td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <?php
+                        }
+                            ?>
+
+                        <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
+                            <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                                <div class="card-header" style="background-color: #0e4551; width: 971px; ">
+                                    Requisition Item
+                                </div>
                                 <div class="card-body">
-                                    <form method="get" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Nama Permintaan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_nama'] ?></td>
-                                                </p>
-
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Deskripsi Permintaan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_desk'] ?></td>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Jenis Permintaan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_jenis'] ?></td>
-                                                </p>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
+                                                <label for="formFile" class="form-label">Cost Center :</label>
+                                                <input class="form-control text-white" type="text" name="cost"
+                                                    placeholder="Input Data" required>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Kategori Permintaan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_kategori'] ?></td>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_aspek'] ?></td>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Lokasi Penyerahan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_lokasi'] ?></td>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
-                                                    :</span>
-                                                </label>
-                                                <p>
-                                                    <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
-                                                    </td>
-                                                </p>
+                                        <div class="col-lg-6">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">Satuan :</label>
+                                                <select class="form-select text-white" name="satuan" required>
+                                                    <option selected disabled>Pilih</option>
+                                                    <option value="Lot" class="text-black">Lot</option>
+                                                    <option value="Ea" class="text-black">Ea</option>
+                                                    <option value="Pcs" class="text-black">Pcs</option>
+                                                    <option value="Unit" class="text-black">Unit</option>
+                                                    <option value="Set" class="text-black">Set</option>
+                                                    <option value="Gross" class="text-black">Gross</option>
+                                                    <option value="Roll" class="text-black">Roll</option>
+                                                    <option value="Pack" class="text-black">Pack</option>
+                                                    <option value="Batch" class="text-black">Batch</option>
+                                                    <option value="Box" class="text-black">Box</option>
+                                                    <option value="Pair" class="text-black">Pair</option>
+                                                    <option value="Lusin" class="text-black">Lusin</option>
+                                                    <option value="Carton" class="text-black">Carton</option>
+                                                    <option value="Barrel" class="text-black">Barrel</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label for="formFile" class="form-label">Harga Satuan :</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control text-white" name="harga"
+                                                    placeholder="Input Data" required>
+                                                <span class="input-group-text">IDR</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">Jumlah (qty) :</label>
+                                                <input class="form-control text-white" type="text" name="jumlah"
+                                                    placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <label for="formFile" class="form-label">Harga Total :</label>
+                                            <div class="input-group mb-3">
+                                                <input type="text" class="form-control text-white" id="harga_total"
+                                                    name="harga_total" readonly>
+                                                <span class="input-group-text">IDR</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <?php
-                                    }
-                                        ?>
-                        </div>
+
+                            <div class="card  card-preview" style="border-radius: 10px 10px 10px 10px;">
+                                <div class=" card-header" style="background-color: #0e4551; width: 947px; ">
+                                    Dokumen KAK & HPS
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
+                                        <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
+                                        <textarea class="form-control text-white" rows="10" placeholder="Input Data"
+                                            name="comment" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Lampiran File KAK :</label>
+                                        <input class="form-control text-white" type="file" name="file_kak" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Lampiran File HPS :</label>
+                                        <input class="form-control text-white" type="file" name="file_hps" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                Submit</button>
+                            <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                    class="bi bi-arrow-left-circle"></i>
+                                Back</button>
+                        </form>
                     </div>
-                    <form method="post" action="kak_hps_aksi.php" enctype="multipart/form-data">
-                        <div class="card">
-                            <div class="card-body">
-                                <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">Cost Center :</label>
-                                            <input class="form-control" type="text" name="cost" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">Satuan :</label>
-                                            <select class="form-select" name="satuan" required>
-                                                <option selected disabled>Pilih</option>
-                                                <option value="Lot">Lot</option>
-                                                <option value="Ea">Ea</option>
-                                                <option value="Pcs">Pcs</option>
-                                                <option value="Unit">Unit</option>
-                                                <option value="Set">Set</option>
-                                                <option value="Gross">Gross</option>
-                                                <option value="Roll">Roll</option>
-                                                <option value="Pack">Pack</option>
-                                                <option value="Batch">Batch</option>
-                                                <option value="Box">Box</option>
-                                                <option value="Pair">Pair</option>
-                                                <option value="Lusin">Lusin</option>
-                                                <option value="Carton">Carton</option>
-                                                <option value="Barrel">Barrel</option>
-
-                                            </select>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <label for="formFile" class="form-label">Harga Satuan :</label>
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" name="harga" required>
-                                            <span class="input-group-text">IDR</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">Jumlah (qty) :</label>
-                                            <input class="form-control" type="text" name="jumlah" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <label for="formFile" class="form-label">Harga Total :</label>
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" id="harga_total" name="harga_total"
-                                                readonly>
-                                            <span class="input-group-text">IDR</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
-                                    <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
-                                    <textarea class="form-control" rows="10" placeholder="Input Data" name="comment"
-                                        required></textarea>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Lampiran File KAK :</label>
-                                    <input class="form-control" type="file" name="file_kak" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Lampiran File HPS :</label>
-                                    <input class="form-control" type="file" name="file_hps" required>
-                                </div>
-                                <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                    Submit</button>
-                                <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                        class="bi bi-arrow-left-circle"></i>
-                                    Back</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-    fetch('sidebar_asmen.php')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('sidebar').innerHTML = data;
-        });
+        <script>
+        fetch('sidebar_asmen.php')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+            });
 
-    function goBack() {
-        window.location.href = 'data_pks.php';
-    }
+        function goBack() {
+            window.location.href = 'data_pks.php';
+        }
 
-    const hargaInput = document.querySelector('input[name="harga"]');
-    const jumlahInput = document.querySelector('input[name="jumlah"]');
-    const totalInput = document.getElementById('harga_total');
+        const hargaInput = document.querySelector('input[name="harga"]');
+        const jumlahInput = document.querySelector('input[name="jumlah"]');
+        const totalInput = document.getElementById('harga_total');
 
-    function calculateTotal() {
-        const harga = parseFloat(hargaInput.value) || 0;
-        const jumlah = parseFloat(jumlahInput.value) || 0;
-        totalInput.value = harga * jumlah;
-    }
+        function calculateTotal() {
+            const harga = parseFloat(hargaInput.value) || 0;
+            const jumlah = parseFloat(jumlahInput.value) || 0;
+            totalInput.value = harga * jumlah;
+        }
 
-    hargaInput.addEventListener('input', calculateTotal);
-    jumlahInput.addEventListener('input', calculateTotal);
-    </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+        hargaInput.addEventListener('input', calculateTotal);
+        jumlahInput.addEventListener('input', calculateTotal);
+        </script>
+        <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets/js/sidebarmenu.js"></script>
+        <script src="../assets/js/app.min.js"></script>
+        <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
 </body>
 
 </html>

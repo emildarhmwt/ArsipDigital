@@ -70,14 +70,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -99,25 +105,40 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
     }
 
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .card-preview {
+        background-color: #0e45515c !important;
         color: white !important;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    input::placeholder {
+        color: white !important;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    textarea::placeholder {
+        color: white !important;
+    }
+
+    .btn-custom-eye {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
         color: white !important;
     }
     </style>
@@ -195,89 +216,96 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Create Dokumen PKS</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form method="post" action="kajian_aksi.php" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Nama Permintaan :</label>
-                                                <input type="text" class="form-control" name="nama"
-                                                    placeholder="Input Data" required>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Deskripsi Permintaan :</label>
-                                                <input type="text" class="form-control" name="deskripsi"
-                                                    placeholder="Input Data" required>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Jenis Permintaan :</label>
-                                                <select class="form-select" aria-label="Default select example"
-                                                    name="jenis">
-                                                    <option selected disabled>Pilih</option>
-                                                    <option value="Barang">Barang</option>
-                                                    <option value="Jasa">Jasa</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Kategori Permintaan :</label>
-                                                <select class="form-select" aria-label="Default select example"
-                                                    name="kategori">
-                                                    <option selected disabled>Pilih</option>
-                                                    <option value="Normal">Normal</option>
-                                                    <option value="Penting">Penting</option>
-                                                    <option value="Mendesak">Mendesak</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Aspek K3/Lingkungan :</label>
-                                                <input type="text" class="form-control" name="aspek"
-                                                    placeholder="Input Data" required>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Lokasi Penyerahan :</label>
-                                                <input type="text" class="form-control" name="lokasi"
-                                                    placeholder="Input Data" required>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Tanggal Dibutuhkan <span
-                                                        class="minimum fs-1">(Min 3 bulan dari Tanggal
-                                                        Pembuatan) :</span>
-                                                </label>
-                                                <input type="date" class="form-control" name="tanggal"
-                                                    placeholder="Input Data" required>
-                                            </div>
-                                        </div>
-                                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">CREATE DOKUMEN KAJIAN
+                        </h5>
+                        <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                                Header
                             </div>
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Komentar</label>
-                                        <textarea class="form-control" rows="10" placeholder="Input Data" name="comment"
-                                            required></textarea>
+                            <div class=" card-body">
+                                <form method="post" action="kajian_aksi.php" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Nama Permintaan :</label>
+                                            <input type="text" class="form-control text-white" name="nama"
+                                                placeholder="Input Data" required>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Deskripsi Permintaan :</label>
+                                            <input type="text" class="form-control text-white" name="deskripsi"
+                                                placeholder="Input Data" required>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                            <select class="form-select text-white" aria-label="Default select example"
+                                                name="jenis" required>
+                                                <option selected disabled class="text-black">Pilih</option>
+                                                <option value="Barang" class="text-black">Barang</option>
+                                                <option value="Jasa" class="text-black">Jasa</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Lampiran File</label>
-                                        <input class="form-control" type="file" name="file">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Kategori Permintaan :</label>
+                                            <select class="form-select text-white" aria-label="Default select example"
+                                                name="kategori" required>
+                                                <option selected disabled class="text-black">Pilih</option>
+                                                <option value="Normal" class="text-black">Normal</option>
+                                                <option value="Penting" class="text-black">Penting</option>
+                                                <option value="Mendesak" class="text-black">Mendesak</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Aspek K3/Lingkungan :</label>
+                                            <input type="text" class="form-control text-white" name="aspek"
+                                                placeholder="Input Data" required>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Lokasi Penyerahan :</label>
+                                            <input type="text" class="form-control text-white" name="lokasi"
+                                                placeholder="Input Data" required>
+                                        </div>
                                     </div>
-                                    <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                        Submit</button>
-                                    <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                            class="bi bi-arrow-left-circle"></i>
-                                        Back</button>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Tanggal Dibutuhkan <span
+                                                    class="minimum fs-1">(Min 3 bulan dari Tanggal
+                                                    Pembuatan) :</span>
+                                            </label>
+                                            <input type="date" class="form-control text-white" name="tanggal" required>
+                                        </div>
+                                    </div>
                             </div>
-                            </form>
                         </div>
+
+                        <div class="card  card-preview" style="border-radius: 10px 10px 10px 10px;">
+                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                                Dokumen Kajian
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Komentar :</label>
+                                    <textarea class="form-control text-white" rows="10" placeholder="Input Data"
+                                        name="comment" required></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Lampiran File :</label>
+                                    <input class="form-control text-white" type="file" name="file">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                Submit</button>
+                            <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                    class="bi bi-arrow-left-circle"></i>
+                                Back</button>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

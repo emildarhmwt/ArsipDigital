@@ -319,7 +319,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <span> data per halaman</span>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
+                                        <input type="text" class="form-control text-white me-2" id="searchInput"
                                             placeholder="Cari..."
                                             style="max-width: 200px; height: 40px; font-size: .95rem;">
                                         <button type="button" class="btn btn-custom"
