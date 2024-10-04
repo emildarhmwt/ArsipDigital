@@ -237,7 +237,6 @@ if ($_SESSION['status'] != "avp_login") {
             </div>
         </div>
     </div>
-    </div>
     <script>
     fetch('sidebar_avp.php')
         .then(response => response.text())

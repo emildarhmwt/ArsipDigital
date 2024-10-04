@@ -36,6 +36,7 @@
     .judul-sidebar {
         font-family: "Outfit", sans-serif;
         font-size: 18px;
+        color: white;
     }
     </style>
 </head>
@@ -50,7 +51,7 @@
             <div class="scroll-sidebar" data-simplebar>
                 <div class="d-flex mb-4 align-items-center justify-content-between">
                     <a href="dashboard_petugas.php" class="text-nowrap logo-img ms-0 ms-md-1">
-                        <img src="../assets/images/logoweb.png" width="200" height="auto">
+                        <img src="../assets/images/logoarsipdigital.png" width="200" height="auto">
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
