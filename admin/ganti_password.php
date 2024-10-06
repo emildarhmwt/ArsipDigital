@@ -70,14 +70,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -107,6 +113,29 @@ if ($_SESSION['status'] != "admin_login") {
 
     .btn-custom:hover {
         background-color: #266d8b !important;
+        color: white !important;
+    }
+
+    .card-preview {
+        background-color: #0e45515c !important;
+        color: white !important;
+    }
+
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    input::placeholder {
+        color: white !important;
+    }
+
+    .btn-custom-eye {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
         color: white !important;
     }
     </style>
@@ -210,45 +239,45 @@ if ($_SESSION['status'] != "admin_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Ganti Password</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <?php
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">GANTI PASSWORD
+                        </h5>
+                        <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                            <div class="card-body">
+                                <?php
                                     if (isset($_GET['alert'])) {
                                         if ($_GET['alert'] == "sukses") {
                                             echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
                                         }
                                     }
                                     ?>
-                                    <form action="ganti_pw_act.php" method="post">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Masukkan Password Baru</label>
-                                            <input type="password" class="form-control"
-                                                placeholder="Masukkan Password Baru .." name="password" id="password"
-                                                required="required" min="5">
+                                <form action="ganti_pw_act.php" method="post">
+                                    <div class="mb-3">
+                                        <label for="shift" class="form-label">Masukkan Password Baru</label>
+                                        <input type="password" class="form-control text-white"
+                                            placeholder="Masukkan Password Baru .." name="password" id="password"
+                                            required="required" min="5">
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input primary" type="checkbox" value=""
+                                                id="showPassword" style="border-color: white;">
+                                            <label class="form-check-label text-white sub-judul" for="showPassword">
+                                                Show Password
+                                            </label>
                                         </div>
-                                        <div class="d-flex align-items-center justify-content-between mb-4">
-                                            <div class="form-check">
-                                                <input class="form-check-input primary" type="checkbox" value=""
-                                                    id="showPassword">
-                                                <label class="form-check-label text-dark sub-judul" for="showPassword">
-                                                    Show Password
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                    </form>
-                                </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

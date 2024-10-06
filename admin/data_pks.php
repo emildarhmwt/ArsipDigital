@@ -1,8 +1,8 @@
 <?php
+include '../koneksi.php';
 session_start();
-if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
-    header("location:../login/loginuser.php?alert=belum_login");
-    exit;
+if ($_SESSION['status'] != "admin_login") {
+    header("location:../login/loginadmin.php?alert=belum_login");
 }
 ?>
 
@@ -22,7 +22,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Acme&family=Coiny&family=Concert+One&family=Outfit:wght@100..900&family=Pacifico&family=Playpen+Sans:wght@100..800&family=Playwrite+DE+Grund:wght@100..400&family=Righteous&family=Sacramento&family=Varela+Round&family=Yatra+One&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playwrite+DE+Grund:wght@100..400&family=Rowdies:wght@300;400;700&family=Varela+Round&display=swap"
         rel="stylesheet">
     <style>
     .notification-dropdown {
@@ -81,6 +81,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         color: #912005;
     }
 
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
+    }
+
     .pacifico-regular {
         font-family: "Pacifico", cursive;
         font-weight: 400;
@@ -107,65 +113,29 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     }
 
     .btn-custom {
-        background-color: #eb9009 !important;
-
-        color: white !important;
+        background-color: #bcddeb !important;
+        color: black !important;
         cursor: pointer;
     }
 
     .btn-custom:hover {
-        background-color: #eb900970 !important;
+        background-color: #266d8b !important;
         color: white !important;
     }
 
     .pilihan-doc a {
         cursor: pointer;
-        color: grey;
-        font-weight: bold;
+        color: gray;
         text-decoration: none;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
     }
 
     .pilihan-doc-kajian a {
-        color: white;
+        color: black;
         text-decoration: underline;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
-    }
-
-    .outfit {
-        font-family: "Outfit", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    .judul-sidebar {
-        font-family: "Outfit", sans-serif;
-        font-size: 25px;
-        color: white;
-    }
-
-    .varela-round-regular {
-        font-family: "Varela Round", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-    }
-
-    .nama-profile {
-        color: #912005;
-        font-family: "Varela Round", sans-serif;
-        font-size: 20px;
     }
 
     .judul-tabel {
         font-family: "Varela Round", sans-serif;
-    }
-
-    .pilihan_dokumen {
-        font-family: "Varela Round", sans-serif;
-        color: white;
     }
 
     .banyak-data {
@@ -182,42 +152,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #609fb2 !important;
         color: white !important;
     }
-
-    .btn-custom-upload {
-        background-color: #eb9009 !important;
-        color: white !important;
-    }
-
-    .btn-custom-upload:hover {
-        background-color: #eb900970 !important;
-        color: white !important;
-    }
-
-    .btn-custom-edit {
-        background-color: #1593a4 !important;
-        color: white !important;
-    }
-
-    .btn-custom-edit:hover {
-        background-color: #1593a487 !important;
-        color: white !important;
-    }
-
-    .btn-custom-hapus {
-        background-color: #7c1919 !important;
-        color: white !important;
-    }
-
-    .btn-custom-hapus:hover {
-        background-color: #b27373 !important;
-        color: white !important;
-    }
-
-    /* .nama-profile2 {
-        color: #912005;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
-    } */
     </style>
 </head>
 
@@ -250,34 +184,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                 <a class="nav-link nav-icon-hover d-flex align-items-center" href="javascript:void(0)"
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php
-                                    include('../koneksi.php');
-                                    $id_pks = $_SESSION['id'];
-                                    $profil = mysqli_query($koneksi, "SELECT * FROM user_pks WHERE pks_id='$id_pks'");
+                                    $id_admin = $_SESSION['id'];
+                                    $profil = mysqli_query($koneksi, "select * from admin where admin_id='$id_admin'");
                                     $profil = mysqli_fetch_assoc($profil);
-                                    if ($profil['pks_foto'] == "") {
+                                    if ($profil['admin_foto'] == "") {
                                     ?>
-                                    <img src="../gambar/sistem/user.png" class="rounded-circle"
-                                        style="width: 50px;height: 50px; object-fit: cover;">
-                                    <?php
-                                    } else {
-                                    ?>
-                                    <img src="../gambar/asmen/<?php echo $profil['pks_foto'] ?>" class="rounded-circle"
-                                        style="width: 50px;height: 50px; object-fit: cover;">
-                                    <?php
-                                    }
-                                    ?>
-                                    <div>
-                                        <p class="nama-profile mb-0"><?php echo htmlspecialchars($_SESSION['nama']); ?>
-                                            [ASMEN]
-                                        </p>
-                                        <!-- <span class="nama-profile2" style=" margin-top: -50px; display:
-                                            block;">[ASMEN]</span> -->
-                                    </div>
+                                    <img src="../gambar/sistem/user.png" style="width: 40px;height: 40px">
+                                    <?php } else { ?>
+                                    <img src="../gambar/admin/<?php echo $profil['admin_foto'] ?>"
+                                        style="width: 40px;height: 40px">
+                                    <?php } ?>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Admin]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile_admin.php"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
@@ -291,7 +214,39 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                 </div>
                             </li>
-
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="ti ti-bell-ringing"></i>
+                                    <div class="notification bg-primary rounded-circle"></div>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                    aria-labelledby="drop2">
+                                    <div class="message-body">
+                                        <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
+                                        <div class="message-list">
+                                            <?php
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id ORDER BY riwayat_id DESC");
+                                            while ($p = mysqli_fetch_array($arsip)) {
+                                            ?>
+                                            <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
+                                                <div class="notification-content">
+                                                    <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
+                                                    <p class="mb-0 fs-3 text-truncate" style="max-width: 200px;">
+                                                        <?php echo $p['arsip_nama'] ?></p>
+                                                    <small
+                                                        class="text-muted fs-2"><?php echo date('H:i d-m-Y', strtotime($p['riwayat_waktu'])) ?></small>
+                                                </div>
+                                            </a>
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <a href="riwayat_unduh.php"
+                                            class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -302,18 +257,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">DOKUMEN KONTRAK PKS
                         </h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-4 border-end pilihan-doc-kajian pilihan_dokumen">
-                                <a href="data_pks.php"> Doc Kajian</a>
-                            </div>
-                            <div class="col-lg-4 border-end">
-                                <a href="data_kak_hps.php">Doc KAK & HPS</a>
-                            </div>
-                            <div class="col-lg-4">
-                                <a href="data_kontrak.php"> Doc Kontrak</a>
-                            </div>
-                        </div>
-                        <!-- table -->
                         <div class="row mb-3">
                             <div class="col-md-6 banyak-data">
                                 <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
@@ -327,12 +270,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                 <span> data per halaman</span>
                             </div>
                             <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                <input type="text" class="form-control text-white me-2" id="searchInput"
+                                <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <button type="button" class="btn btn-custom"
-                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;" onclick="tambahArsip()">
-                                    <i class="ti ti-plus fs-5"></i>Create
-                                </button>
                             </div>
                         </div>
 
@@ -357,7 +296,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                <thead class="fs-4 text-center align-middle">
+                                <thead class="fs-4 align-middle">
                                     <tr>
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
@@ -385,39 +324,84 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <?php
                                     $no = 1;
                                     include '../koneksi.php';
-                                    // Perbaiki query untuk menghindari status "Rejected (AVP)"
+                                    // Perbaiki query untuk menggunakan alias yang benar
                                     $arsip = mysqli_query($koneksi, "
-                                            SELECT dockajian.*, 
-                                            user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama, 
+                                            SELECT dockajian.*, doc_kak_hps.*, doc_kontrak.*,
+                                            user_pks.pks_nama AS petugas_nama, 
+                                            user_pks2.pks_nama AS avp_nama, 
+                                            user_pks3.pks_nama AS vp_nama, 
+                                            user_pks4.pks_nama AS gm_nama, 
+                                            
                                             doc_kak_hps.dockh_status_gm AS status_gm, 
                                             doc_kak_hps.dockh_status_vp AS status_vp, 
                                             doc_kak_hps.dockh_status_avp AS status_avp, 
                                             doc_kak_hps.dockh_status_asmen AS status_asmen,
+                                            
+                                            doc_kak_hps.dockh_waktu_asmen AS waktu_asmen,
+                                            doc_kak_hps.dockh_waktu_avp AS waktu_avp,
+                                            doc_kak_hps.dockh_waktu_vp AS waktu_vp,
+                                            doc_kak_hps.dockh_waktu_gm AS waktu_gm,
+                                            
                                             doc_kontrak.dockt_status_gm AS kontrak_status_gm, 
                                             doc_kontrak.dockt_status_vp AS kontrak_status_vp, 
                                             doc_kontrak.dockt_status_avp AS kontrak_status_avp, 
-                                            doc_kontrak.dockt_status_asmen AS kontrak_status_asmen
+                                            doc_kontrak.dockt_status_asmen AS kontrak_status_asmen,
+                                            
+                                            doc_kontrak.dockt_waktu_asmen AS kontrak_waktu_asmen,
+                                            doc_kontrak.dockt_waktu_avp AS kontrak_waktu_avp,
+                                            doc_kontrak.dockt_waktu_vp AS kontrak_waktu_vp,
+                                            doc_kontrak.dockt_waktu_gm AS kontrak_waktu_gm
+                                            
                                             FROM dockajian 
                                             JOIN user_pks ON dockajian.dock_petugas = user_pks.pks_id 
                                             LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
                                             LEFT JOIN user_pks AS user_pks3 ON dockajian.dock_vp = user_pks3.pks_id 
                                             LEFT JOIN user_pks AS user_pks4 ON dockajian.dock_gm = user_pks4.pks_id
+                                            
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id
-                                            ORDER BY dockajian.dock_tanggal DESC
+                                            ORDER BY dockajian.dock_id DESC
                                             ");
-
-                                    if (!$arsip) {
-                                        die("Query Error: " . mysqli_error($koneksi));
-                                    }
                                     while ($p = mysqli_fetch_assoc($arsip)) {
-
                                     ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td><?php
-                                                if (!empty($p['gm_nama'])) {
+                                        <td>
+                                            <?php
+                                                if (!empty($p['dockt_gm'])) {
+                                                    $gm_id = $p['dockt_gm'];
+                                                    $gm_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$gm_id'"))['pks_nama'];
+                                                    echo $gm_nama;
+                                                } elseif (!empty($p['dockt_vp'])) {
+                                                    $vp_id = $p['dockt_vp'];
+                                                    $vp_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$vp_id'"))['pks_nama'];
+                                                    echo $vp_nama;
+                                                } elseif (!empty($p['dockt_avp'])) {
+                                                    $avp_id = $p['dockt_avp'];
+                                                    $avp_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$avp_id'"))['pks_nama'];
+                                                    echo $avp_nama;
+                                                } elseif (!empty($p['dockt_petugas'])) {
+                                                    $petugas_id = $p['dockt_petugas'];
+                                                    $petugas_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$petugas_id'"))['pks_nama'];
+                                                    echo $petugas_nama;
+                                                } elseif (!empty($p['dockh_gm'])) {
+                                                    $dockh_gm_id = $p['dockh_gm'];
+                                                    $dockh_gm_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$dockh_gm_id'"))['pks_nama'];
+                                                    echo $dockh_gm_nama;
+                                                } elseif (!empty($p['dockh_avp'])) {
+                                                    $dockh_avp_id = $p['dockh_avp'];
+                                                    $dockh_avp_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$dockh_avp_id'"))['pks_nama'];
+                                                    echo $dockh_avp_nama;
+                                                } elseif (!empty($p['dockh_vp'])) {
+                                                    $dockh_vp_id = $p['dockh_vp'];
+                                                    $dockh_vp_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$dockh_vp_id'"))['pks_nama'];
+                                                    echo $dockh_vp_nama;
+                                                } elseif (!empty($p['dockh_petugas'])) {
+                                                    $dockh_petugas_id = $p['dockh_petugas'];
+                                                    $dockh_petugas_nama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$dockh_petugas_id'"))['pks_nama'];
+                                                    echo $dockh_petugas_nama;
+                                                } elseif (!empty($p['gm_nama'])) {
                                                     echo $p['gm_nama'];
                                                 } elseif (!empty($p['vp_nama'])) {
                                                     echo $p['vp_nama'];
@@ -426,12 +410,46 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 } else {
                                                     echo $p['petugas_nama'];
                                                 }
-                                                ?></td>
+                                                ?>
+                                        </td>
                                         <td><?php echo $p['dock_kategori'] ?></td>
                                         <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                        </td>
                                         <td>
                                             <?php
-                                                if (!empty($p['dock_waktu_gm'])) {
+                                                if (!empty($p['kontrak_waktu_gm'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_gm']));
+                                                    $tanggal = date('d M Y', strtotime($p['kontrak_waktu_gm']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['kontrak_waktu_vp'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_vp']));
+                                                    $tanggal = date('d M Y', strtotime($p['kontrak_waktu_vp']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['kontrak_waktu_avp'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_avp']));
+                                                    $tanggal = date('d M Y', strtotime($p['kontrak_waktu_avp']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['kontrak_waktu_asmen'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_asmen']));
+                                                    $tanggal = date('d M Y', strtotime($p['kontrak_waktu_asmen']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['waktu_gm'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['waktu_gm']));
+                                                    $tanggal = date('d M Y', strtotime($p['waktu_gm']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['waktu_vp'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['waktu_vp']));
+                                                    $tanggal = date('d M Y', strtotime($p['waktu_vp']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['waktu_avp'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['waktu_avp']));
+                                                    $tanggal = date('d M Y', strtotime($p['waktu_avp']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['waktu_asmen'])) {
+                                                    $dock_waktu = date('H:i:s', strtotime($p['waktu_asmen']));
+                                                    $tanggal = date('d M Y', strtotime($p['waktu_asmen']));
+                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                } elseif (!empty($p['dock_waktu_gm'])) {
                                                     $dock_waktu = date('H:i:s', strtotime($p['dock_waktu_gm']));
                                                     $tanggal = date('d M Y', strtotime($p['dock_waktu_gm']));
                                                     echo $dock_waktu . '<br>' . $tanggal;
@@ -443,12 +461,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                     $dock_waktu = date('H:i:s', strtotime($p['dock_waktu_avp']));
                                                     $tanggal = date('d M Y', strtotime($p['dock_waktu_avp']));
                                                     echo $dock_waktu . '<br>' . $tanggal;
-                                                } elseif (!empty($p['dock_waktu_asmen'])) {
+                                                } else {
                                                     $dock_waktu_asmen = date('H:i:s', strtotime($p['dock_waktu_asmen']));
                                                     $tanggal_asmen = date('d M Y', strtotime($p['dock_waktu_asmen']));
                                                     echo $dock_waktu_asmen . '<br>' . $tanggal_asmen;
-                                                } else {
-                                                    echo '-';
                                                 }
                                                 ?>
                                         </td>
@@ -499,24 +515,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             <div class="btn-group">
                                                 <a target="_blank" class="btn btn-custom-eye btn-sm"
                                                     href="preview_kajian.php?id=<?php echo $p['dock_id']; ?>"><i
-                                                        class="ti ti-eye fs-5"></i></a>
-                                                <a class="btn btn-custom-hapus btn-sm" href="javascript:void(0);"
-                                                    onclick="confirmDelete('<?php echo $p['dock_id']; ?>')"><i
-                                                        class="ti ti-trash fs-5"></i></a>
-                                            </div>
-                                            <div class="btn-group mt-2">
-                                                <?php if (($p['dock_status_avp'] == 'Rejected (AVP)' or $p['dock_status_vp'] == 'Rejected (VP)' or $p['dock_status_gm'] === 'Rejected (GM)')): ?>
-                                                <a href="edit_dk.php?id=<?php echo $p['dock_id']; ?>"
-                                                    class="btn btn-custom-edit btn-sm text-center d-flex align-items-center justify-content-center">
-                                                    <i class="ti ti-pencil fs-5"></i>
+                                                        class="ti ti-eye fs-5"></i>
                                                 </a>
-                                                <?php endif; ?>
-                                                <?php if (in_array($p['dock_status_gm'], ['Done'])): ?>
-                                                <a href="tambah_kak_hps.php?id=<?php echo $p['dock_id']; ?>"
-                                                    class="btn btn-custom-upload btn-sm text-center d-flex align-items-center justify-content-center">
-                                                    <i class="ti ti-upload fs-5"></i>
-                                                </a>
-                                                <?php endif; ?>
                                             </div>
                                         </td>
                                     </tr>
@@ -536,35 +536,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             </div>
         </div>
     </div>
+    </div>
     <script>
-    fetch('sidebar_asmen.php')
+    fetch('sidebar_admin.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function tambahArsip() {
-        window.location.href = 'tambah_dokumen_kajian.php';
-    }
-
-    function confirmDelete(id) {
-        if (confirm("Apakah Anda yakin ingin menghapus dokumen ini?")) {
-            fetch(`hapus_kajian.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("Dokumen berhasil dihapus.");
-                        window.location.href = 'data_pks.php'; // Redirect to data_kontrak.php
-                    } else {
-                        alert("Gagal menghapus dokumen.");
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert("Terjadi kesalahan saat menghapus dokumen.");
-                });
-        }
-    }
 
     // Fungsi untuk menangani paginasi dan pencarian
     document.addEventListener('DOMContentLoaded', function() {

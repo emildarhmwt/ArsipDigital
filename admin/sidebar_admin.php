@@ -36,6 +36,7 @@
         .judul-sidebar {
             font-family: "Outfit", sans-serif;
             font-size: 18px;
+            color: white;
         }
         </style>
     </head>
@@ -50,7 +51,7 @@
                 <div class="scroll-sidebar" data-simplebar>
                     <div class="d-flex mb-4 align-items-center justify-content-between">
                         <a href="dashboard_admin.php" class="text-nowrap logo-img ms-0 ms-md-1">
-                            <img src="../assets/images/logoweb.png" width="200" height="auto">
+                            <img src="../assets/images/logoarsipdigital.png" width="200" height="auto">
                         </a>
                         <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                             <i class="ti ti-x fs-8"></i>
@@ -77,11 +78,12 @@
                                 <span class="hide-menu judul-sidebar">MENU</span>
                             </li>
                             <li class="sidebar-item">
-                                <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
+                                <a class="sidebar-link sidebar-link warning-hover-bg" href="data_pks.php"
+                                    aria-expanded="false">
                                     <span class="aside-icon p-2 bg-light-warning rounded-3">
                                         <i class="ti ti-file-analytics fs-7 text-warning"></i>
                                     </span>
-                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Data </span>
+                                    <span class="hide-menu ms-2 ps-1 judul-sidebar">Pengajuan Kontrak PKS</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">

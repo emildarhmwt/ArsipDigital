@@ -143,6 +143,14 @@
          background-color: #b27373 !important;
          color: white !important;
      }
+
+     input::placeholder {
+         color: white !important;
+     }
+
+     textarea::placeholder {
+         color: white !important;
+     }
      </style>
  </head>
 
@@ -267,12 +275,12 @@
                                      <div class="mb-3">
                                          <label for="kategori" class="form-label">Kategori</label>
                                          <select class="form-control text-white" name="kategori" required="required">
-                                             <option value="">Pilih kategori</option>
+                                             <option value="" style="color: black;">Pilih kategori</option>
                                              <?php
                                                 $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
                                                 while ($k = mysqli_fetch_array($kategori)) {
                                                 ?>
-                                             <option value="<?php echo $k['kategori_id']; ?>">
+                                             <option value="<?php echo $k['kategori_id']; ?>" style="color: black;">
                                                  <?php echo $k['kategori_nama']; ?></option>
                                              <?php
                                                 }
@@ -281,12 +289,12 @@
                                      </div>
                                      <div class="mb-3">
                                          <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
-                                         <textarea class="form-control" rows="10" placeholder="Input Data"
+                                         <textarea class="form-control text-white" rows="10" placeholder="Input Data"
                                              name="keterangan" required></textarea>
                                      </div>
                                      <div class="mb-3">
                                          <label for="formFile" class="form-label">File</label>
-                                         <input class="form-control" type="file" name="file">
+                                         <input class="form-control text-white" type="file" name="file">
                                      </div>
                                  </div>
 

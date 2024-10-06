@@ -194,11 +194,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     }
 
     .btn-custom-edit {
-        background-color: #7c1919 !important;
+        background-color: #1593a4 !important;
         color: white !important;
     }
 
     .btn-custom-edit:hover {
+        background-color: #1593a487 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus:hover {
         background-color: #b27373 !important;
         color: white !important;
     }
@@ -470,6 +480,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <a target="_blank" class="btn btn-custom-eye btn-sm"
                                                     href="preview_kontrak.php?id=<?php echo $p['dockt_dock_id']; ?>"><i
                                                         class="ti ti-eye fs-5"></i></a>
+                                                <a class="btn btn-custom-hapus btn-sm" href="javascript:void(0);"
+                                                    onclick="confirmDelete('<?php echo $p['dockt_dock_id']; ?>')"><i
+                                                        class="ti ti-trash fs-5"></i></a>
+                                            </div>
+                                            <div class="btn-group mt-2">
                                                 <?php if (($p['dockt_status_avp'] == 'Rejected (AVP)' OR $p['dockt_status_vp'] == 'Rejected (VP)' OR $p['dockt_status_gm'] === 'Rejected (GM)')): ?>
                                                 <a href="edit_kontrak.php?id=<?php echo $p['dockt_dock_id']; ?>"
                                                     class="btn btn-custom-edit btn-sm text-center d-flex align-items-center justify-content-center">
@@ -502,8 +517,23 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function tambahArsip() {
-        window.location.href = 'tambah_dokumen_kajian.php';
+    function confirmDelete(id) {
+        if (confirm("Apakah Anda yakin ingin menghapus dokumen ini?")) {
+            fetch(`hapus_kontrak.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Dokumen berhasil dihapus.");
+                        window.location.href = 'data_kontrak.php'; // Redirect to data_kontrak.php
+                    } else {
+                        alert("Gagal menghapus dokumen.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Terjadi kesalahan saat menghapus dokumen.");
+                });
+        }
     }
 
     // Fungsi untuk menangani paginasi dan pencarian
@@ -537,12 +567,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                 const li = document.createElement('li');
                 li.classList.add('page-item');
                 if (i === currentPage) li.classList.add('active');
-
                 const a = document.createElement('a');
                 a.classList.add('page-link');
                 a.href = '#';
                 a.textContent = i;
-
                 a.addEventListener('click', (e) => {
                     e.preventDefault();
                     currentPage = i;

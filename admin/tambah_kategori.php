@@ -70,14 +70,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -99,25 +105,50 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .btn-custom-eye {
+        background-color: #11475e !important;
         color: white !important;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
+        color: white !important;
+    }
+
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
+    input::placeholder {
+        color: white !important;
+    }
+
+    textarea::placeholder {
         color: white !important;
     }
     </style>
@@ -221,37 +252,36 @@ if ($_SESSION['status'] != "admin_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Tambah Kategori</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <form method="post" action="kategori_aksi.php">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama Kategori</label>
-                                            <input type="text" class="form-control" name="nama" placeholder="Input Data"
-                                                required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="exampleFormControlTextarea1"
-                                                class="form-label">Keterangan</label>
-                                            <textarea class="form-control" name="keterangan" rows="10"
-                                                placeholder="Input Data" required></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
-                                    </form>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">TAMBAH KATEGORI
+                        </h5>
+                        <form method="post" action="kategori_aksi.php">
+                            <div class="banyak-data">
+                                <div class="mb-3">
+                                    <label for="shift" class="form-label">Nama Kategori</label>
+                                    <input type="text" class="form-control text-white" name="nama"
+                                        placeholder="Input Data" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
+                                    <textarea class="form-control text-white" name="keterangan" rows="10"
+                                        placeholder="Input Data" required></textarea>
                                 </div>
                             </div>
-                        </div>
+                            <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                Submit</button>
+                            <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                    class="bi bi-arrow-left-circle"></i>
+                                Back</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

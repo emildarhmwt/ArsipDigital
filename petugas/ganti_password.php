@@ -241,47 +241,45 @@
              </header>
              <!--  Header End -->
              <div class="container-fluid">
-                 <div class="container-fluid">
-                     <div class="card">
-                         <div class="card-body">
-                             <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">GANTI PASSWORD
-                             </h5>
-                             <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
-                                 <div class="card-body">
-                                     <?php
+                 <div class="card">
+                     <div class="card-body">
+                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">GANTI PASSWORD
+                         </h5>
+                         <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                             <div class="card-body">
+                                 <?php
                                     if (isset($_GET['alert'])) {
                                         if ($_GET['alert'] == "sukses") {
                                             echo "<div class='alert alert-success'>Password anda berhasil diganti!</div>";
                                         }
                                     }
                                     ?>
-                                     <form method="POST" action="ganti_pw_act.php">
-                                         <div class="mb-3">
-                                             <label for="shift" class="form-label">Masukkan Password Baru</label>
-                                             <input type="password" class="form-control"
-                                                 placeholder="Masukkan Password Baru .." name="password" id="password"
-                                                 required="required" min="5">
+                                 <form method="POST" action="ganti_pw_act.php">
+                                     <div class="mb-3">
+                                         <label for="shift" class="form-label">Masukkan Password Baru</label>
+                                         <input type="password" class="form-control text-white"
+                                             placeholder="Masukkan Password Baru .." name="password" id="password"
+                                             required="required" min="5">
+                                     </div>
+                                     <div class="d-flex align-items-center justify-content-between mb-4">
+                                         <div class="form-check">
+                                             <input class="form-check-input primary" type="checkbox" value=""
+                                                 id="showPassword" style="border-color: white;">
+                                             <label class="form-check-label text-white sub-judul" for="showPassword">
+                                                 Show Password
+                                             </label>
                                          </div>
-                                         <div class="d-flex align-items-center justify-content-between mb-4">
-                                             <div class="form-check">
-                                                 <input class="form-check-input primary" type="checkbox" value=""
-                                                     id="showPassword" style="border-color: white;">
-                                                 <label class="form-check-label text-white sub-judul"
-                                                     for="showPassword">
-                                                     Show Password
-                                                 </label>
-                                             </div>
-                                         </div>
-                                         <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                             Submit</button>
-                                     </form>
-                                 </div>
+                                     </div>
+                                     <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                         Submit</button>
+                                 </form>
                              </div>
                          </div>
                      </div>
                  </div>
              </div>
          </div>
+     </div>
      </div>
      <script>
      fetch('sidebar_petugas.php')

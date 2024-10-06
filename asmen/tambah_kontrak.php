@@ -300,33 +300,32 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         <?php
                         }
                         ?>
-                        <form method="post" action="kontrak_aksi.php" enctype="multipart/form-data"></form>
-                        <div class="card  card-preview" style="border-radius: 10px 10px 10px 10px;">
-                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
-                                Dokumen Kajian
-                            </div>
-                            <div class="card-body">
-
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
-                                    <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
-                                    <textarea class="form-control text-white" rows="10" placeholder="Input Data"
-                                        name="comment" required></textarea>
+                        <form method="post" action="kontrak_aksi.php" enctype="multipart/form-data">
+                            <div class="card  card-preview" style="border-radius: 10px 10px 10px 10px;">
+                                <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                                    Dokumen Kajian
                                 </div>
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Lampiran File :</label>
-                                    <input class="form-control text-white" type="file" name="file" required>
-                                </div>
+                                <div class="card-body">
 
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
+                                        <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
+                                        <textarea class="form-control text-white" rows="10" placeholder="Input Data"
+                                            name="comment" required></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Lampiran File :</label>
+                                        <input class="form-control text-white" type="file" name="file" required>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                Submit</button>
-                            <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                    class="bi bi-arrow-left-circle"></i>
-                                Back</button>
-                        </div>
+                            <div>
+                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                    Submit</button>
+                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                        class="bi bi-arrow-left-circle"></i>
+                                    Back</button>
+                            </div>
                         </form>
                     </div>
                 </div>

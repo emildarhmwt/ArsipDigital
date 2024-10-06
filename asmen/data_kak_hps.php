@@ -194,11 +194,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     }
 
     .btn-custom-edit {
-        background-color: #7c1919 !important;
+        background-color: #1593a4 !important;
         color: white !important;
     }
 
     .btn-custom-edit:hover {
+        background-color: #1593a487 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus:hover {
         background-color: #b27373 !important;
         color: white !important;
     }
@@ -470,6 +480,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <a target="_blank" class="btn btn-custom-eye btn-sm"
                                                     href="preview_dp.php?id=<?php echo $p['dockh_dock_id']; ?>"><i
                                                         class="ti ti-eye fs-5"></i></a>
+                                                <a class="btn btn-custom-hapus btn-sm" href="javascript:void(0);"
+                                                    onclick="confirmDelete('<?php echo $p['dockh_dock_id']; ?>')"><i
+                                                        class="ti ti-trash fs-5"></i></a>
+                                            </div>
+                                            <div class="btn-group mt-2">
                                                 <?php if (($p['dockh_status_avp'] == 'Rejected (AVP)' or $p['dockh_status_vp'] == 'Rejected (VP)' or $p['dockh_status_gm'] === 'Rejected (GM)')): ?>
                                                 <a href="edit_kak_hps.php?id=<?php echo $p['dockh_dock_id']; ?>"
                                                     class="btn btn-custom-edit btn-sm text-center d-flex align-items-center justify-content-center">
@@ -510,6 +525,25 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
     function tambahArsip() {
         window.location.href = 'tambah_dokumen_kajian.php';
+    }
+
+    function confirmDelete(id) {
+        if (confirm("Apakah Anda yakin ingin menghapus dokumen ini?")) {
+            fetch(`hapus_kak_hps.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Dokumen berhasil dihapus.");
+                        window.location.href = 'data_kak_hps.php'; // Redirect to data_kontrak.php
+                    } else {
+                        alert("Gagal menghapus dokumen.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Terjadi kesalahan saat menghapus dokumen.");
+                });
+        }
     }
 
     // Fungsi untuk menangani paginasi dan pencarian
