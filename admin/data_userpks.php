@@ -70,14 +70,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -99,25 +105,52 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
     }
 
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
+    .btn-custom-eye {
+        background-color: #11475e !important;
         color: white !important;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #1593a4 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #1593a487 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus:hover {
+        background-color: #b27373 !important;
         color: white !important;
     }
     </style>
@@ -223,103 +256,100 @@ if ($_SESSION['status'] != "admin_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data User</h5>
+                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA USER KONTRAK PKS
+                        </h5>
                         <!-- table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                        <select id="rowsPerPageSelect" class="form-select"
-                                            style="width: auto; display: inline-block;">
-                                            <option value="5">5</option>
-                                            <option value="10" selected>10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span> data per halaman</span>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                        <button type="button" class="btn btn-custom"
-                                            style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                            onclick="tambahPetugas()">
-                                            <i class="bi bi-plus-square"></i> Tambah User
-                                        </button>
-                                    </div>
-                                </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 banyak-data">
+                                <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
+                                <select id="rowsPerPageSelect" class="form-select"
+                                    style="width: auto; display: inline-block;">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <span> data per halaman</span>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                <input type="text" class="form-control me-2 text-white" id="searchInput"
+                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                <button type="button" class="btn btn-custom-eye"
+                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
+                                    onclick="tambahPetugas()">
+                                    <i class="bi bi-plus-square"></i> Tambah User
+                                </button>
+                            </div>
+                        </div>
 
-                                <div class="table-responsive products-table" data-simplebar>
-                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
-                                            <tr>
-                                                <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3" style="width: 10%;">Foto</th>
-                                                <th class="fs-3">Nama</th>
-                                                <th class="fs-3">Username</th>
-                                                <th class="fs-3">Jabatan</th>
-                                                <th class="fs-3" style="width: 5%;">Opsi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
+                        <div class="table-responsive products-table" data-simplebar>
+                            <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                <thead class="fs-4">
+                                    <tr>
+                                        <th class="fs-3" style="width: 5%;">No</th>
+                                        <th class="fs-3" style="width: 10%;">Foto</th>
+                                        <th class="fs-3">Nama</th>
+                                        <th class="fs-3">Username</th>
+                                        <th class="fs-3">Jabatan</th>
+                                        <th class="fs-3" style="width: 5%;">Opsi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                             include '../koneksi.php';
                                             $no = 1;
                                             $user = mysqli_query($koneksi, "SELECT * FROM user_pks ORDER BY pks_id DESC");
                                             while ($p = mysqli_fetch_array($user)) {
                                             ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td>
-                                                    <?php
+                                    <tr>
+                                        <td><?php echo $no++; ?></td>
+                                        <td>
+                                            <?php
                                                         if ($p['pks_foto'] == "") {
                                                         ?>
-                                                    <img class="img-user" src="../gambar/sistem/user.png" width="50"
-                                                        height="50">
-                                                    <?php
+                                            <img class="img-user" src="../gambar/sistem/user.png" width="50"
+                                                height="50">
+                                            <?php
                                                         } else {
                                                         ?>
-                                                    <img class="img-user"
-                                                        src="../gambar/asmen/<?php echo $p['pks_foto']; ?>" width="50"
-                                                        height="50">
-                                                    <?php
+                                            <img class="img-user" src="../gambar/asmen/<?php echo $p['pks_foto']; ?>"
+                                                width="50" height="50">
+                                            <?php
                                                         }
                                                         ?>
-                                                </td>
-                                                <td><?php echo $p['pks_nama'] ?></td>
-                                                <td><?php echo $p['pks_username'] ?></td>
-                                                <td><?php echo $p['pks_level'] ?></td>
-                                                <td class="text-center">
-                                                    <div class="btn-group">
-                                                        <a href="edit_asmen.php?id=<?php echo $p['pks_id']; ?>"
-                                                            class="btn btn-default btn-sm"><i
-                                                                class="ti ti-edit fs-5"></i></a>
-                                                        <a href="asmen_hapus.php?id=<?php echo $p['pks_id']; ?>"
-                                                            class="btn btn-default btn-sm"
-                                                            onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
-                                                                class="ti ti-trash fs-5"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?php
+                                        </td>
+                                        <td><?php echo $p['pks_nama'] ?></td>
+                                        <td><?php echo $p['pks_username'] ?></td>
+                                        <td><?php echo $p['pks_level'] ?></td>
+                                        <td class="text-center">
+                                            <div class="btn-group">
+                                                <a href="edit_asmen.php?id=<?php echo $p['pks_id']; ?>"
+                                                    class="btn btn-custom-edit btn-sm"><i
+                                                        class="ti ti-edit fs-5"></i></a>
+                                                <a href="asmen_hapus.php?id=<?php echo $p['pks_id']; ?>"
+                                                    class="btn btn-custom-hapus btn-sm"
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
+                                                        class="ti ti-trash fs-5"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
                                             }
                                             ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                <!-- Pagination items will be added here by JavaScript -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

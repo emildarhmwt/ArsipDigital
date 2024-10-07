@@ -386,6 +386,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         <label for="formFile" class="form-label">Lampiran File HPS :</label>
                                         <input class="form-control text-white" type="file" name="file_hps" required>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="kategori" class="form-label">Ditujukan Kepada :</label>
+                                        <select class="form-control text-white" name="tujuan_avp" required="required">
+                                            <option value="" style="color: black;">Asisten Vice President</option>
+                                            <?php
+                                                $kategori = mysqli_query($koneksi, "SELECT * FROM user_pks WHERE pks_level='AVP'");
+                                                while ($k = mysqli_fetch_array($kategori)) {
+                                                ?>
+                                            <option value="<?php echo $k['pks_id']; ?>" style="color: black;">
+                                                <?php echo $k['pks_nama']; ?></option>
+                                            <?php
+                                                }
+                                                ?>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
 

@@ -265,7 +265,7 @@
                                             ?>
                                      <tr>
                                          <td><?php echo $no++; ?></td>
-                                         <td><?php echo date('H:i:s  d-m-Y', strtotime($p['riwayat_waktu'])) ?>
+                                         <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?>
                                          </td>
                                          <td><?php echo $p['user_nama'] ?></td>
                                          <td><a style="color: blue"

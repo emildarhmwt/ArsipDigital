@@ -646,10 +646,48 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             ?>
                         </div>
                         <div class="row d-inline-flex mt-3 text-center justify-content-center">
-                            <a class="btn btn-custom-upload d-inline-flex justify-content-center align-items-center mx-2"
+                            <!-- <a class="btn btn-custom-upload d-inline-flex justify-content-center align-items-center mx-2"
                                 href="confirm_dp.php?id=<?php echo $id; ?>" style="width: auto; padding: 5px 10px;"><i
                                     class="ti ti-thumb-up"></i> Approve
-                            </a>
+                            </a> -->
+
+                            <button
+                                class="btn btn-custom-upload d-inline-flex justify-content-center align-items-center mx-2"
+                                onclick="openApproveModal(<?php echo $id; ?>)" style="width: auto; padding: 5px 10px;">
+                                <i class="ti ti-thumb-up"></i> Approve
+                            </button>
+
+                            <div class="modal" id="approveModal"
+                                style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
+                                <div class="modal-content" style="padding: 10px;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Approve Document</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="confirm_dp.php?id=<?php echo $id; ?>">
+                                            <div class="mb-3">
+                                                <label for="tujuan_vp" class="form-label">Ditujukan Kepada :</label>
+                                                <select class="form-control" name="tujuan_vp" required="required">
+                                                    <option value="" style="color: black;">Vice President </option>
+                                                    <?php
+                                                            $kategori = mysqli_query($koneksi, "SELECT * FROM user_pks WHERE pks_level='VP'");
+                                                            while ($k = mysqli_fetch_array($kategori)) {
+                                                            ?>
+                                                    <option value="<?php echo $k['pks_id']; ?>" style="color: black;">
+                                                        <?php echo $k['pks_nama']; ?></option>
+                                                    <?php
+                                                            }
+                                                            ?>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-custom-review">Approve</button>
+                                            <button type="button" class="btn btn-custom-edit"
+                                                onclick="closeApproveModal()">Cancel</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
                             <button
                                 class="btn btn-custom-edit d-inline-flex justify-content-center align-items-center mx-2"
                                 onclick="openRejectModal(<?php echo $id; ?>)" style="width: auto; padding: 5px 10px;">
@@ -705,6 +743,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
     function closeRejectModal(id) {
         document.getElementById('rejectModal' + id).style.display = 'none';
+    }
+
+    function openApproveModal() {
+        document.getElementById('approveModal').style.display = 'block';
+    }
+
+    function closeApproveModal() {
+        document.getElementById('approveModal').style.display = 'none';
     }
     </script>
     <script src=" ../assets/libs/jquery/dist/jquery.min.js">

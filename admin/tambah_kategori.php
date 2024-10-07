@@ -280,9 +280,6 @@ if ($_SESSION['status'] != "admin_login") {
             </div>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
     <script>
     fetch('sidebar_admin.php')
         .then(response => response.text())

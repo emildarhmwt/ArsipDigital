@@ -70,14 +70,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -97,6 +103,21 @@ if ($_SESSION['status'] != "admin_login") {
         font-optical-sizing: auto;
         font-style: normal;
         font-weight: 400;
+    }
+
+    .table td {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
     }
     </style>
 </head>
@@ -201,73 +222,72 @@ if ($_SESSION['status'] != "admin_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Data Riwayat Unduhan Arsip</h5>
+                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA RIWAYAT UNDUH ARSIP
+                        </h5>
                         <!-- table -->
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                        <select id="rowsPerPageSelect" class="form-select"
-                                            style="width: auto; display: inline-block;">
-                                            <option value="5">5</option>
-                                            <option value="10" selected>10</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                        </select>
-                                        <span> data per halaman</span>
-                                    </div>
-                                    <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                        <input type="text" class="form-control me-2" id="searchInput"
-                                            placeholder="Cari..."
-                                            style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                    </div>
-                                </div>
 
-                                <div class="table-responsive products-table" data-simplebar>
-                                    <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                        <thead class="fs-4">
-                                            <tr>
-                                                <th class="fs-3" style="width: 5%;">No</th>
-                                                <th class="fs-3">Waktu Unduh</th>
-                                                <th class="fs-3">User</th>
-                                                <th class="fs-3">Arsip yang diunduh</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
+                        <div class="row mb-3">
+                            <div class="col-md-6 banyak-data">
+                                <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
+                                <select id="rowsPerPageSelect" class="form-select"
+                                    style="width: auto; display: inline-block;">
+                                    <option value="5">5</option>
+                                    <option value="10" selected>10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                                <span> data per halaman</span>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                <input type="text" class="form-control me-2 text-white" id="searchInput"
+                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
+                            </div>
+                        </div>
+
+                        <div class="table-responsive products-table" data-simplebar>
+                            <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                <thead class="fs-4 text-center">
+                                    <tr>
+                                        <th class="fs-3" style="width: 5%;">No</th>
+                                        <th class="fs-3" style="width: 20%;">Waktu Unduh</th>
+                                        <th class="fs-3">User</th>
+                                        <th class="fs-3">Arsip yang diunduh</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                             include '../koneksi.php';
                                             $no = 1;
                                             $saya = $_SESSION['id'];
                                             $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id ORDER BY riwayat_id DESC");
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
-                                            <tr>
-                                                <td><?php echo $no++; ?></td>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($p['riwayat_waktu'])) ?>
-                                                </td>
-                                                <td><?php echo $p['user_nama'] ?></td>
-                                                <td><a style="color: blue"
-                                                        href="arsip_preview_saya.php?id=<?php echo $p['arsip_id']; ?>"><?php echo $p['arsip_nama'] ?></a>
-                                                </td>
-                                            </tr>
-                                            <?php
+                                    <tr>
+                                        <td class="text-center"><?php echo $no++; ?></td>
+                                        <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?>
+                                        </td>
+                                        <td><?php echo $p['user_nama'] ?></td>
+                                        <td><a style="color: blue"
+                                                href="arsip_preview_saya.php?id=<?php echo $p['arsip_id']; ?>"><?php echo $p['arsip_nama'] ?></a>
+                                        </td>
+                                    </tr>
+                                    <?php
                                             }
                                             ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <nav aria-label="Page navigation">
-                                    <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                        <!-- Pagination items will be added here by JavaScript -->
-                                    </ul>
-                                </nav>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                <!-- Pagination items will be added here by JavaScript -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

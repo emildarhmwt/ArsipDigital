@@ -273,6 +273,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     <tr>
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
+                                        <th class="fs-3">Ditujukan Kepada</th>
                                         <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
                                         <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
                                             &nbsp&nbsp&nbsp
@@ -304,6 +305,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                             user_pks2.pks_nama AS avp_nama, 
                                             user_pks3.pks_nama AS vp_nama, 
                                             user_pks4.pks_nama AS gm_nama, 
+                                            user_pks5.pks_nama AS tujuan_avp,
                                             
                                             doc_kak_hps.dockh_status_gm AS status_gm, 
                                             doc_kak_hps.dockh_status_vp AS status_vp, 
@@ -330,6 +332,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                             LEFT JOIN user_pks AS user_pks2 ON dockajian.dock_avp = user_pks2.pks_id 
                                             LEFT JOIN user_pks AS user_pks3 ON dockajian.dock_vp = user_pks3.pks_id 
                                             LEFT JOIN user_pks AS user_pks4 ON dockajian.dock_gm = user_pks4.pks_id
+                                            LEFT JOIN user_pks AS user_pks5 ON dockajian.dock_tujuan_avp = user_pks5.pks_id
                                             
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id
@@ -339,7 +342,26 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
-                                        <td><?php echo $p['dock_nama'] ?></td>
+                                        <td>
+                                            <?php echo $p['dock_nama'] ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if (!empty($p['dockt_tujuan_avp'])) {
+                                                    $tujuankt_vp = $p['dockt_tujuan_avp'];
+                                                    $tujuankt_vpnama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$tujuankt_vp'"))['pks_nama'];
+                                                    echo $tujuankt_vpnama . '<br>(Doc Kontrak)';
+                                                } elseif (!empty($p['dockh_tujuan_avp'])) {
+                                                    $tujuan_vp = $p['dockh_tujuan_avp'];
+                                                    $tujuan_vpnama = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_nama FROM user_pks WHERE pks_id='$tujuan_vp'"))['pks_nama'];
+                                                    echo $tujuan_vpnama . '<br>(Doc KAK & HPS)';
+                                                } elseif (!empty($p['tujuan_avp'])) {
+                                                    echo $p['tujuan_avp'] . '<br>(Doc Kajian)';
+                                                } else {
+                                                    echo '-';
+                                                }
+                                                ?>
+                                        </td>
                                         <td>
                                             <?php
                                                 if (!empty($p['dockt_gm'])) {

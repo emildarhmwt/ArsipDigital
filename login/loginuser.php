@@ -14,7 +14,7 @@
         rel="stylesheet">
     <style>
     body {
-        background-color: #d2c392;
+        background-color: #bdd7d9;
     }
 
     .img-login {
@@ -27,7 +27,7 @@
     }
 
     .card {
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(216, 226, 237, 0.32);
     }
 
     .btn-primary {
@@ -93,6 +93,36 @@
         right: -3%;
         bottom: -5%;
     }
+
+    .btn-custom-eye {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
+        color: white !important;
+    }
     </style>
 </head>
 
@@ -154,9 +184,9 @@
                                     </div>
                                     <div class="d-flex justify-content-between">
                                         <input type="submit" value="Login"
-                                            class="btn btn-primary fs-4 mb-4 rounded-2 flex-grow-1 me-2 sub-judul">
+                                            class="btn btn-custom-eye fs-4 mb-4 rounded-2 flex-grow-1 me-2 sub-judul">
                                         <a href="../index.php"
-                                            class="btn btn-secondary fs-4 mb-4 rounded-2 flex-grow-1 sub-judul">Back</a>
+                                            class="btn btn-custom-edit fs-4 mb-4 rounded-2 flex-grow-1 sub-judul">Back</a>
                                     </div>
                                 </form>
                             </div>

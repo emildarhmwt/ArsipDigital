@@ -346,6 +346,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <tr>
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
+                                        <!-- <th class="fs-3">Ditujukan Kepada</th> -->
                                         <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
                                         <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
                                             &nbsp&nbsp&nbsp
@@ -372,7 +373,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             include '../koneksi.php';
                                             $arsip = mysqli_query($koneksi, "
                                             SELECT doc_kontrak.*, 
-                                            user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama, 
+                                            user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama, user_pks5.pks_nama AS tujuan_avp,
                                             dockajian.dock_status_gm AS status_gm, 
                                             dockajian.dock_status_vp AS status_vp, 
                                             dockajian.dock_status_avp AS status_avp, 
@@ -386,6 +387,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             LEFT JOIN user_pks AS user_pks2 ON doc_kontrak.dockt_avp = user_pks2.pks_id 
                                             LEFT JOIN user_pks AS user_pks3 ON doc_kontrak.dockt_vp = user_pks3.pks_id 
                                             LEFT JOIN user_pks AS user_pks4 ON doc_kontrak.dockt_gm = user_pks4.pks_id
+                                            LEFT JOIN user_pks AS user_pks5 ON doc_kontrak.dockt_tujuan_avp = user_pks5.pks_id
                                             LEFT JOIN dockajian ON doc_kontrak.dockt_dock_id = dockajian.dock_id
                                             LEFT JOIN doc_kak_hps ON doc_kontrak.dockt_dock_id = doc_kak_hps.dockh_dock_id
                                             ORDER BY doc_kontrak.dockt_tanggal DESC
@@ -395,6 +397,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockt_nama'] ?></td>
+                                        <!-- <td><?php echo $p['tujuan_avp'] ?></td> -->
                                         <td><?php
                                                 if (!empty($p['gm_nama'])) {
                                                     echo $p['gm_nama'];

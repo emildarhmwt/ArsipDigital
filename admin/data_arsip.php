@@ -266,7 +266,7 @@ if ($_SESSION['status'] != "admin_login") {
                         </h5>
                         <!-- table -->
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-6 banyak-data">
                                 <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
                                 <select id="rowsPerPageSelect" class="form-select"
                                     style="width: auto; display: inline-block;">
@@ -278,22 +278,22 @@ if ($_SESSION['status'] != "admin_login") {
                                 <span> data per halaman</span>
                             </div>
                             <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                <input type="text" class="form-control me-2" id="searchInput" placeholder="Cari..."
-                                    style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                <input type="text" class="form-control me-2 text-white" id="searchInput"
+                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
                             </div>
                         </div>
 
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                <thead class="fs-4">
+                                <thead class="fs-4 text-center">
                                     <tr>
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3" style="width: 10%;">Waktu Upload</th>
                                         <th class="fs-3" style="width: 20%;">Arsip</th>
                                         <th class="fs-3" style="width: 15%;">Kategori</th>
-                                        <th class="fs-3" style="width: 10%;">Petugas</th>
-                                        <th class="fs-3" style="width: 30%;">Keterangan</th>
-                                        <th class="fs-3" style="width: 10%;">Opsi</th>
+                                        <th class="fs-3" style="width: 15%;">Petugas</th>
+                                        <th class="fs-3" style="width: 25%;">Keterangan</th>
+                                        <th class="fs-3" style="width: 15%;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -304,30 +304,35 @@ if ($_SESSION['status'] != "admin_login") {
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                     <tr>
-                                        <td><?php echo $no++; ?></td>
-                                        <td><?php echo date('H:i:s  d-m-Y', strtotime($p['arsip_waktu_upload'])) ?>
+                                        <td class="text-center"><?php echo $no++; ?></td>
+                                        <td>
+                                            <div class="text-center">
+                                                <div> <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
+                                                </div>
+                                                <div><?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td>
-
                                             <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>
                                             <b>Nama</b> : <?php echo $p['arsip_nama'] ?><br>
                                             <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
-
                                         </td>
-                                        <td><?php echo $p['kategori_nama'] ?></td>
-                                        <td><?php echo $p['petugas_nama'] ?></td>
-                                        <td><?php echo $p['arsip_keterangan'] ?></td>
+                                        <td class="text-center"><?php echo $p['kategori_nama'] ?></td>
+                                        <td class="text-center"><?php echo $p['petugas_nama'] ?></td>
+                                        <td class="text-center"><?php echo $p['arsip_keterangan'] ?></td>
                                         <td class="text-center">
-
-                                            <div class="btn-group">
-                                                <a target="_blank" class="btn btn-default btn-sm"
+                                            <div class="btn-group mb-2">
+                                                <a target="_blank" class="btn btn-custom-upload btn-sm"
                                                     href="../arsip/<?php echo $p['arsip_file']; ?>" download><i
                                                         class="ti ti-download fs-7"></i></a>
                                                 <a target="_blank"
                                                     href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
-                                                    class="btn btn-default btn-sm">
+                                                    class="btn btn-custom-eye btn-sm">
                                                     <i class="ti ti-eye fs-7"></i></a>
-                                                <button type="button" class="btn btn-default btn-sm"
+                                            </div>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-custom-hapus btn-sm"
                                                     onclick="hapusArsip(<?php echo $p['arsip_id']; ?>)">
                                                     <i class="ti ti-trash fs-7"></i>
                                                 </button>

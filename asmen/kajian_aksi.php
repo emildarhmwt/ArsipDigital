@@ -14,6 +14,7 @@ $kategori  = $_POST['kategori'];
 $aspek  = $_POST['aspek'];
 $tanggal  = $_POST['tanggal'];
 $lokasi  = $_POST['lokasi'];
+$tujuan_avp = $_POST['tujuan_avp'];
 
 $rand = rand();
 $filename = $_FILES['file']['name'];
@@ -27,8 +28,8 @@ if ($jenis == "php") {
 
     // Insert into doc1 for AVP confirmation with status 'uploaded'
     mysqli_query($koneksi, 
-    "INSERT into dockajian (dock_petugas, dock_waktu_asmen, dock_nama, dock_desk, dock_jenis, dock_kategori, dock_aspek, dock_tanggal, dock_lokasi, dock_file, dock_comment, dock_status_asmen) 
-    VALUES ('$petugas', '$waktu','$nama', '$deskripsi', '$jenis', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded (Asmen)')") or die(mysqli_error($koneksi));
+    "INSERT into dockajian (dock_petugas, dock_waktu_asmen, dock_tujuan_avp, dock_nama, dock_desk, dock_jenis, dock_kategori, dock_aspek, dock_tanggal, dock_lokasi, dock_file, dock_comment, dock_status_asmen) 
+    VALUES ('$petugas', '$waktu','$tujuan_avp','$nama', '$deskripsi', '$jenis', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded (Asmen)')") or die(mysqli_error($koneksi));
 
     header("location:data_pks.php?alert=sukses");
 }

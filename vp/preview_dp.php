@@ -435,25 +435,25 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $no = 1;
                                 include '../koneksi.php';
                                 // Perbaiki query untuk menggunakan alias yang benar
-                                 $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id, doc_kontrak.dockt_dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id LEFT JOIN doc_kontrak ON doc_kak_hps.dockh_dock_id = doc_kontrak.dockt_dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
+                                $arsip = mysqli_query($koneksi, "SELECT doc_kak_hps.*, dockajian.dock_id, doc_kontrak.dockt_dock_id FROM doc_kak_hps LEFT JOIN dockajian ON doc_kak_hps.dockh_dock_id = dockajian.dock_id LEFT JOIN doc_kontrak ON doc_kak_hps.dockh_dock_id = doc_kontrak.dockt_dock_id WHERE doc_kak_hps.dockh_dock_id = '$id' ORDER BY doc_kak_hps.dockh_dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border d-flex justify-content-center align-items-center"
                                 style="border-radius: 10px; height: 48px; width:320px; margin-right:10px;">
                                 <?php
-                                // Pastikan dock_id ada di array $p
-                                $id_dock = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dock) {
-                                ?>
+                                        // Pastikan dock_id ada di array $p
+                                        $id_dock = isset($p['dock_id']) ? $p['dock_id'] : null; // Menggunakan null jika tidak ada
+                                        if ($id_dock) {
+                                        ?>
                                 <a href="preview_kajian.php?id=<?php echo $id_dock; ?>" style="color:white;"> Doc Kajian
                                 </a>
                                 <?php
-                                } else {
-                                ?>
+                                        } else {
+                                        ?>
                                 <span>Doc Kajian tidak tersedia</span>
                                 <?php
-                                }
-                                ?>
+                                        }
+                                        ?>
                             </div>
                             <div class=" col-lg-4 border d-flex justify-content-center
                                 align-items-center"
@@ -464,19 +464,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 align-items-center"
                                 style="border-radius: 10px; height: 48px; width:320px; margin-right:10px; ">
                                 <?php
-                                // Pastikan dockt_id ada di array $p
-                                $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
-                                if ($id_dockt) {
-                                ?>
+                                        // Pastikan dockt_id ada di array $p
+                                        $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
+                                        if ($id_dockt) {
+                                        ?>
                                 <a href="preview_kontrak.php?id=<?php echo $id_dockt; ?>" style="color:white;"> Doc
                                     Kontrak </a>
                                 <?php
-                                } else {
-                                ?>
+                                        } else {
+                                        ?>
                                 <span>Doc Kontrak tidak tersedia</span>
                                 <?php
-                                }
-                                ?>
+                                        }
+                                        ?>
                             </div>
                             <?php
                                 }
@@ -536,12 +536,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         </div>
 
                         <?php
-                                    $no = 1;
-                                    include '../koneksi.php';
-                                    // Perbaiki query untuk menggunakan alias yang benar
-                                    $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
-                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
-                                    ?>
+                            $no = 1;
+                            include '../koneksi.php';
+                            // Perbaiki query untuk menggunakan alias yang benar
+                            $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
+                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                            ?>
                         <div class="row mb-3">
                             <div class="col-md-12 d-flex justify-content-end align-items-center">
                                 <a target="_blank"
@@ -560,15 +560,15 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </a>
                             </div>
                             <?php
-                                    }
-                                        ?>
+                            }
+                                ?>
                         </div>
                         <div class="table-responsive products-table" data-simplebar>
                             <?php
-                                            $no = 1;
-                                            include '../koneksi.php';
-                                            // Perbaiki query untuk menggunakan alias yang benar
-                                            $arsip = mysqli_query($koneksi, "
+                                    $no = 1;
+                                    include '../koneksi.php';
+                                    // Perbaiki query untuk menggunakan alias yang benar
+                                    $arsip = mysqli_query($koneksi, "
                                             SELECT doc_kak_hps.*, user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama
                                             FROM doc_kak_hps
                                             JOIN user_pks ON doc_kak_hps.dockh_petugas = user_pks.pks_id 
@@ -578,8 +578,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             WHERE dockh_dock_id = '$id' 
                                             ORDER BY dockh_dock_id DESC
                                         ");
-                                            while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
-                                            ?>
+                                    while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
+                                    ?>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4">
                                     <tr>
@@ -603,7 +603,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
-                                        <td><?php echo ($p['dockh_waktu_avp']) ?$p['dockh_waktu_avp'] : '-' ?>
+                                        <td><?php echo ($p['dockh_waktu_avp']) ? $p['dockh_waktu_avp'] : '-' ?>
                                         <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?></td>
                                         <td>
                                             <?php echo !empty($p['dockh_status_avp']) ? $p['dockh_status_avp'] : '-'; ?>
@@ -616,7 +616,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
-                                        <td><?php echo ($p['dockh_waktu_vp']) ?$p['dockh_waktu_vp'] : '-' ?>
+                                        <td><?php echo ($p['dockh_waktu_vp']) ? $p['dockh_waktu_vp'] : '-' ?>
                                         <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                         <td>
                                             <?php echo !empty($p['dockh_status_vp']) ? $p['dockh_status_vp'] : '-'; ?>
@@ -629,7 +629,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
-                                        <td><?php echo ($p['dockh_waktu_gm']) ?$p['dockh_waktu_gm'] : '-' ?>
+                                        <td><?php echo ($p['dockh_waktu_gm']) ? $p['dockh_waktu_gm'] : '-' ?>
                                         <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
                                         <td>
                                             <?php echo !empty($p['dockh_status_gm']) ? $p['dockh_status_gm'] : '-'; ?>
@@ -642,14 +642,51 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </tbody>
                             </table>
                             <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                         </div>
                         <div class="row d-inline-flex mt-3 text-center justify-content-center">
-                            <a class="btn btn-custom-upload d-inline-flex justify-content-center align-items-center mx-2"
+                            <!-- <a class="btn btn-custom-upload d-inline-flex justify-content-center align-items-center mx-2"
                                 href="confirm_dp.php?id=<?php echo $id; ?>" style="width: auto; padding: 5px 10px;"><i
                                     class="ti ti-thumb-up"></i> Approve
-                            </a>
+                            </a> -->
+
+                            <button
+                                class="btn btn-custom-upload d-inline-flex justify-content-center align-items-center mx-2"
+                                onclick="openApproveModal(<?php echo $id; ?>)" style="width: auto; padding: 5px 10px;">
+                                <i class="ti ti-thumb-up"></i> Approve
+                            </button>
+
+                            <div class="modal" id="approveModal"
+                                style="display:none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px;">
+                                <div class="modal-content" style="padding: 10px;">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Approve Document</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="POST" action="confirm_dp.php?id=<?php echo $id; ?>">
+                                            <div class="mb-3">
+                                                <label for="tujuan_vp" class="form-label">Ditujukan Kepada :</label>
+                                                <select class="form-control" name="tujuan_vp" required="required">
+                                                    <option value="" style="color: black;">General Manager UPTE</option>
+                                                    <?php
+                                                            $kategori = mysqli_query($koneksi, "SELECT * FROM user_pks WHERE pks_level='GM'");
+                                                            while ($k = mysqli_fetch_array($kategori)) {
+                                                            ?>
+                                                    <option value="<?php echo $k['pks_id']; ?>" style="color: black;">
+                                                        <?php echo $k['pks_nama']; ?></option>
+                                                    <?php
+                                                            }
+                                                            ?>
+                                                </select>
+                                            </div>
+                                            <button type="submit" class="btn btn-custom-review">Approve</button>
+                                            <button type="button" class="btn btn-custom-edit"
+                                                onclick="closeApproveModal()">Cancel</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                             <button
                                 class="btn btn-custom-edit d-inline-flex justify-content-center align-items-center mx-2"
                                 onclick="openRejectModal(<?php echo $id; ?>)" style="width: auto; padding: 5px 10px;">
@@ -705,6 +742,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
 
     function closeRejectModal(id) {
         document.getElementById('rejectModal' + id).style.display = 'none';
+    }
+
+    function openApproveModal() {
+        document.getElementById('approveModal').style.display = 'block';
+    }
+
+    function closeApproveModal() {
+        document.getElementById('approveModal').style.display = 'none';
     }
     </script>
     <script src=" ../assets/libs/jquery/dist/jquery.min.js">

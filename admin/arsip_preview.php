@@ -70,14 +70,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -99,14 +105,17 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
         color: white !important;
     }
     </style>
@@ -214,100 +223,98 @@ if ($_SESSION['status'] != "admin_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-4">Preview Arsip</h5>
-
-                        <a href="data_arsip.php" class="btn btn-custom2 mb-3">
+                        <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">PREVIEW ARSIP
+                        </h5>
+                        <a href="data_arsip.php" class="btn btn-custom-edit mb-3">
                             <i class="bi bi-arrow-left"></i> Back
                         </a>
-                        <div class="card mb-4">
-                            <div class="card-body">
+                        <?php
+                        $id = $_GET['id'];
+                        $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
+                        while ($d = mysqli_fetch_array($data)) {
+                        ?>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <table class="table">
+                                    <tr>
+                                        <th>Kode Arsip</th>
+                                        <td><?php echo $d['arsip_kode']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Waktu Upload</th>
+                                        <td><?php echo date('H:i:s  d-m-Y', strtotime($d['arsip_waktu_upload'])) ?>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Nama File</th>
+                                        <td><?php echo $d['arsip_nama']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Kategori</th>
+                                        <td><?php echo $d['kategori_nama']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Jenis File</th>
+                                        <td><?php echo $d['arsip_jenis']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Petugas Pengupload</th>
+                                        <td><?php echo $d['petugas_nama']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Keterangan</th>
+                                        <td><?php echo $d['arsip_keterangan']; ?></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-8">
                                 <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
+                                    if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
                                     ?>
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <table class="table">
-                                            <tr>
-                                                <th>Kode Arsip</th>
-                                                <td><?php echo $d['arsip_kode']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Waktu Upload</th>
-                                                <td><?php echo date('H:i:s  d-m-Y', strtotime($d['arsip_waktu_upload'])) ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>Nama File</th>
-                                                <td><?php echo $d['arsip_nama']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Kategori</th>
-                                                <td><?php echo $d['kategori_nama']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Jenis File</th>
-                                                <td><?php echo $d['arsip_jenis']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Petugas Pengupload</th>
-                                                <td><?php echo $d['petugas_nama']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th>Keterangan</th>
-                                                <td><?php echo $d['arsip_keterangan']; ?></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <?php
-                                                if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
-                                                ?>
-                                        <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
-                                            alt="<?php echo $d['arsip_nama']; ?>">
-                                        <?php
-                                                } elseif ($d['arsip_jenis'] == "pdf") {
-                                                ?>
-                                        <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
-                                            width="100%" height="600px" />
-                                        <?php
-                                                } elseif ($d['arsip_jenis'] == "xlsx" || $d['arsip_jenis'] == "xls") {
-                                                ?>
-                                        <div id="excel-preview"></div>
-                                        <script>
-                                        fetch('../arsip/<?php echo $d['arsip_file']; ?>')
-                                            .then(response => response.arrayBuffer())
-                                            .then(data => {
-                                                const workbook = XLSX.read(data, {
-                                                    type: 'array'
-                                                });
-                                                const sheetName = workbook.SheetNames[0];
-                                                const worksheet = workbook.Sheets[sheetName];
-                                                const html = XLSX.utils.sheet_to_html(worksheet);
-                                                document.getElementById('excel-preview').innerHTML = html;
-                                            });
-                                        </script>
-                                        <?php
-                                                } else {
-                                                ?>
-                                        <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
-                                                href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
-                                        </p>
-                                        <?php
-                                                }
-                                                ?>
-                                    </div>
-                                </div>
+                                <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
+                                    alt="<?php echo $d['arsip_nama']; ?>">
+                                <?php
+                                    } elseif ($d['arsip_jenis'] == "pdf") {
+                                    ?>
+                                <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
+                                    width="100%" height="600px" />
+                                <?php
+                                    } elseif ($d['arsip_jenis'] == "xlsx" || $d['arsip_jenis'] == "xls") {
+                                    ?>
+                                <div id="excel-preview"></div>
+                                <script>
+                                fetch('../arsip/<?php echo $d['arsip_file']; ?>')
+                                    .then(response => response.arrayBuffer())
+                                    .then(data => {
+                                        const workbook = XLSX.read(data, {
+                                            type: 'array'
+                                        });
+                                        const sheetName = workbook.SheetNames[0];
+                                        const worksheet = workbook.Sheets[sheetName];
+                                        const html = XLSX.utils.sheet_to_html(worksheet);
+                                        document.getElementById('excel-preview').innerHTML = html;
+                                    });
+                                </script>
+                                <?php
+                                    } else {
+                                    ?>
+                                <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
+                                        href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
+                                </p>
                                 <?php
                                     }
                                     ?>
                             </div>
                         </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

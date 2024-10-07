@@ -36,6 +36,7 @@ if ($_SESSION['status'] != "admin_login") {
 
     .textinfo {
         font-size: 12px;
+        margin-bottom: 5px;
     }
 
     .notification-dropdown .message-body {
@@ -74,14 +75,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -103,25 +110,50 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
-    .btn-custom {
-        background-color: #bcddeb !important;
-        color: black !important;
-        cursor: pointer;
-    }
-
-    .btn-custom:hover {
-        background-color: #266d8b !important;
+    .btn-custom-eye {
+        background-color: #11475e !important;
         color: white !important;
     }
 
-    .btn-custom2 {
-        background-color: #ede0a0 !important;
-        color: black !important;
-        cursor: pointer;
+    .btn-custom-eye:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
     }
 
-    .btn-custom2:hover {
-        background-color: #bdb57b !important;
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
+        color: white !important;
+    }
+
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
+        color: white !important;
+    }
+
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
+    input::placeholder {
+        color: white !important;
+    }
+
+    textarea::placeholder {
         color: white !important;
     }
     </style>
@@ -228,47 +260,55 @@ if ($_SESSION['status'] != "admin_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-4">Edit Data Petugas</h5>
-                            <div class="card">
-                                <div class="card-body">
-                                    <?php
-                                    $id = $_GET['id'];
-                                    $data = mysqli_query($koneksi, "select * from petugas where petugas_id='$id'");
-                                    while ($d = mysqli_fetch_array($data)) {
-                                    ?>
-                                    <form method="post" action="petugas_update.php" enctype="multipart/form-data">
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Nama</label>
-                                            <input type="hidden" name="id" value="<?php echo $d['petugas_id']; ?>">
-                                            <input type="text" class="form-control" name="nama" required="required"
-                                                value="<?php echo $d['petugas_nama']; ?>">
+                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">EDIT DATA PETUGAS
+                            </h5>
+                            <?php
+                            $id = $_GET['id'];
+                            $data = mysqli_query($koneksi, "select * from petugas where petugas_id='$id'");
+                            while ($d = mysqli_fetch_array($data)) {
+                            ?>
+                            <form method="post" action="petugas_update.php" enctype="multipart/form-data">
+                                <div class="banyak-data">
+                                    <div class="mb-3">
+                                        <label for="shift" class="form-label">Nama</label>
+                                        <input type="hidden" name="id" value="<?php echo $d['petugas_id']; ?>">
+                                        <input type="text" class="form-control text-white" name="nama"
+                                            required="required" value="<?php echo $d['petugas_nama']; ?>">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="shift" class="form-label">Username</label>
+                                        <input type="text" class="form-control text-white" name="username"
+                                            required="required" value="<?php echo $d['petugas_username']; ?>">
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="shift" class="form-label">Password</label>
+                                        <input type="password" class="form-control text-white" name="password">
+                                        <p class="textinfo">Kosongkan jika tidak ingin mengubah password</p>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input primary" type="checkbox" value=""
+                                                id="showPassword" style="border-color: white;">
+                                            <label class="form-check-label text-white sub-judul" for="showPassword">
+                                                Show Password
+                                            </label>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Username</label>
-                                            <input type="text" class="form-control" name="username" required="required"
-                                                value="<?php echo $d['petugas_username']; ?>">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="shift" class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="password">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah password</p>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">Foto</label>
-                                            <input class="form-control" name="foto" type="file">
-                                            <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
-                                        </div>
-                                        <button type="submit" class="btn btn-custom"><i class="bi bi-send"></i>
-                                            Submit</button>
-                                        <button type="button" class="btn btn-custom2 mx-3" onclick="goBack()"><i
-                                                class="bi bi-arrow-left-circle"></i>
-                                            Back</button>
-                                    </form>
-                                    <?php
-                                    }
-                                    ?>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Foto</label>
+                                        <input class="form-control text-white" name="foto" type="file">
+                                        <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
+                                    </div>
                                 </div>
-                            </div>
+                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                    Submit</button>
+                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                        class="bi bi-arrow-left-circle"></i>
+                                    Back</button>
+                            </form>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -285,6 +325,15 @@ if ($_SESSION['status'] != "admin_login") {
     function goBack() {
         window.location.href = 'data_petugas.php';
     }
+
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordInput = document.getElementById('password');
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
+        }
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

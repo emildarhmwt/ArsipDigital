@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Varela+Round&display=swap" rel="stylesheet">
     <style>
     body {
-        background-color: #d2c392;
+        background-color: #bdd7d9;
     }
 
     .cursor-pointer {
@@ -26,11 +26,11 @@
     }
 
     .login-container {
-        background-color: #e4e0c2;
+        background-color: #22486d;
     }
 
     .login-text {
-        color: #4d3d0d;
+        color: white;
         font-family: 'Varela Round', sans-serif;
     }
 
@@ -80,19 +80,19 @@
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21"
-                                                    stroke="#667085" stroke-width="2" stroke-linecap="round"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                                 <path
                                                     d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z"
-                                                    stroke="#667085" stroke-width="2" stroke-linecap="round"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                                 <path
                                                     d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13"
-                                                    stroke="#667085" stroke-width="2" stroke-linecap="round"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                                 <path
                                                     d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88"
-                                                    stroke="#667085" stroke-width="2" stroke-linecap="round"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                             </svg>
                                         </div>
@@ -114,11 +114,11 @@
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"
-                                                    stroke="#667085" stroke-width="2" stroke-linecap="round"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                                 <path
                                                     d="M20 21C20 18.8783 19.1571 16.8434 17.6569 15.3431C16.1566 13.8429 14.1217 13 12 13C9.87827 13 7.84344 13.8429 6.34315 15.3431C4.84285 16.8434 4 18.8783 4 21"
-                                                    stroke="#667085" stroke-width="2" stroke-linecap="round"
+                                                    stroke="#ffffff" stroke-width="2" stroke-linecap="round"
                                                     stroke-linejoin="round" />
                                             </svg>
                                         </div>

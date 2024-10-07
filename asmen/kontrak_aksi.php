@@ -38,14 +38,14 @@ if ($dockt_dock_id) {
 $rand = rand();
 $filename = $_FILES['file']['name'];
 $comment  = $_POST['comment'];
-
+$tujuan_avp = $_POST['tujuan_avp'];
 
     move_uploaded_file($_FILES['file']['tmp_name'], '../berkas_pks/' . $rand . '_' . $filename);
     $nama_file = $rand . '_' . $filename;
 
     // Insert into doc1 for AVP confirmation with status 'uploaded'
     mysqli_query($koneksi, 
-    "INSERT into doc_kontrak (dockt_dock_id, dockt_petugas, dockt_waktu_asmen, dockt_nama, dockt_desk, dockt_jenis, dockt_kategori, dockt_aspek, dockt_tanggal, dockt_lokasi, dockt_file, dockt_comment, dockt_status_asmen) 
-    VALUES ('$dockt_dock_id','$petugas', '$waktu','$nama', '$desk', '$jenis2', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded (Asmen)')") or die(mysqli_error($koneksi));
+    "INSERT into doc_kontrak (dockt_dock_id, dockt_petugas, dockt_waktu_asmen, dockt_tujuan_avp ,dockt_nama, dockt_desk, dockt_jenis, dockt_kategori, dockt_aspek, dockt_tanggal, dockt_lokasi, dockt_file, dockt_comment, dockt_status_asmen) 
+    VALUES ('$dockt_dock_id','$petugas', '$waktu','$tujuan_avp','$nama', '$desk', '$jenis2', '$kategori', '$aspek', '$tanggal', '$lokasi', '$nama_file', '$comment', 'Uploaded (Asmen)')") or die(mysqli_error($koneksi));
 
     header("location:data_kontrak.php?alert=sukses");
