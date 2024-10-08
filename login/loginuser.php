@@ -179,7 +179,7 @@
                                             <option value="asmen">Asisten Manager</option>
                                             <option value="avp">Asisten Vice President</option>
                                             <option value="vp">Vice President</option>
-                                            <option value="gm">General Manager UPTE</option>
+                                            <option value="gm">General Manager</option>
                                         </select>
                                     </div>
                                     <div class="d-flex justify-content-between">
