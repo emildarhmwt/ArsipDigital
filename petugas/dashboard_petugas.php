@@ -101,6 +101,76 @@
          font-style: normal;
          font-weight: 400;
      }
+
+     .haikiri {
+         width: 200px;
+         height: auto;
+         float: left;
+         margin-top: -65px;
+         margin-left: -50px;
+     }
+
+     .haikanan {
+         width: 200px;
+         height: auto;
+         float: right;
+         margin-top: -40px;
+         margin-right: -37px;
+     }
+
+     .welcome {
+         margin-top: -170px;
+         font-family: "Varela Round", sans-serif;
+         color: white;
+         font-size: 30px;
+     }
+
+     .nama {
+         font-family: "Varela Round", sans-serif;
+         font-size: 18px;
+         color: white;
+     }
+
+     .gm {
+         font-family: "Varela Round", sans-serif;
+         margin-top: 30px;
+         font-size: 10px;
+         color: white;
+     }
+
+     .wave {
+         width: 170px;
+         height: auto;
+         margin-top: -25px;
+         margin-left: auto;
+         margin-right: 0;
+     }
+
+     .wave2 {
+         width: 170px;
+         height: auto;
+         margin-top: -25px;
+         margin-left: auto;
+         margin-right: 0;
+     }
+
+     .kategori {
+         margin-top: -40px;
+
+     }
+
+     .kategori2 {
+         margin-top: -50px;
+     }
+
+     .doc-pks {
+         color: #062949 !important;
+     }
+
+     .btn-custom-search {
+         color: white !important;
+         background-color: #11475e !important;
+     }
      </style>
  </head>
 
@@ -206,52 +276,77 @@
              <div class="container-fluid">
                  <div class="row">
                      <div class="col-lg-6">
-                         <div class="card overflow-hidden">
+                         <div class="card overflow-hidden" style="height: 170px; background-color: #0d3254;">
                              <div class="card-body p-4">
-                                 <div class="d-flex align-items-center mb-2">
-                                     <span
-                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
-                                         <i class="ti ti-category fs-8"></i>
-                                     </span>
-                                     <div class="ms-2">
-                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
-                                         <?php
-                                        $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
-                                        ?>
-
-                                         <h5 class="card-title mb-0 fw-semibold fs-3"><span
-                                                 class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
-                                         </h5>
+                                 <div class="row align-items-center text-center">
+                                     <div class="col-4 text-start">
+                                         <img src="../assets/images/haikiri.png" class="haikiri">
                                      </div>
-
+                                     <div class="col-4 text-center">
+                                         <!-- Added a div for centering text -->
+                                         <h5 class="welcome">Welcome</h5>
+                                         <h5 class="nama"><?php echo htmlspecialchars($_SESSION['nama']); ?></h5>
+                                         <h5 class="gm">Asisten Manager</h5>
+                                     </div>
+                                     <div class="col-4 text-end">
+                                         <img src="../assets/images/haikanan.png" class="haikanan">
+                                     </div>
                                  </div>
                              </div>
                          </div>
                      </div>
-                     <div class="col-lg-6">
-                         <div class="card overflow-hidden">
+
+                     <div class="col-lg-3">
+                         <div class="card overflow-hidden" style="height: 170px; background-color:#e47c10;">
+                             <div class=" card-body p-4">
+                                 <div class="d-flex align-items-center mb-2">
+                                     <span class="me-2 d-flex align-items-center justify-content-center">
+                                         <i class="ti ti-file-analytics fs-9 text-white kategori2"></i>
+                                     </span>
+                                     <div class=" ms-2">
+                                         <img src="../assets/images/2.png" class="wave">
+                                     </div>
+                                 </div>
+
+                                 <div class="kategori">
+                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
+                                     <?php
+                                        $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
+                                        ?>
+
+                                     <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                             class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
+                                     </h5>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+
+                     <div class="col-lg-3">
+                         <div class="card overflow-hidden" style="height: 170px; background-color:#e47c10;">
                              <div class="card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
-                                     <span
-                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
-                                         <i class="ti ti-users fs-8"></i>
+                                     <span class="me-2 d-flex align-items-center justify-content-center">
+                                         <i class="ti ti-file-analytics fs-9 text-white kategori2"></i>
                                      </span>
                                      <div class="ms-2">
-                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
-                                         <?php
+                                         <img src="../assets/images/2.png" class="wave2">
+                                     </div>
+                                 </div>
+                                 <div class="kategori doc-pks">
+                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
+                                     <?php
                                         $jumlah_user = mysqli_query($koneksi, "select * from user");
                                         ?>
-                                         <h5 class="card-title mb-0 fw-semibold fs-3"><span
-                                                 class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
-                                         </h5>
-                                     </div>
+                                     <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                             class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
+                                     </h5>
                                  </div>
                              </div>
                          </div>
                      </div>
                  </div>
+
                  <!-- Row 1 -->
                  <div class="row">
                      <div class="col-lg-8 d-flex align-items-strech">
@@ -263,12 +358,12 @@
                                      </div>
                                      <div class="row">
                                          <div class="col-lg-12 d-flex align-items-center">
-                                             <button type="button" class="btn btn-outline-secondary btn-sm me-3"
+                                             <button type="button" class="btn btn-custom-search btn-sm me-3"
                                                  id="fetchAllData">Semua Data</button>
                                              <div class="dropdown mx-2">
                                                  <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
                                                      aria-expanded="false"
-                                                     class="rounded-circle btn-outline-secondary rounded-circle btn-sm px-1 btn shadow-none">
+                                                     class="rounded-circle btn-custom-search rounded-circle btn-sm px-1 btn shadow-none">
                                                      <i class="ti ti-search fs-6 d-block"></i>
                                                  </button>
                                                  <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
@@ -292,7 +387,8 @@
                                                                  </div>
                                                              </div>
                                                              <div class="d-flex justify-content-center mt-3">
-                                                                 <button type="submit" class="btn btn-primary mx-3"><i
+                                                                 <button type="submit"
+                                                                     class="btn btn-custom-search mx-3"><i
                                                                          class="bi bi-search"></i> Search
                                                                      Data</button>
                                                              </div>
@@ -316,7 +412,8 @@
                                          <div class="row align-items-center">
                                              <div class="col-lg-12 d-flex align-items-center">
                                                  <div class="col-lg-8">
-                                                     <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip :
+                                                     <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip
+                                                         :
                                                      </h5>
                                                  </div>
                                                  <div class="col-lg-4">
@@ -378,30 +475,36 @@
                      label: 'Jumlah Arsip per Kategori',
                      data: data,
                      backgroundColor: [
-                         'rgba(204, 39, 39, 0.2)',
-                         'rgba(204, 180, 39, 0.2)',
-                         'rgba(142, 204, 39, 0.2)',
-                         'rgba(39, 204, 49, 0.2)',
-                         'rgba(39, 204, 160, 0.2)',
-                         'rgba(39, 125, 204, 0.2)',
-                         'rgba(42, 39, 204, 0.2)',
-                         'rgba(128, 39, 204, 0.2)',
-                         'rgba(204, 39, 197, 0.2)',
-                         'rgba(204, 39, 115, 0.2)',
-                         'rgba(204, 39, 39, 0.2)'
+                         'rgba(7, 28, 49, 1)',
+                         'rgba(10, 39, 68, 1)',
+                         'rgba(11, 54, 95, 1)',
+                         'rgba(22, 71, 117, 1)',
+                         'rgba(25, 86, 144, 1)',
+                         'rgba(34, 105, 173, 1)',
+                         'rgba(45, 119, 190, 1)',
+                         'rgba(61, 140, 215, 1)',
+                         'rgba(51, 146, 237, 1)',
+                         'rgba(101, 170, 237, 1)',
+                         'rgba(121, 181, 239, 1)',
+                         'rgba(147, 194, 240, 1)',
+                         'rgba(180, 214, 247, 1)',
+                         'rgba(215, 235, 255, 1)'
                      ],
                      borderColor: [
-                         'rgba(204, 39, 39, 1)',
-                         'rgba(204, 180, 39, 1)',
-                         'rgba(142, 204, 39, 1)',
-                         'rgba(39, 204, 49, 1)',
-                         'rgba(39, 204, 160, 1)',
-                         'rgba(39, 125, 204, 1)',
-                         'rgba(42, 39, 204, 1)',
-                         'rgba(128, 39, 204, 1)',
-                         'rgba(204, 39, 197, 1)',
-                         'rgba(204, 39, 115, 1)',
-                         'rgba(204, 39, 39, 1)'
+                         'rgba(7, 28, 49, 1)',
+                         'rgba(10, 39, 68, 1)',
+                         'rgba(11, 54, 95, 1)',
+                         'rgba(22, 71, 117, 1)',
+                         'rgba(25, 86, 144, 1)',
+                         'rgba(34, 105, 173, 1)',
+                         'rgba(45, 119, 190, 1)',
+                         'rgba(61, 140, 215, 1)',
+                         'rgba(51, 146, 237, 1)',
+                         'rgba(101, 170, 237, 1)',
+                         'rgba(121, 181, 239, 1)',
+                         'rgba(147, 194, 240, 1)',
+                         'rgba(180, 214, 247, 1)',
+                         'rgba(215, 235, 255, 1)'
                      ],
                      borderWidth: 1
                  }]
@@ -473,9 +576,16 @@
 
          let downloadChart; // Declare a variable to hold the chart instance
 
-         const fetchData = (startDate = '', endDate = '') => {
-             const url = startDate && endDate ? `get_download_data.php?startDate=${startDate}&endDate=${endDate}` :
-                 'get_download_data.php';
+         const getLastWeekDate = () => {
+             const date = new Date();
+             date.setDate(date.getDate() - 7);
+             return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+         };
+
+         const fetchData = (startDate = getLastWeekDate(), endDate = '') => {
+             const url = endDate ?
+                 `grafik.php?startDate=${startDate}&endDate=${endDate}` :
+                 `grafik.php?startDate=${startDate}`;
              fetch(url)
                  .then(response => response.json())
                  .then(data => {
@@ -494,15 +604,29 @@
                              datasets: [{
                                  label: 'Jumlah Unduhan',
                                  data: data.values,
-                                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                 borderColor: 'rgba(75, 192, 192, 1)',
+                                 backgroundColor: '#11475e ',
+                                 borderColor: '#11475e ',
                                  borderWidth: 1
                              }]
                          },
                          options: {
                              scales: {
                                  y: {
-                                     beginAtZero: true
+                                     beginAtZero: true,
+                                     grid: {
+                                         color: '#ffffff' // Changed grid line color to white
+                                     },
+                                     ticks: {
+                                         color: '#ffffff' // Changed tick text color to white
+                                     }
+                                 },
+                                 x: {
+                                     grid: {
+                                         color: '#ffffff' // Changed grid line color to white
+                                     },
+                                     ticks: {
+                                         color: '#ffffff' // Changed tick text color to white
+                                     }
                                  }
                              }
                          }
@@ -528,7 +652,7 @@
          });
 
          // Call fetchData on page load
-         fetchData();
+         fetchData(getLastWeekDate());
          </script>
          <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
          <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

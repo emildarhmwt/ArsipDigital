@@ -313,7 +313,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <!-- Added a div for centering text -->
                                         <h5 class="welcome">Welcome</h5>
                                         <h5 class="nama"><?php echo htmlspecialchars($_SESSION['nama']); ?></h5>
-                                        <h5 class="gm">General Manager</h5>
+                                        <h5 class="gm">Asisten Manager</h5>
                                     </div>
                                     <div class="col-4 text-end">
                                         <img src="../assets/images/haikanan.png" class="haikanan">
