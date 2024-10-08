@@ -802,9 +802,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     function fetchCurrentYearData() {
         const nowKajian = new Date();
         const currentYearKajian = now.getFullYear(); // Mendapatkan tahun saat ini
+        const currentMonthKajian = now.getMonth() + 1;
         document.getElementById('kajianStartYear').value = currentYearKajian; // Menetapkan input ke tahun saat ini
         document.getElementById('yearTextKajian').textContent = currentYearKajian; // Tampilkan tahun saat ini di UI
-        fetchKajianData(currentYearKajian); // Ambil data untuk tahun saat ini
+        fetchKajianData(currentYearKajian, currentMonthKajian); // Ambil data untuk tahun saat ini
     }
 
     function fetchKajianData(year) {
@@ -862,9 +863,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     function fetchCurrentYearDataKH() {
         const nowKH = new Date();
         const currentYearKH = nowKH.getFullYear(); // Mendapatkan tahun saat ini
+        const currentMonthKH = now.getMonth() + 1;
         document.getElementById('kakHpsStartYear').value = currentYearKH; // Menetapkan input ke tahun saat ini
         document.getElementById('yearTextKH').textContent = currentYearKH; // Tampilkan tahun saat ini di UI
-        fetchKHData(currentYearKH); // Ambil data untuk tahun saat ini
+        fetchKHData(currentYearKH, currentMonthKH); // Ambil data untuk tahun saat ini
     }
 
     function fetchKHData(year) {
@@ -882,7 +884,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
             .catch(error => console.error('Error fetching data:', error));
     }
 
-    // Existing updateKajianChart function
     function updateKHChart(data) {
         // Update the chart data with the fetched data
         statusDocKHChart.data.datasets[0].data = data.uploaded_asmen; // Update with the correct data
@@ -919,10 +920,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     //Grafik Dokumen Kontrak
     function fetchCurrentYearDataKontrak() {
         const nowKontrak = new Date();
-        const currentYearKontrak = nowKH.getFullYear(); // Mendapatkan tahun saat ini
+        const currentYearKontrak = nowKontrak.getFullYear(); // Mendapatkan tahun saat ini
+        const currentMonthKontrak = now.getMonth() + 1;
         document.getElementById('kontrakStartYear').value = currentYearKontrak; // Menetapkan input ke tahun saat ini
         document.getElementById('yearTextKontrak').textContent = currentYearKontrak; // Tampilkan tahun saat ini di UI
-        fetchKHData(currentYearKontrak); // Ambil data untuk tahun saat ini
+        fetchKontrakData(currentYearKontrak, currentMonthKontrak); // Ambil data untuk tahun saat ini
     }
 
     function fetchKontrakData(year) {
@@ -1684,8 +1686,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     });
 
     window.onload = function() {
-        displayCurrentDate(); // Display current date
+        // displayCurrentDate(); // Display current date
         fetchCurrentMonthData(); // Fetch data for the current month
+        fetchCurrentYearData(); // Fetch data for Dokumen Kajian
+        fetchCurrentYearDataKH(); // Fetch data for Dokumen KAK & HPS
+        fetchCurrentYearDataKontrak(); // Fetch data for Dokumen Kontrak
     };
     </script>
     <script src=" ../assets/libs/jquery/dist/jquery.min.js">
