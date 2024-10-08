@@ -800,17 +800,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
 
     //Grafik Dokumen Kajian
     function fetchCurrentYearData() {
-        const now = new Date();
-        const currentYear = now.getFullYear(); // Get the current year
-        document.getElementById('kajianStartYear').value = currentYear; // Set the input field to the current year
-        fetchKajianData(currentYear); // Fetch data for the current year
+        const nowKajian = new Date();
+        const currentYearKajian = now.getFullYear(); // Mendapatkan tahun saat ini
+        document.getElementById('kajianStartYear').value = currentYearKajian; // Menetapkan input ke tahun saat ini
+        document.getElementById('yearTextKajian').textContent = currentYearKajian; // Tampilkan tahun saat ini di UI
+        fetchKajianData(currentYearKajian); // Ambil data untuk tahun saat ini
     }
-
-    // Call this function when the page loads
-    window.onload = function() {
-        displayCurrentDate(); // Display current date
-        fetchCurrentYearData(); // Fetch data for the current year
-    };
 
     function fetchKajianData(year) {
         fetch(`fetch_kajian_data.php?year=${year}`)
@@ -821,8 +816,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                 return response.json();
             })
             .then(data => {
-                console.log(data); // Log the data to check its structure
-                updateKajianChart(data); // Update the chart with the new data
+                console.log(data); // Log data untuk memeriksa strukturnya
+                updateKajianChart(data); // Perbarui grafik dengan data baru
             })
             .catch(error => console.error('Error fetching data:', error));
     }
@@ -841,7 +836,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
     }
 
     const nowKajian = new Date();
-    const currentYearKajian = now.getFullYear();
+    const currentYearKajian = new Date().getFullYear();
     document.getElementById('yearTextKajian').textContent = currentYearKajian;
     fetchDataByYear(currentYearKajian);
 
@@ -857,7 +852,49 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
         }
     });
 
+    // Call this function when the page loads
+    window.onload = function() {
+        displayCurrentDate(); // Display current date
+        fetchCurrentYearData();
+    };
+
     // Grafik Dokumen KAK & HPS
+    function fetchCurrentYearDataKH() {
+        const nowKH = new Date();
+        const currentYearKH = nowKH.getFullYear(); // Mendapatkan tahun saat ini
+        document.getElementById('kakHpsStartYear').value = currentYearKH; // Menetapkan input ke tahun saat ini
+        document.getElementById('yearTextKH').textContent = currentYearKH; // Tampilkan tahun saat ini di UI
+        fetchKHData(currentYearKH); // Ambil data untuk tahun saat ini
+    }
+
+    function fetchKHData(year) {
+        fetch(`fetch_kak_hps_data.php?year=${year}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Log data untuk memeriksa strukturnya
+                updateKHChart(data); // Perbarui grafik dengan data baru
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Existing updateKajianChart function
+    function updateKHChart(data) {
+        // Update the chart data with the fetched data
+        statusDocKHChart.data.datasets[0].data = data.uploaded_asmen; // Update with the correct data
+        statusDocKHChart.data.datasets[1].data = data.approved_avp; // Update with the correct data
+        statusDocKHChart.data.datasets[2].data = data.rejected_avp; // Update with the correct data
+        statusDocKHChart.data.datasets[3].data = data.approved_vp; // Update with the correct data
+        statusDocKHChart.data.datasets[4].data = data.rejected_vp; // Update with the correct data
+        statusDocKHChart.data.datasets[5].data = data.done; // Update with the correct data
+        statusDocKHChart.data.datasets[6].data = data.rejected_gm; // Update with the correct data
+        statusDocKHChart.update(); // Refresh the chart
+    }
+
     const nowKH = new Date();
     const currentYearKH = now.getFullYear();
     document.getElementById('yearTextKH').textContent = currentYearKH;
@@ -867,10 +904,55 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
         event.preventDefault();
         const year = document.getElementById('kakHpsStartYear').value;
         document.getElementById('yearTextKH').textContent = year;
-        fetchKakHpsData(year);
+        if (year) {
+            fetchKHData(year); // Fetch data for the specified year
+        } else {
+            alert('Please enter a valid year.'); // Alert if the year is not valid
+        }
     });
 
+    window.onload = function() {
+        displayCurrentDate(); // Display current date
+        fetchCurrentYearDataKH(); // Fetch data for the current year for KAK & HPS
+    };
+
     //Grafik Dokumen Kontrak
+    function fetchCurrentYearDataKontrak() {
+        const nowKontrak = new Date();
+        const currentYearKontrak = nowKH.getFullYear(); // Mendapatkan tahun saat ini
+        document.getElementById('kontrakStartYear').value = currentYearKontrak; // Menetapkan input ke tahun saat ini
+        document.getElementById('yearTextKontrak').textContent = currentYearKontrak; // Tampilkan tahun saat ini di UI
+        fetchKHData(currentYearKontrak); // Ambil data untuk tahun saat ini
+    }
+
+    function fetchKontrakData(year) {
+        fetch(`fetch_kontrak_data.php?year=${year}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Log data untuk memeriksa strukturnya
+                updateKontrakChart(data); // Perbarui grafik dengan data baru
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+    // Existing updateKajianChart function
+    function updateKontrakChart(data) {
+        // Update the chart data with the fetched data
+        statusDocKontrakChart.data.datasets[0].data = data.uploaded_asmen; // Update with the correct data
+        statusDocKontrakChart.data.datasets[1].data = data.approved_avp; // Update with the correct data
+        statusDocKontrakChart.data.datasets[2].data = data.rejected_avp; // Update with the correct data
+        statusDocKontrakChart.data.datasets[3].data = data.approved_vp; // Update with the correct data
+        statusDocKontrakChart.data.datasets[4].data = data.rejected_vp; // Update with the correct data
+        statusDocKontrakChart.data.datasets[5].data = data.done; // Update with the correct data
+        statusDocKontrakChart.data.datasets[6].data = data.rejected_gm; // Update with the correct data
+        statusDocKontrakChart.update(); // Refresh the chart
+    }
+
     const nowKontrak = new Date();
     const currentYearKontrak = now.getFullYear();
     document.getElementById('yearTextKontrak').textContent = currentYearKontrak;
@@ -880,8 +962,18 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
         event.preventDefault();
         const year = document.getElementById('kontrakStartYear').value;
         document.getElementById('yearTextKontrak').textContent = year;
-        fetchKontrakData(year);
+        if (year) {
+            fetchKontrakData(year); // Fetch data for the specified year
+        } else {
+            alert('Please enter a valid year.'); // Alert if the year is not valid
+        }
     });
+
+    // Call this function when the page loads to fetch the current year data
+    window.onload = function() {
+        displayCurrentDate(); // Display current date
+        fetchCurrentYearDataKontrak(); // Fetch data for the current year for KAK & HPS
+    };
 
     const categoryData =
         <?php
