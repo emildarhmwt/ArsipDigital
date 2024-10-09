@@ -68,14 +68,20 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .navbar-judul {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
         margin-left: 20px;
-        font-family: "Playwrite DE Grund", cursive;
+        font-family: "Varela Round", sans-serif;
         display: flex;
         align-items: center;
         margin-top: 17px;
-        color: #4e6a7d;
+        color: #912005;
+    }
+
+    .nama-profile {
+        color: #912005;
+        font-family: "Varela Round", sans-serif;
+        font-size: 20px;
     }
 
     .pacifico-regular {
@@ -95,6 +101,122 @@ if ($_SESSION['status'] != "admin_login") {
         font-optical-sizing: auto;
         font-style: normal;
         font-weight: 400;
+    }
+
+    .bg-custom-circle {
+        --bs-bg-opacity: 1;
+        background-color: rgb(23 60 81) !important;
+        color: white !important;
+    }
+
+    .btn-custom-search {
+        color: white !important;
+        background-color: #11475e !important;
+    }
+
+    .haikiri {
+        width: 200px;
+        height: auto;
+        float: left;
+        margin-top: -65px;
+        margin-left: -50px;
+    }
+
+    .haikanan {
+        width: 200px;
+        height: auto;
+        float: right;
+        margin-top: -40px;
+        margin-right: -37px;
+    }
+
+    .welcome {
+        margin-top: -170px;
+        font-family: "Varela Round", sans-serif;
+        color: white;
+        font-size: 30px;
+    }
+
+    .nama {
+        font-family: "Varela Round", sans-serif;
+        font-size: 18px;
+        color: white;
+    }
+
+    .gm {
+        font-family: "Varela Round", sans-serif;
+        margin-top: 30px;
+        font-size: 10px;
+        color: white;
+    }
+
+    .wave {
+        width: 120px;
+        height: auto;
+        margin-top: -25px;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .wave2 {
+        width: 120px;
+        height: auto;
+        margin-top: -25px;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .wave3 {
+        width: 120px;
+        height: auto;
+        margin-top: -25px;
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .doc-pks {
+        color: #062949 !important;
+    }
+
+    .kajian {
+        background-image: url("../assets/images/bg-card.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .kontrak {
+        margin-top: 20px;
+    }
+
+    .kategori {
+        background-image: url("../assets/images/3.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .jumlah-kategori {
+        margin-left: 40px;
+        margin-top: -10px;
+    }
+
+    .gambar-kategori {
+        width: 120px;
+        height: auto;
+        margin-left: auto;
+        margin-top: -30px;
+        margin-right: 0;
+        float: right;
+    }
+
+    .gambar-user {
+        width: 170px;
+        height: auto;
+        margin-left: auto;
+        margin-top: -50px;
+        margin-right: -30px;
+        float: right;
     }
     </style>
 </head>
@@ -198,52 +320,135 @@ if ($_SESSION['status'] != "admin_login") {
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-3">
-                        <div class="card overflow-hidden">
+                    <div class="col-lg-6">
+                        <div class="card overflow-hidden" style="height: 170px; background-color: #0d3254;">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-2">
-                                    <span
-                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
-                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
-                                        <i class="ti ti-thumb-up fs-8"></i>
-                                    </span>
-                                    <div class="ms-2">
-                                        <h5 class="card-title mb-2 fw-semibold fs-4">Data Selesai</h5>
-                                        <h5 class="card-title mb-0 fw-semibold fs-3">18</h5>
+                                <div class="row align-items-center text-center">
+                                    <div class="col-4 text-start">
+                                        <img src="../assets/images/haikiri.png" class="haikiri">
                                     </div>
-
+                                    <div class="col-4 text-center">
+                                        <!-- Added a div for centering text -->
+                                        <h5 class="welcome">Welcome</h5>
+                                        <h5 class="nama"><?php echo htmlspecialchars($_SESSION['nama']); ?></h5>
+                                        <h5 class="gm">Admin</h5>
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <img src="../assets/images/haikanan.png" class="haikanan">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="card overflow-hidden">
+
+                    <div class="col-lg-2">
+                        <div class="card overflow-hidden kajian" style="height: 170px;">
+                            <div class=" card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
+                                    </span>
+                                    <!-- <div class=" ms-2">
+                                        <img src="../assets/images/2.png" class="wave">
+                                    </div> -->
+                                </div>
+
+                                <div class="mt-4">
+                                    <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc Kajian</h5>
+                                    <?php
+                                    // Update the query to exclude certain statuses
+                                    // $jumlah_kajian = mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen != 'Uploaded (Asmen)' OR dock_status_avp NOT IN ('Approved (AVP)', 'Rejected (AVP)') OR dock_status_vp != 'Rejected (VP)'");
+                                    $jumlah_kajian = mysqli_query($koneksi, "SELECT * FROM dockajian");
+                                    ?>
+                                    <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
+                                            class="counter"><?php echo mysqli_num_rows($jumlah_kajian); ?></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="card overflow-hidden kajian" style="height: 170px;">
                             <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
+                                    </span>
+                                    <!-- <div class="ms-2">
+                                        <img src="../assets/images/2.png" class="wave2">
+                                    </div> -->
+                                </div>
+                                <div class="mt-4 doc-pks">
+                                    <h5 class="doc-pks mb-2 fw-semibold fs-1">Doc KAK & HPS</h5>
+                                    <?php
+                                    // $jumlah_kak_hps = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen != 'Uploaded (Asmen)' OR dockh_status_avp NOT IN ('Approved (AVP)', 'Rejected (AVP)') OR dockh_status_vp != 'Rejected (VP)'");
+                                    $jumlah_kak_hps = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps");
+                                    ?>
+                                    <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
+                                            class="counter"><?php echo mysqli_num_rows($jumlah_kak_hps); ?></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="card overflow-hidden kajian" style="height: 170px;">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="me-2 d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
+                                    </span>
+                                    <!-- <div class="ms-2">
+                                        <img src="../assets/images/2.png" class="wave3">
+                                    </div> -->
+                                </div>
+                                <div class="mt-4 doc-pks">
+                                    <h5 class="doc-pks mb-2 fw-semibold fs-1">Doc Kontrak</h5>
+                                    <?php
+                                    // $jumlah_kontrak = mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen != 'Uploaded (Asmen)' OR dockt_status_avp NOT IN ('Approved (AVP)', 'Rejected (AVP)') OR dockt_status_vp != 'Rejected (VP)'");
+                                    $jumlah_kontrak = mysqli_query($koneksi, "SELECT * FROM doc_kontrak");
+                                    ?>
+                                    <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
+                                            class="counter"><?php echo mysqli_num_rows($jumlah_kontrak); ?></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card overflow-hidden kategori" style="height: 150px;">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2 jumlah-kategori">
                                     <span
                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
                                         <i class="ti ti-category fs-8"></i>
                                     </span>
-                                    <div class="ms-2">
+                                    <div class="me-2">
                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
                                         <?php
                                         $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
                                         ?>
-
-                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                        <h5 class="card-title mb-0 fw-semibold fs-4"><span
                                                 class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
                                         </h5>
                                     </div>
-
+                                </div>
+                                <div>
+                                    <img src="../assets/images/6.png" class="gambar-kategori">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="card overflow-hidden">
+                    <div class="col-lg-4">
+                        <div class="card overflow-hidden kategori" style="height: 150px;">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-2">
+                                <div class="d-flex align-items-center mb-2 jumlah-kategori">
                                     <span
                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
@@ -254,19 +459,21 @@ if ($_SESSION['status'] != "admin_login") {
                                         <?php
                                         $jumlah_petugas = mysqli_query($koneksi, "select * from petugas");
                                         ?>
-                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                        <h5 class="card-title mb-0 fw-semibold fs-4"><span
                                                 class="counter"><?php echo mysqli_num_rows($jumlah_petugas); ?></span>
                                         </h5>
                                     </div>
-
+                                </div>
+                                <div>
+                                    <img src="../assets/images/7.png" class="gambar-user">
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-3">
-                        <div class="card overflow-hidden">
+                    <div class="col-lg-4">
+                        <div class="card overflow-hidden kategori" style="height: 150px;">
                             <div class="card-body p-4">
-                                <div class="d-flex align-items-center mb-2">
+                                <div class="d-flex align-items-center mb-2 jumlah-kategori">
                                     <span
                                         class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
                                         style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
@@ -281,6 +488,9 @@ if ($_SESSION['status'] != "admin_login") {
                                                 class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
                                         </h5>
                                     </div>
+                                </div>
+                                <div>
+                                    <img src="../assets/images/7.png" class="gambar-user">
                                 </div>
                             </div>
                         </div>
@@ -297,12 +507,12 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 d-flex align-items-center">
-                                            <button type="button" class="btn btn-outline-secondary btn-sm me-3"
+                                            <button type="button" class="btn btn-custom-search btn-sm me-3"
                                                 id="fetchAllData">Semua Data</button>
                                             <div class="dropdown mx-2">
                                                 <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
                                                     aria-expanded="false"
-                                                    class="rounded-circle btn-outline-secondary rounded-circle btn-sm px-1 btn shadow-none">
+                                                    class="rounded-circle btn-custom-search rounded-circle btn-sm px-1 btn shadow-none">
                                                     <i class="ti ti-search fs-6 d-block"></i>
                                                 </button>
                                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
@@ -326,9 +536,9 @@ if ($_SESSION['status'] != "admin_login") {
                                                                 </div>
                                                             </div>
                                                             <div class="d-flex justify-content-center mt-3">
-                                                                <button type="submit" class="btn btn-primary mx-3"><i
-                                                                        class="bi bi-search"></i> Search
-                                                                    Data</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-custom-search mx-3"><i
+                                                                        class="bi bi-search"></i> Search</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -350,7 +560,8 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="row align-items-center">
                                             <div class="col-lg-12 d-flex align-items-center">
                                                 <div class="col-lg-8">
-                                                    <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip :
+                                                    <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">Jumlah Arsip
+                                                        :
                                                     </h5>
                                                 </div>
                                                 <div class="col-lg-4">
@@ -421,115 +632,220 @@ if ($_SESSION['status'] != "admin_login") {
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class=" row">
-                        <div class="col-lg-12 d-flex align-items-stretch">
-                            <div class="card w-100">
-                                <div class="card-body p-4">
-                                    <div class="d-flex mb-4 justify-content-between align-items-center">
-                                        <h5 class="mb-0 fw-bold">Data </h5>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-10">
+                                            <div class="">
+                                                <h5 class="card-title fw-semibold">Grafik Semua Dokumen PKS
+                                                </h5>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 d-flex align-items-center">
+                                                    <span
+                                                        class="rounded-circle btn-custom-search btn-sm px-1 btn shadow-none"
+                                                        id="yearText" style="width:50px; height:30px;"></span>
+                                                    <div class="dropdown mx-2">
+                                                        <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                            aria-expanded="false"
+                                                            class="rounded-circle btn-custom-search btn-sm px-1 btn shadow-none">
+                                                            <i class="ti ti-search fs-6 d-block"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                            aria-labelledby="dropdownMenuButton2">
+                                                            <div class="message-body">
+                                                                <form id="yearFilterForm">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 mb-1">
+                                                                            <label for="startYear"
+                                                                                class="form-label">Tahun
+                                                                                :</label>
+                                                                            <input type="number" class="form-control"
+                                                                                id="startYear" name="startYear"
+                                                                                placeholder="Masukkan Tahun" min="2000"
+                                                                                max="2100">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="d-flex justify-content-center mt-3">
+                                                                        <button type="submit"
+                                                                            class="btn btn-custom-search mx-3"><i
+                                                                                class="bi bi-search"></i> Search
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <canvas id="statusBarChart" width="200px" height="300px"></canvas>
+                                        </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                                    <div class="table-responsive" style="max-height: 400px; overflow-y: auto;"
-                                        data-simplebar>
-                                        <table class="table table-borderless align-middle text-nowrap">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Nama File</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="me-4">
-                                                                <img src="../assets/images/profile/user1.jpg" width="50"
-                                                                    class="rounded-circle" alt="" />
-                                                            </div>
-                                                            <div>
-                                                                <h6 class="mb-1 fw-bolder">
-                                                                    Mark J. Freeman</h6>
-                                                                <p class="fs-3 mb-0">Prof.
-                                                                    English</p>
-                                                            </div>
+                    <div class="col-lg-6">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h5 class="card-title fw-semibold">Grafik Dokumen Kajian</h5>
+                                            <div class="d-flex">
+                                                <span
+                                                    class="rounded-circle btn-custom-search btn-sm px-1 btn shadow-none"
+                                                    id="yearTextKajian" style="width:50px; height:30px;"></span>
+                                                <div class="dropdown mx-2">
+                                                    <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                        class="rounded-circle btn-custom-search rounded-circle btn-sm px-1 btn shadow-none">
+                                                        <i class="ti ti-search fs-6 d-block"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                        aria-labelledby="dropdownMenuButton2">
+                                                        <div class="message-body">
+                                                            <form id="kajianYearFilterForm">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 mb-1">
+                                                                        <label for="kajianStartYear"
+                                                                            class="form-label">Tahun :</label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="kajianStartYear" name="kajianStartYear"
+                                                                            placeholder="Masukkan Tahun" min="2000"
+                                                                            max="2100">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-center mt-3">
+                                                                    <button type="submit"
+                                                                        class="btn btn-custom-search mx-3"><i
+                                                                            class="bi bi-search"></i>
+                                                                        Search</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                                aria-expanded="false"
-                                                                class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
-                                                                <i class="ti ti-dots-vertical fs-7 d-block"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButton1">
-                                                                <li><a class="dropdown-item" href="#">Action</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item" href="#">Another
-                                                                        action</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item" href="#">Something
-                                                                        else
-                                                                        here</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <canvas id="statusDocChart" width="200px" height="300px"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="me-4">
-                                                                <img src="../assets/images/profile/user1.jpg" width="50"
-                                                                    class="rounded-circle" alt="" />
-                                                            </div>
-                                                            <div>
-                                                                <h6 class="mb-1 fw-bolder">
-                                                                    Mark J. Freeman</h6>
-                                                                <p class="fs-3 mb-0">Prof.
-                                                                    English</p>
-                                                            </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h5 class="card-title fw-semibold">Grafik Dokumen KAK & HPS</h5>
+                                            <div class="d-flex">
+                                                <span
+                                                    class="rounded-circle btn-custom-search btn-sm px-1 btn shadow-none"
+                                                    id="yearTextKH" style="width:50px; height:30px;"></span>
+                                                <div class="dropdown mx-2">
+                                                    <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                        class="rounded-circle btn-custom-search rounded-circle btn-sm px-1 btn shadow-none">
+                                                        <i class="ti ti-search fs-6 d-block"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                        aria-labelledby="dropdownMenuButton2">
+                                                        <div class="message-body">
+                                                            <form id="kakHpsYearFilterForm">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 mb-1">
+                                                                        <label for="kakHpsStartYear"
+                                                                            class="form-label">Tahun :</label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="kakHpsStartYear" name="kakHpsStartYear"
+                                                                            placeholder="Masukkan Tahun" min="2000"
+                                                                            max="2100">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-center mt-3">
+                                                                    <button type="submit"
+                                                                        class="btn btn-custom-search mx-3"><i
+                                                                            class="bi bi-search"></i>
+                                                                        Search</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    </td>
-                                                    <td>
-                                                        <span
-                                                            class="badge bg-light-success rounded-pill text-success px-3 py-2 fs-3">Available</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="dropdown">
-                                                            <button id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                                aria-expanded="false"
-                                                                class="rounded-circle btn-transparent rounded-circle btn-sm px-1 btn shadow-none">
-                                                                <i class="ti ti-dots-vertical fs-7 d-block"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu dropdown-menu-end"
-                                                                aria-labelledby="dropdownMenuButton1">
-                                                                <li><a class="dropdown-item" href="#">Action</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item" href="#">Another
-                                                                        action</a>
-                                                                </li>
-                                                                <li>
-                                                                    <a class="dropdown-item" href="#">Something
-                                                                        else
-                                                                        here</a>
-                                                                </li>
-                                                            </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <canvas id="statusDocKHChart" width="200px" height="300px"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="card" style="height: 400px;">
+                            <div class="card-body p-4">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-12 mb-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-3">
+                                            <h5 class="card-title fw-semibold">Grafik Dokumen Kontrak</h5>
+                                            <div class="d-flex">
+                                                <span
+                                                    class="rounded-circle btn-custom-search btn-sm px-1 btn shadow-none"
+                                                    id="yearTextKontrak" style="width:50px; height:30px;"></span>
+                                                <div class="dropdown mx-2">
+                                                    <button id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                                                        aria-expanded="false"
+                                                        class="rounded-circle btn-custom-search rounded-circle btn-sm px-1 btn shadow-none">
+                                                        <i class="ti ti-search fs-6 d-block"></i>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up notification-dropdown"
+                                                        aria-labelledby="dropdownMenuButton2">
+                                                        <div class="message-body">
+                                                            <form id="kontrakYearFilterForm">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 mb-1">
+                                                                        <label for="kontrakStartYear"
+                                                                            class="form-label">Tahun :</label>
+                                                                        <input type="number" class="form-control"
+                                                                            id="kontrakStartYear"
+                                                                            name="kontrakStartYear"
+                                                                            placeholder="Masukkan Tahun" min="2000"
+                                                                            max="2100">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="d-flex justify-content-center mt-3">
+                                                                    <button type="submit"
+                                                                        class="btn btn-custom-search mx-3"><i
+                                                                            class="bi bi-search"></i>
+                                                                        Search</button>
+                                                                </div>
+                                                            </form>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <canvas id="statusDocKontrakChart" width="200px" height="300px"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -568,30 +884,36 @@ if ($_SESSION['status'] != "admin_login") {
                     label: 'Jumlah Arsip per Kategori',
                     data: data,
                     backgroundColor: [
-                        'rgba(204, 39, 39, 0.2)',
-                        'rgba(204, 180, 39, 0.2)',
-                        'rgba(142, 204, 39, 0.2)',
-                        'rgba(39, 204, 49, 0.2)',
-                        'rgba(39, 204, 160, 0.2)',
-                        'rgba(39, 125, 204, 0.2)',
-                        'rgba(42, 39, 204, 0.2)',
-                        'rgba(128, 39, 204, 0.2)',
-                        'rgba(204, 39, 197, 0.2)',
-                        'rgba(204, 39, 115, 0.2)',
-                        'rgba(204, 39, 39, 0.2)'
+                        'rgba(7, 28, 49, 1)',
+                        'rgba(10, 39, 68, 1)',
+                        'rgba(11, 54, 95, 1)',
+                        'rgba(22, 71, 117, 1)',
+                        'rgba(25, 86, 144, 1)',
+                        'rgba(34, 105, 173, 1)',
+                        'rgba(45, 119, 190, 1)',
+                        'rgba(61, 140, 215, 1)',
+                        'rgba(51, 146, 237, 1)',
+                        'rgba(101, 170, 237, 1)',
+                        'rgba(121, 181, 239, 1)',
+                        'rgba(147, 194, 240, 1)',
+                        'rgba(180, 214, 247, 1)',
+                        'rgba(215, 235, 255, 1)'
                     ],
                     borderColor: [
-                        'rgba(204, 39, 39, 1)',
-                        'rgba(204, 180, 39, 1)',
-                        'rgba(142, 204, 39, 1)',
-                        'rgba(39, 204, 49, 1)',
-                        'rgba(39, 204, 160, 1)',
-                        'rgba(39, 125, 204, 1)',
-                        'rgba(42, 39, 204, 1)',
-                        'rgba(128, 39, 204, 1)',
-                        'rgba(204, 39, 197, 1)',
-                        'rgba(204, 39, 115, 1)',
-                        'rgba(204, 39, 39, 1)'
+                        'rgba(7, 28, 49, 1)',
+                        'rgba(10, 39, 68, 1)',
+                        'rgba(11, 54, 95, 1)',
+                        'rgba(22, 71, 117, 1)',
+                        'rgba(25, 86, 144, 1)',
+                        'rgba(34, 105, 173, 1)',
+                        'rgba(45, 119, 190, 1)',
+                        'rgba(61, 140, 215, 1)',
+                        'rgba(51, 146, 237, 1)',
+                        'rgba(101, 170, 237, 1)',
+                        'rgba(121, 181, 239, 1)',
+                        'rgba(147, 194, 240, 1)',
+                        'rgba(180, 214, 247, 1)',
+                        'rgba(215, 235, 255, 1)'
                     ],
                     borderWidth: 1
                 }]
@@ -635,11 +957,18 @@ if ($_SESSION['status'] != "admin_login") {
             'auto'; // Mengaktifkan scroll pada y-axis
         categoryPieChart.update();
 
-        let downloadChart; // Declare a variable to hold the chart instance
+        let downloadChart;
 
-        const fetchData = (startDate = '', endDate = '') => {
-            const url = startDate && endDate ? `get_download_data.php?startDate=${startDate}&endDate=${endDate}` :
-                'get_download_data.php';
+        const getLastWeekDate = () => {
+            const date = new Date();
+            date.setDate(date.getDate() - 7);
+            return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+        };
+
+        const fetchData = (startDate = getLastWeekDate(), endDate = '') => {
+            const url = endDate ?
+                `grafik.php?startDate=${startDate}&endDate=${endDate}` :
+                `grafik.php?startDate=${startDate}`;
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
@@ -658,15 +987,29 @@ if ($_SESSION['status'] != "admin_login") {
                             datasets: [{
                                 label: 'Jumlah Unduhan',
                                 data: data.values,
-                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: '#11475e ',
+                                borderColor: '#11475e ',
                                 borderWidth: 1
                             }]
                         },
                         options: {
                             scales: {
                                 y: {
-                                    beginAtZero: true
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: '#ffffff'
+                                    },
+                                    ticks: {
+                                        color: '#ffffff'
+                                    }
+                                },
+                                x: {
+                                    grid: {
+                                        color: '#ffffff'
+                                    },
+                                    ticks: {
+                                        color: '#ffffff'
+                                    }
                                 }
                             }
                         }
@@ -692,7 +1035,845 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
         // Call fetchData on page load
-        fetchData();
+        fetchData(getLastWeekDate());
+
+        //Grafik Semua Data
+        function fetchCurrentMonthData() {
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth() + 1;
+            fetchDataByYear(currentYear, currentMonth);
+        }
+
+        function fetchDataByYear(year, month) {
+            fetch(`fetch_data.php?year=${year}&month=${month}`)
+                .then(response => response.json())
+                .then(data => {
+                    updateChart(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function updateChart(data) {
+            statusBarChart.data.datasets[0].data = data.kajian;
+            statusBarChart.data.datasets[1].data = data.kak_hps;
+            statusBarChart.data.datasets[2].data = data.kontrak;
+            statusBarChart.update();
+        }
+
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        document.getElementById('yearText').textContent = currentYear;
+        fetchDataByYear(currentYear);
+
+        document.querySelector('#yearFilterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const startYear = document.getElementById('startYear').value;
+            document.getElementById('yearText').textContent = startYear;
+            fetchDataByYear(startYear); // Call the function to fetch data by year
+        });
+
+        //Grafik Dokumen Kajian
+        function fetchCurrentYearData() {
+            const nowKajian = new Date();
+            const currentYearKajian = now.getFullYear(); // Mendapatkan tahun saat ini
+            const currentMonthKajian = now.getMonth() + 1;
+            document.getElementById('kajianStartYear').value = currentYearKajian; // Menetapkan input ke tahun saat ini
+            document.getElementById('yearTextKajian').textContent = currentYearKajian; // Tampilkan tahun saat ini di UI
+            fetchKajianData(currentYearKajian, currentMonthKajian); // Ambil data untuk tahun saat ini
+        }
+
+        function fetchKajianData(year) {
+            fetch(`fetch_kajian_data.php?year=${year}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Log data untuk memeriksa strukturnya
+                    updateKajianChart(data); // Perbarui grafik dengan data baru
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Existing updateKajianChart function
+        function updateKajianChart(data) {
+            // Assuming you have a chart instance named statusDocChart
+            statusDocChart.data.datasets[0].data = data.uploaded_asmen; // Update with the correct data
+            statusDocChart.data.datasets[1].data = data.approved_avp; // Update with the correct data
+            statusDocChart.data.datasets[2].data = data.rejected_avp; // Update with the correct data
+            statusDocChart.data.datasets[3].data = data.approved_vp; // Update with the correct data
+            statusDocChart.data.datasets[4].data = data.rejected_vp; // Update with the correct data
+            statusDocChart.data.datasets[5].data = data.done; // Update with the correct data
+            statusDocChart.data.datasets[6].data = data.rejected_gm; // Update with the correct data
+            statusDocChart.update(); // Refresh the chart
+        }
+
+        const nowKajian = new Date();
+        const currentYearKajian = new Date().getFullYear();
+        document.getElementById('yearTextKajian').textContent = currentYearKajian;
+        fetchDataByYear(currentYearKajian);
+
+        document.querySelector('#kajianYearFilterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const year = document.getElementById('kajianStartYear').value;
+            document.getElementById('yearTextKajian').textContent = year;
+            if (year) {
+                document.getElementById('yearTextKajian').textContent = year; // Update displayed year
+                fetchKajianData(year); // Fetch data for the specified year
+            } else {
+                alert('Please enter a valid year.'); // Alert if the year is not valid
+            }
+        });
+
+        // Call this function when the page loads
+        window.onload = function() {
+            displayCurrentDate(); // Display current date
+            fetchCurrentYearData();
+        };
+
+        // Grafik Dokumen KAK & HPS
+        function fetchCurrentYearDataKH() {
+            const nowKH = new Date();
+            const currentYearKH = nowKH.getFullYear(); // Mendapatkan tahun saat ini
+            const currentMonthKH = now.getMonth() + 1;
+            document.getElementById('kakHpsStartYear').value = currentYearKH; // Menetapkan input ke tahun saat ini
+            document.getElementById('yearTextKH').textContent = currentYearKH; // Tampilkan tahun saat ini di UI
+            fetchKHData(currentYearKH, currentMonthKH); // Ambil data untuk tahun saat ini
+        }
+
+        function fetchKHData(year) {
+            fetch(`fetch_kak_hps_data.php?year=${year}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Log data untuk memeriksa strukturnya
+                    updateKHChart(data); // Perbarui grafik dengan data baru
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        function updateKHChart(data) {
+            // Update the chart data with the fetched data
+            statusDocKHChart.data.datasets[0].data = data.uploaded_asmen; // Update with the correct data
+            statusDocKHChart.data.datasets[1].data = data.approved_avp; // Update with the correct data
+            statusDocKHChart.data.datasets[2].data = data.rejected_avp; // Update with the correct data
+            statusDocKHChart.data.datasets[3].data = data.approved_vp; // Update with the correct data
+            statusDocKHChart.data.datasets[4].data = data.rejected_vp; // Update with the correct data
+            statusDocKHChart.data.datasets[5].data = data.done; // Update with the correct data
+            statusDocKHChart.data.datasets[6].data = data.rejected_gm; // Update with the correct data
+            statusDocKHChart.update(); // Refresh the chart
+        }
+
+        const nowKH = new Date();
+        const currentYearKH = now.getFullYear();
+        document.getElementById('yearTextKH').textContent = currentYearKH;
+        fetchDataByYear(currentYearKH);
+
+        document.querySelector('#kakHpsYearFilterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const year = document.getElementById('kakHpsStartYear').value;
+            document.getElementById('yearTextKH').textContent = year;
+            if (year) {
+                fetchKHData(year); // Fetch data for the specified year
+            } else {
+                alert('Please enter a valid year.'); // Alert if the year is not valid
+            }
+        });
+
+        window.onload = function() {
+            displayCurrentDate(); // Display current date
+            fetchCurrentYearDataKH(); // Fetch data for the current year for KAK & HPS
+        };
+
+        //Grafik Dokumen Kontrak
+        function fetchCurrentYearDataKontrak() {
+            const nowKontrak = new Date();
+            const currentYearKontrak = nowKontrak.getFullYear(); // Mendapatkan tahun saat ini
+            const currentMonthKontrak = now.getMonth() + 1;
+            document.getElementById('kontrakStartYear').value =
+                currentYearKontrak; // Menetapkan input ke tahun saat ini
+            document.getElementById('yearTextKontrak').textContent =
+                currentYearKontrak; // Tampilkan tahun saat ini di UI
+            fetchKontrakData(currentYearKontrak, currentMonthKontrak); // Ambil data untuk tahun saat ini
+        }
+
+        function fetchKontrakData(year) {
+            fetch(`fetch_kontrak_data.php?year=${year}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data); // Log data untuk memeriksa strukturnya
+                    updateKontrakChart(data); // Perbarui grafik dengan data baru
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Existing updateKajianChart function
+        function updateKontrakChart(data) {
+            // Update the chart data with the fetched data
+            statusDocKontrakChart.data.datasets[0].data = data.uploaded_asmen; // Update with the correct data
+            statusDocKontrakChart.data.datasets[1].data = data.approved_avp; // Update with the correct data
+            statusDocKontrakChart.data.datasets[2].data = data.rejected_avp; // Update with the correct data
+            statusDocKontrakChart.data.datasets[3].data = data.approved_vp; // Update with the correct data
+            statusDocKontrakChart.data.datasets[4].data = data.rejected_vp; // Update with the correct data
+            statusDocKontrakChart.data.datasets[5].data = data.done; // Update with the correct data
+            statusDocKontrakChart.data.datasets[6].data = data.rejected_gm; // Update with the correct data
+            statusDocKontrakChart.update(); // Refresh the chart
+        }
+
+        const nowKontrak = new Date();
+        const currentYearKontrak = now.getFullYear();
+        document.getElementById('yearTextKontrak').textContent = currentYearKontrak;
+        fetchDataByYear(currentYearKontrak);
+
+        document.querySelector('#kontrakYearFilterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const year = document.getElementById('kontrakStartYear').value;
+            document.getElementById('yearTextKontrak').textContent = year;
+            if (year) {
+                fetchKontrakData(year); // Fetch data for the specified year
+            } else {
+                alert('Please enter a valid year.'); // Alert if the year is not valid
+            }
+        });
+
+        // Call this function when the page loads to fetch the current year data
+        window.onload = function() {
+            displayCurrentDate(); // Display current date
+            fetchCurrentYearDataKontrak(); // Fetch data for the current year for KAK & HPS
+        };
+
+        // Data for bar chart
+        const barChartData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                    label: 'Doc Kajian',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(17, 63, 108, 1)',
+                    borderColor: 'rgba(17, 63, 108, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Doc KAK & HPS',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(234, 139, 0, 1)',
+                    borderColor: 'rgba(234, 139, 0, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Doc Kontrak',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Create bar chart
+        const ctxBar = document.getElementById('statusBarChart').getContext('2d');
+        const statusBarChart = new Chart(ctxBar, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+
+        // Data for the second bar chart
+        const statusDocData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                    label: 'Uploaded (Asmen)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND MONTH(dock_waktu_asmen) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(12, 70, 125, 1)',
+                    borderColor: 'rgba(12, 70, 125, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Approved (AVP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Approved (AVP)' AND MONTH(dock_waktu_avp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(244, 149, 11, 1)',
+                    borderColor: 'rgba(244, 149, 11, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (AVP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_avp = 'Rejected (AVP)' AND MONTH(dock_waktu_avp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Approved (VP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Approved (VP)' AND MONTH(dock_waktu_vp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(250, 176, 69, 1)',
+                    borderColor: 'rgba(250, 176, 69, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (VP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_vp = 'Rejected (VP)' AND MONTH(dock_waktu_vp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Done',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done' AND MONTH(dock_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(81, 132, 181, 1)',
+                    borderColor: 'rgba(81, 132, 181, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (GM)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Rejected (GM)' AND MONTH(dock_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const ctxStatusDoc = document.getElementById('statusDocChart').getContext('2d');
+        const statusDocChart = new Chart(ctxStatusDoc, {
+            type: 'bar',
+            data: statusDocData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Data for the third bar chart
+        const statusDoc2Data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                    label: 'Uploaded (Asmen)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockh_waktu_asmen) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(12, 70, 125, 1)',
+                    borderColor: 'rgba(12, 70, 125, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Approved (AVP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Approved (AVP)' AND MONTH(dockh_waktu_avp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(244, 149, 11, 1)',
+                    borderColor: 'rgba(244, 149, 11, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (AVP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_avp = 'Rejected (AVP)' AND MONTH(dockh_waktu_avp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Approved (VP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Approved (VP)' AND MONTH(dockh_waktu_vp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(250, 176, 69, 1)',
+                    borderColor: 'rgba(250, 176, 69, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (VP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_vp = 'Rejected (VP)' AND MONTH(dockh_waktu_vp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Done',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done' AND MONTH(dockh_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(81, 132, 181, 1)',
+                    borderColor: 'rgba(81, 132, 181, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (GM)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Rejected (GM)' AND MONTH(dockh_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const ctxStatusDoc2 = document.getElementById('statusDocKHChart').getContext('2d');
+        const statusDocKHChart = new Chart(ctxStatusDoc2, {
+            type: 'bar',
+            data: statusDoc2Data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Data for the forth bar chart
+        const statusDoc3Data = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            datasets: [{
+                    label: 'Uploaded (Asmen)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND MONTH(dockt_waktu_asmen) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(12, 70, 125, 1)',
+                    borderColor: 'rgba(12, 70, 125, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Approved (AVP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Approved (AVP)' AND MONTH(dockt_waktu_avp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(244, 149, 11, 1)',
+                    borderColor: 'rgba(244, 149, 11, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (AVP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_avp = 'Rejected (AVP)' AND MONTH(dockt_waktu_avp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Approved (VP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Approved (VP)' AND MONTH(dockt_waktu_vp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(250, 176, 69, 1)',
+                    borderColor: 'rgba(250, 176, 69, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (VP)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_vp = 'Rejected (VP)' AND MONTH(dockt_waktu_vp) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Done',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done' AND MONTH(dockt_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(81, 132, 181, 1)',
+                    borderColor: 'rgba(81, 132, 181, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                },
+                {
+                    label: 'Rejected (GM)',
+                    data: [
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 1")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 2")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 3")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 4")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 5")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 6")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 7")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 8")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 9")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 10")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 11")); ?>,
+                        <?php echo mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Rejected (GM)' AND MONTH(dockt_waktu_gm) = 12")); ?>
+                    ],
+                    backgroundColor: 'rgba(158, 6, 6, 1)',
+                    borderColor: 'rgba(158, 6, 6, 1)',
+                    borderRadius: 5,
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        const ctxStatusDoc3 = document.getElementById('statusDocKontrakChart').getContext('2d');
+        const statusDocKontrakChart = new Chart(ctxStatusDoc3, {
+            type: 'bar',
+            data: statusDoc3Data,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        window.onload = function() {
+            // displayCurrentDate(); // Display current date
+            fetchCurrentMonthData(); // Fetch data for the current month
+            fetchCurrentYearData(); // Fetch data for Dokumen Kajian
+            fetchCurrentYearDataKH(); // Fetch data for Dokumen KAK & HPS
+            fetchCurrentYearDataKontrak(); // Fetch data for Dokumen Kontrak
+        };
         </script>
         <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
         <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

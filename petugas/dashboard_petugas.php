@@ -548,32 +548,6 @@
              'auto'; // Mengaktifkan scroll pada y-axis
          categoryPieChart.update();
 
-         // fetch(`get_download_data.php`)
-         //     .then(response => response.json())
-         //     .then(data => {
-         //         const ctx = document.getElementById('downloadChart').getContext('2d');
-         //         const downloadChart = new Chart(ctx, {
-         //             type: 'line', // or 'line', 'pie', etc.
-         //             data: {
-         //                 labels: data.labels, // Dates
-         //                 datasets: [{
-         //                     label: 'Jumlah Unduhan',
-         //                     data: data.values, // Download counts
-         //                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-         //                     borderColor: 'rgba(75, 192, 192, 1)',
-         //                     borderWidth: 1
-         //                 }]
-         //             },
-         //             options: {
-         //                 scales: {
-         //                     y: {
-         //                         beginAtZero: true
-         //                     }
-         //                 }
-         //             }
-         //         });
-         //     });
-
          let downloadChart; // Declare a variable to hold the chart instance
 
          const getLastWeekDate = () => {
@@ -614,18 +588,18 @@
                                  y: {
                                      beginAtZero: true,
                                      grid: {
-                                         color: '#ffffff' // Changed grid line color to white
+                                         color: '#ffffff'
                                      },
                                      ticks: {
-                                         color: '#ffffff' // Changed tick text color to white
+                                         color: '#ffffff'
                                      }
                                  },
                                  x: {
                                      grid: {
-                                         color: '#ffffff' // Changed grid line color to white
+                                         color: '#ffffff'
                                      },
                                      ticks: {
-                                         color: '#ffffff' // Changed tick text color to white
+                                         color: '#ffffff'
                                      }
                                  }
                              }

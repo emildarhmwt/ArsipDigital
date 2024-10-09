@@ -116,51 +116,44 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
     }
 
     .welcome {
-        margin-top: -170px;
+        margin-top: -180px;
         font-family: "Varela Round", sans-serif;
         color: white;
-        font-size: 30px;
+        font-size: 40px;
     }
 
     .nama {
         font-family: "Varela Round", sans-serif;
-        font-size: 18px;
+        font-size: 20px;
         color: white;
     }
 
     .gm {
         font-family: "Varela Round", sans-serif;
         margin-top: 30px;
-        font-size: 10px;
+        font-size: 15px;
         color: white;
     }
 
     .wave {
-        width: 120px;
+        width: 325px;
         height: auto;
         margin-top: -25px;
         margin-left: auto;
         margin-right: 0;
-    }
-
-    .wave2 {
-        width: 120px;
-        height: auto;
-        margin-top: -25px;
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    .wave3 {
-        width: 120px;
-        height: auto;
-        margin-top: -25px;
-        margin-left: auto;
-        margin-right: 0;
+        float: right;
     }
 
     .doc-pks {
         color: #062949 !important;
+    }
+
+    .file-kategori {
+        margin-top: -170px;
+    }
+
+    .kategori {
+        margin-top: -160px;
     }
     </style>
 </head>
@@ -236,7 +229,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-8">
                         <div class="card overflow-hidden" style="height: 170px; background-color: #0d3254;">
                             <div class="card-body p-4">
                                 <div class="row align-items-center text-center">
@@ -257,19 +250,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="card overflow-hidden" style="height: 170px; background-color:#e47c10;">
                             <div class=" card-body p-4">
                                 <div class="d-flex align-items-center mb-2">
                                     <span class="me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ti ti-file-analytics fs-9 text-white"></i>
+                                        <i class="ti ti-file-analytics fs-9 text-white file-kategori"></i>
                                     </span>
                                     <div class=" ms-2">
                                         <img src="../assets/images/2.png" class="wave">
                                     </div>
                                 </div>
 
-                                <div class="mt-2">
+                                <div class="kategori">
                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
                                     <?php
                                         $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");

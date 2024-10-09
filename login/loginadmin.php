@@ -175,7 +175,7 @@
                                     </div>
                                     <div class="mb-4">
                                         <label for="hak" class="form-label sub-judul">Hak Akses</label>
-                                        <select class="form-select" name="akses" id="akses">
+                                        <select class="form-select" name="akses" id="akses" required>
                                             <option selected disabled>Hak Akses</option>
                                             <option value="admin">Admin</option>
                                             <option value="petugas">Petugas</option>
