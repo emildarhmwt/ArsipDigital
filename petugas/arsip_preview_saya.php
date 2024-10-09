@@ -239,7 +239,9 @@
                                      </tr>
                                      <tr>
                                          <th>Waktu Upload</th>
-                                         <td><?php echo date('H:i:s  d-m-Y', strtotime($d['arsip_waktu_upload'])) ?>
+                                         <td>
+                                             <?php echo date('d M Y', strtotime($d['arsip_waktu_upload'])); ?><br>
+                                             <?php echo date('H:i:s', strtotime($d['arsip_waktu_upload'])); ?>
                                          </td>
                                      </tr>
                                      <tr>

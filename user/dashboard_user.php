@@ -116,22 +116,22 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
     }
 
     .welcome {
-        margin-top: -180px;
+        margin-top: -170px;
         font-family: "Varela Round", sans-serif;
         color: white;
-        font-size: 40px;
+        font-size: 30px;
     }
 
     .nama {
         font-family: "Varela Round", sans-serif;
-        font-size: 20px;
+        font-size: 18px;
         color: white;
     }
 
     .gm {
         font-family: "Varela Round", sans-serif;
         margin-top: 30px;
-        font-size: 15px;
+        font-size: 10px;
         color: white;
     }
 
@@ -152,8 +152,45 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
         margin-top: -170px;
     }
 
+    .kajian {
+        background-image: url("../assets/images/bg-card.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .kontrak {
+        margin-top: 20px;
+    }
+
     .kategori {
-        margin-top: -160px;
+        background-image: url("../assets/images/3.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .jumlah-kategori {
+        margin-left: 40px;
+        margin-top: -10px;
+    }
+
+    .gambar-kategori {
+        width: 170px;
+        height: auto;
+        margin-left: auto;
+        margin-top: -60px;
+        margin-right: 0;
+        float: right;
+    }
+
+    .gambar-user {
+        width: 170px;
+        height: auto;
+        margin-left: auto;
+        margin-top: -50px;
+        margin-right: -30px;
+        float: right;
     }
     </style>
 </head>
@@ -229,7 +266,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-6">
                         <div class="card overflow-hidden" style="height: 170px; background-color: #0d3254;">
                             <div class="card-body p-4">
                                 <div class="row align-items-center text-center">
@@ -250,27 +287,27 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
-                        <div class="card overflow-hidden" style="height: 170px; background-color:#e47c10;">
-                            <div class=" card-body p-4">
-                                <div class="d-flex align-items-center mb-2">
-                                    <span class="me-2 d-flex align-items-center justify-content-center">
-                                        <i class="ti ti-file-analytics fs-9 text-white file-kategori"></i>
+                    <div class="col-lg-6">
+                        <div class="card overflow-hidden kategori" style="height: 170px;">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center mb-2 jumlah-kategori">
+                                    <span
+                                        class="me-2 rounded-circle bg-light-primary d-flex align-items-center justify-content-center"
+                                        style="width: 50px; height: 50px; line-height: 50px; color: #4e6a7d;">
+                                        <i class="ti ti-category fs-8"></i>
                                     </span>
-                                    <div class=" ms-2">
-                                        <img src="../assets/images/2.png" class="wave">
-                                    </div>
-                                </div>
-
-                                <div class="kategori">
-                                    <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
-                                    <?php
+                                    <div class="me-2">
+                                        <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
+                                        <?php
                                         $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
                                         ?>
-
-                                    <h5 class="card-title mb-0 fw-semibold fs-3"><span
-                                            class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
-                                    </h5>
+                                        <h5 class="card-title mb-0 fw-semibold fs-4"><span
+                                                class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img src="../assets/images/6.png" class="gambar-kategori">
                                 </div>
                             </div>
                         </div>

@@ -418,19 +418,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 if (!empty($p['dockh_waktu_gm'])) {
                                                     $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_gm']));
                                                     $tanggal = date('d M Y', strtotime($p['dockh_waktu_gm']));
-                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                    echo $tanggal . '<br>' . $dock_waktu;
                                                 } elseif (!empty($p['dockh_waktu_vp'])) {
                                                     $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_vp']));
                                                     $tanggal = date('d M Y', strtotime($p['dockh_waktu_vp']));
-                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                    echo $tanggal . '<br>' . $dock_waktu;
                                                 } elseif (!empty($p['dockh_waktu_avp'])) {
                                                     $dock_waktu = date('H:i:s', strtotime($p['dockh_waktu_avp']));
                                                     $tanggal = date('d M Y', strtotime($p['dockh_waktu_avp']));
-                                                    echo $dock_waktu . '<br>' . $tanggal;
+                                                    echo $tanggal . '<br>' . $dock_waktu;
                                                 } elseif (!empty($p['dockh_waktu_asmen'])) {
                                                     $dock_waktu_asmen = date('H:i:s', strtotime($p['dockh_waktu_asmen']));
                                                     $tanggal_asmen = date('d M Y', strtotime($p['dockh_waktu_asmen']));
-                                                    echo $dock_waktu_asmen . '<br>' . $tanggal_asmen;
+                                                    echo $tanggal_asmen . '<br>' . $dock_waktu_asmen;
                                                 } else {
                                                     echo '-';
                                                 }

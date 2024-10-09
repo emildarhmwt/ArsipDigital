@@ -307,10 +307,11 @@ if ($_SESSION['status'] != "admin_login") {
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td>
                                             <div class="text-center">
-                                                <div> <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
-                                                </div>
                                                 <div><?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?>
                                                 </div>
+                                                <div> <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
+                                                </div>
+
                                             </div>
                                         </td>
                                         <td>

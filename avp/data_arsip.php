@@ -275,8 +275,8 @@ if ($_SESSION['status'] != "avp_login") {
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td>
-                                            <div><?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?></div>
                                             <div><?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?></div>
+                                            <div><?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?></div>
                                         </td>
                                         <td>
                                             <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>

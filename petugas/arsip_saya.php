@@ -352,7 +352,13 @@
                                                 ?>
                                      <tr>
                                          <td><?php echo $no++; ?></td>
-                                         <td><?php echo date('H:i:s  d-m-Y', strtotime($p['arsip_waktu_upload'])) ?>
+                                         <td>
+                                             <div class="text-center">
+                                                 <div> <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
+                                                 </div>
+                                                 <div><?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?>
+                                                 </div>
+                                             </div>
                                          </td>
                                          <td>
 

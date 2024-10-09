@@ -171,8 +171,8 @@ if ($_SESSION['status'] != "vp_login") {
                                     <tr>
                                         <th>Waktu Upload</th>
                                         <td>
-                                            <div><?php echo date('H:i:s', strtotime($d['arsip_waktu_upload'])); ?></div>
                                             <div><?php echo date('d M Y', strtotime($d['arsip_waktu_upload'])); ?></div>
+                                            <div><?php echo date('H:i:s', strtotime($d['arsip_waktu_upload'])); ?></div>
                                         </td>
                                     </tr>
                                     <tr>
