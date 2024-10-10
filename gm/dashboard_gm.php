@@ -256,7 +256,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     </div>
                                 </div>
                             </li>
-                            <!-- <li class="nav-item dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="ti ti-bell-ringing"></i>
@@ -285,9 +285,14 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                  ORDER BY dockajian.dock_id DESC
                                              ");
                                             while ($p = mysqli_fetch_array($arsip)) {
-                                                // Check if all statuses are NULL before displaying the notification
-                                                if (is_null($p['dock_nama']) && is_null($p['dockh_nama']) && is_null($p['dockt_nama'])) {
-                                                    continue; // Skip if all are NULL
+                                                // Check if the keys exist and if all statuses are NULL before displaying the notification
+                                                if ((!isset($p['dock_status_gm']) || is_null($p['dock_status_gm'])) &&
+                                                    (!isset($p['dockh_status_gm']) || is_null($p['dockh_status_gm'])) &&
+                                                    (!isset($p['dockt_status_gm']) || is_null($p['dockt_status_gm']))
+                                                ) {
+                                                    // Only display the notification if all statuses are NULL
+                                                } else {
+                                                    continue; // Skip if any status is NOT NULL
                                                 }
                                             ?>
                                             <a href="data_pks.php" class="dropdown-item py-2 border-bottom">
@@ -305,7 +310,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         </div>
                                     </div>
                                 </div>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -423,8 +428,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                             </div>
                                             <div class="col-lg-4 justify-content-end">
                                                 <?php
-                                            $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
-                                            ?>
+                                                $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
+                                                ?>
                                                 <h5 class="card-title mb-10 fw-semibold mt-3 fs-7 justify-content-end">
                                                     <span
                                                         class="counter justify-content-end"><?php echo mysqli_num_rows($jumlah_arsip); ?>
@@ -949,13 +954,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
 
         const categoryData =
             <?php
-            $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id GROUP BY kategori_nama");
-            $categories = [];
-            while ($row = mysqli_fetch_assoc($category_query)) {
-                $categories[] = $row;
-            }
-            echo json_encode($categories);
-            ?>;
+                $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id GROUP BY kategori_nama");
+                $categories = [];
+                while ($row = mysqli_fetch_assoc($category_query)) {
+                    $categories[] = $row;
+                }
+                echo json_encode($categories);
+                ?>;
 
         const labels = categoryData.map(item => item.kategori_nama);
         const data = categoryData.map(item => item.count);

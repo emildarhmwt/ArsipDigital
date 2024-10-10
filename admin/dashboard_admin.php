@@ -482,10 +482,12 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="ms-2">
                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
                                         <?php
-                                        $jumlah_user = mysqli_query($koneksi, "select * from user");
+                                        // Update the query to count users from both user and userpks tables
+                                        $jumlah_user = mysqli_query($koneksi, "SELECT (SELECT COUNT(*) FROM user) + (SELECT COUNT(*) FROM user_pks) AS total_users");
+                                        $result = mysqli_fetch_assoc($jumlah_user);
                                         ?>
                                         <h5 class="card-title mb-0 fw-semibold fs-3"><span
-                                                class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
+                                                class="counter"><?php echo $result['total_users']; ?></span>
                                         </h5>
                                     </div>
                                 </div>
