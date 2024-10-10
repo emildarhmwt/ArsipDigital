@@ -139,7 +139,7 @@ if ($_SESSION['status'] != "admin_login") {
 
     .nama {
         font-family: "Varela Round", sans-serif;
-        font-size: 18px;
+        font-size: 15px;
         color: white;
     }
 
@@ -457,10 +457,11 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="ms-2">
                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Petugas</h5>
                                         <?php
-                                        $jumlah_petugas = mysqli_query($koneksi, "select * from petugas");
+                                        $jumlah_petugas = mysqli_query($koneksi, "SELECT (SELECT COUNT(*) FROM petugas) + (SELECT COUNT(*) FROM admin) AS total_petugas");
+                                        $result = mysqli_fetch_assoc($jumlah_petugas);
                                         ?>
-                                        <h5 class="card-title mb-0 fw-semibold fs-4"><span
-                                                class="counter"><?php echo mysqli_num_rows($jumlah_petugas); ?></span>
+                                        <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                                class="counter"><?php echo $result['total_petugas']; ?></span>
                                         </h5>
                                     </div>
                                 </div>

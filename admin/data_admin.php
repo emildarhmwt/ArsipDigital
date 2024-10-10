@@ -277,14 +277,14 @@ if ($_SESSION['status'] != "admin_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA USER
+                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA ADMIN
                         </h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-6 border-end pilihan-doc-kajian pilihan_dokumen">
-                                <a href="data_user.php"> Data User</a>
+                            <div class="col-lg-6 border-end ">
+                                <a href="data_petugas.php"> Data Petugas</a>
                             </div>
-                            <div class="col-lg-6">
-                                <a href="data_userpks.php">Data User PKS</a>
+                            <div class="col-lg-6 pilihan-doc-kajian pilihan_dokumen">
+                                <a href="data_admin.php">Data Admin</a>
                             </div>
                         </div>
                         <!-- table -->
@@ -306,7 +306,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <button type="button" class="btn btn-custom-eye"
                                     style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                     onclick="tambahPetugas()">
-                                    <i class="bi bi-plus-square"></i> Tambah User
+                                    <i class="bi bi-plus-square"></i> Tambah Admin
                                 </button>
                             </div>
                         </div>
@@ -324,45 +324,45 @@ if ($_SESSION['status'] != "admin_login") {
                                 </thead>
                                 <tbody>
                                     <?php
-                                            include '../koneksi.php';
-                                            $no = 1;
-                                            $user = mysqli_query($koneksi, "SELECT * FROM user ORDER BY user_id DESC");
-                                            while ($p = mysqli_fetch_array($user)) {
-                                            ?>
+                                    include '../koneksi.php';
+                                    $no = 1;
+                                    $petugas = mysqli_query($koneksi, "SELECT * FROM admin ORDER BY admin_id DESC");
+                                    while ($p = mysqli_fetch_array($petugas)) {
+                                    ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td>
                                             <?php
-                                                        if ($p['user_foto'] == "") {
-                                                        ?>
+                                                if ($p['admin_foto'] == "") {
+                                                ?>
                                             <img class="img-user" src="../gambar/sistem/user.png" width="50"
                                                 height="50">
                                             <?php
-                                                        } else {
-                                                        ?>
-                                            <img class="img-user" src="../gambar/user/<?php echo $p['user_foto']; ?>"
+                                                } else {
+                                                ?>
+                                            <img class="img-user" src="../gambar/admin/<?php echo $p['admin_foto']; ?>"
                                                 width="50" height="50">
                                             <?php
-                                                        }
-                                                        ?>
+                                                }
+                                                ?>
                                         </td>
-                                        <td><?php echo $p['user_nama'] ?></td>
-                                        <td><?php echo $p['user_username'] ?></td>
+                                        <td><?php echo $p['admin_nama'] ?></td>
+                                        <td><?php echo $p['admin_username'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="edit_user.php?id=<?php echo $p['user_id']; ?>"
+                                                <a href="edit_admin.php?id=<?php echo $p['admin_id']; ?>"
                                                     class="btn btn-custom-edit btn-sm"><i
                                                         class="ti ti-edit fs-5"></i></a>
-                                                <a href="user_hapus.php?id=<?php echo $p['user_id']; ?>"
+                                                <a href="admin_hapus.php?id=<?php echo $p['admin_id']; ?>"
                                                     class="btn btn-custom-hapus btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
+                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus admin ini?');"><i
                                                         class="ti ti-trash fs-5"></i></a>
                                             </div>
                                         </td>
                                     </tr>
                                     <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -386,7 +386,7 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
     function tambahPetugas() {
-        window.location.href = 'tambah_user.php';
+        window.location.href = 'tambah_admin.php';
     }
 
     // Fungsi untuk menangani paginasi dan pencarian

@@ -282,7 +282,8 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
                                     <div class="mb-1">
                                         <label for="shift" class="form-label">Password</label>
-                                        <input type="password" class="form-control text-white" name="password">
+                                        <input type="password" class="form-control text-white" name="password"
+                                            id="password">
                                         <p class="textinfo">Kosongkan jika tidak ingin mengubah password</p>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between mb-3">

@@ -153,6 +153,27 @@ if ($_SESSION['status'] != "admin_login") {
         background-color: #b27373 !important;
         color: white !important;
     }
+
+    .pilihan-doc a {
+        cursor: pointer;
+        color: grey;
+        font-weight: bold;
+        text-decoration: none;
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+    }
+
+    .pilihan-doc-kajian a {
+        color: white;
+        text-decoration: underline;
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+    }
+
+    .pilihan_dokumen {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
     </style>
 </head>
 
@@ -258,6 +279,14 @@ if ($_SESSION['status'] != "admin_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA PETUGAS
                         </h5>
+                        <div class="row text-center justify-content-center pilihan-doc mb-5">
+                            <div class="col-lg-6 border-end pilihan-doc-kajian pilihan_dokumen">
+                                <a href="data_petugas.php"> Data Petugas</a>
+                            </div>
+                            <div class="col-lg-6">
+                                <a href="data_admin.php">Data Admin</a>
+                            </div>
+                        </div>
                         <!-- table -->
                         <div class="row mb-3">
                             <div class="col-md-6 banyak-data">
