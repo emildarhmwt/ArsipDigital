@@ -371,6 +371,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <?php
                                             $no = 1;
                                             include '../koneksi.php';
+                                             $id_pks = $_SESSION['id'];
                                             $arsip = mysqli_query($koneksi, "
                                             SELECT doc_kontrak.*, 
                                             user_pks.pks_nama AS petugas_nama, user_pks2.pks_nama AS avp_nama, user_pks3.pks_nama AS vp_nama, user_pks4.pks_nama AS gm_nama, user_pks5.pks_nama AS tujuan_avp,
@@ -390,6 +391,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             LEFT JOIN user_pks AS user_pks5 ON doc_kontrak.dockt_tujuan_avp = user_pks5.pks_id
                                             LEFT JOIN dockajian ON doc_kontrak.dockt_dock_id = dockajian.dock_id
                                             LEFT JOIN doc_kak_hps ON doc_kontrak.dockt_dock_id = doc_kak_hps.dockh_dock_id
+                                             WHERE doc_kontrak.dockt_petugas = '$id_pks'
                                             ORDER BY doc_kontrak.dockt_tanggal DESC
                                             ");
                                             while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data

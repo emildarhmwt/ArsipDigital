@@ -332,7 +332,7 @@
                          <div class="table-responsive products-table" data-simplebar>
                              <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                  <thead class="fs-4">
-                                     <tr>
+                                     <tr class="text-center">
                                          <th class="fs-3" style="width: 5%;">No</th>
                                          <th class="fs-3" style="width: 10%;">Waktu Upload</th>
                                          <th class="fs-3" style="width: 25%;">Arsip</th>
@@ -351,25 +351,23 @@
                                                 while ($p = mysqli_fetch_array($arsip)) {
                                                 ?>
                                      <tr>
-                                         <td><?php echo $no++; ?></td>
+                                         <td class="text-center"><?php echo $no++; ?></td>
                                          <td>
                                              <div class="text-center">
-                                                 <div> <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
-                                                 </div>
                                                  <div><?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?>
+                                                 </div>
+                                                 <div> <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
                                                  </div>
                                              </div>
                                          </td>
                                          <td>
-
                                              <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>
                                              <b>Nama</b> : <?php echo $p['arsip_nama'] ?><br>
                                              <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
-
                                          </td>
-                                         <td><?php echo $p['kategori_nama'] ?></td>
-                                         <td><?php echo $p['petugas_nama'] ?></td>
-                                         <td><?php echo $p['arsip_keterangan'] ?></td>
+                                         <td class="text-center"><?php echo $p['kategori_nama'] ?></td>
+                                         <td class="text-center"><?php echo $p['petugas_nama'] ?></td>
+                                         <td class="text-center"><?php echo $p['arsip_keterangan'] ?></td>
                                          <td class="text-center">
 
                                              <div class="btn-group mb-3">

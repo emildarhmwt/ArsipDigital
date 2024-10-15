@@ -327,95 +327,92 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                     ");
                         while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
-                        <div class="row">
-                            <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
-                                <div class="card-header"
-                                    style="background-color: #0e4551; width: 995px; margin-left: -12px;">
-                                    Header
-                                </div>
-                                <div class="card-body">
-                                    <form method="get" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Nama Permintaan :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_nama'] ?></td>
-                                                </p>
-
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Deskripsi Permintaan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_desk'] ?></td>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Jenis Permintaan :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_jenis'] ?></td>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Kategori Permintaan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_kategori'] ?></td>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Aspek K3/Lingkungan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_aspek'] ?></td>
-                                                </p>
-                                            </div>
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Lokasi Penyerahan
-                                                    :</label>
-                                                <p>
-                                                    <td><?php echo $p['dock_lokasi'] ?></td>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4 mb-3">
-                                                <label for="shift" class="form-label">Tanggal Dibutuhkan
-                                                    :</span>
-                                                </label>
-                                                <p>
-                                                    <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
-                                                    </td>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
+                        <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                            <div class="card-header" style="background-color: #0e4551; width: 100%;">
+                                Header
                             </div>
+                            <div class="card-body">
+                                <form method="get" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Nama Permintaan :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_nama'] ?></td>
+                                            </p>
 
-                            <div class="card card-preview">
-                                <div class="card-header"
-                                    style="background-color: #0e4551; width: 995px; margin-left: -12px;">
-                                    Komentar
-                                </div>
-                                <div class="card-body">
-                                    <form method="get" enctype="multipart/form-data">
-                                        <div class="row">
-                                            <div class="col-lg-12 mb-3">
-                                                <p style="text-align: justify;">
-                                                    <td><?php echo $p['dock_comment'] ?></td>
-                                                </p>
-                                            </div>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Deskripsi Permintaan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_desk'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_jenis'] ?></td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Kategori Permintaan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_kategori'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Aspek K3/Lingkungan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_aspek'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Lokasi Penyerahan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dock_lokasi'] ?></td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 mb-3">
+                                            <label for="shift" class="form-label">Tanggal Dibutuhkan
+                                                :</span>
+                                            </label>
+                                            <p>
+                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                </td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <?php
+                        </div>
+
+                        <div class="card card-preview">
+                            <div class="card-header" style="background-color: #0e4551; width: 100%;">
+                                Komentar
+                            </div>
+                            <div class="card-body">
+                                <form method="get" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-12 mb-3">
+                                            <p style="text-align: justify;">
+                                                <td><?php echo $p['dock_comment'] ?></td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <?php
                         }
                             ?>
-                        </div>
+
 
                         <div class="row text-center justify-content-center d-flex align-items-center"
                             style="border-radius: 10px; height: 50px;">
@@ -427,18 +424,20 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border d-flex justify-content-center align-items-center"
-                                style="border-radius: 10px; height: 48px; width:320px; margin-right:10px; background-color: #0e4551;">
-                                <a href="preview_kajian.php?id=<?php echo $id; ?>" style="color:white;"> Doc Kajian </a>
+                                style="border-radius: 10px; height: 48px; width:31%px; margin-right:10px; background-color: #0e4551;">
+                                <a href="preview_kajian.php?id=<?php echo $id; ?>" style="color:white;"> Doc Kajian
+                                </a>
                             </div>
                             <div class=" col-lg-4 border d-flex justify-content-center
                                 align-items-center"
-                                style="border-radius: 10px; height: 48px; width:320px;color:grey; margin-right:10px;">
+                                style="border-radius: 10px; height: 48px; width:31%;color:grey; margin-right:10px;">
                                 <?php
                                         // Pastikan dockh_id ada di array $p
                                         $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
                                         if ($id_dockh) {
                                         ?>
-                                <a href="preview_dp.php?id=<?php echo $id_dockh; ?>" style="color:white;"> Doc KAK & HPS
+                                <a href="preview_dp.php?id=<?php echo $id_dockh; ?>" style="color:white;"> Doc KAK &
+                                    HPS
                                 </a>
                                 <?php
                                         } else {
@@ -449,7 +448,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         ?>
                             </div>
                             <div class=" col-lg-4 d-flex justify-content-center border align-items-center"
-                                style="border-radius: 10px; height: 48px; width:320px;color:grey;">
+                                style="border-radius: 10px; height: 48px; width:31%;color:grey;">
                                 <?php
                                         // Pastikan dockt_id ada di array $p
                                         $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
@@ -577,7 +576,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td><?php echo date('d M Y H:i:s', strtotime($p['dock_waktu_asmen'])) ?></td>
+                                        <td><?php echo date('d M Y H:i:s', strtotime($p['dock_waktu_asmen'])) ?>
+                                        </td>
                                         <td><?php echo $p['petugas_nama'] ?></td>
                                         <td> <?php echo $p['dock_status_asmen']; ?> </td>
                                     </tr>

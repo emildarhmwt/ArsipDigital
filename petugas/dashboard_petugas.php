@@ -171,6 +171,22 @@
          color: white !important;
          background-color: #11475e !important;
      }
+
+     .doc-pks {
+         color: #062949 !important;
+     }
+
+     .kajian {
+         background-image: url("../assets/images/bg-card.png");
+         background-size: 100% 100%;
+         background-position: center;
+         background-repeat: no-repeat;
+         height: 100%;
+     }
+
+     .kontrak {
+         margin-top: 20px;
+     }
      </style>
  </head>
 
@@ -297,24 +313,24 @@
                      </div>
 
                      <div class="col-lg-3">
-                         <div class="card overflow-hidden" style="height: 170px; background-color:#e47c10;">
+                         <div class="card overflow-hidden kajian" style="height: 170px;">
                              <div class=" card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
                                      <span class="me-2 d-flex align-items-center justify-content-center">
-                                         <i class="ti ti-file-analytics fs-9 text-white kategori2"></i>
+                                         <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
                                      </span>
-                                     <div class=" ms-2">
+                                     <!-- <div class=" ms-2">
                                          <img src="../assets/images/2.png" class="wave">
-                                     </div>
+                                     </div> -->
                                  </div>
 
-                                 <div class="kategori">
-                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
+                                 <div class="mt-4 doc-pks">
+                                     <h5 class="doc-pks mb-2 fw-semibold fs-1">Jumlah Kategori</h5>
                                      <?php
                                         $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
                                         ?>
 
-                                     <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                     <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
                                              class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
                                      </h5>
                                  </div>
@@ -323,22 +339,23 @@
                      </div>
 
                      <div class="col-lg-3">
-                         <div class="card overflow-hidden" style="height: 170px; background-color:#e47c10;">
-                             <div class="card-body p-4">
+                         <div class="card overflow-hidden kajian" style="height: 170px;">
+                             <div class=" card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
                                      <span class="me-2 d-flex align-items-center justify-content-center">
-                                         <i class="ti ti-file-analytics fs-9 text-white kategori2"></i>
+                                         <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
                                      </span>
-                                     <div class="ms-2">
-                                         <img src="../assets/images/2.png" class="wave2">
-                                     </div>
+                                     <!-- <div class=" ms-2">
+                                         <img src="../assets/images/2.png" class="wave">
+                                     </div> -->
                                  </div>
-                                 <div class="kategori doc-pks">
-                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
+
+                                 <div class="mt-4 doc-pks">
+                                     <h5 class="doc-pks mb-2 fw-semibold fs-1">Jumlah User</h5>
                                      <?php
                                         $jumlah_user = mysqli_query($koneksi, "select * from user");
                                         ?>
-                                     <h5 class="card-title mb-0 fw-semibold fs-3"><span
+                                     <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
                                              class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
                                      </h5>
                                  </div>

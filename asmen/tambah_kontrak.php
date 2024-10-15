@@ -317,7 +317,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         <label for="formFile" class="form-label">Lampiran File :</label>
                                         <input class="form-control text-white" type="file" name="file" required>
                                     </div>
-                                    <div class="mb-3">
+                                    <!-- <div class="mb-3">
                                         <label for="kategori" class="form-label">Ditujukan Kepada :</label>
                                         <select class="form-control text-white" name="tujuan_avp" required="required">
                                             <option value="" style="color: black;">Asisten Vice President</option>
@@ -331,7 +331,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 }
                                                 ?>
                                         </select>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div>

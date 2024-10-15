@@ -297,6 +297,11 @@ if ($_SESSION['status'] != "admin_login") {
                                             <option value="GM" style="color: black;">General Manager</option>
                                         </select>
                                     </div>
+                                    <div class="mb-3">
+                                        <label for="kode" class="form-label">Kode</label>
+                                        <input type="text" class="form-control text-white" name="kode"
+                                            placeholder="Input Data" required>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
                                     Submit</button>
@@ -327,6 +332,23 @@ if ($_SESSION['status'] != "admin_login") {
             passwordInput.type = 'text';
         } else {
             passwordInput.type = 'password';
+        }
+    });
+
+    document.querySelector('select[name="level"]').addEventListener('change', function() {
+        var kodeInput = document.querySelector('input[name="kode"]');
+        var selectedValue = this.value;
+
+        if (selectedValue === "ASMEN") {
+            kodeInput.value = "AD-AM-";
+        } else if (selectedValue === "AVP") {
+            kodeInput.value = "AD-AVP-";
+        } else if (selectedValue === "VP") {
+            kodeInput.value = "AD-VP-";
+        } else if (selectedValue === "GM") {
+            kodeInput.value = "AD-GM-";
+        } else {
+            kodeInput.value = "";
         }
     });
     </script>

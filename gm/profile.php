@@ -151,7 +151,7 @@ if ($_SESSION['status'] != "gm_login") {
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
-                    <div class=" card-header" style="background-color: #0e4551; width: 1047px; font-size: 25px;">
+                    <div class=" card-header" style="background-color: #0e4551; width: 100%; font-size: 25px;">
                         Profil
                     </div>
                     <div class="card-body">

@@ -270,15 +270,15 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4 align-middle">
-                                    <tr>
+                                    <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
-                                        <th class="fs-3">Ditujukan Kepada</th>
+                                        <th class="fs-3" style="width: 20%;">Nama Permintaan</th>
+                                        <!-- <th class="fs-3">Ditujukan Kepada</th> -->
                                         <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
                                         <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
                                             &nbsp&nbsp&nbsp
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 15%;">&nbsp&nbsp&nbsp Tanggal
+                                        <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp&nbsp Tanggal
                                             &nbsp&nbsp&nbsp
                                             <br>
                                             &nbsp&nbsp&nbsp Dibutuhkan &nbsp&nbsp&nbsp
@@ -289,7 +289,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         </th>
                                         <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK&HPS
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 15%;">Proses <br> Doc Kontrak
+                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kontrak
                                         </th>
                                         <th class="fs-3">Opsi</th>
                                     </tr>
@@ -298,6 +298,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     <?php
                                     $no = 1;
                                     include '../koneksi.php';
+                                    $id_pks = $_SESSION['id'];
                                     // Perbaiki query untuk menggunakan alias yang benar
                                     $arsip = mysqli_query($koneksi, "
                                             SELECT dockajian.*, doc_kak_hps.*, doc_kontrak.*,
@@ -336,6 +337,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                             
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id
+                                            WHERE dockajian.dock_tujuan_gm = '$id_pks'
                                             ORDER BY dockajian.dock_id DESC
                                             ");
                                     while ($p = mysqli_fetch_assoc($arsip)) {
@@ -365,8 +367,6 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         } else {
                                             $lastStatus = $p['dock_status_asmen'];
                                         }
-
-
                                         // Check if the last status is 'Rejected'
                                         if ($lastStatus == 'Rejected (AVP)' || $lastStatus == 'Rejected (VP)' || $lastStatus == 'Approved (AVP)' || $lastStatus == 'Uploaded (Asmen)') {
                                             continue; // Skip this iteration if the last status is rejected
@@ -375,7 +375,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td>
+                                        <!-- <td>
                                             <?php
                                                 if (!empty($p['dockt_tujuan_gm'])) {
                                                     $tujuankt_vp = $p['dockt_tujuan_gm'];
@@ -391,7 +391,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                                     echo '-';
                                                 }
                                                 ?>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <?php
                                                 if (!empty($p['dockt_gm'])) {

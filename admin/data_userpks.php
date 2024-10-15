@@ -314,16 +314,17 @@ if ($_SESSION['status'] != "admin_login") {
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4">
-                                    <tr>
+                                    <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3" style="width: 10%;">Foto</th>
+                                        <th class="fs-3" style="width: 13%;">Kode</th>
                                         <th class="fs-3">Nama</th>
                                         <th class="fs-3">Username</th>
-                                        <th class="fs-3">Jabatan</th>
+                                        <th class="fs-3" style="width: 10%;">Jabatan</th>
                                         <th class="fs-3" style="width: 5%;">Opsi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     <?php
                                             include '../koneksi.php';
                                             $no = 1;
@@ -331,8 +332,8 @@ if ($_SESSION['status'] != "admin_login") {
                                             while ($p = mysqli_fetch_array($user)) {
                                             ?>
                                     <tr>
-                                        <td><?php echo $no++; ?></td>
-                                        <td>
+                                        <td class="text-center"><?php echo $no++; ?></td>
+                                        <td class="text-center">
                                             <?php
                                                         if ($p['pks_foto'] == "") {
                                                         ?>
@@ -347,6 +348,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                         }
                                                         ?>
                                         </td>
+                                        <td><?php echo $p['pks_kode'] ?></td>
                                         <td><?php echo $p['pks_nama'] ?></td>
                                         <td><?php echo $p['pks_username'] ?></td>
                                         <td><?php echo $p['pks_level'] ?></td>

@@ -256,7 +256,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     </div>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown">
+                            <!-- <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="ti ti-bell-ringing"></i>
@@ -310,7 +310,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </nav>

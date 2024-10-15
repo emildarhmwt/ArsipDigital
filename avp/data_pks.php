@@ -270,15 +270,15 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4 align-middle">
-                                    <tr>
+                                    <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
+                                        <th class="fs-3" style="width: 20%;">Nama Permintaan</th>
                                         <!-- <th class="fs-3">Ditujukan Kepada</th> -->
                                         <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
                                         <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
                                             &nbsp&nbsp&nbsp
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 15%;">&nbsp&nbsp&nbsp Tanggal
+                                        <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp&nbsp Tanggal
                                             &nbsp&nbsp&nbsp
                                             <br>
                                             &nbsp&nbsp&nbsp Dibutuhkan &nbsp&nbsp&nbsp
@@ -289,7 +289,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                         </th>
                                         <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK&HPS
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 15%;">Proses <br> Doc Kontrak
+                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kontrak
                                         </th>
                                         <th class="fs-3">Opsi</th>
                                     </tr>

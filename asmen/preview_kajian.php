@@ -287,7 +287,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             <p>
                                                 <td><?php echo $p['dock_nama'] ?></td>
                                             </p>
-
                                         </div>
                                         <div class="col-lg-4 mb-3">
                                             <label for="shift" class="form-label">Deskripsi Permintaan
@@ -372,12 +371,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
                             <div class="col-lg-4 border d-flex justify-content-center align-items-center"
-                                style="border-radius: 10px; height: 48px; width:320px; margin-right:10px; background-color: #0e4551;">
+                                style="border-radius: 10px; height: 48px; width:31%; margin-right:10px; background-color: #0e4551;">
                                 <a href="preview_kajian.php?id=<?php echo $id; ?>" style="color:white;"> Doc Kajian
                                 </a>
                             </div>
                             <div class=" col-lg-4 border d-flex justify-content-center align-items-center"
-                                style="border-radius: 10px; height: 48px; width:320px;color:grey; margin-right:10px;">
+                                style="border-radius: 10px; height: 48px; width:31% ;color:grey; margin-right:10px;">
                                 <?php
                                         // Pastikan dockh_id ada di array $p
                                         $id_dockh = isset($p['dockh_dock_id']) ? $p['dockh_dock_id'] : null; // Menggunakan null jika tidak ada
@@ -395,7 +394,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         ?>
                             </div>
                             <div class=" col-lg-4 border d-flex justify-content-center align-items-center"
-                                style="border-radius: 10px; height: 48px; width:320px;color:grey;">
+                                style="border-radius: 10px; height: 48px; width:31% ;color:grey;">
                                 <?php
                                         // Pastikan dockt_id ada di array $p
                                         $id_dockt = isset($p['dockt_dock_id']) ? $p['dockt_dock_id'] : null; // Menggunakan null jika tidak ada
