@@ -298,6 +298,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                     <?php
                                     $no = 1;
                                     include '../koneksi.php';
+                                    $id_pks = $_SESSION['id'];
                                     // Perbaiki query untuk menggunakan alias yang benar
                                     $arsip = mysqli_query($koneksi, "
                                             SELECT dockajian.*, doc_kak_hps.*, doc_kontrak.*,
@@ -336,6 +337,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "vp_login") {
                                             
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id
+                                            WHERE dockajian.dock_tujuan_vp = '$id_pks'
                                             ORDER BY dockajian.dock_id DESC
                                             ");
                                     while ($p = mysqli_fetch_assoc($arsip)) {

@@ -298,7 +298,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     <?php
                                     $no = 1;
                                     include '../koneksi.php';
-                                     $id_pks = $_SESSION['id'];
+                                    $id_pks = $_SESSION['id'];
                                     // Perbaiki query untuk menggunakan alias yang benar
                                     $arsip = mysqli_query($koneksi, "
                                             SELECT dockajian.*, doc_kak_hps.*, doc_kontrak.*,
