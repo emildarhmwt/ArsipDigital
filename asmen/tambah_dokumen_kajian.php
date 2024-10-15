@@ -221,7 +221,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">CREATE DOKUMEN KAJIAN
                         </h5>
                         <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
-                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                            <div class=" card-header" style="background-color: #0e4551; width: 100%; ">
                                 Header
                             </div>
                             <div class=" card-body">
@@ -282,7 +282,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         </div>
 
                         <div class="card  card-preview" style="border-radius: 10px 10px 10px 10px;">
-                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                            <div class=" card-header" style="background-color: #0e4551; width: 100%; ">
                                 Dokumen Kajian
                             </div>
                             <div class="card-body">
@@ -295,7 +295,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <label for="formFile" class="form-label">Lampiran File :</label>
                                     <input class="form-control text-white" type="file" name="file">
                                 </div>
-                                <div class="mb-3">
+                                <!-- <div class="mb-3">
                                     <label for="kategori" class="form-label">Ditujukan Kepada :</label>
                                     <select class="form-control text-white" name="tujuan_avp" required="required">
                                         <option value="" style="color: black;">Asisten Vice President</option>
@@ -309,7 +309,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 }
                                                 ?>
                                     </select>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 

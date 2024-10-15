@@ -323,7 +323,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         <div class="row">
                             <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
                                 <div class="card-header"
-                                    style="background-color: #0e4551; width: 995px; margin-left: -12px;">
+                                    style="background-color: #0e4551; width: 100%; margin-left: -12px;">
                                     Header
                                 </div>
                                 <div class="card-body">

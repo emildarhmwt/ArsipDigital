@@ -273,7 +273,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     <tr>
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3" style="width: 10%;">Nama Permintaan</th>
-                                        <th class="fs-3">Ditujukan Kepada</th>
+                                        <!-- <th class="fs-3">Ditujukan Kepada</th> -->
                                         <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
                                         <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
                                             &nbsp&nbsp&nbsp
@@ -298,6 +298,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                     <?php
                                     $no = 1;
                                     include '../koneksi.php';
+                                     $id_pks = $_SESSION['id'];
                                     // Perbaiki query untuk menggunakan alias yang benar
                                     $arsip = mysqli_query($koneksi, "
                                             SELECT dockajian.*, doc_kak_hps.*, doc_kontrak.*,
@@ -336,6 +337,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                             
                                             LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id
                                             LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id
+                                            WHERE dockajian.dock_tujuan_avp = '$id_pks'
                                             ORDER BY dockajian.dock_id DESC
                                             ");
                                     while ($p = mysqli_fetch_assoc($arsip)) {
@@ -345,7 +347,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                         <td>
                                             <?php echo $p['dock_nama'] ?>
                                         </td>
-                                        <td>
+                                        <!-- <td>
                                             <?php
                                                 if (!empty($p['dockt_tujuan_avp'])) {
                                                     $tujuankt_vp = $p['dockt_tujuan_avp'];
@@ -361,7 +363,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
                                                     echo '-';
                                                 }
                                                 ?>
-                                        </td>
+                                        </td> -->
                                         <td>
                                             <?php
                                                 if (!empty($p['dockt_gm'])) {

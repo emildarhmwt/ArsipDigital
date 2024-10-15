@@ -231,7 +231,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
                         <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
-                            <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
+                            <div class=" card-header" style="background-color: #0e4551; width: 100%; ">
                                 Header
                             </div>
                             <div class="card-body">
@@ -302,8 +302,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         ?>
                         <form method="post" action="kontrak_aksi.php" enctype="multipart/form-data">
                             <div class="card  card-preview" style="border-radius: 10px 10px 10px 10px;">
-                                <div class=" card-header" style="background-color: #0e4551; width: 971px; ">
-                                    Dokumen Kajian
+                                <div class=" card-header" style="background-color: #0e4551; width: 100%; ">
+                                    Dokumen Kontrak PKS
                                 </div>
                                 <div class="card-body">
 
