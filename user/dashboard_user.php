@@ -299,10 +299,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                                     <div class="me-2">
                                         <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
                                         <?php
-                                        $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
-                                        ?>
-                                        <h5 class="card-title mb-0 fw-semibold fs-4"><span
-                                                class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
+                                            $jumlah_kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                            $total_kategori = mysqli_num_rows($jumlah_kategori);
+                                            ?>
+                                        <h5 class="card-title mb-0 fw-semibold fs-4">
+                                            <span class="counter" id="kategoriCounter">0</span>
                                         </h5>
                                     </div>
                                 </div>
@@ -352,6 +353,27 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
+
+    function animateCounter(element, start, end, duration) {
+        let startTime = null;
+        const step = (timestamp) => {
+            if (!startTime) startTime = timestamp;
+            const progress = Math.min((timestamp - startTime) / duration, 1);
+            element.textContent = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                requestAnimationFrame(step);
+            } else {
+                element.textContent = end; // Ensure it ends at the final value
+            }
+        };
+        requestAnimationFrame(step);
+    }
+
+    // Get the total counts from PHP
+    const totalKategori = <?php echo $total_kategori; ?>;
+
+    // Animate each counter
+    animateCounter(document.getElementById('kategoriCounter'), 0, totalKategori, 2000);
 
     const categoryData =
         <?php

@@ -341,25 +341,21 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
 
                     <div class="col-lg-2">
                         <div class="card overflow-hidden kajian" style="height: 170px;">
-                            <div class=" card-body p-4">
+                            <div class="card-body p-4">
                                 <div class="d-flex align-items-center mb-2">
                                     <span class="me-2 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
                                     </span>
-                                    <!-- <div class=" ms-2">
-                                        <img src="../assets/images/2.png" class="wave">
-                                    </div> -->
                                 </div>
 
                                 <div class="mt-4">
                                     <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc Kajian</h5>
                                     <?php
-                                    // Update the query to exclude certain statuses
-                                    // $jumlah_kajian = mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen != 'Uploaded (Asmen)' OR dock_status_avp NOT IN ('Approved (AVP)', 'Rejected (AVP)') OR dock_status_vp != 'Rejected (VP)'");
                                     $jumlah_kajian = mysqli_query($koneksi, "SELECT * FROM dockajian");
+                                    $total_kajian = mysqli_num_rows($jumlah_kajian);
                                     ?>
-                                    <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
-                                            class="counter"><?php echo mysqli_num_rows($jumlah_kajian); ?></span>
+                                    <h5 class="doc-pks mb-0 fw-semibold fs-3">
+                                        <span class="counter" id="kajianCounter">0</span>
                                     </h5>
                                 </div>
                             </div>
@@ -373,18 +369,16 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     <span class="me-2 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
                                     </span>
-                                    <!-- <div class="ms-2">
-                                        <img src="../assets/images/2.png" class="wave2">
-                                    </div> -->
                                 </div>
-                                <div class="mt-4 doc-pks">
-                                    <h5 class="doc-pks mb-2 fw-semibold fs-1">Doc KAK & HPS</h5>
+
+                                <div class="mt-4">
+                                    <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc KAK & HPS</h5>
                                     <?php
-                                    // $jumlah_kak_hps = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen != 'Uploaded (Asmen)' OR dockh_status_avp NOT IN ('Approved (AVP)', 'Rejected (AVP)') OR dockh_status_vp != 'Rejected (VP)'");
                                     $jumlah_kak_hps = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps");
+                                    $total_kak_hps = mysqli_num_rows($jumlah_kak_hps);
                                     ?>
-                                    <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
-                                            class="counter"><?php echo mysqli_num_rows($jumlah_kak_hps); ?></span>
+                                    <h5 class="doc-pks mb-0 fw-semibold fs-3">
+                                        <span class="counter" id="KHCounter">0</span>
                                     </h5>
                                 </div>
                             </div>
@@ -398,18 +392,16 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
                                     <span class="me-2 d-flex align-items-center justify-content-center">
                                         <i class="ti ti-file-analytics fs-9 text-white kontrak"></i>
                                     </span>
-                                    <!-- <div class="ms-2">
-                                        <img src="../assets/images/2.png" class="wave3">
-                                    </div> -->
                                 </div>
-                                <div class="mt-4 doc-pks">
-                                    <h5 class="doc-pks mb-2 fw-semibold fs-1">Doc Kontrak</h5>
+
+                                <div class="mt-4">
+                                    <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc Kontrak</h5>
                                     <?php
-                                    // $jumlah_kontrak = mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen != 'Uploaded (Asmen)' OR dockt_status_avp NOT IN ('Approved (AVP)', 'Rejected (AVP)') OR dockt_status_vp != 'Rejected (VP)'");
                                     $jumlah_kontrak = mysqli_query($koneksi, "SELECT * FROM doc_kontrak");
+                                    $total_kontrak = mysqli_num_rows($jumlah_kontrak);
                                     ?>
-                                    <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
-                                            class="counter"><?php echo mysqli_num_rows($jumlah_kontrak); ?></span>
+                                    <h5 class="doc-pks mb-0 fw-semibold fs-3">
+                                        <span class="counter" id="kontrakCounter">0</span>
                                     </h5>
                                 </div>
                             </div>
@@ -734,6 +726,31 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "gm_login") {
             .then(data => {
                 document.getElementById('sidebar').innerHTML = data;
             });
+
+        function animateCounter(element, start, end, duration) {
+            let startTime = null;
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                } else {
+                    element.textContent = end; // Ensure it ends at the final value
+                }
+            };
+            requestAnimationFrame(step);
+        }
+
+        // Get the total counts from PHP
+        const totalKajian = <?php echo $total_kajian; ?>;
+        const totalKakHps = <?php echo $total_kak_hps; ?>;
+        const totalKontrak = <?php echo $total_kontrak; ?>;
+
+        // Animate each counter
+        animateCounter(document.getElementById('kajianCounter'), 0, totalKajian, 2000);
+        animateCounter(document.getElementById('KHCounter'), 0, totalKakHps, 2000);
+        animateCounter(document.getElementById('kontrakCounter'), 0, totalKontrak, 2000);
 
         //Grafik Semua Data
         function fetchCurrentMonthData() {

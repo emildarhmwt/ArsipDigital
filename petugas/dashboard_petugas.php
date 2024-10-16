@@ -325,13 +325,13 @@
                                  </div>
 
                                  <div class="mt-4 doc-pks">
-                                     <h5 class="doc-pks mb-2 fw-semibold fs-1">Jumlah Kategori</h5>
+                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
                                      <?php
-                                        $jumlah_kategori = mysqli_query($koneksi, "select * from kategori");
-                                        ?>
-
-                                     <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
-                                             class="counter"><?php echo mysqli_num_rows($jumlah_kategori); ?></span>
+                                            $jumlah_kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                            $total_kategori = mysqli_num_rows($jumlah_kategori);
+                                            ?>
+                                     <h5 class="card-title mb-0 fw-semibold fs-4">
+                                         <span class="counter" id="kategoriCounter">0</span>
                                      </h5>
                                  </div>
                              </div>
@@ -351,12 +351,14 @@
                                  </div>
 
                                  <div class="mt-4 doc-pks">
-                                     <h5 class="doc-pks mb-2 fw-semibold fs-1">Jumlah User</h5>
+                                     <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
                                      <?php
-                                        $jumlah_user = mysqli_query($koneksi, "select * from user");
-                                        ?>
-                                     <h5 class="doc-pks mb-0 fw-semibold fs-3"><span
-                                             class="counter"><?php echo mysqli_num_rows($jumlah_user); ?></span>
+                                            $jumlah_user = mysqli_query($koneksi, "SELECT (SELECT COUNT(*) FROM user) + (SELECT COUNT(*) FROM user_pks) AS total_users");
+                                            $result_user = mysqli_fetch_assoc($jumlah_user);
+                                            $total_user = $result_user['total_users'];
+                                            ?>
+                                     <h5 class="card-title mb-0 fw-semibold fs-3">
+                                         <span class="counter" id="userCounter">0</span>
                                      </h5>
                                  </div>
                              </div>
@@ -467,6 +469,29 @@
              .then(data => {
                  document.getElementById('sidebar').innerHTML = data;
              });
+
+         function animateCounter(element, start, end, duration) {
+             let startTime = null;
+             const step = (timestamp) => {
+                 if (!startTime) startTime = timestamp;
+                 const progress = Math.min((timestamp - startTime) / duration, 1);
+                 element.textContent = Math.floor(progress * (end - start) + start);
+                 if (progress < 1) {
+                     requestAnimationFrame(step);
+                 } else {
+                     element.textContent = end; // Ensure it ends at the final value
+                 }
+             };
+             requestAnimationFrame(step);
+         }
+
+         // Get the total counts from PHP
+         const totalKategori = <?php echo $total_kategori; ?>;
+         const totalUser = <?php echo $total_user; ?>;
+
+         // Animate each counter
+         animateCounter(document.getElementById('kategoriCounter'), 0, totalKategori, 2000);
+         animateCounter(document.getElementById('userCounter'), 0, totalUser, 2000);
 
          const categoryData =
              <?php

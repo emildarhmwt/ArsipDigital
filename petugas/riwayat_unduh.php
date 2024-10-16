@@ -248,7 +248,7 @@
                          <div class="table-responsive products-table" data-simplebar>
                              <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                  <thead class="fs-4">
-                                     <tr>
+                                     <tr class="text-center">
                                          <th class="fs-3" style="width: 5%;">No</th>
                                          <th class="fs-3" style="width: 20%;">Waktu Unduh</th>
                                          <th class="fs-3" style="width: 25%;">User</th>
@@ -264,7 +264,7 @@
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                      <tr>
-                                         <td><?php echo $no++; ?></td>
+                                         <td class="text-center"><?php echo $no++; ?></td>
                                          <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?>
                                          </td>
                                          <td><?php echo $p['user_nama'] ?></td>
