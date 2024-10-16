@@ -285,7 +285,7 @@ if ($_SESSION['status'] != "admin_login") {
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4">
-                                    <tr>
+                                    <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
                                         <th class="fs-3">Nama</th>
                                         <th class="fs-3">Keterangan</th>
@@ -300,7 +300,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             while ($p = mysqli_fetch_array($kategori)) {
                                             ?>
                                     <tr>
-                                        <td><?php echo $no++; ?></td>
+                                        <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['kategori_nama'] ?></td>
                                         <td><?php echo $p['kategori_keterangan'] ?></td>
                                         <td class="text-center">
