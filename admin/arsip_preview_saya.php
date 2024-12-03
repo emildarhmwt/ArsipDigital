@@ -229,63 +229,83 @@ if ($_SESSION['status'] != "admin_login") {
                             <i class="bi bi-arrow-left"></i> Back
                         </a>
                         <?php
-                        $id = $_GET['id'];
-                        $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
-                        while ($d = mysqli_fetch_array($data)) {
+                        include '../koneksi.php';
+                        $no = 1;
+                        $arsip = mysqli_query($koneksi, "SELECT arsip.*, kategori.kategori_nama, status_arsip.status_nama, admin.admin_nama, petugas.petugas_nama 
+                                            FROM arsip 
+                                            LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
+                                            LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
+                                            LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
+                                            LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
+                                            ORDER BY arsip.arsip_id DESC");
+                        while ($p = mysqli_fetch_array($arsip)) {
                         ?>
                         <div class="row">
                             <div class="col-lg-4">
                                 <table class="table">
                                     <tr>
                                         <th>Kode Arsip</th>
-                                        <td><?php echo $d['arsip_kode']; ?></td>
+                                        <td><?php echo $p['arsip_kode']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Waktu Upload</th>
                                         <td>
-                                            <?php echo date('d M Y', strtotime($d['arsip_waktu_upload'])); ?><br>
-                                            <?php echo date('H:i:s', strtotime($d['arsip_waktu_upload'])); ?>
+                                            <?php echo date('d M Y', strtotime($p['arsip_waktu_upload'])); ?><br>
+                                            <?php echo date('H:i:s', strtotime($p['arsip_waktu_upload'])); ?>
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>Nama File</th>
-                                        <td><?php echo $d['arsip_nama']; ?></td>
+                                        <td><?php echo $p['arsip_nama']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Kategori</th>
-                                        <td><?php echo $d['kategori_nama']; ?></td>
+                                        <td><?php echo $p['kategori_nama']; ?></td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Status</th>
+                                        <td><?php echo $p['status_nama']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Jenis File</th>
-                                        <td><?php echo $d['arsip_jenis']; ?></td>
+                                        <td><?php echo $p['arsip_jenis']; ?></td>
                                     </tr>
                                     <tr>
                                         <th>Petugas Pengupload</th>
-                                        <td><?php echo $d['petugas_nama']; ?></td>
+                                        <td>
+                                            <?php
+                                                if ($p['arsip_petugas'] != 0) {
+                                                    echo $p['petugas_nama'];
+                                                } else {
+                                                    echo $p['admin_nama'];
+                                                }
+                                                ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Keterangan</th>
-                                        <td><?php echo $d['arsip_keterangan']; ?></td>
+                                        <td><?php echo $p['arsip_keterangan']; ?></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-lg-8">
                                 <?php
-                                    if ($d['arsip_jenis'] == "png" || $d['arsip_jenis'] == "jpg" || $d['arsip_jenis'] == "gif" || $d['arsip_jenis'] == "jpeg") {
+                                    if ($p['arsip_jenis'] == "png" || $p['arsip_jenis'] == "jpg" || $p['arsip_jenis'] == "gif" || $p['arsip_jenis'] == "jpeg") {
                                     ?>
-                                <img src="../arsip/<?php echo $d['arsip_file']; ?>" class="img-fluid"
-                                    alt="<?php echo $d['arsip_nama']; ?>">
+                                <img src="../arsip/<?php echo $p['arsip_file']; ?>" class="img-fluid"
+                                    alt="<?php echo $p['arsip_nama']; ?>">
                                 <?php
-                                    } elseif ($d['arsip_jenis'] == "pdf") {
+                                    } elseif ($p['arsip_jenis'] == "pdf") {
                                     ?>
-                                <embed src="../arsip/<?php echo $d['arsip_file']; ?>" type="application/pdf"
+                                <embed src="../arsip/<?php echo $p['arsip_file']; ?>" type="application/pdf"
                                     width="100%" height="600px" />
                                 <?php
-                                    } elseif ($d['arsip_jenis'] == "xlsx" || $d['arsip_jenis'] == "xls") {
+                                    } elseif ($p['arsip_jenis'] == "xlsx" || $p['arsip_jenis'] == "xls") {
                                     ?>
                                 <div id="excel-preview"></div>
                                 <script>
-                                fetch('../arsip/<?php echo $d['arsip_file']; ?>')
+                                fetch('../arsip/<?php echo $p['arsip_file']; ?>')
                                     .then(response => response.arrayBuffer())
                                     .then(data => {
                                         const workbook = XLSX.read(data, {
@@ -301,7 +321,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     } else {
                                     ?>
                                 <p>Preview tidak tersedia, silahkan <a target="_blank" style="color: blue"
-                                        href="../arsip/<?php echo $d['arsip_file']; ?>">Download di sini.</a>
+                                        href="../arsip/<?php echo $p['arsip_file']; ?>">Download di sini.</a>
                                 </p>
                                 <?php
                                     }
@@ -315,8 +335,6 @@ if ($_SESSION['status'] != "admin_login") {
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

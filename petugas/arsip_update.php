@@ -14,11 +14,12 @@ $rand = rand();
 $filename = $_FILES['file']['name'];
 
 $kategori = $_POST['kategori'];
+$status = $_POST['status'];
 $keterangan = $_POST['keterangan'];
 
 if($filename == ""){
 
-	mysqli_query($koneksi, "update arsip set arsip_kode='$kode', arsip_nama='$nama', arsip_kategori='$kategori', arsip_keterangan='$keterangan' where arsip_id='$id'")or die(mysqli_error($koneksi));
+	mysqli_query($koneksi, "update arsip set arsip_kode='$kode', arsip_nama='$nama', arsip_kategori='$kategori', arsip_status='$status', arsip_keterangan='$keterangan' where arsip_id='$id'")or die(mysqli_error($koneksi));
 	header("location:arsip_saya.php");
 
 }else{
@@ -38,7 +39,7 @@ if($filename == ""){
 		// upload file baru
 		move_uploaded_file($_FILES['file']['tmp_name'], '../arsip/'.$rand.'_'.$filename);
 		$nama_file = $rand.'_'.$filename;
-		mysqli_query($koneksi, "update arsip set arsip_kode='$kode', arsip_nama='$nama', arsip_jenis='$jenis', arsip_kategori='$kategori', arsip_keterangan='$keterangan', arsip_file='$nama_file' where arsip_id='$id'")or die(mysqli_error($koneksi));
+		mysqli_query($koneksi, "update arsip set arsip_kode='$kode', arsip_nama='$nama', arsip_jenis='$jenis', arsip_kategori='$kategori', arsip_status='$status', arsip_keterangan='$keterangan', arsip_file='$nama_file' where arsip_id='$id'")or die(mysqli_error($koneksi));
 		header("location:arsip_saya.php?alert=sukses");
 	}
 }

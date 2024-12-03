@@ -257,10 +257,10 @@
                                          <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
                                          <div class="message-list">
                                              <?php
-                                            $id_saya = $_SESSION['id'];
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
+                                                $id_saya = $_SESSION['id'];
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
+                                                while ($p = mysqli_fetch_array($arsip)) {
+                                                ?>
                                              <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
                                                  <div class="notification-content">
                                                      <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
@@ -271,8 +271,8 @@
                                                  </div>
                                              </a>
                                              <?php
-                                            }
-                                            ?>
+                                                }
+                                                ?>
                                          </div>
                                          <a href="riwayat_unduh.php"
                                              class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
@@ -314,19 +314,19 @@
 
                          <center>
                              <?php
-                                        if (isset($_GET['alert'])) {
-                                            if ($_GET['alert'] == "gagal") {
-                                        ?>
+                                if (isset($_GET['alert'])) {
+                                    if ($_GET['alert'] == "gagal") {
+                                ?>
                              <div class="alert alert-danger">File arsip gagal diupload. krena demi keamanan file
                                  .php tidak diperbolehkan.</div>
                              <?php
-                                            } else {
-                                            ?>
+                                    } else {
+                                    ?>
                              <div class="alert alert-success">Arsip berhasil tersimpan.</div>
                              <?php
-                                            }
-                                        }
-                                        ?>
+                                    }
+                                }
+                                ?>
                          </center>
 
                          <div class="table-responsive products-table" data-simplebar>
@@ -337,6 +337,7 @@
                                          <th class="fs-3" style="width: 10%;">Waktu Upload</th>
                                          <th class="fs-3" style="width: 25%;">Arsip</th>
                                          <th class="fs-3" style="width: 15%;">Kategori</th>
+                                         <th class="fs-3" style="width: 15%;">Status</th>
                                          <th class="fs-3" style="width: 10%;">Petugas</th>
                                          <th class="fs-3" style="width: 30%;">Keterangan</th>
                                          <th class="fs-3" style="width: 5%;">Opsi</th>
@@ -344,12 +345,19 @@
                                  </thead>
                                  <tbody>
                                      <?php
-                                                include '../koneksi.php';
-                                                $no = 1;
-                                                $saya = $_SESSION['id'];
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_petugas='$saya' ORDER BY arsip_id DESC");
-                                                while ($p = mysqli_fetch_array($arsip)) {
-                                                ?>
+                                        include '../koneksi.php';
+                                        $no = 1;
+                                        $saya = $_SESSION['id'];
+                                        $arsip = mysqli_query($koneksi, "SELECT arsip.*, kategori.kategori_nama, status_arsip.status_nama, admin.admin_nama, petugas.petugas_nama 
+                                            FROM arsip 
+                                            LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
+                                            LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
+                                            LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
+                                            LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
+                                            WHERE arsip_petugas='$saya'
+                                            ORDER BY arsip.arsip_id DESC");
+                                        while ($p = mysqli_fetch_array($arsip)) {
+                                        ?>
                                      <tr>
                                          <td class="text-center"><?php echo $no++; ?></td>
                                          <td>
@@ -366,7 +374,16 @@
                                              <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
                                          </td>
                                          <td class="text-center"><?php echo $p['kategori_nama'] ?></td>
-                                         <td class="text-center"><?php echo $p['petugas_nama'] ?></td>
+                                         <td class="text-center"><?php echo $p['status_nama'] ?></td>
+                                         <td class="text-center">
+                                             <?php
+                                                if ($p['arsip_petugas'] != 0) {
+                                                    echo $p['petugas_nama'];
+                                                } else {
+                                                    echo $p['admin_nama'];
+                                                }
+                                                ?>
+                                         </td>
                                          <td class="text-center"><?php echo $p['arsip_keterangan'] ?></td>
                                          <td class="text-center">
 
@@ -393,8 +410,8 @@
                                          </td>
                                      </tr>
                                      <?php
-                                                }
-                                                ?>
+                                        }
+                                        ?>
                                  </tbody>
                              </table>
                          </div>

@@ -263,11 +263,6 @@ if ($_SESSION['status'] != "admin_login") {
                                     <input type="text" class="form-control text-white" name="nama"
                                         placeholder="Input Data" required>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
-                                    <textarea class="form-control text-white" name="keterangan" rows="10"
-                                        placeholder="Input Data" required></textarea>
-                                </div>
                             </div>
                             <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
                                 Submit</button>

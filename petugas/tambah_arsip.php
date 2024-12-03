@@ -288,6 +288,21 @@
                                          </select>
                                      </div>
                                      <div class="mb-3">
+                                         <label for="kategori" class="form-label">Status</label>
+                                         <select class="form-control text-white" name="status" required="required">
+                                             <option value="" style="color: black;">Pilih status</option>
+                                             <?php
+                                                $status = mysqli_query($koneksi, "SELECT * FROM status_arsip");
+                                                while ($s = mysqli_fetch_array($status)) {
+                                                ?>
+                                             <option value="<?php echo $s['status_id']; ?>" style="color: black;">
+                                                 <?php echo $s['status_nama']; ?></option>
+                                             <?php
+                                                }
+                                                ?>
+                                         </select>
+                                     </div>
+                                     <div class="mb-3">
                                          <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
                                          <textarea class="form-control text-white" rows="10" placeholder="Input Data"
                                              name="keterangan" required></textarea>

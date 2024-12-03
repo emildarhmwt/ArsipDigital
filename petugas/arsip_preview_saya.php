@@ -227,7 +227,7 @@
                          </a>
                          <?php
                             $id = $_GET['id'];
-                            $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
+                            $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas,status_arsip WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_status=status_id and arsip_id='$id'");
                             while ($d = mysqli_fetch_array($data)) {
                             ?>
                          <div class="row">
@@ -251,6 +251,10 @@
                                      <tr>
                                          <th>Kategori</th>
                                          <td><?php echo $d['kategori_nama']; ?></td>
+                                     </tr>
+                                     <tr>
+                                         <th>Status</th>
+                                         <td><?php echo $d['status_nama']; ?></td>
                                      </tr>
                                      <tr>
                                          <th>Jenis File</th>

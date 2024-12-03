@@ -269,11 +269,6 @@ if ($_SESSION['status'] != "admin_login") {
                                     <input type="text" class="form-control text-white" name="nama" required="required"
                                         value="<?php echo $d['kategori_nama']; ?>">
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
-                                    <textarea class="form-control text-white" name="keterangan" rows="10"
-                                        required="required"><?php echo $d['kategori_keterangan']; ?></textarea>
-                                </div>
                             </div>
 
                             <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
@@ -289,9 +284,6 @@ if ($_SESSION['status'] != "admin_login") {
                 </div>
             </div>
         </div>
-    </div>
-    </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

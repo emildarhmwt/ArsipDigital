@@ -205,10 +205,10 @@ if ($_SESSION['status'] != "avp_login") {
                                             while ($k = mysqli_fetch_array($kategori)) {
                                             ?>
                                             <option <?php if (isset($_GET['kategori'])) {
-                                                        if ($_GET['kategori'] == $k['kategori_id']) {
-                                                            echo "selected='selected'";
-                                                        }
-                                                    } ?> value="<?php echo $k['kategori_id']; ?>">
+                                                            if ($_GET['kategori'] == $k['kategori_id']) {
+                                                                echo "selected='selected'";
+                                                            }
+                                                        } ?> value="<?php echo $k['kategori_id']; ?>">
                                                 <?php echo $k['kategori_nama']; ?></option>
                                             <?php
                                             }
@@ -256,6 +256,7 @@ if ($_SESSION['status'] != "avp_login") {
                                         <th class="fs-3" style="width: 10%;">Waktu Upload</th>
                                         <th class="fs-3" style="width: 25%;">Arsip</th>
                                         <th class="fs-3" style="width: 15%;">Kategori</th>
+                                        <th class="fs-3" style="width: 15%;">Status</th>
                                         <th class="fs-3" style="width: 15%;">Petugas</th>
                                         <th class="fs-3" style="width: 25%;">Keterangan</th>
                                         <th class="fs-3" style="width: 5%;">Opsi</th>
@@ -263,15 +264,28 @@ if ($_SESSION['status'] != "avp_login") {
                                 </thead>
                                 <tbody>
                                     <?php
-                                            $no = 1;
-                                            if (isset($_GET['kategori'])) {
-                                                $kategori = $_GET['kategori'];
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_kategori='$kategori' ORDER BY arsip_id DESC");
-                                            } else {
-                                                $arsip = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id ORDER BY arsip_id DESC");
-                                            }
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
+                                    $no = 1;
+                                    if (isset($_GET['kategori'])) {
+                                        $kategori = $_GET['kategori'];
+                                        $arsip = mysqli_query($koneksi, "SELECT arsip.*, kategori.kategori_nama, status_arsip.status_nama, admin.admin_nama, petugas.petugas_nama 
+                                            FROM arsip 
+                                            LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
+                                            LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
+                                            LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
+                                            LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
+                                            WHERE arsip_kategori='$kategori'
+                                            ORDER BY arsip.arsip_id DESC");
+                                    } else {
+                                        $arsip = mysqli_query($koneksi, "SELECT arsip.*, kategori.kategori_nama, status_arsip.status_nama, admin.admin_nama, petugas.petugas_nama 
+                                            FROM arsip 
+                                            LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
+                                            LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
+                                            LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
+                                            LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
+                                            ORDER BY arsip.arsip_id DESC");
+                                    }
+                                    while ($p = mysqli_fetch_array($arsip)) {
+                                    ?>
                                     <tr>
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td class="text-center">
@@ -284,7 +298,16 @@ if ($_SESSION['status'] != "avp_login") {
                                             <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
                                         </td>
                                         <td class="text-center"><?php echo $p['kategori_nama'] ?></td>
-                                        <td class="text-center"><?php echo $p['petugas_nama'] ?></td>
+                                        <td class="text-center"><?php echo $p['status_nama'] ?></td>
+                                        <td class="text-center">
+                                            <?php
+                                                if ($p['arsip_petugas'] != 0) {
+                                                    echo $p['petugas_nama'];
+                                                } else {
+                                                    echo $p['admin_nama'];
+                                                }
+                                                ?>
+                                        </td>
                                         <td class="text-center"><?php echo $p['arsip_keterangan'] ?></td>
                                         <td class="text-center">
                                             <div class="btn-group">
@@ -301,8 +324,8 @@ if ($_SESSION['status'] != "avp_login") {
                                         </td>
                                     </tr>
                                     <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

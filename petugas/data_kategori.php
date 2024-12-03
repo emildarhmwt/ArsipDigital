@@ -221,6 +221,14 @@
                      <div class="card-body">
                          <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA KATEGORI
                          </h5>
+                         <div class="row mb-5">
+                             <div class="col-lg-6 text-center border-end text-white">
+                                 <a href="data_kategori.php" class="text-white">Kategori</a>
+                             </div>
+                             <div class="col-lg-6 text-center text-white">
+                                 <a href="data_status.php" class="text-white">Status</a>
+                             </div>
+                         </div>
                          <!-- table -->
                          <div class="row mb-3">
                              <div class="col-md-6 banyak-data">
@@ -245,8 +253,7 @@
                                  <thead class="fs-4">
                                      <tr class="text-center">
                                          <th class="fs-3" style="width: 5%;">No</th>
-                                         <th class="fs-3">Nama</th>
-                                         <th class="fs-3">Keterangan</th>
+                                         <th class="fs-3">Kategori</th>
                                      </tr>
                                  </thead>
                                  <tbody>
@@ -258,7 +265,6 @@
                                      <tr>
                                          <td class="text-center"><?php echo $no++; ?></td>
                                          <td><?php echo $p['kategori_nama'] ?></td>
-                                         <td><?php echo $p['kategori_keterangan'] ?></td>
                                      </tr>
                                      <?php
                                             }
@@ -275,8 +281,6 @@
                  </div>
              </div>
          </div>
-     </div>
-     </div>
      </div>
      <script>
      fetch('sidebar_petugas.php')

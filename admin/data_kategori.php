@@ -258,7 +258,14 @@ if ($_SESSION['status'] != "admin_login") {
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA KATEGORI
                         </h5>
-                        <!-- table -->
+                        <div class="row mb-5">
+                            <div class="col-lg-6 text-center border-end text-white">
+                                <a href="data_kategori.php" class="text-white">Kategori</a>
+                            </div>
+                            <div class="col-lg-6 text-center text-white">
+                                <a href="data_status.php" class="text-white">Status</a>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6 banyak-data">
                                 <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
@@ -287,26 +294,24 @@ if ($_SESSION['status'] != "admin_login") {
                                 <thead class="fs-4">
                                     <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3">Nama</th>
-                                        <th class="fs-3">Keterangan</th>
+                                        <th class="fs-3">Kategori</th>
                                         <th class="fs-3">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                            include '../koneksi.php';
-                                            $no = 1;
-                                            $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
-                                            while ($p = mysqli_fetch_array($kategori)) {
-                                            ?>
+                                    include '../koneksi.php';
+                                    $no = 1;
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                    while ($p = mysqli_fetch_array($kategori)) {
+                                    ?>
                                     <tr>
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['kategori_nama'] ?></td>
-                                        <td><?php echo $p['kategori_keterangan'] ?></td>
                                         <td class="text-center">
                                             <?php
-                                                        if ($p['kategori_id'] != 1) {
-                                                        ?>
+                                                if ($p['kategori_id'] != 1) {
+                                                ?>
                                             <div class="btn-group">
                                                 <a href="edit_kategori.php?id=<?php echo $p['kategori_id']; ?>"
                                                     class="btn btn-custom-upload btn-sm"><i
@@ -317,27 +322,26 @@ if ($_SESSION['status'] != "admin_login") {
                                                 </button>
                                             </div>
                                             <?php
-                                                        }
-                                                        ?>
+                                                }
+                                                ?>
                                         </td>
                                     </tr>
                                     <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mt-3" id="paginationContainer">
+                                    <!-- Pagination fetms will be added here by JavaScript -->
+                                </ul>
+                            </nav>
                         </div>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                <!-- Pagination items will be added here by JavaScript -->
-                            </ul>
-                        </nav>
                     </div>
                 </div>
+
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')
