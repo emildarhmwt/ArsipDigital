@@ -156,6 +156,17 @@ if ($_SESSION['status'] != "admin_login") {
     textarea::placeholder {
         color: white !important;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
     </style>
 </head>
 
@@ -179,7 +190,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -290,7 +301,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
                                                 while ($k = mysqli_fetch_array($kategori)) {
                                                 ?>
-                                            <option <?php if ($k['kategori_id'] == $d['arsip_kategori']) {
+                                            <option style="color: black;" <?php if ($k['kategori_id'] == $d['arsip_kategori']) {
                                                                 echo "selected='selected'";
                                                             } ?> value="<?php echo $k['kategori_id']; ?>">
                                                 <?php echo $k['kategori_nama']; ?></option>
@@ -307,7 +318,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 $status = mysqli_query($koneksi, "SELECT * FROM status_arsip");
                                                 while ($s = mysqli_fetch_array($status)) {
                                                 ?>
-                                            <option <?php if ($s['status_id'] == $d['arsip_status']) {
+                                            <option style="color: black;" <?php if ($s['status_id'] == $d['arsip_status']) {
                                                                 echo "selected='selected'";
                                                             } ?> value="<?php echo $s['status_id']; ?>">
                                                 <?php echo $s['status_nama']; ?></option>
@@ -350,7 +361,7 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
     function goBack() {
-        window.location.href = 'arsip_saya.php';
+        window.location.href = 'data_arsip.php';
     }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

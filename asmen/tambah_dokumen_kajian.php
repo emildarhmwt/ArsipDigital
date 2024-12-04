@@ -141,6 +141,41 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-color: #b27373 !important;
         color: white !important;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -164,7 +199,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -313,7 +348,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             </div>
                         </div>
 
-                        <div>
+                        <div class="text-center">
                             <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
                                 Submit</button>
                             <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i

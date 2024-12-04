@@ -156,6 +156,41 @@ if ($_SESSION['status'] != "admin_login") {
     textarea::placeholder {
         color: white !important;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -179,7 +214,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -300,12 +335,14 @@ if ($_SESSION['status'] != "admin_login") {
                                     <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                 </div>
                             </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-custom-eye mx-2"><i class="bi bi-send"></i>
+                                    Submit</button>
+                                <button type="button" class="btn btn-custom-edit" onclick="goBack()"><i
+                                        class="bi bi-arrow-left-circle"></i>
+                                    Kembali</button>
+                            </div>
 
-                            <button type="submit" class="btn btn-custom-eye mx-2"><i class="bi bi-send"></i>
-                                Submit</button>
-                            <button type="button" class="btn btn-custom-edit" onclick="goBack()"><i
-                                    class="bi bi-arrow-left-circle"></i>
-                                Kembali</button>
                         </form>
                         <?php
                         }

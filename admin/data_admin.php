@@ -174,6 +174,45 @@ if ($_SESSION['status'] != "admin_login") {
         font-family: "Varela Round", sans-serif;
         color: white;
     }
+
+    #searchInput::placeholder {
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -197,7 +236,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -280,33 +319,33 @@ if ($_SESSION['status'] != "admin_login") {
                         <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA ADMIN
                         </h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-6 border-end ">
+                            <div class="col-lg-6 col-6 border-end ">
                                 <a href="data_petugas.php"> Data Petugas</a>
                             </div>
-                            <div class="col-lg-6 pilihan-doc-kajian pilihan_dokumen">
+                            <div class="col-lg-6 col-6 pilihan-doc-kajian pilihan_dokumen">
                                 <a href="data_admin.php">Data Admin</a>
                             </div>
                         </div>
                         <!-- table -->
                         <div class="row mb-3">
-                            <div class="col-md-6 banyak-data">
-                                <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                <select id="rowsPerPageSelect" class="form-select"
+                            <div class="col-md-6 col-6 banyak-data">
+                                <label for="rowsPerPageSelect" class="form-label tampil">Tampilkan:</label>
+                                <select id="rowsPerPageSelect" class="form-select text-white"
                                     style="width: auto; display: inline-block;">
-                                    <option value="5">5</option>
-                                    <option value="10" selected>10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
+                                    <option value="5" style="color: black;">5</option>
+                                    <option value="10" selected style="color: black;">10</option>
+                                    <option value="15" style="color: black;">15</option>
+                                    <option value="20" style="color: black;">20</option>
                                 </select>
-                                <span> data per halaman</span>
+                                <span class="tampil"> data per halaman</span>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                            <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
                                 <button type="button" class="btn btn-custom-eye"
                                     style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                     onclick="tambahPetugas()">
-                                    <i class="bi bi-plus-square"></i> Tambah Admin
+                                    <i class="bi bi-plus-square"></i> Tambah
                                 </button>
                             </div>
                         </div>

@@ -162,6 +162,30 @@
              flex-basis: 0% !important;
          }
      }
+
+     @media (max-width: 425px) {
+         .navbar-judul {
+             font-size: 5px;
+             margin-top: 11%;
+             margin-left: -5%;
+         }
+
+         .navbar-collapse {
+             flex-basis: 0% !important;
+         }
+
+         .nama-profile {
+             color: #912005;
+             font-family: "Varela Round", sans-serif;
+             font-size: 10px;
+             line-height: 2;
+         }
+
+         .tampil {
+             display: none;
+         }
+
+     }
      </style>
  </head>
 
@@ -323,11 +347,12 @@
                                          <input class="form-control text-white" type="file" name="file">
                                      </div>
                                  </div>
-
-                                 <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                     Submit</button>
-                                 <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                         class="bi bi-arrow-left-circle"></i> Kembali</button>
+                                 <div class="text-center">
+                                     <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                         Submit</button>
+                                     <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                             class="bi bi-arrow-left-circle"></i> Kembali</button>
+                                 </div>
                              </form>
                          </div>
                      </div>

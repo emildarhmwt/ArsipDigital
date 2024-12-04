@@ -155,6 +155,30 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -248,7 +272,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class="card-body">
                                 <form method="get" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Nama Permintaan
                                                 :</label>
                                             <p>
@@ -256,14 +280,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             </p>
 
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Deskripsi Permintaan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dock_desk'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Jenis Permintaan
                                                 :</label>
                                             <p>
@@ -272,21 +296,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Kategori Permintaan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dock_kategori'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Aspek K3/Lingkungan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dock_aspek'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Lokasi Penyerahan
                                                 :</label>
                                             <p>
@@ -295,7 +319,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Tanggal Dibutuhkan
                                                 :</span>
                                             </label>
@@ -319,7 +343,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-12">
                                             <div class="mb-3">
                                                 <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
                                                 <label for="formFile" class="form-label">Cost Center :</label>
@@ -327,7 +351,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                     placeholder="Input Data" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-12">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Satuan :</label>
                                                 <select class="form-select text-white" name="satuan" required>
@@ -351,7 +375,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4">
+                                        <div class="col-lg-4 col-12">
                                             <label for="formFile" class="form-label">Harga Satuan :</label>
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control text-white" name="harga"
@@ -359,14 +383,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                                 <span class="input-group-text">IDR</span>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-4">
+                                        <div class="col-lg-4 col-12">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Jumlah (qty) :</label>
                                                 <input class="form-control text-white" type="text" name="jumlah"
                                                     placeholder="Input Data" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-4">
+                                        <div class="col-lg-4 col-12">
                                             <label for="formFile" class="form-label">Harga Total :</label>
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control text-white" id="harga_total"
@@ -414,12 +438,14 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     </div> -->
                                 </div>
                             </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                    Submit</button>
+                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                        class="bi bi-arrow-left-circle"></i>
+                                    Kembali</button>
+                            </div>
 
-                            <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                Submit</button>
-                            <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                    class="bi bi-arrow-left-circle"></i>
-                                Kembali</button>
                         </form>
                     </div>
                 </div>

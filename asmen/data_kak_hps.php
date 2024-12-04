@@ -227,6 +227,30 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -319,8 +343,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         </div>
                         <!-- table -->
                         <div class="row mb-3">
-                            <div class="col-md-6 banyak-data">
-                                <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
+                            <div class="col-md-6 col-6 banyak-data">
+                                <label for="rowsPerPageSelect" class="form-label tampil">Tampilkan:</label>
                                 <select id="rowsPerPageSelect" class="form-select text-white"
                                     style="width: auto; display: inline-block;">
                                     <option value="5" style="color: black;">5</option>
@@ -328,9 +352,9 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     <option value="15" style="color: black;">15</option>
                                     <option value="20" style="color: black;">20</option>
                                 </select>
-                                <span> data per halaman</span>
+                                <span class="tampil"> data per halaman</span>
                             </div>
-                            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                            <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control text-white me-2" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
                             </div>

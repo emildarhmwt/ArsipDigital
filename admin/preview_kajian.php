@@ -209,6 +209,45 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         background-color: #b27373 !important;
         color: white !important;
     }
+
+    #searchInput::placeholder {
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -233,7 +272,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -334,21 +373,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class="card-body">
                                 <form method="get" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Nama Permintaan :</label>
                                             <p>
                                                 <td><?php echo $p['dock_nama'] ?></td>
                                             </p>
 
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Deskripsi Permintaan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dock_desk'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Jenis Permintaan :</label>
                                             <p>
                                                 <td><?php echo $p['dock_jenis'] ?></td>
@@ -356,21 +395,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Kategori Permintaan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dock_kategori'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Aspek K3/Lingkungan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dock_aspek'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Lokasi Penyerahan
                                                 :</label>
                                             <p>
@@ -379,7 +418,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Tanggal Dibutuhkan
                                                 :</span>
                                             </label>
@@ -413,7 +452,6 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         }
                             ?>
 
-
                         <div class="row text-center justify-content-center d-flex align-items-center"
                             style="border-radius: 10px; height: 50px;">
                             <?php
@@ -423,12 +461,12 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 $arsip = mysqli_query($koneksi, "SELECT dockajian.*, doc_kak_hps.dockh_dock_id, doc_kontrak.dockt_dock_id FROM dockajian LEFT JOIN doc_kak_hps ON dockajian.dock_id = doc_kak_hps.dockh_dock_id LEFT JOIN doc_kontrak ON dockajian.dock_id = doc_kontrak.dockt_dock_id WHERE dockajian.dock_id = '$id' ORDER BY dockajian.dock_id DESC");
                                 while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                 ?>
-                            <div class="col-lg-4 border d-flex justify-content-center align-items-center"
+                            <div class="col-lg-4 col-4 border d-flex justify-content-center align-items-center"
                                 style="border-radius: 10px; height: 48px; width:31%px; margin-right:10px; background-color: #0e4551;">
                                 <a href="preview_kajian.php?id=<?php echo $id; ?>" style="color:white;"> Doc Kajian
                                 </a>
                             </div>
-                            <div class=" col-lg-4 border d-flex justify-content-center
+                            <div class="col-lg-4 col-4 border d-flex justify-content-center
                                 align-items-center"
                                 style="border-radius: 10px; height: 48px; width:31%;color:grey; margin-right:10px;">
                                 <?php
@@ -447,7 +485,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         }
                                         ?>
                             </div>
-                            <div class=" col-lg-4 d-flex justify-content-center border align-items-center"
+                            <div class="col-lg-4 col-4 d-flex justify-content-center border align-items-center"
                                 style="border-radius: 10px; height: 48px; width:31%;color:grey;">
                                 <?php
                                         // Pastikan dockt_id ada di array $p

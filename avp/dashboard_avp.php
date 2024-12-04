@@ -231,6 +231,59 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "avp_login") {
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+        .welcome {
+            margin-top: -140px;
+            font-family: "Varela Round", sans-serif;
+            color: white;
+            font-size: 20px;
+        }
+
+        .gm {
+            font-family: "Varela Round", sans-serif;
+            margin-top: 30px;
+            font-size: 5px;
+            color: white;
+        }
+
+        .haikiri {
+            width: 150px;
+            height: auto;
+            float: left;
+            margin-top: -35px;
+            margin-left: -50px;
+        }
+
+        .haikanan {
+            width: 150px;
+            height: auto;
+            float: right;
+            margin-top: -20px;
+            margin-right: -37px;
+        }
+
+    }
     </style>
 </head>
 

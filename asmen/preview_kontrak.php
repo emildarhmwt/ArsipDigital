@@ -200,6 +200,30 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -300,21 +324,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class="card-body">
                                 <form method="get" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Nama Permintaan :</label>
                                             <p>
                                                 <td><?php echo $p['dockt_nama'] ?></td>
                                             </p>
 
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Deskripsi Permintaan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dockt_desk'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4  mb-3">
+                                        <div class="col-lg-4 col-12  mb-3">
                                             <label for="shift" class="form-label">Jenis Permintaan :</label>
                                             <p>
                                                 <td><?php echo $p['dockt_jenis'] ?></td>
@@ -322,21 +346,21 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Kategori Permintaan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dockt_kategori'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Aspek K3/Lingkungan
                                                 :</label>
                                             <p>
                                                 <td><?php echo $p['dockt_aspek'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Lokasi Penyerahan
                                                 :</label>
                                             <p>
@@ -345,7 +369,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Tanggal Dibutuhkan
                                                 :</span>
                                             </label>
@@ -366,13 +390,13 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class="card-body">
                                 <form method="get" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Cost Center :</label>
                                             <p>
                                                 <td><?php echo $p['dockh_cost'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Satuan
                                                 :</label>
                                             <p>
@@ -381,19 +405,19 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Harga Satuan :</label>
                                             <p>
                                                 <td><?php echo $p['dockh_harga'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Jumlah (qty) :</label>
                                             <p>
                                                 <td><?php echo $p['dockh_jumlah'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 col-4 mb-3">
+                                        <div class="col-lg-4 col-12 mb-3">
                                             <label for="shift" class="form-label">Harga Total :</label>
                                             <p>
                                                 <td><?php echo $p['dockh_harga_total'] ?></td>
