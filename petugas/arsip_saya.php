@@ -182,6 +182,21 @@
          background-color: #b27373 !important;
          color: white !important;
      }
+
+     #searchInput::placeholder {
+         color: white;
+     }
+
+     @media (max-width: 768px) {
+         .navbar-judul {
+             font-size: 10px;
+             margin-top: 10%;
+         }
+
+         .navbar-collapse {
+             flex-basis: 0% !important;
+         }
+     }
      </style>
  </head>
 
@@ -205,7 +220,7 @@
                              </a>
                          </li>
                          <li>
-                             <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                             <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                          </li>
                      </ul>
                      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -293,21 +308,21 @@
                          <div class="row mb-3">
                              <div class="col-md-6 banyak-data">
                                  <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                 <select id="rowsPerPageSelect" class="form-select"
+                                 <select id="rowsPerPageSelect" class="form-select text-white"
                                      style="width: auto; display: inline-block;">
-                                     <option value="5">5</option>
-                                     <option value="10" selected>10</option>
-                                     <option value="15">15</option>
-                                     <option value="20">20</option>
+                                     <option value="5" style="color: black;">5</option>
+                                     <option value="10" selected style="color: black;">10</option>
+                                     <option value="15" style="color: black;">15</option>
+                                     <option value="20" style="color: black;">20</option>
                                  </select>
                                  <span> data per halaman</span>
                              </div>
                              <div class="col-md-6 d-flex justify-content-end align-items-center">
-                                 <input type="text" class="form-control me-2" id="searchInput" placeholder="Cari..."
-                                     style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
+                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
                                  <button type="button" class="btn btn-custom-arsip"
                                      style="height: 40px; padding: 0 .5rem; font-size: .95rem;" onclick="tambahArsip()">
-                                     <i class="ti ti-book-upload fs-5"></i> Upload Arsip
+                                     <i class="ti ti-book-upload fs-5"></i> Upload
                                  </button>
                              </div>
                          </div>

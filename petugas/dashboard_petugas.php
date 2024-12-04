@@ -219,6 +219,17 @@
          color: #08203f;
          font-weight: bold;
      }
+
+     @media (max-width: 768px) {
+         .navbar-judul {
+             font-size: 10px;
+             margin-top: 10%;
+         }
+
+         .navbar-collapse {
+             flex-basis: 0% !important;
+         }
+     }
      </style>
  </head>
 
@@ -242,7 +253,7 @@
                              </a>
                          </li>
                          <li>
-                             <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                             <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                          </li>
                      </ul>
                      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -294,10 +305,10 @@
                                          <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
                                          <div class="message-list">
                                              <?php
-                                            $id_saya = $_SESSION['id'];
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
-                                            while ($p = mysqli_fetch_array($arsip)) {
-                                            ?>
+                                                $id_saya = $_SESSION['id'];
+                                                $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
+                                                while ($p = mysqli_fetch_array($arsip)) {
+                                                ?>
                                              <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
                                                  <div class="notification-content">
                                                      <h6 class="mb-0 fs-3"><?php echo $p['user_nama'] ?> mengunduh</h6>
@@ -308,8 +319,8 @@
                                                  </div>
                                              </a>
                                              <?php
-                                            }
-                                            ?>
+                                                }
+                                                ?>
                                          </div>
                                          <a href="riwayat_unduh.php"
                                              class="btn btn-outline-primary btn-sm mt-2 d-block">Lihat Semua</a>
@@ -344,7 +355,7 @@
                          </div>
                      </div>
 
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-6">
                          <div class="card overflow-hidden kajian" style="height: 170px;">
                              <div class=" card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
@@ -359,9 +370,9 @@
                                  <div class="mt-4 doc-pks">
                                      <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah Kategori</h5>
                                      <?php
-                                            $jumlah_kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
-                                            $total_kategori = mysqli_num_rows($jumlah_kategori);
-                                            ?>
+                                        $jumlah_kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
+                                        $total_kategori = mysqli_num_rows($jumlah_kategori);
+                                        ?>
                                      <h5 class="card-title mb-0 fw-semibold fs-4">
                                          <span class="counter" id="kategoriCounter">0</span>
                                      </h5>
@@ -370,7 +381,7 @@
                          </div>
                      </div>
 
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-6">
                          <div class="card overflow-hidden kajian" style="height: 170px;">
                              <div class=" card-body p-4">
                                  <div class="d-flex align-items-center mb-2">
@@ -385,10 +396,10 @@
                                  <div class="mt-4 doc-pks">
                                      <h5 class="card-title mb-2 fw-semibold fs-4">Jumlah User</h5>
                                      <?php
-                                            $jumlah_user = mysqli_query($koneksi, "SELECT (SELECT COUNT(*) FROM user) + (SELECT COUNT(*) FROM user_pks) AS total_users");
-                                            $result_user = mysqli_fetch_assoc($jumlah_user);
-                                            $total_user = $result_user['total_users'];
-                                            ?>
+                                        $jumlah_user = mysqli_query($koneksi, "SELECT (SELECT COUNT(*) FROM user) + (SELECT COUNT(*) FROM user_pks) AS total_users");
+                                        $result_user = mysqli_fetch_assoc($jumlah_user);
+                                        $total_user = $result_user['total_users'];
+                                        ?>
                                      <h5 class="card-title mb-0 fw-semibold fs-3">
                                          <span class="counter" id="userCounter">0</span>
                                      </h5>
@@ -399,7 +410,7 @@
                  </div>
 
                  <div class="row">
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-6">
                          <div class="card nota-dinas">
                              <div class="card-body">
                                  <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -431,30 +442,31 @@
                                  <h5 class="surat-masuk text-center"> Nota Dinas Masuk</h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc mt-3">
+                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                              Open
                                          </div>
-                                         <div class="col-lg-4 sm-ooc mt-3">
+                                         <div class="col-lg-4 col-4 sm-ooc mt-3">
                                              <span class="counter" id="openCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              On Progress
                                          </div>
-                                         <div class="col-lg-4 sm-ooc">
+                                         <div class="col-lg-4 col-4 sm-ooc">
                                              <span class="counter" id="onprogressCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              Close
                                          </div>
-                                         <div class="col-lg-4 sm-ooc"> <span class="counter" id="closeCounter">0</span>
+                                         <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                                 id="closeCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
@@ -462,7 +474,7 @@
                          </div>
                      </div>
 
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-6">
                          <div class="card  nota-dinas">
                              <div class="card-body">
                                  <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -494,30 +506,30 @@
                                  <h5 class="surat-masuk text-center"> Nota Dinas Keluar</h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc mt-3">
+                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                              Open
                                          </div>
-                                         <div class="col-lg-4 sm-ooc mt-3">
+                                         <div class="col-lg-4 col-4 sm-ooc mt-3">
                                              <span class="counter" id="openkCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              On Progress
                                          </div>
-                                         <div class="col-lg-4 sm-ooc"> <span class="counter"
+                                         <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
                                                  id="onprogresskCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              Close
                                          </div>
-                                         <div class="col-lg-4 sm-ooc">
+                                         <div class="col-lg-4 col-4 sm-ooc">
                                              <span class="counter" id="closekCounter">0</span>
                                          </div>
                                      </div>
@@ -526,7 +538,7 @@
                          </div>
                      </div>
 
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-6">
                          <div class="card nota-dinas">
                              <div class="card-body">
                                  <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -558,30 +570,30 @@
                                  <h5 class="surat-masuk text-center"> Surat Masuk</h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc mt-3">
+                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                              Open
                                          </div>
-                                         <div class="col-lg-4 sm-ooc mt-3">
+                                         <div class="col-lg-4 col-4 sm-ooc mt-3">
                                              <span class="counter" id="opensmCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              On Progress
                                          </div>
-                                         <div class="col-lg-4 sm-ooc">
+                                         <div class="col-lg-4 col-4 sm-ooc">
                                              <span class="counter" id="onprogresssmCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              Close
                                          </div>
-                                         <div class="col-lg-4 sm-ooc">
+                                         <div class="col-lg-4 col-4 sm-ooc">
                                              <span class="counter" id="closesmCounter">0</span>
                                          </div>
                                      </div>
@@ -590,7 +602,7 @@
                          </div>
                      </div>
 
-                     <div class="col-lg-3">
+                     <div class="col-lg-3 col-6">
                          <div class="card nota-dinas">
                              <div class="card-body">
                                  <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -622,30 +634,30 @@
                                  <h5 class="surat-masuk text-center"> Surat Keluar</h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc mt-3">
+                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                              Open
                                          </div>
-                                         <div class="col-lg-4 sm-ooc mt-3">
+                                         <div class="col-lg-4 col-4 sm-ooc mt-3">
                                              <span class="counter" id="openskCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              On Progress
                                          </div>
-                                         <div class="col-lg-4 sm-ooc"> <span class="counter"
+                                         <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
                                                  id="onprogressskCounter">0</span>
                                          </div>
                                      </div>
                                  </h5>
                                  <h5>
                                      <div class="row">
-                                         <div class="col-lg-8 sm-ooc">
+                                         <div class="col-lg-8 col-8 sm-ooc">
                                              Close
                                          </div>
-                                         <div class="col-lg-4 sm-ooc"> <span class="counter"
+                                         <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
                                                  id="closeskCounter">0</span>
                                          </div>
                                      </div>
@@ -713,7 +725,7 @@
                      </div>
                      <div class="col-lg-4">
                          <div class="row">
-                             <div class="col-lg-12 col-sm-6">
+                             <div class="col-lg-12 col-12">
                                  <!-- Yearly Breakup -->
                                  <div class="card overflow-hidden">
                                      <div class="card-body p-4">
@@ -728,7 +740,7 @@
                                                      <?php
                                                         $id_petugas = $_SESSION['id']; // Get the current user's ID
                                                         $jumlah_arsip = mysqli_query($koneksi, "SELECT * FROM arsip WHERE arsip_petugas='$id_petugas'");
-                                                     ?>
+                                                        ?>
                                                      <h5
                                                          class="card-title mb-10 fw-semibold mt-3 fs-7 justify-content-end">
                                                          <span
@@ -808,14 +820,14 @@
 
          const categoryData =
              <?php
-                $id_petugas = $_SESSION['id']; // Get the current user's ID
-                $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id AND arsip_petugas='$id_petugas' GROUP BY kategori_nama");
-                $categories = [];
-                while ($row = mysqli_fetch_assoc($category_query)) {
-                    $categories[] = $row;
-                }
-                echo json_encode($categories);
-                ?>;
+                    $id_petugas = $_SESSION['id']; // Get the current user's ID
+                    $category_query = mysqli_query($koneksi, "SELECT kategori_nama, COUNT(*) as count FROM arsip, kategori WHERE arsip_kategori=kategori_id AND arsip_petugas='$id_petugas' GROUP BY kategori_nama");
+                    $categories = [];
+                    while ($row = mysqli_fetch_assoc($category_query)) {
+                        $categories[] = $row;
+                    }
+                    echo json_encode($categories);
+                    ?>;
 
          const labels = categoryData.map(item => item.kategori_nama);
          const data = categoryData.map(item => item.count);

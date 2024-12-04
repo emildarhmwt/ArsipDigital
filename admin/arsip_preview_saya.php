@@ -226,18 +226,19 @@ if ($_SESSION['status'] != "admin_login") {
                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">PREVIEW ARSIP
                         </h5>
                         <a href="riwayat_unduh.php" class="btn btn-custom-edit mb-3">
-                            <i class="bi bi-arrow-left"></i> Back
+                            <i class="bi bi-arrow-left"></i> Kembali
                         </a>
                         <?php
                         include '../koneksi.php';
                         $no = 1;
+                        $id_arsip = $_GET['id'];
                         $arsip = mysqli_query($koneksi, "SELECT arsip.*, kategori.kategori_nama, status_arsip.status_nama, admin.admin_nama, petugas.petugas_nama 
-                                            FROM arsip 
-                                            LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
-                                            LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
-                                            LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
-                                            LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
-                                            ORDER BY arsip.arsip_id DESC");
+                                    FROM arsip 
+                                    LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
+                                    LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
+                                    LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
+                                    LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
+                                    WHERE arsip.arsip_id = '$id_arsip'");
                         while ($p = mysqli_fetch_array($arsip)) {
                         ?>
                         <div class="row">

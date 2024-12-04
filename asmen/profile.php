@@ -75,6 +75,17 @@ if ($_SESSION['status'] != "asmen_login") {
         background-color: #609fb2 !important;
         color: white !important;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
     </style>
 </head>
 
@@ -98,7 +109,7 @@ if ($_SESSION['status'] != "asmen_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">

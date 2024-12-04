@@ -144,6 +144,17 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         background-color: #b27373 !important;
         color: white !important;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
     </style>
 </head>
 
@@ -167,7 +178,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul">Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -227,7 +238,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                         $no = 1;
                         include '../koneksi.php';
                         // Perbaiki query untuk menggunakan alias yang benar
-                        $arsip = mysqli_query($koneksi, "SELECT * FROM dockajian JOIN user_pks ON dock_petugas=pks_id WHERE dock_id = '$id' ORDER BY dock_id DESC");
+                        $arsip = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps JOIN user_pks ON dockh_petugas=pks_id WHERE dockh_dock_id = '$id' ORDER BY dockh_dock_id DESC");
                         while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                         ?>
                         <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
@@ -237,60 +248,105 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                             <div class="card-body">
                                 <form method="get" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Nama Permintaan
                                                 :</label>
                                             <p>
-                                                <td><?php echo $p['dock_nama'] ?></td>
+                                                <td><?php echo $p['dockh_nama'] ?></td>
                                             </p>
 
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Deskripsi Permintaan
                                                 :</label>
                                             <p>
-                                                <td><?php echo $p['dock_desk'] ?></td>
+                                                <td><?php echo $p['dockh_desk'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Jenis Permintaan
                                                 :</label>
                                             <p>
-                                                <td><?php echo $p['dock_jenis'] ?></td>
+                                                <td><?php echo $p['dockh_jenis'] ?></td>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Kategori Permintaan
                                                 :</label>
                                             <p>
-                                                <td><?php echo $p['dock_kategori'] ?></td>
+                                                <td><?php echo $p['dockh_kategori'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Aspek K3/Lingkungan
                                                 :</label>
                                             <p>
-                                                <td><?php echo $p['dock_aspek'] ?></td>
+                                                <td><?php echo $p['dockh_aspek'] ?></td>
                                             </p>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Lokasi Penyerahan
                                                 :</label>
                                             <p>
-                                                <td><?php echo $p['dock_lokasi'] ?></td>
+                                                <td><?php echo $p['dockh_lokasi'] ?></td>
                                             </p>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 mb-3">
                                             <label for="shift" class="form-label">Tanggal Dibutuhkan
                                                 :</span>
                                             </label>
                                             <p>
-                                                <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                                <td><?php echo date('d M Y', strtotime($p['dockh_tanggal'])); ?>
                                                 </td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="card card-preview">
+                            <div class="card-header" style="background-color: #0e4551; width: 100%;">
+                                Requisition Item
+                            </div>
+                            <div class="card-body">
+                                <form method="get" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-4 mb-3">
+                                            <label for="shift" class="form-label">Cost Center :</label>
+                                            <p>
+                                                <td><?php echo $p['dockh_cost'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 col-4 mb-3">
+                                            <label for="shift" class="form-label">Satuan
+                                                :</label>
+                                            <p>
+                                                <td><?php echo $p['dockh_satuan'] ?></td>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-4 mb-3">
+                                            <label for="shift" class="form-label">Harga Satuan :</label>
+                                            <p>
+                                                <td><?php echo $p['dockh_harga'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 col-4 mb-3">
+                                            <label for="shift" class="form-label">Jumlah (qty) :</label>
+                                            <p>
+                                                <td><?php echo $p['dockh_jumlah'] ?></td>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4 col-4 mb-3">
+                                            <label for="shift" class="form-label">Harga Total :</label>
+                                            <p>
+                                                <td><?php echo $p['dockh_harga_total'] ?></td>
                                             </p>
                                         </div>
                                     </div>
@@ -339,7 +395,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     Submit</button>
                                 <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
                                         class="bi bi-arrow-left-circle"></i>
-                                    Back</button>
+                                    Kembali</button>
                             </div>
                         </form>
                     </div>

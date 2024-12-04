@@ -306,7 +306,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 Submit</button>
                             <button type="button" class="btn btn-custom-edit" onclick="goBack()"><i
                                     class="bi bi-arrow-left-circle"></i>
-                                Back</button>
+                                Kembali</button>
                         </form>
                         <?php
                             }

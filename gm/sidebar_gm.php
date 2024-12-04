@@ -50,7 +50,7 @@
             <!-- Sidebar scroll-->
             <div class="scroll-sidebar" data-simplebar>
                 <div class="d-flex mb-4 align-items-center justify-content-between">
-                    <a href="dashboard_user.php" class="text-nowrap logo-img ms-0 ms-md-1">
+                    <a href="dashboard_gm.php" class="text-nowrap logo-img ms-0 ms-md-1">
                         <img src="../assets/images/logoarsipdigital.png" width="200" height="auto">
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">

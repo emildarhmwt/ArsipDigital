@@ -114,6 +114,21 @@
          background-color: #b27373 !important;
          color: white !important;
      }
+
+     #searchInput::placeholder {
+         color: white;
+     }
+
+     @media (max-width: 768px) {
+         .navbar-judul {
+             font-size: 10px;
+             margin-top: 10%;
+         }
+
+         .navbar-collapse {
+             flex-basis: 0% !important;
+         }
+     }
      </style>
  </head>
 
@@ -138,7 +153,7 @@
                              </a>
                          </li>
                          <li>
-                             <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                             <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                          </li>
                      </ul>
                      <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -223,11 +238,11 @@
                          <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">PREVIEW ARSIP
                          </h5>
                          <a href="riwayat_unduh.php" class="btn btn-custom-edit mb-3">
-                             <i class="bi bi-arrow-left"></i> Back
+                             <i class="bi bi-arrow-left"></i> Kembali
                          </a>
                          <?php
                             $id = $_GET['id'];
-                            $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_id='$id'");
+                            $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas, status_arsip WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_status=status_id and arsip_id='$id'");
                             while ($d = mysqli_fetch_array($data)) {
                             ?>
                          <div class="row">
@@ -251,6 +266,10 @@
                                      <tr>
                                          <th>Kategori</th>
                                          <td><?php echo $d['kategori_nama']; ?></td>
+                                     </tr>
+                                     <tr>
+                                         <th>Status</th>
+                                         <td><?php echo $d['status_nama']; ?></td>
                                      </tr>
                                      <tr>
                                          <th>Jenis File</th>

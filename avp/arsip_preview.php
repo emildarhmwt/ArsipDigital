@@ -73,6 +73,17 @@ if ($_SESSION['status'] != "avp_login") {
         background-color: #b27373 !important;
         color: white !important;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
     </style>
 </head>
 
@@ -97,7 +108,7 @@ if ($_SESSION['status'] != "avp_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -154,12 +165,19 @@ if ($_SESSION['status'] != "avp_login") {
                         <h5 class="card-title fw-semibold mb-3 text-center fs-7 judul-tabel">PREVIEW ARSIP
                         </h5>
                         <a href="data_arsip.php" class="btn btn-custom-edit mb-3">
-                            <i class="bi bi-arrow-left"></i> Back
+                            <i class="bi bi-arrow-left"></i> Kembali
                         </a>
                         <?php
                         $id = $_GET['id'];
-                        $data = mysqli_query($koneksi, "SELECT * FROM arsip,kategori,petugas,status_arsip WHERE arsip_petugas=petugas_id and arsip_kategori=kategori_id and arsip_status=status_id and arsip_id='$id'");
-                        while ($d = mysqli_fetch_array($data)) {
+                        $id_arsip = $_GET['id'];
+                        $arsip = mysqli_query($koneksi, "SELECT arsip.*, kategori.kategori_nama, status_arsip.status_nama, admin.admin_nama, petugas.petugas_nama 
+                                    FROM arsip 
+                                    LEFT JOIN kategori ON arsip.arsip_kategori = kategori.kategori_id 
+                                    LEFT JOIN status_arsip ON arsip.arsip_status = status_arsip.status_id 
+                                    LEFT JOIN admin ON arsip.arsip_admin = admin.admin_id 
+                                    LEFT JOIN petugas ON arsip.arsip_petugas = petugas.petugas_id 
+                                    WHERE arsip.arsip_id = '$id_arsip'");
+                        while ($d = mysqli_fetch_array($arsip)) {
                         ?>
                         <div class="row">
                             <div class="col-lg-4">
@@ -193,7 +211,15 @@ if ($_SESSION['status'] != "avp_login") {
                                     </tr>
                                     <tr>
                                         <th>Petugas Pengupload</th>
-                                        <td><?php echo $d['petugas_nama']; ?></td>
+                                        <td>
+                                            <?php
+                                                if ($d['arsip_petugas'] != 0) {
+                                                    echo $d['petugas_nama'];
+                                                } else {
+                                                    echo $d['admin_nama'];
+                                                }
+                                                ?>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <th>Keterangan</th>

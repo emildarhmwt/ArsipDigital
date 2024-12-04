@@ -321,7 +321,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 Submit</button>
                             <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
                                     class="bi bi-arrow-left-circle"></i>
-                                Back</button>
+                                Kembali</button>
                             <?php
                             }
                             ?>

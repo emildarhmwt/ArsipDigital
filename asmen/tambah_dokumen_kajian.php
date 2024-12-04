@@ -318,7 +318,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                 Submit</button>
                             <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
                                     class="bi bi-arrow-left-circle"></i>
-                                Back</button>
+                                Kembali</button>
                         </div>
                         </form>
                     </div>

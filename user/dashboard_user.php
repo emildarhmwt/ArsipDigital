@@ -224,6 +224,17 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
         color: #08203f;
         font-weight: bold;
     }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
     </style>
 </head>
 
@@ -247,7 +258,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -348,7 +359,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-6">
                         <div class="card nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -380,30 +391,31 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                                 <h5 class="surat-masuk text-center"> Nota Dinas Masuk</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc mt-3">
+                                        <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
                                             <span class="counter" id="openCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc">
                                             <span class="counter" id="onprogressCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 sm-ooc"> <span class="counter" id="closeCounter">0</span>
+                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                                id="closeCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
@@ -411,7 +423,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-6">
                         <div class="card  nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -443,30 +455,30 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                                 <h5 class="surat-masuk text-center"> Nota Dinas Keluar</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc mt-3">
+                                        <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
                                             <span class="counter" id="openkCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8  sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
                                                 id="onprogresskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc">
                                             <span class="counter" id="closekCounter">0</span>
                                         </div>
                                     </div>
@@ -475,7 +487,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-6">
                         <div class="card nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -507,30 +519,30 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                                 <h5 class="surat-masuk text-center"> Surat Masuk</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc mt-3">
+                                        <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
                                             <span class="counter" id="opensmCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc">
                                             <span class="counter" id="onprogresssmCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc">
                                             <span class="counter" id="closesmCounter">0</span>
                                         </div>
                                     </div>
@@ -539,7 +551,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-6">
                         <div class="card nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -571,30 +583,31 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "user_login") {
                                 <h5 class="surat-masuk text-center"> Surat Keluar</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc mt-3">
+                                        <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
                                             <span class="counter" id="openskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
                                                 id="onprogressskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 sm-ooc">
+                                        <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 sm-ooc"> <span class="counter" id="closeskCounter">0</span>
+                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                                id="closeskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>

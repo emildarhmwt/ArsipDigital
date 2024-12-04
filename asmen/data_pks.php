@@ -213,11 +213,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         color: white !important;
     }
 
-    /* .nama-profile2 {
-        color: #912005;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
-    } */
+    #searchInput::placeholder {
+        color: white;
+    }
+
+    @media (max-width: 768px) {
+        .navbar-judul {
+            font-size: 10px;
+            margin-top: 10%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+    }
     </style>
 </head>
 
@@ -241,7 +250,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Sistem Informasi Arsip Digital</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -303,13 +312,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">DOKUMEN KONTRAK PKS
                         </h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-4 border-end pilihan-doc-kajian pilihan_dokumen">
+                            <div class="col-lg-4 col-4 border-end pilihan-doc-kajian pilihan_dokumen">
                                 <a href="data_pks.php"> Doc Kajian</a>
                             </div>
-                            <div class="col-lg-4 border-end">
+                            <div class="col-lg-4 col-4 border-end">
                                 <a href="data_kak_hps.php">Doc KAK & HPS</a>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-4 col-4">
                                 <a href="data_kontrak.php"> Doc Kontrak</a>
                             </div>
                         </div>
@@ -317,12 +326,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         <div class="row mb-3">
                             <div class="col-md-6 banyak-data">
                                 <label for="rowsPerPageSelect" class="form-label">Tampilkan:</label>
-                                <select id="rowsPerPageSelect" class="form-select"
+                                <select id="rowsPerPageSelect" class="form-select text-white"
                                     style="width: auto; display: inline-block;">
-                                    <option value="5">5</option>
-                                    <option value="10" selected>10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
+                                    <option value="5" style="color: black;">5</option>
+                                    <option value="10" selected style="color: black;">10</option>
+                                    <option value="15" style="color: black;">15</option>
+                                    <option value="20" style="color: black;">20</option>
                                 </select>
                                 <span> data per halaman</span>
                             </div>

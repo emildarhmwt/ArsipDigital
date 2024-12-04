@@ -139,7 +139,7 @@
                             <div class="card-body">
                                 <h3 class="text-center mb-4 sub-judul2"> Login User </h3>
                                 <img src="../assets/images/login.png" alt="Logo" class="img-login">
-                                <p class="text-center sub-judul2">Sistem Informasi Arsip Digital</p>
+                                <p class="text-center sub-judul2">Administrasi & Pelaporan Penambangan </p>
                                 <?php
                                 if (isset($_GET['alert'])) {
                                     if ($_GET['alert'] == "gagal") {
@@ -186,7 +186,7 @@
                                         <input type="submit" value="Login"
                                             class="btn btn-custom-eye fs-4 mb-4 rounded-2 flex-grow-1 me-2 sub-judul">
                                         <a href="../index.php"
-                                            class="btn btn-custom-edit fs-4 mb-4 rounded-2 flex-grow-1 sub-judul">Back</a>
+                                            class="btn btn-custom-edit fs-4 mb-4 rounded-2 flex-grow-1 sub-judul">Kembali</a>
                                     </div>
                                 </form>
                             </div>
