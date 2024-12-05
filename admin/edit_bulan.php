@@ -266,12 +266,25 @@ if ($_SESSION['status'] != "admin_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM EDIT
-                            </h5>
+                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM EDIT</h5>
                             <?php
                             $id = $_GET['id'];
-                            $data = mysqli_query($koneksi, "select * from bulan_kontrak where bulan_id='$id'");
-                            while ($d = mysqli_fetch_array($data)) {
+                            $data = mysqli_query($koneksi, "SELECT * FROM bulan_kontrak WHERE bulan_id='$id'");
+                            $d = mysqli_fetch_array($data);
+                            $bulan_header_id = $d['bulan_header_id'];
+                            $all_data = mysqli_query($koneksi, "SELECT * FROM bulan_kontrak WHERE bulan_header_id='$bulan_header_id' ORDER BY bulan_id ASC");
+                            $previous_rk = 0;
+                            while ($row = mysqli_fetch_array($all_data)) {
+                                $bulan_id = $row['bulan_id'];
+                                $bulan_realisasi = $row['bulan_realisasi'];
+                                if ($bulan_id == $id) {
+                                    $current_rk = $previous_rk + $bulan_realisasi;
+                                    mysqli_query($koneksi, "UPDATE bulan_kontrak SET bulan_rk='$current_rk' WHERE bulan_id='$bulan_id'");
+                                    $bulan_rk_value = $current_rk; // Store the calculated value
+                                } else {
+                                    $previous_rk += $bulan_realisasi;
+                                }
+                            }
                             ?>
                             <form method="post" action="bulan_update.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
@@ -300,7 +313,9 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="mb-3">
                                         <label for="kategori" class="form-label">Realisasi Kumulatif</label>
                                         <input type="number" class="form-control text-white" name="bulan_rk"
-                                            value="<?php echo $d['bulan_rk']; ?>" required>
+                                            id="bulan_rk"
+                                            value="<?php echo isset($bulan_rk_value) ? $bulan_rk_value : $d['bulan_rk']; ?>"
+                                            readonly>
                                     </div>
                                 </div>
                                 <input type="hidden" name="bulan_header_id"
@@ -309,12 +324,8 @@ if ($_SESSION['status'] != "admin_login") {
                                 <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
                                     Submit</button>
                                 <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                        class="bi bi-arrow-left-circle"></i>
-                                    Kembali</button>
+                                        class="bi bi-arrow-left-circle"></i> Kembali</button>
                             </form>
-                            <?php
-                            }
-                            ?>
                         </div>
                     </div>
                 </div>
