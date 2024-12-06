@@ -440,10 +440,6 @@ if ($_SESSION['status'] != "admin_login") {
                                     href="">
                                     <i class="bi bi-file-spreadsheet fs-4 me-1"></i> Export
                                 </a>
-                                <a class="btn btn-custom-back btn-sm d-flex justify-content-end align-items-center mx-2"
-                                    href="">
-                                    <i class="bi bi-file-pdf fs-4 me-1"></i> Export
-                                </a>
                             </div>
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"

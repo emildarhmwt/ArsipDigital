@@ -27,7 +27,7 @@ $result = mysqli_query($koneksi, $query);
 if (mysqli_num_rows($result) > 0) {
     // Data array untuk Excel
     $data = [
-        ["NO", "JUDUL KONTRAK", "NO SPPH", "KATEGORI", "START DATE", "END DATE", "PERIODE REALISASI", "NILAI KONTRAK", "REALISASI S.D.", "NILAI SISA KONTRAK", "% SISA", "KETERANGAN"]
+        ["NO", "DESKRIPSI", "JUMLAH", "TAHUN PEMBUATAN","MASA SEWA", "START DATE", "END DATE", "MIN HM", "MAX HM", "TARIF", "TOTAL"]
     ];
 
     $no = 1;
@@ -43,24 +43,16 @@ if (mysqli_num_rows($result) > 0) {
         $persentaseSisa = ($nilaiSisa / $data['total_nilai']) * 100;
         
         $sheet->setCellValue('A'.$row, $no++);
-        $sheet->getStyle('A'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->setCellValue('B'.$row, $data['header_judul']);
         $sheet->setCellValue('C'.$row, $data['header_nomor']);
-        $sheet->getStyle('C'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->setCellValue('D'.$row, $data['header_kategori']);
-        $sheet->getStyle('D'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->setCellValue('E'.$row, date('F Y', strtotime($data['kontrak_awal'])));
-        $sheet->getStyle('E'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->setCellValue('F'.$row, date('F Y', strtotime($data['kontrak_akhir'])));
-        $sheet->getStyle('F'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->setCellValue('G'.$row, date('F Y', strtotime($data['kontrak_awal'])));
-        $sheet->getStyle('G'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->setCellValue('H'.$row, number_format($data['total_nilai'], 2, ',', '.') . ' Rp');
-        $sheet->getStyle('H'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+        $sheet->setCellValue('H'.$row, number_format($data['total_nilai'], 2, ',', '.'));
         $sheet->setCellValue('I'.$row, number_format($data['total_realisasi'], 2, ',', '.'));
         $sheet->setCellValue('J'.$row, number_format($nilaiSisa, 2, ',', '.'));
         $sheet->setCellValue('K'.$row, number_format($persentaseSisa, 2, ',', '.') . '%');
-        $sheet->getStyle('K'.$row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
         $sheet->setCellValue('L'.$row, $data['header_ket']);
         $row++;
     }

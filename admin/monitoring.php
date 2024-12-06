@@ -340,10 +340,6 @@ if ($_SESSION['status'] != "admin_login") {
                                     href="export_excel.php">
                                     <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
                                 </a>
-                                <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center"
-                                    href="export_pdf.php">
-                                    <i class="bi bi-file-pdf fs-6 me-1"></i> Export
-                                </a>
                             </div>
                         </div>
 
