@@ -308,14 +308,15 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="mb-3">
                                         <label for="kategori" class="form-label">Realisasi</label>
                                         <input type="number" class="form-control text-white" name="bulan_realisasi"
-                                            id="realisasi" value="<?php echo $d['bulan_realisasi']; ?>" readonly>
+                                            id="realisasi" value="<?php echo $d['bulan_realisasi']; ?>"
+                                            oninput="updateCumulative()" readonly>
                                     </div>
                                     <div class="mb-3">
                                         <label for="kategori" class="form-label">Realisasi Kumulatif</label>
                                         <input type="number" class="form-control text-white" name="bulan_rk"
                                             id="bulan_rk"
                                             value="<?php echo isset($bulan_rk_value) ? $bulan_rk_value : $d['bulan_rk']; ?>"
-                                            readonly>
+                                            required>
                                     </div>
                                 </div>
                                 <input type="hidden" name="bulan_header_id"
@@ -348,6 +349,17 @@ if ($_SESSION['status'] != "admin_login") {
         const bulan_denda = parseFloat(document.getElementById('bulan_denda').value) || 0;
         const realisasi = bulan_invoice - bulan_denda;
         document.getElementById('realisasi').value = realisasi.toFixed(2);
+        updateCumulative();
+    }
+
+    function updateCumulative() {
+        const realisasiInput = document.getElementById('realisasi');
+        const cumulativeInput = document.getElementById('bulan_rk');
+
+        let realisasiValue = parseFloat(realisasiInput.value) || 0; // Default to 0 if empty
+        let previousRK = <?php echo $previous_rk; ?>; // Pass the calculated previous RK from PHP
+
+        cumulativeInput.value = previousRK + realisasiValue; // Update cumulative value
     }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
