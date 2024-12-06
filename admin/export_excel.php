@@ -1,52 +1,81 @@
 <?php
 include '../koneksi.php';
-header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-header('Content-Disposition: attachment; filename="data_monitoring.xlsx"');
 
-$kategori = mysqli_query($koneksi, "SELECT hk.*, k.kontrak_awal, k.kontrak_akhir, 
-    (SELECT SUM(k2.kontrak_total) 
-     FROM kontrak k2 
-     WHERE k2.kontrak_header_id = hk.header_id) AS total_nilai, 
-     (SELECT SUM(b2.bulan_realisasi) 
-     FROM bulan_kontrak b2 
-     WHERE b2.bulan_header_id = hk.header_id) AS total_realisasi 
-    FROM header_kontrak hk 
-    LEFT JOIN kontrak k ON hk.header_id = k.kontrak_header_id 
-    LEFT JOIN bulan_kontrak b ON hk.header_id = b.bulan_header_id 
-    GROUP BY hk.header_id");
+// Include PhpSpreadsheet
+require '../vendor/autoload.php';
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-require 'vendor/autoload.php'; // Make sure to include PhpSpreadsheet
+// Query untuk mengambil data
+$query = "SELECT hk.*, k.kontrak_awal, k.kontrak_akhir, 
+                 (SELECT SUM(k2.kontrak_total) 
+                  FROM kontrak k2 
+                  WHERE k2.kontrak_header_id = hk.header_id) AS total_nilai, 
+                 (SELECT SUM(b2.bulan_realisasi) 
+                  FROM bulan_kontrak b2 
+                  WHERE b2.bulan_header_id = hk.header_id) AS total_realisasi 
+          FROM header_kontrak hk 
+          LEFT JOIN kontrak k ON hk.header_id = k.kontrak_header_id 
+          LEFT JOIN bulan_kontrak b ON hk.header_id = b.bulan_header_id 
+          GROUP BY hk.header_id";
 
-$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-$sheet = $spreadsheet->getActiveSheet();
-$sheet->setTitle('Monitoring Data');
+$result = mysqli_query($koneksi, $query);
 
-// Set header
-$headers = ['No', 'Judul Kontrak', 'No SPPH', 'Kategori', 'Start Date', 'End Date', 'Periode Realisasi', 'Nilai Kontrak', 'Realisasi S.D.', 'Nilai Sisa Kontrak', '% Sisa', 'Keterangan'];
-$sheet->fromArray($headers, NULL, 'A1');
+// Cek jika ada data
+if (mysqli_num_rows($result) > 0) {
+    // Data array untuk Excel
+    $data = [
+        ["NO", "JUDUL KONTRAK", "NO SPPH", "KATEGORI", "START DATE", "END DATE", "PERIODE REALISASI", "NILAI KONTRAK", "REALISASI S.D.", "NILAI SISA KONTRAK", "% SISA", "KETERANGAN"]
+    ];
 
-// Populate data
-$row = 2;
-$no = 1;
-while ($p = mysqli_fetch_array($kategori)) {
-    $sheet->fromArray([
-        $no++,
-        $p['header_judul'],
-        $p['header_nomor'],
-        $p['header_kategori'],
-        date('F Y', strtotime($p['kontrak_awal'])),
-        date('F Y', strtotime($p['kontrak_akhir'])),
-        date('F Y', strtotime($p['kontrak_awal'])),
-        $p['total_nilai'],
-        $p['total_realisasi'],
-        ($p['total_nilai'] - $p['total_realisasi']),
-        ($p['total_nilai'] - $p['total_realisasi']) / $p['total_nilai'] * 100,
-        $p['header_ket']
-    ], NULL, 'A' . $row++);
+    $no = 1;
+    $row = 2; 
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+    
+    $sheet->fromArray($data, NULL, 'A1');
+    $sheet->getStyle('A1:L1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+    
+    while ($data = mysqli_fetch_assoc($result)) {
+        $nilaiSisa = $data['total_nilai'] - $data['total_realisasi'];
+        $persentaseSisa = ($nilaiSisa / $data['total_nilai']) * 100;
+        
+        $sheet->setCellValue('A'.$row, $no++);
+        $sheet->setCellValue('B'.$row, $data['header_judul']);
+        $sheet->setCellValue('C'.$row, $data['header_nomor']);
+        $sheet->setCellValue('D'.$row, $data['header_kategori']);
+        $sheet->setCellValue('E'.$row, date('F Y', strtotime($data['kontrak_awal'])));
+        $sheet->setCellValue('F'.$row, date('F Y', strtotime($data['kontrak_akhir'])));
+        $sheet->setCellValue('G'.$row, date('F Y', strtotime($data['kontrak_awal'])));
+        $sheet->setCellValue('H'.$row, number_format($data['total_nilai'], 2, ',', '.'));
+        $sheet->setCellValue('I'.$row, number_format($data['total_realisasi'], 2, ',', '.'));
+        $sheet->setCellValue('J'.$row, number_format($nilaiSisa, 2, ',', '.'));
+        $sheet->setCellValue('K'.$row, number_format($persentaseSisa, 2, ',', '.') . '%');
+        $sheet->setCellValue('L'.$row, $data['header_ket']);
+        $row++;
+    }
+
+    // Styling
+    $lastRow = $row - 1;
+    $sheet->getStyle('A1:L'.$lastRow)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+    $sheet->getStyle('A1:L1')->getFont()->setBold(true);
+    
+    // Auto-size columns
+    foreach (range('A', 'L') as $col) {
+        $sheet->getColumnDimension($col)->setAutoSize(true);
+    }
+
+    // Output
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    header('Content-Disposition: attachment;filename="Monitoring_Kontrak.xlsx"');
+    header('Cache-Control: max-age=0');
+
+    $writer = new Xlsx($spreadsheet);
+    $writer->save('php://output');
+    exit;
+} else {
+    echo "Tidak ada data yang tersedia untuk diekspor.";
 }
-
-// Save Excel file
-$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-$writer->save('php://output');
-exit;
 ?>
