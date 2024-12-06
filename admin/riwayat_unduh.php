@@ -277,7 +277,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id ORDER BY riwayat_id DESC");
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
-                                    <tr class="text-center">
+                                    <tr class="text-center fs-3">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?>
                                         </td>

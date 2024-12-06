@@ -368,7 +368,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     $petugas = mysqli_query($koneksi, "SELECT * FROM admin ORDER BY admin_id DESC");
                                     while ($p = mysqli_fetch_array($petugas)) {
                                     ?>
-                                    <tr>
+                                    <tr class="fs-3">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td class="text-center">
                                             <?php

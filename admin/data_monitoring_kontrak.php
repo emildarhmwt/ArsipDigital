@@ -205,7 +205,12 @@ if ($_SESSION['status'] != "admin_login") {
         white-space: normal;
     }
 
-    #searchInput::placeholder {
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
+    #secondSearchInput::placeholder {
         color: white;
     }
 
@@ -382,39 +387,39 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="row">
                                 <div class="col-lg-12 col-12 mb-3">
                                     <div class="row">
-                                        <div class="col-lg-2">
+                                        <div class="col-lg-2 col-3">
                                             <label for="shift" class="form-label">JUDUL KONTRAK</label>
                                         </div>
-                                        <div class="col-lg-1">
+                                        <div class="col-lg-1 col-1">
                                             :
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9 col-8">
                                             <td><?php echo $p['header_judul'] ?></td>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-12 mb-3">
                                     <div class="row">
-                                        <div class="col-lg-2">
+                                        <div class="col-lg-2 col-3">
                                             <label for="shift" class="form-label">NO SPPH</label>
                                         </div>
-                                        <div class="col-lg-1">
+                                        <div class="col-lg-1 col-1">
                                             :
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9 col-8">
                                             <td><?php echo $p['header_nomor'] ?></td>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 col-12 mb-3">
                                     <div class="row">
-                                        <div class="col-lg-2">
+                                        <div class="col-lg-2 col-3">
                                             <label for="shift" class="form-label">KATEGORI KONTRAK</label>
                                         </div>
-                                        <div class="col-lg-1">
+                                        <div class="col-lg-1 col-1">
                                             :
                                         </div>
-                                        <div class="col-lg-9">
+                                        <div class="col-lg-9 col-8">
                                             <td><?php echo $p['header_kategori'] ?></td>
                                         </div>
                                     </div>
@@ -430,7 +435,17 @@ if ($_SESSION['status'] != "admin_login") {
                 <div class="card">
                     <div class="card-body">
                         <div class="row mb-3">
-                            <div class="col-md-12 d-flex justify-content-end align-items-center">
+                            <div class="col-md-6 col-6 d-flex justify-content-start align-items-center">
+                                <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"
+                                    href="">
+                                    <i class="bi bi-file-spreadsheet fs-4 me-1"></i> Export
+                                </a>
+                                <a class="btn btn-custom-back btn-sm d-flex justify-content-end align-items-center mx-2"
+                                    href="">
+                                    <i class="bi bi-file-pdf fs-4 me-1"></i> Export
+                                </a>
+                            </div>
+                            <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="tambah_kontrak_lagi.php?kontrak_header_id=<?php echo $id; ?>">
                                     <i class="ti ti-plus fs-7 me-1"></i> Tambah
@@ -438,7 +453,7 @@ if ($_SESSION['status'] != "admin_login") {
 
                                 <a class="btn btn-custom-back btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="monitoring.php">
-                                    <i class="ti ti-arrow-narrow-left fs-7 me-1"></i></i> Kembali
+                                    <i class="ti ti-arrow-narrow-left fs-7 me-1"></i> Kembali
                                 </a>
                             </div>
                         </div>
@@ -456,8 +471,8 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3 text-center" style="padding: 0 20px;">End Date</th>
                                         <th class="fs-3 text-center" style="padding: 0 13px;">Min HM</th>
                                         <th class="fs-3 text-center" style="padding: 0 13px;">Max HM</th>
-                                        <th class="fs-3 text-center" style="padding: 0 50px;">Tarif</th>
-                                        <th class="fs-3 text-center" style="padding: 0 70px;">Total</th>
+                                        <th class="fs-3 text-center" style="padding: 0 70px;">Tarif</th>
+                                        <th class="fs-3 text-center" style="padding: 0 90px;">Total</th>
                                         <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
@@ -597,10 +612,30 @@ if ($_SESSION['status'] != "admin_login") {
                                     <tr class="text-center fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo date('F Y', strtotime($p['bulan_bulan'])); ?></td>
-                                        <td><?php echo $p['bulan_invoice'] ?></td>
-                                        <td><?php echo $p['bulan_denda'] ?></td>
-                                        <td><?php echo $p['bulan_realisasi'] ?></td>
-                                        <td><?php echo $p['bulan_rk'] ?></td>
+                                        <td class="fs-2 text-start">
+                                            <span>Rp</span>
+                                            <span class="float-end">
+                                                <?php echo number_format($p['bulan_invoice'], 2, ',', '.'); ?>
+                                            </span>
+                                        </td>
+                                        <td class="fs-2 text-start">
+                                            <span>Rp</span>
+                                            <span class="float-end">
+                                                <?php echo number_format($p['bulan_denda'], 2, ',', '.'); ?>
+                                            </span>
+                                        </td>
+                                        <td class="fs-2 text-start">
+                                            <span>Rp</span>
+                                            <span class="float-end">
+                                                <?php echo number_format($p['bulan_realisasi'], 2, ',', '.'); ?>
+                                            </span>
+                                        </td>
+                                        <td class="fs-2 text-start">
+                                            <span>Rp</span>
+                                            <span class="float-end">
+                                                <?php echo number_format($p['bulan_rk'], 2, ',', '.'); ?>
+                                            </span>
+                                        </td>
                                         <td class="text-center">
                                             <a href="edit_bulan.php?id=<?php echo $p['bulan_id']; ?>"
                                                 class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
@@ -614,26 +649,35 @@ if ($_SESSION['status'] != "admin_login") {
                                     ?>
                                     <tr>
                                         <td colspan="2" class="text-end fw-bold">Total:</td>
-                                        <td class="fw-bold">
-                                            <?php echo number_format($total_invoice, 2, ',', '.'); ?>
+                                        <td class="fs-2 text-start fw-bold">
+                                            <span>Rp</span>
+                                            <span class="float-end ">
+                                                <?php echo number_format($total_invoice, 2, ',', '.'); ?>
+                                            </span>
                                         </td>
-                                        <td class="fw-bold">
-                                            <?php echo number_format($total_denda, 2, ',', '.'); ?>
+                                        <td class="fs-2 text-start fw-bold">
+                                            <span>Rp</span>
+                                            <span class="float-end">
+                                                <?php echo number_format($total_denda, 2, ',', '.'); ?>
+                                            </span>
                                         </td>
-                                        <td class="fw-bold">
-                                            <?php echo number_format($total_realisasi, 2, ',', '.'); ?>
+                                        <td class="fs-2 text-start fw-bold">
+                                            <span>Rp</span>
+                                            <span class="float-end">
+                                                <?php echo number_format($total_realisasi, 2, ',', '.'); ?>
+                                            </span>
                                         </td>
                                         <td class="text-center"></td>
                                         <td class="text-center"></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <nav aria-label="Page navigation">
-                                <ul class="pagination justify-content-center mt-3" id="secondPaginationContainer">
-                                    <!-- Pagination items will be added here by JavaScript -->
-                                </ul>
-                            </nav>
                         </div>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center mt-3" id="secondPaginationContainer">
+                                <!-- Pagination items will be added here by JavaScript -->
+                            </ul>
+                        </nav>
                     </div>
                 </div>
             </div>

@@ -600,30 +600,30 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     while ($p = mysqli_fetch_assoc($arsip)) { // Tambahkan loop untuk mengambil data
                                     ?>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                <thead class="fs-4">
-                                    <tr>
+                                <thead>
+                                    <tr class="text-center align-middle">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3">Nama Permintaan</th>
-                                        <th class="fs-3">Updated</th>
-                                        <th class="fs-3">Pelaku saat ini</th>
-                                        <th class="fs-3">Proses</th>
+                                        <th class="fs-3 text-center" style="padding: 0 70px;">Nama Permintaan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Updated</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Pelaku saat ini</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Proses</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr>
-                                        <td><?php echo $no++; ?></td>
-                                        <td><?php echo $p['dock_nama'] ?></td>
-                                        <td><?php echo date('d M Y H:i:s', strtotime($p['dock_waktu_asmen'])) ?>
+                                    <tr class="fs-3 text-center">
+                                        <td class="text-center"><?php echo $no++; ?></td>
+                                        <td class="text-center"><?php echo $p['dock_nama'] ?></td>
+                                        <td><?php echo date('d M Y ( H:i:s )', strtotime($p['dock_waktu_asmen'])) ?>
                                         </td>
                                         <td><?php echo $p['petugas_nama'] ?></td>
                                         <td> <?php echo $p['dock_status_asmen']; ?> </td>
                                     </tr>
 
-                                    <tr>
-                                        <td><?php echo $no++; ?></td>
+                                    <tr class="fs-3 text-center">
+                                        <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td><?php echo ($p['dock_waktu_avp']) ? date('d M Y H:i:s', strtotime($p['dock_waktu_avp'])) : '-' ?>
+                                        <td><?php echo ($p['dock_waktu_avp']) ? date('d M Y ( H:i:s )', strtotime($p['dock_waktu_avp'])) : '-' ?>
                                         </td>
                                         <td><?php echo !empty($p['avp_nama']) ? $p['avp_nama'] : '-'; ?></td>
                                         <td>
@@ -634,10 +634,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td><?php echo $no++; ?></td>
+                                    <tr class="fs-3 text-center">
+                                        <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td><?php echo ($p['dock_waktu_vp']) ? date('d M Y H:i:s', strtotime($p['dock_waktu_vp'])) : '-' ?>
+                                        <td><?php echo ($p['dock_waktu_vp']) ? date('d M Y ( H:i:s )', strtotime($p['dock_waktu_vp'])) : '-' ?>
                                         </td>
                                         <td><?php echo !empty($p['vp_nama']) ? $p['vp_nama'] : '-'; ?></td>
                                         <td>
@@ -648,10 +648,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </td>
                                     </tr>
 
-                                    <tr>
-                                        <td><?php echo $no++; ?></td>
+                                    <tr class="fs-3 text-center">
+                                        <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td><?php echo ($p['dock_waktu_gm']) ? date('d M Y H:i:s', strtotime($p['dock_waktu_gm'])) : '-' ?>
+                                        <td><?php echo ($p['dock_waktu_gm']) ? date('d M Y ( H:i:s )', strtotime($p['dock_waktu_gm'])) : '-' ?>
                                         </td>
                                         <td><?php echo !empty($p['gm_nama']) ? $p['gm_nama'] : '-'; ?></td>
                                         <td>

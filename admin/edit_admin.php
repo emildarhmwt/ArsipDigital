@@ -340,7 +340,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                     </div>
                                 </div>
-                                <div class="textcenter">
+                                <div class="text-center">
                                     <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
                                         Submit</button>
                                     <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i

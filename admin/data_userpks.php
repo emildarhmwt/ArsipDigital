@@ -363,7 +363,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3" style="width: 5%;">Opsi</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">
+                                <tbody class="text-center fs-3">
                                     <?php
                                             include '../koneksi.php';
                                             $no = 1;

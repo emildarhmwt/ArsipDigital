@@ -162,6 +162,30 @@ if ($_SESSION['status'] != "admin_login") {
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -293,39 +317,59 @@ if ($_SESSION['status'] != "admin_login") {
                                         <input type="text" class="form-control text-white" name="bulan_bulan"
                                             value="<?php echo date('F Y', strtotime($d['bulan_bulan'])); ?>" readonly>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label">Nilai Invoice</label>
-                                        <input type="number" class="form-control text-white" name="bulan_invoice"
-                                            id="bulan_invoice" value="<?php echo $d['bulan_invoice']; ?>"
-                                            oninput="calculateTotal()" required>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Nilai Invoice</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="bulan_invoice" id="bulan_invoice"
+                                                    value="<?php echo $d['bulan_invoice']; ?>"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Nilai Denda</label>
+                                                <input type="number" class="form-control text-white" name="bulan_denda"
+                                                    id="bulan_denda" value="<?php echo $d['bulan_denda']; ?>"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Nilai Denda</label>
-                                        <input type="number" class="form-control text-white" name="bulan_denda"
-                                            id="bulan_denda" value="<?php echo $d['bulan_denda']; ?>"
-                                            oninput="calculateTotal()" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Realisasi</label>
-                                        <input type="number" class="form-control text-white" name="bulan_realisasi"
-                                            id="realisasi" value="<?php echo $d['bulan_realisasi']; ?>"
-                                            oninput="updateCumulative()" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Realisasi Kumulatif</label>
-                                        <input type="number" class="form-control text-white" name="bulan_rk"
-                                            id="bulan_rk"
-                                            value="<?php echo isset($bulan_rk_value) ? $bulan_rk_value : $d['bulan_rk']; ?>"
-                                            required>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Realisasi</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="bulan_realisasi" id="realisasi"
+                                                    value="<?php echo $d['bulan_realisasi']; ?>"
+                                                    oninput="updateCumulative()" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Realisasi Kumulatif</label>
+                                                <input type="number" class="form-control text-white" name="bulan_rk"
+                                                    id="bulan_rk"
+                                                    value="<?php echo isset($bulan_rk_value) ? $bulan_rk_value : $d['bulan_rk']; ?>"
+                                                    required>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <input type="hidden" name="bulan_header_id"
                                     value="<?php echo $d['bulan_header_id']; ?>">
                                 <input type="hidden" name="bulan_id" value="<?php echo $d['bulan_id']; ?>">
-                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                    Submit</button>
-                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                        class="bi bi-arrow-left-circle"></i> Kembali</button>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                    <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                            class="bi bi-arrow-left-circle"></i>
+                                        Kembali</button>
+                                </div>
+
                             </form>
                         </div>
                     </div>
@@ -341,7 +385,9 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
     function goBack() {
-        window.location.href = 'monitoring.php';
+        const headerId = <?php echo $d['bulan_header_id']; ?>; // Get the header_id from PHP
+        window.location.href =
+            `data_monitoring_kontrak.php?id=${headerId}`; // Redirect to data_monitoring_kontrak.php with header_id
     }
 
     function calculateTotal() {

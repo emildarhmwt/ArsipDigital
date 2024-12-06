@@ -303,8 +303,10 @@ if ($_SESSION['status'] != "admin_login") {
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                        Submit</button>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                            Submit</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -312,7 +314,6 @@ if ($_SESSION['status'] != "admin_login") {
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

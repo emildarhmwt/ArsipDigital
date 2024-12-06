@@ -293,43 +293,51 @@ if ($_SESSION['status'] != "admin_login") {
                                         <input type="text" class="form-control text-white" name="nama"
                                             required="required" value="<?php echo $d['arsip_nama']; ?>">
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label">Kategori</label>
-                                        <select class="form-control text-white" name="kategori" required="required">
-                                            <option value="" style="color: black;">Pilih kategori</option>
-                                            <?php
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Kategori</label>
+                                                <select class="form-control text-white" name="kategori"
+                                                    required="required">
+                                                    <option value="" style="color: black;">Pilih kategori</option>
+                                                    <?php
                                                 $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
                                                 while ($k = mysqli_fetch_array($kategori)) {
                                                 ?>
-                                            <option style="color: black;" <?php if ($k['kategori_id'] == $d['arsip_kategori']) {
+                                                    <option style="color: black;" <?php if ($k['kategori_id'] == $d['arsip_kategori']) {
                                                                 echo "selected='selected'";
                                                             } ?> value="<?php echo $k['kategori_id']; ?>">
-                                                <?php echo $k['kategori_nama']; ?></option>
-                                            <?php
+                                                        <?php echo $k['kategori_nama']; ?></option>
+                                                    <?php
                                                 }
                                                 ?>
-                                        </select>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Status</label>
-                                        <select class="form-control text-white" name="status" required="required">
-                                            <option value="" style="color: black;">Pilih status</option>
-                                            <?php
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Status</label>
+                                                <select class="form-control text-white" name="status"
+                                                    required="required">
+                                                    <option value="" style="color: black;">Pilih status</option>
+                                                    <?php
                                                 $status = mysqli_query($koneksi, "SELECT * FROM status_arsip");
                                                 while ($s = mysqli_fetch_array($status)) {
                                                 ?>
-                                            <option style="color: black;" <?php if ($s['status_id'] == $d['arsip_status']) {
+                                                    <option style="color: black;" <?php if ($s['status_id'] == $d['arsip_status']) {
                                                                 echo "selected='selected'";
                                                             } ?> value="<?php echo $s['status_id']; ?>">
-                                                <?php echo $s['status_nama']; ?></option>
-                                            <?php
+                                                        <?php echo $s['status_nama']; ?></option>
+                                                    <?php
                                                 }
                                                 ?>
-                                        </select>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
-                                        <textarea class="form-control text-white" name="keterangan"
+                                        <textarea class="form-control text-white" name="keterangan" rows="10"
                                             required="required"><?php echo $d['arsip_keterangan']; ?></textarea>
                                     </div>
                                     <div class="mb-3">
@@ -337,11 +345,13 @@ if ($_SESSION['status'] != "admin_login") {
                                         <input class="form-control text-white" type="file" name="file">
                                         <p class="textinfo">Kosongkan jika tidak ingin mengubah foto</p>
                                     </div>
-                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                        Submit</button>
-                                    <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                            class="bi bi-arrow-left-circle"></i>
-                                        Kembali</button>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                            Submit</button>
+                                        <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                                class="bi bi-arrow-left-circle"></i>
+                                            Kembali</button>
+                                    </div>
                                 </div>
                             </form>
                             <?php

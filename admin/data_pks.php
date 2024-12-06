@@ -338,28 +338,22 @@ if ($_SESSION['status'] != "admin_login") {
                                 <thead class="fs-4 align-middle">
                                     <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 20%;">Nama Permintaan</th>
-                                        <th class="fs-3" style="width: 10%;">Pelaku saat ini</th>
-                                        <th class="fs-3" style="width: 10%;">&nbsp&nbsp&nbsp Prioritas
-                                            &nbsp&nbsp&nbsp
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Nama Permintaan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Pelaku saat ini</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Prioritas</th>
+                                        <th class="fs-3 text-center" style="padding: 0 25px;">Tanggal <br> Dibutuhkan
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp&nbsp Tanggal
-                                            &nbsp&nbsp&nbsp
-                                            <br>
-                                            &nbsp&nbsp&nbsp Dibutuhkan &nbsp&nbsp&nbsp
-                                        <th class="fs-3 text-center" style="width: 10%;">&nbsp&nbsp Last Update
-                                            &nbsp &nbsp
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Last Update</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Proses <br> Doc Kajian
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kajian
+                                        <th class="fs-3 text-center" style="padding: 0 25px;">Proses <br> Doc KAK&HPS
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc KAK&HPS
+                                        <th class="fs-3 text-center" style="padding: 0 25px;">Proses <br> Doc Kontrak
                                         </th>
-                                        <th class="fs-3 text-center" style="width: 10%;">Proses <br> Doc Kontrak
-                                        </th>
-                                        <th class="fs-3">Opsi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text-center">
+                                <tbody>
                                     <?php
                                     $no = 1;
                                     include '../koneksi.php';
@@ -403,10 +397,10 @@ if ($_SESSION['status'] != "admin_login") {
                                             ");
                                     while ($p = mysqli_fetch_assoc($arsip)) {
                                     ?>
-                                    <tr>
-                                        <td><?php echo $no++; ?></td>
+                                    <tr class="fs-2">
+                                        <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['dock_nama'] ?></td>
-                                        <td>
+                                        <td class="text-center">
                                             <?php
                                                 if (!empty($p['dockt_gm'])) {
                                                     $gm_id = $p['dockt_gm'];
@@ -451,10 +445,11 @@ if ($_SESSION['status'] != "admin_login") {
                                                 }
                                                 ?>
                                         </td>
-                                        <td><?php echo $p['dock_kategori'] ?></td>
-                                        <td><?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
+                                        <td class="text-center"><?php echo $p['dock_kategori'] ?></td>
+                                        <td class="text-center">
+                                            <?php echo date('d M Y', strtotime($p['dock_tanggal'])); ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <?php
                                                 if (!empty($p['kontrak_waktu_gm'])) {
                                                     $dock_waktu = date('H:i:s', strtotime($p['kontrak_waktu_gm']));
@@ -507,7 +502,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 }
                                                 ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <?php
                                                 if (!empty($p['dock_status_gm'])) {
                                                     echo $p['dock_status_gm'];
@@ -520,7 +515,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 }
                                                 ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <?php
                                                 if (!empty($p['status_gm'])) {
                                                     echo $p['status_gm'];
@@ -535,7 +530,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 }
                                                 ?>
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             <?php
                                                 if (!empty($p['kontrak_status_gm'])) {
                                                     echo $p['kontrak_status_gm'];

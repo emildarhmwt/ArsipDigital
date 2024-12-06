@@ -316,15 +316,15 @@ if ($_SESSION['status'] != "admin_login") {
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4 text-center">
-                                    <tr>
+                                    <tr class="align-middle">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 10%;">Waktu Upload</th>
-                                        <th class="fs-3" style="width: 20%;">Arsip</th>
-                                        <th class="fs-3" style="width: 15%;">Kategori</th>
-                                        <th class="fs-3" style="width: 15%;">Status</th>
-                                        <th class="fs-3" style="width: 15%;">Petugas</th>
-                                        <th class="fs-3" style="width: 25%;">Keterangan</th>
-                                        <th class="fs-3" style="width: 15%;">Opsi</th>
+                                        <th class="fs-3" style="padding: 0 20px;">Waktu Upload</th>
+                                        <th class="fs-3" style="padding: 0 60px;">Arsip</th>
+                                        <th class="fs-3" style="padding: 0 30px;">Kategori</th>
+                                        <th class="fs-3" style="padding: 0 30px;">Status</th>
+                                        <th class="fs-3" style="padding: 0 30px;">Petugas</th>
+                                        <th class="fs-3" style="padding: 0 60px;">Keterangan</th>
+                                        <th class="fs-3" style="padding: 0 5px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -340,7 +340,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             ORDER BY arsip.arsip_id DESC");
                                     while ($p = mysqli_fetch_array($arsip)) {
                                     ?>
-                                    <tr>
+                                    <tr class="fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td>
                                             <div class="text-center">
@@ -371,19 +371,19 @@ if ($_SESSION['status'] != "admin_login") {
                                             <div class="btn-group mb-2">
                                                 <a target="_blank" class="btn btn-custom-download btn-sm"
                                                     href="../arsip/<?php echo $p['arsip_file']; ?>" download><i
-                                                        class="ti ti-download fs-7"></i></a>
+                                                        class="ti ti-download fs-3"></i></a>
                                                 <a target="_blank"
                                                     href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
                                                     class="btn btn-custom-eye btn-sm">
-                                                    <i class="ti ti-eye fs-7"></i></a>
+                                                    <i class="ti ti-eye fs-3"></i></a>
                                             </div>
                                             <div class="btn-group">
                                                 <a href="edit_arsip.php?id=<?php echo $p['arsip_id']; ?>"
                                                     class="btn btn-custom-upload btn-sm"><i
-                                                        class="ti ti-edit fs-7"></i></a>
+                                                        class="ti ti-edit fs-3"></i></a>
                                                 <button type="button" class="btn btn-custom-hapus btn-sm"
                                                     onclick="hapusArsip(<?php echo $p['arsip_id']; ?>)">
-                                                    <i class="ti ti-trash fs-7"></i>
+                                                    <i class="ti ti-trash fs-3"></i>
                                                 </button>
                                             </div>
                                         </td>

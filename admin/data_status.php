@@ -333,8 +333,8 @@ if ($_SESSION['status'] != "admin_login") {
                                 <thead class="fs-4">
                                     <tr class="text-center">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3">Status</th>
-                                        <th class="fs-3">Opsi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 230px;">Status</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -344,7 +344,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     $kategori = mysqli_query($koneksi, "SELECT * FROM status_arsip");
                                     while ($p = mysqli_fetch_array($kategori)) {
                                     ?>
-                                    <tr>
+                                    <tr class="fs-3">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td><?php echo $p['status_nama'] ?></td>
                                         <td class="text-center">
@@ -354,10 +354,10 @@ if ($_SESSION['status'] != "admin_login") {
                                             <div class="btn-group">
                                                 <a href="edit_status.php?id=<?php echo $p['status_id']; ?>"
                                                     class="btn btn-custom-upload btn-sm"><i
-                                                        class="ti ti-edit fs-7"></i></a>
+                                                        class="ti ti-edit fs-5"></i></a>
                                                 <button type="button" class="btn btn-custom-hapus btn-sm"
                                                     onclick="hapusKategori(<?php echo $p['status_id']; ?>)">
-                                                    <i class="ti ti-trash fs-7"></i>
+                                                    <i class="ti ti-trash fs-5"></i>
                                                 </button>
                                             </div>
                                             <?php

@@ -290,11 +290,13 @@ if ($_SESSION['status'] != "admin_login") {
                                             name="header_ket"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                    Submit</button>
-                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                        class="bi bi-arrow-left-circle"></i>
-                                    Kembali</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                    <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                            class="bi bi-arrow-left-circle"></i>
+                                        Kembali</button>
+                                </div>
                             </form>
                         </div>
                     </div>

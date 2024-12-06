@@ -368,7 +368,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             $user = mysqli_query($koneksi, "SELECT * FROM user ORDER BY user_id DESC");
                                             while ($p = mysqli_fetch_array($user)) {
                                             ?>
-                                    <tr>
+                                    <tr class="fs-3">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td class="text-center">
                                             <?php

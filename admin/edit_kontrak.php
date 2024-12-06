@@ -162,6 +162,30 @@ if ($_SESSION['status'] != "admin_login") {
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -280,64 +304,101 @@ if ($_SESSION['status'] != "admin_login") {
                                         <input type="text" class="form-control text-white" name="kontrak_desk"
                                             value="<?php echo $d['kontrak_desk']; ?>" required>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label">Jumlah</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_jumlah"
-                                            id="kontrak_jumlah" value="<?php echo $d['kontrak_jumlah']; ?>"
-                                            oninput="calculateTotal()" required>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Jumlah</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_jumlah" id="kontrak_jumlah"
+                                                    value="<?php echo $d['kontrak_jumlah']; ?>"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-4">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Tahun Pembuatan</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_tahun" value="<?php echo $d['kontrak_tahun']; ?>"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-4">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Masa Sewa</label>
+                                                <input type="number" class="form-control text-white" name="kontrak_masa"
+                                                    id="kontrak_masa" value="<?php echo $d['kontrak_masa']; ?>"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Tahun Pembuatan</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_tahun"
-                                            value="<?php echo $d['kontrak_tahun']; ?>" required>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Start Date</label>
+                                                <input type="date" class="form-control text-white" name="kontrak_awal"
+                                                    value="<?php echo $d['kontrak_awal']; ?>" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">End Date</label>
+                                                <input type="date" class="form-control text-white" name="kontrak_akhir"
+                                                    value="<?php echo $d['kontrak_akhir']; ?>" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Masa Sewa</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_masa"
-                                            id="kontrak_masa" value="<?php echo $d['kontrak_masa']; ?>"
-                                            oninput="calculateTotal()" required>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Min HM</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_minhm" value="<?php echo $d['kontrak_minhm']; ?>"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Max HM</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_maxhm" id="kontrak_maxhm"
+                                                    value="<?php echo $d['kontrak_maxhm']; ?>"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Start Date</label>
-                                        <input type="date" class="form-control text-white" name="kontrak_awal"
-                                            value="<?php echo $d['kontrak_awal']; ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">End Date</label>
-                                        <input type="date" class="form-control text-white" name="kontrak_akhir"
-                                            value="<?php echo $d['kontrak_akhir']; ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Min HM</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_minhm"
-                                            value="<?php echo $d['kontrak_minhm']; ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Max HM</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_maxhm"
-                                            id="kontrak_maxhm" value="<?php echo $d['kontrak_maxhm']; ?>"
-                                            oninput="calculateTotal()" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Tarif</label>
-                                        <input type="text" class="form-control text-white" name="kontrak_tarif"
-                                            id="kontrak_tarif" value="<?php echo $d['kontrak_tarif']; ?>"
-                                            oninput="calculateTotal()" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Total</label>
-                                        <input type="text" class="form-control text-white" name="kontrak_total"
-                                            id="total" value="<?php echo $d['kontrak_total']; ?>" readonly>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Tarif</label>
+                                                <input type="text" class="form-control text-white" name="kontrak_tarif"
+                                                    id="kontrak_tarif" value="<?php echo $d['kontrak_tarif']; ?>"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Total</label>
+                                                <input type="text" class="form-control text-white" name="kontrak_total"
+                                                    id="total" value="<?php echo $d['kontrak_total']; ?>" readonly>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <input type="hidden" name="kontrak_header_id"
                                     value="<?php echo $d['kontrak_header_id']; ?>">
                                 <input type="hidden" name="kontrak_id" value="<?php echo $d['kontrak_id']; ?>">
-                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                    Submit</button>
-                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                        class="bi bi-arrow-left-circle"></i>
-                                    Kembali</button>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                    <button type="button" class="btn btn-custom-edit mx-3"
+                                        onclick="goBack(<?php echo $d['kontrak_header_id']; ?>)"><i
+                                            class="bi bi-arrow-left-circle"></i>
+                                        Kembali</button>
+                                </div>
                             </form>
                             <?php
                             }
@@ -355,8 +416,8 @@ if ($_SESSION['status'] != "admin_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function goBack() {
-        window.location.href = 'monitoring.php';
+    function goBack(headerId) {
+        window.location.href = 'data_monitoring_kontrak.php?id=' + headerId;
     }
 
     function calculateTotal() {

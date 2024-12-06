@@ -157,6 +157,26 @@ if ($_SESSION['status'] != "admin_login") {
         color: white;
     }
 
+    .btn-custom-hapus {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-hapus:hover {
+        background-color: #b27373 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #1593a4 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #1593a487 !important;
+        color: white !important;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -316,6 +336,14 @@ if ($_SESSION['status'] != "admin_login") {
                                     onclick="tambahKategori()">
                                     <i class="bi bi-plus-square"></i> Tambah
                                 </button>
+                                <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
+                                    href="export_excel.php">
+                                    <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
+                                </a>
+                                <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center"
+                                    href="export_pdf.php">
+                                    <i class="bi bi-file-pdf fs-6 me-1"></i> Export
+                                </a>
                             </div>
                         </div>
 

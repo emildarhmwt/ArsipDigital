@@ -162,6 +162,30 @@ if ($_SESSION['status'] != "admin_login") {
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -275,63 +299,94 @@ if ($_SESSION['status'] != "admin_login") {
                                         <input type="text" class="form-control text-white" name="kontrak_desk"
                                             placeholder="Input Data" required>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label">Jumlah</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_jumlah"
-                                            id="kontrak_jumlah" placeholder="Input Data" oninput="calculateTotal()"
-                                            required>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Jumlah</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_jumlah" id="kontrak_jumlah" placeholder="Input Data"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-4">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Tahun Pembuatan</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_tahun" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-4">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Masa Sewa</label>
+                                                <input type="number" class="form-control text-white" name="kontrak_masa"
+                                                    id="kontrak_masa" placeholder="Input Data"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Tahun Pembuatan</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_tahun"
-                                            placeholder="Input Data" required>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Start Date</label>
+                                                <input type="date" class="form-control text-white" name="kontrak_awal"
+                                                    placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">End Date</label>
+                                                <input type="date" class="form-control text-white" name="kontrak_akhir"
+                                                    placeholder="Input Data" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Masa Sewa</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_masa"
-                                            id="kontrak_masa" placeholder="Input Data" oninput="calculateTotal()"
-                                            required>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Min HM</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_minhm" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Max HM</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="kontrak_maxhm" id="kontrak_maxhm" placeholder="Input Data"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Start Date</label>
-                                        <input type="date" class="form-control text-white" name="kontrak_awal"
-                                            placeholder="Input Data" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">End Date</label>
-                                        <input type="date" class="form-control text-white" name="kontrak_akhir"
-                                            placeholder="Input Data" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Min HM</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_minhm"
-                                            placeholder="Input Data" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Max HM</label>
-                                        <input type="number" class="form-control text-white" name="kontrak_maxhm"
-                                            id="kontrak_maxhm" placeholder="Input Data" oninput="calculateTotal()"
-                                            required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Tarif</label>
-                                        <input type="text" class="form-control text-white" name="kontrak_tarif"
-                                            id="kontrak_tarif" placeholder="Input Data" oninput="calculateTotal()"
-                                            required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="kategori" class="form-label">Total</label>
-                                        <input type="text" class="form-control text-white" name="kontrak_total"
-                                            id="total" placeholder="Total" readonly>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Tarif</label>
+                                                <input type="text" class="form-control text-white" name="kontrak_tarif"
+                                                    id="kontrak_tarif" placeholder="Input Data"
+                                                    oninput="calculateTotal()" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="kategori" class="form-label">Total</label>
+                                                <input type="text" class="form-control text-white" name="kontrak_total"
+                                                    id="total" placeholder="Total" readonly>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <input type="hidden" name="kontrak_header_id"
                                     value="<?php echo $_GET['kontrak_header_id']; ?>">
-                                <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                    Submit</button>
-                                <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                        class="bi bi-arrow-left-circle"></i>
-                                    Kembali</button>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                    <button type="button" class="btn btn-custom-edit mx-3"
+                                        onclick="window.location.href='data_monitoring_kontrak.php?id=<?php echo $_GET['kontrak_header_id']; ?>'"><i
+                                            class="bi bi-arrow-left-circle"></i> Kembali</button>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -345,10 +400,6 @@ if ($_SESSION['status'] != "admin_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function goBack() {
-        window.location.href = 'monitoring.php';
-    }
 
     function calculateTotal() {
         const kontrak_jumlah = parseFloat(document.getElementById('kontrak_jumlah').value) || 0;

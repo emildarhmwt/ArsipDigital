@@ -643,17 +643,17 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                             ?>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4">
-                                    <tr>
+                                    <tr class="text-center align-middle">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3">Nama Permintaan</th>
-                                        <th class="fs-3">Updated</th>
-                                        <th class="fs-3">Pelaku saat ini</th>
-                                        <th class="fs-3">Proses</th>
+                                        <th class="fs-3 text-center" style="padding: 0 70px;">Nama Permintaan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Updated</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Pelaku saat ini</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Proses</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr>
+                                    <tr class="fs-3 text-center">
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
                                         <td><?php echo date('d M Y H:i:s', strtotime($p['dockh_waktu_asmen'])) ?></td>
@@ -661,7 +661,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         <td><?php echo $p['dockh_status_asmen']; ?> </td>
                                     </tr>
 
-                                    <tr>
+                                    <tr class="fs-3 text-center">
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
                                         <td><?php echo ($p['dockh_waktu_avp']) ? date('d M Y H:i:s', strtotime($p['dockh_waktu_avp'])) : '-' ?>
@@ -675,7 +675,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </td>
                                     </tr>
 
-                                    <tr>
+                                    <tr class="fs-3 text-center">
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
                                         <td><?php echo ($p['dockh_waktu_vp']) ? date('d M Y H:i:s', strtotime($p['dockh_waktu_vp'])) : '-' ?>
@@ -689,7 +689,7 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </td>
                                     </tr>
 
-                                    <tr>
+                                    <tr class="fs-3 text-center">
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $p['dockh_nama'] ?></td>
                                         <td><?php echo ($p['dockh_waktu_gm']) ? date('d M Y H:i:s', strtotime($p['dockh_waktu_gm'])) : '-' ?>
