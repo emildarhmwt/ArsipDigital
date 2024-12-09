@@ -85,6 +85,31 @@
                                 </span>
                                 <span class="hide-menu ms-2 ps-1 judul-sidebar">Data Arsip</span>
                             </a>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
+                                <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                    <i class="ti ti-category fs-7 text-warning"></i>
+                                </span>
+                                <span class="hide-menu ms-2 ps-1 judul-sidebar">Agenda</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="#" aria-expanded="false">
+                                <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                    <i class="ti ti-category fs-7 text-primary"></i>
+                                </span>
+                                <span class="hide-menu ms-2 ps-1 judul-sidebar">Status PR</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="monitoring.php"
+                                aria-expanded="false">
+                                <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                    <i class="ti ti-category fs-7 text-warning"></i>
+                                </span>
+                                <span class="hide-menu ms-2 ps-1 judul-sidebar">Monitoring Kontrak</span>
+                            </a>
+                        </li>
                         </li>
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-5"></i>

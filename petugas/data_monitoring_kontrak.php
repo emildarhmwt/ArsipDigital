@@ -1,7 +1,7 @@
 <?php
 include '../koneksi.php';
 session_start();
-if ($_SESSION['status'] != "admin_login") {
+if ($_SESSION['status'] != "petugas_login") {
     header("location:../login/loginadmin.php?alert=belum_login");
 }
 ?>
@@ -292,7 +292,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -301,23 +301,23 @@ if ($_SESSION['status'] != "admin_login") {
                                 <a class="nav-link nav-icon-hover d-flex align-items-center" href="javascript:void(0)"
                                     id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?php
-                                    $id_admin = $_SESSION['id'];
-                                    $profil = mysqli_query($koneksi, "select * from admin where admin_id='$id_admin'");
+                                    $id_petugas = $_SESSION['id'];
+                                    $profil = mysqli_query($koneksi, "select * from petugas where petugas_id='$id_petugas'");
                                     $profil = mysqli_fetch_assoc($profil);
-                                    if ($profil['admin_foto'] == "") {
+                                    if ($profil['petugas_foto'] == "") {
                                     ?>
-                                    <img src="../gambar/sistem/user.png" style="width: 40px;height: 40px">
+                                    <img src="../gambar/sistem/user.png" class="rounded-circle"
+                                        style="width: 40px;height: 40px; object-fit: cover;">
                                     <?php } else { ?>
-                                    <img src="../gambar/admin/<?php echo $profil['admin_foto'] ?>"
-                                        style="width: 40px;height: 40px">
+                                    <img src="../gambar/petugas/<?php echo $profil['petugas_foto'] ?>"
+                                        class="rounded-circle" style="width: 40px;height: 40px; object-fit: cover;">
                                     <?php } ?>
-                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Admin]</p>
+                                    <p class="nama-profile mb-0"><?php echo $_SESSION['nama']; ?> [Petugas]</p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
                                     aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="profile_admin.php"
-                                            class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="profile.php" class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Profil Saya</p>
                                         </a>
@@ -331,6 +331,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
                                 </div>
                             </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
@@ -343,7 +344,8 @@ if ($_SESSION['status'] != "admin_login") {
                                         <h5 class="message-title mb-2">Riwayat unduh arsip</h5>
                                         <div class="message-list">
                                             <?php
-                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id ORDER BY riwayat_id DESC");
+                                            $id_saya = $_SESSION['id'];
+                                            $arsip = mysqli_query($koneksi, "SELECT * FROM riwayat,arsip,user WHERE riwayat_arsip=arsip_id and riwayat_user=user_id and arsip_petugas='$id_saya' ORDER BY riwayat_id DESC LIMIT 5");
                                             while ($p = mysqli_fetch_array($arsip)) {
                                             ?>
                                             <a href="riwayat_unduh.php" class="dropdown-item py-2 border-bottom">
@@ -442,11 +444,6 @@ if ($_SESSION['status'] != "admin_login") {
                                 </a>
                             </div>
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
-                                <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"
-                                    href="tambah_kontrak_lagi.php?kontrak_header_id=<?php echo $id; ?>">
-                                    <i class="ti ti-plus fs-7 me-1"></i> Tambah
-                                </a>
-
                                 <a class="btn btn-custom-back btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="monitoring.php">
                                     <i class="ti ti-arrow-narrow-left fs-7 me-1"></i> Kembali
@@ -469,7 +466,6 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3 text-center" style="padding: 0 13px;">Max HM</th>
                                         <th class="fs-3 text-center" style="padding: 0 70px;">Tarif</th>
                                         <th class="fs-3 text-center" style="padding: 0 90px;">Total</th>
-                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -507,14 +503,6 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <?php echo number_format($p['kontrak_total'], 2, ',', '.'); ?>
                                             </span>
                                         </td>
-                                        <td class="text-center">
-                                            <a href="edit_kontrak.php?id=<?php echo $p['kontrak_id']; ?>"
-                                                class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
-                                            <button type="button" class="btn btn-custom-hapus btn-sm"
-                                                onclick="hapusKontrak(<?php echo $p['kontrak_id']; ?>)">
-                                                <i class="ti ti-trash fs-3"></i>
-                                            </button>
-                                        </td>
                                     </tr>
                                     <?php
                                         $subtotal += $p['kontrak_total'];
@@ -528,7 +516,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <?php echo number_format($subtotal, 2, ',', '.'); ?>
                                             </span>
                                         </td>
-                                        <td class="text-center"></td>
+
                                     </tr>
                                     <tr>
                                         <td colspan="10" class="text-end fw-bold fs-2">PPN 10%:</td>
@@ -538,7 +526,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <?php echo number_format($subtotal * 0.10, 2, ',', '.'); ?>
                                             </span>
                                         </td>
-                                        <td class="text-center"></td>
+
                                     </tr>
                                     <tr>
                                         <td colspan="10" class="text-end fw-bold fs-2">Total:</td>
@@ -548,7 +536,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <?php echo number_format($subtotal + ($subtotal * 0.10), 2, ',', '.'); ?>
                                             </span>
                                         </td>
-                                        <td class="text-center"></td>
+
                                     </tr>
                                 </tbody>
                             </table>
@@ -572,10 +560,6 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="secondSearchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <button id="generateMonths"
-                                    class="btn btn-custom-review d-flex justify-content-end align-items-center">
-                                    <i class="ti ti-calendar fs-5 me-1"></i> Refresh
-                                </button>
                             </div>
                         </div>
 
@@ -590,8 +574,6 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3 text-center" style="padding: 0 30px;">Nilai Denda</th>
                                         <th class="fs-3 text-center" style="padding: 0 30px;">Realisasi</th>
                                         <th class="fs-3 text-center" style="padding: 0 30px;">Realisasi <br> Kumulatif
-                                        </th>
-                                        <th class="fs-3 text-center" style="padding: 0 10px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="secondTableBody">
@@ -632,10 +614,6 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <?php echo number_format($p['bulan_rk'], 2, ',', '.'); ?>
                                             </span>
                                         </td>
-                                        <td class="text-center">
-                                            <a href="edit_bulan.php?id=<?php echo $p['bulan_id']; ?>"
-                                                class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
-                                        </td>
                                     </tr>
                                     <?php
                                         $total_invoice += $p['bulan_invoice'];
@@ -664,7 +642,6 @@ if ($_SESSION['status'] != "admin_login") {
                                             </span>
                                         </td>
                                         <td class="text-center"></td>
-                                        <td class="text-center"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -680,53 +657,11 @@ if ($_SESSION['status'] != "admin_login") {
         </div>
     </div>
     <script>
-    fetch('sidebar_admin.php')
+    fetch('sidebar_petugas.php')
         .then(response => response.text())
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    document.getElementById('generateMonths').addEventListener('click', function() {
-        const id = <?php echo $id; ?>; // Get the header_id
-        const button = this; // Reference to the button
-        button.disabled = true; // Disable the button to prevent multiple clicks
-
-        fetch('generate_bulan.php?id=' + id)
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Bulan berhasil ditambahkan!');
-                } else {
-                    alert('Gagal menambahkan bulan: ' + data.message);
-                }
-                button.disabled = false; // Re-enable the button after the operation
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                button.disabled = false; // Re-enable the button in case of error
-            });
-    });
-
-    function hapusKontrak(kontrakId) {
-        if (confirm('Apakah Anda yakin ingin menghapus kontrak ini?')) {
-            fetch('hapus_kontrak.php?id=' + kontrakId, {
-                    method: 'DELETE'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Kontrak berhasil dihapus!');
-                        location.reload(); // Reload the page to see the changes
-                    } else {
-                        alert('Gagal menghapus kontrak: ' + data.message);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus kontrak.');
-                });
-        }
-    }
 
     document.addEventListener('DOMContentLoaded', function() {
         // Elemen untuk tabel kedua
