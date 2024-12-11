@@ -152,6 +152,10 @@
          color: white !important;
      }
 
+     .wajib_isi {
+         color: red;
+     }
+
      @media (max-width: 768px) {
          .navbar-judul {
              font-size: 10px;
@@ -298,17 +302,20 @@
                              <form method="post" action="arsip_aksi.php" enctype="multipart/form-data">
                                  <div class="banyak-data">
                                      <div class="mb-3">
-                                         <label for="shift" class="form-label">Kode Arsip</label>
+                                         <label for="shift" class="form-label"><span class="wajib_isi">*</span> Kode
+                                             Arsip</label>
                                          <input type="text" class="form-control text-white" name="kode"
                                              placeholder="Input Data" required>
                                      </div>
                                      <div class="mb-3">
-                                         <label for="shift" class="form-label">Nama Arsip</label>
+                                         <label for="shift" class="form-label"><span class="wajib_isi">*</span> Nama
+                                             Arsip</label>
                                          <input type="text" class="form-control text-white" name="nama"
                                              placeholder="Input Data" required>
                                      </div>
                                      <div class="mb-3">
-                                         <label for="kategori" class="form-label">Kategori</label>
+                                         <label for="kategori" class="form-label"><span class="wajib_isi">*</span>
+                                             Kategori</label>
                                          <select class="form-control text-white" name="kategori" required="required">
                                              <option value="" style="color: black;">Pilih kategori</option>
                                              <?php
@@ -323,7 +330,8 @@
                                          </select>
                                      </div>
                                      <div class="mb-3">
-                                         <label for="kategori" class="form-label">Status</label>
+                                         <label for="kategori" class="form-label"><span class="wajib_isi">*</span>
+                                             Status</label>
                                          <select class="form-control text-white" name="status" required="required">
                                              <option value="" style="color: black;">Pilih status</option>
                                              <?php
@@ -338,12 +346,14 @@
                                          </select>
                                      </div>
                                      <div class="mb-3">
-                                         <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
+                                         <label for="exampleFormControlTextarea1" class="form-label"><span
+                                                 class="wajib_isi">*</span> Keterangan</label>
                                          <textarea class="form-control text-white" rows="10" placeholder="Input Data"
                                              name="keterangan" required></textarea>
                                      </div>
                                      <div class="mb-3">
-                                         <label for="formFile" class="form-label">File</label>
+                                         <label for="formFile" class="form-label"><span class="wajib_isi">*</span>
+                                             File</label>
                                          <input class="form-control text-white" type="file" name="file">
                                      </div>
                                  </div>

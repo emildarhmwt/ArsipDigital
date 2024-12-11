@@ -95,6 +95,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         font-style: normal;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     .varela-round-regular {
         font-family: "Varela Round", sans-serif;
         font-weight: 400;
@@ -388,13 +392,15 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 <div class="card-body">
 
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
+                                        <label for="exampleFormControlTextarea1" class="form-label"><span
+                                                class="wajib_isi">*</span> Komentar :</label>
                                         <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
                                         <textarea class="form-control text-white" rows="10" placeholder="Input Data"
                                             name="comment" required></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Lampiran File :</label>
+                                        <label for="formFile" class="form-label"><span
+                                                class="wajib_isi">*</span>Lampiran File :</label>
                                         <input class="form-control text-white" type="file" name="file" required>
                                     </div>
                                     <!-- <div class="mb-3">

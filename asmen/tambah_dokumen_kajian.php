@@ -142,6 +142,10 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         color: white !important;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -263,17 +267,20 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                 <form method="post" action="kajian_aksi.php" enctype="multipart/form-data">
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Nama Permintaan :</label>
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span> Nama
+                                                Permintaan :</label>
                                             <input type="text" class="form-control text-white" name="nama"
                                                 placeholder="Input Data" required>
                                         </div>
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Deskripsi Permintaan :</label>
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span>
+                                                Deskripsi Permintaan :</label>
                                             <input type="text" class="form-control text-white" name="deskripsi"
                                                 placeholder="Input Data" required>
                                         </div>
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Jenis Permintaan :</label>
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span> Jenis
+                                                Permintaan :</label>
                                             <select class="form-select text-white" aria-label="Default select example"
                                                 name="jenis" required>
                                                 <option selected disabled class="text-black">Pilih</option>
@@ -284,7 +291,8 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Kategori Permintaan :</label>
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span>
+                                                Kategori Permintaan :</label>
                                             <select class="form-select text-white" aria-label="Default select example"
                                                 name="kategori" required>
                                                 <option selected disabled class="text-black">Pilih</option>
@@ -294,20 +302,22 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                             </select>
                                         </div>
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Aspek K3/Lingkungan :</label>
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span> Aspek
+                                                K3/Lingkungan :</label>
                                             <input type="text" class="form-control text-white" name="aspek"
                                                 placeholder="Input Data" required>
                                         </div>
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Lokasi Penyerahan :</label>
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span>
+                                                Lokasi Penyerahan :</label>
                                             <input type="text" class="form-control text-white" name="lokasi"
                                                 placeholder="Input Data" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 mb-3">
-                                            <label for="shift" class="form-label">Tanggal Dibutuhkan <span
-                                                    class="minimum fs-1">(Min 3 bulan dari Tanggal
+                                            <label for="shift" class="form-label"><span class="wajib_isi">*</span>
+                                                Tanggal Dibutuhkan <span class="minimum fs-1">(Min 3 bulan dari Tanggal
                                                     Pembuatan) :</span>
                                             </label>
                                             <input type="date" class="form-control text-white" name="tanggal" required>
@@ -322,13 +332,15 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             </div>
                             <div class="card-body">
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Komentar :</label>
+                                    <label for="formFile" class="form-label"><span class="wajib_isi">*</span> Komentar
+                                        :</label>
                                     <textarea class="form-control text-white" rows="10" placeholder="Input Data"
                                         name="comment" required></textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="formFile" class="form-label">Lampiran File :</label>
-                                    <input class="form-control text-white" type="file" name="file">
+                                    <label for="formFile" class="form-label"><span class="wajib_isi">*</span> Lampiran
+                                        File :</label>
+                                    <input class="form-control text-white" type="file" name="file" required>
                                 </div>
                                 <!-- <div class="mb-3">
                                     <label for="kategori" class="form-label">Ditujukan Kepada :</label>

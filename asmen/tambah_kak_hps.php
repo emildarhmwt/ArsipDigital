@@ -145,6 +145,10 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
         color: white !important;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -346,14 +350,16 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         <div class="col-lg-6 col-12">
                                             <div class="mb-3">
                                                 <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
-                                                <label for="formFile" class="form-label">Cost Center :</label>
+                                                <label for="formFile" class="form-label"><span
+                                                        class="wajib_isi">*</span> Cost Center :</label>
                                                 <input class="form-control text-white" type="text" name="cost"
                                                     placeholder="Input Data" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-12">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Satuan :</label>
+                                                <label for="formFile" class="form-label"><span
+                                                        class="wajib_isi">*</span> Satuan :</label>
                                                 <select class="form-select text-white" name="satuan" required>
                                                     <option selected disabled>Pilih</option>
                                                     <option value="Lot" class="text-black">Lot</option>
@@ -376,7 +382,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4 col-12">
-                                            <label for="formFile" class="form-label">Harga Satuan :</label>
+                                            <label for="formFile" class="form-label"><span class="wajib_isi">*</span>
+                                                Harga Satuan :</label>
                                             <div class="input-group mb-3">
                                                 <input type="text" class="form-control text-white" name="harga"
                                                     placeholder="Input Data" required>
@@ -385,7 +392,8 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                         </div>
                                         <div class="col-lg-4 col-12">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Jumlah (qty) :</label>
+                                                <label for="formFile" class="form-label"><span
+                                                        class="wajib_isi">*</span> Jumlah (qty) :</label>
                                                 <input class="form-control text-white" type="text" name="jumlah"
                                                     placeholder="Input Data" required>
                                             </div>
@@ -408,17 +416,20 @@ $id = isset($_GET['id']) ? $_GET['id'] : 0;
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Komentar :</label>
+                                        <label for="exampleFormControlTextarea1" class="form-label"><span
+                                                class="wajib_isi">*</span> Komentar :</label>
                                         <input type="hidden" name="dock_id" value="<?php echo $id; ?>">
                                         <textarea class="form-control text-white" rows="10" placeholder="Input Data"
                                             name="comment" required></textarea>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Lampiran File KAK :</label>
+                                        <label for="formFile" class="form-label"><span class="wajib_isi">*</span>
+                                            Lampiran File KAK :</label>
                                         <input class="form-control text-white" type="file" name="file_kak" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Lampiran File HPS :</label>
+                                        <label for="formFile" class="form-label"><span class="wajib_isi">*</span>
+                                            Lampiran File HPS :</label>
                                         <input class="form-control text-white" type="file" name="file_hps" required>
                                     </div>
                                     <!-- <div class="mb-3">

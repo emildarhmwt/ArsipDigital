@@ -96,7 +96,8 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="agenda.php"
+                                aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-warning rounded-3">
                                     <i class="ti ti-category fs-7 text-warning"></i>
                                 </span>
@@ -104,7 +105,8 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link primary-hover-bg" href="#" aria-expanded="false">
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="status_pr.php"
+                                aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-primary rounded-3">
                                     <i class="ti ti-category fs-7 text-primary"></i>
                                 </span>
