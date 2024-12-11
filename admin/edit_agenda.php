@@ -162,6 +162,30 @@ if ($_SESSION['status'] != "admin_login") {
             flex-basis: 0% !important;
         }
     }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
+    }
     </style>
 </head>
 
@@ -341,7 +365,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Lokasi</label>
                                                 <input type="text" class="form-control text-white" name="agenda_lokasi"
@@ -349,7 +373,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agenda_lokasi']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Penanggung
                                                     Jawab</label>
@@ -361,28 +385,28 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Status</label>
                                                 <select class="form-select text-white"
                                                     aria-label="Default select example" name="agenda_status" required>
                                                     <option selected disabled>Status</option>
                                                     <option value="Belum Dimulai" style="color: black;"
-                                                        <?php echo ($d['agenda_kategori'] == 'Daily') ? 'selected' : ''; ?>>
+                                                        <?php echo ($d['agenda_status'] == 'Belum Dimulai') ? 'selected' : ''; ?>>
                                                         Belum Dimulai</option>
-                                                    <option value="Weekly" style="color: black;"
-                                                        <?php echo ($d['agenda_kategori'] == 'Dalam Proses') ? 'selected' : ''; ?>>
+                                                    <option value="Dalam Proses" style="color: black;"
+                                                        <?php echo ($d['agenda_status'] == 'Dalam Proses') ? 'selected' : ''; ?>>
                                                         Dalam Proses</option>
-                                                    <option value="Monthly" style="color: black;"
-                                                        <?php echo ($d['agenda_kategori'] == 'Belum Selesai') ? 'selected' : ''; ?>>
+                                                    <option value="Belum Selesai" style="color: black;"
+                                                        <?php echo ($d['agenda_status'] == 'Belum Selesai') ? 'selected' : ''; ?>>
                                                         Belum Selesai</option>
-                                                    <option value="Yearly" style="color: black;"
-                                                        <?php echo ($d['agenda_kategori'] == 'Selesai') ? 'selected' : ''; ?>>
+                                                    <option value="Selesai" style="color: black;"
+                                                        <?php echo ($d['agenda_status'] == 'Selesai') ? 'selected' : ''; ?>>
                                                         Selesai</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Dokumen Risalah Rapat</label>
                                                 <input class="form-control text-white" type="file" name="file">

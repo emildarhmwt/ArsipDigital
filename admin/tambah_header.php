@@ -152,6 +152,10 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -161,6 +165,30 @@ if ($_SESSION['status'] != "admin_login") {
         .navbar-collapse {
             flex-basis: 0% !important;
         }
+    }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
     }
     </style>
 </head>
@@ -270,17 +298,20 @@ if ($_SESSION['status'] != "admin_login") {
                             <form method="post" action="header_aksi.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="mb-3">
-                                        <label for="shift" class="form-label">Judul Kontrak</label>
+                                        <label for="shift" class="form-label">
+                                            <span class="wajib_isi">*</span> Judul Kontrak</label>
                                         <input type="text" class="form-control text-white" name="header_judul"
                                             placeholder="Input Data" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="shift" class="form-label">No SPPH</label>
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span> No
+                                            SPPH</label>
                                         <input type="number" class="form-control text-white" name="header_nomor"
                                             placeholder="Input Data" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="kategori" class="form-label">Kategori</label>
+                                        <label for="kategori" class="form-label"> <span class="wajib_isi">*</span>
+                                            Kategori</label>
                                         <input type="text" class="form-control text-white" name="header_kategori"
                                             placeholder="Input Data" required>
                                     </div>

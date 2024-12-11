@@ -152,6 +152,10 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -161,6 +165,30 @@ if ($_SESSION['status'] != "admin_login") {
         .navbar-collapse {
             flex-basis: 0% !important;
         }
+    }
+
+    @media (max-width: 425px) {
+        .navbar-judul {
+            font-size: 5px;
+            margin-top: 11%;
+            margin-left: -5%;
+        }
+
+        .navbar-collapse {
+            flex-basis: 0% !important;
+        }
+
+        .nama-profile {
+            color: #912005;
+            font-family: "Varela Round", sans-serif;
+            font-size: 10px;
+            line-height: 2;
+        }
+
+        .tampil {
+            display: none;
+        }
+
     }
     </style>
 </head>
@@ -272,9 +300,10 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="row">
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label">Kategori</label>
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Kategori</label>
                                                 <select class="form-select text-white"
-                                                    aria-label="Default select example" name="agenda_kategori">
+                                                    aria-label="Default select example" name="agenda_kategori" required>
                                                     <option selected disabled>Kategori</option>
                                                     <option value="Daily" style="color: black;">Daily</option>
                                                     <option value="Weekly" style="color: black;">Weekly</option>
@@ -285,7 +314,8 @@ if ($_SESSION['status'] != "admin_login") {
                                         </div>
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label">Tanggal</label>
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Tanggal</label>
                                                 <input type="date" class="form-control text-white" name="agenda_tanggal"
                                                     placeholder="Input Data" required>
                                             </div>
@@ -295,15 +325,17 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="row">
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Waktu
-                                                    Awal</label>
+                                                <label for="exampleFormControlTextarea1" class="form-label">
+                                                    <span class="wajib_isi">*</span> Waktu Awal
+                                                </label>
                                                 <input type="time" class="form-control text-white"
                                                     name="agenda_waktu_awal" placeholder="Input Data" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Waktu Akhir</label>
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Waktu Akhir</label>
                                                 <input type="time" class="form-control text-white"
                                                     name="agenda_waktu_akhir" placeholder="Input Data" required>
                                             </div>
@@ -311,28 +343,32 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Kegiatan</label>
+                                        <label for="exampleFormControlTextarea1" class="form-label">
+                                            <span class="wajib_isi">*</span> Kegiatan</label>
                                         <input type="text" class="form-control text-white" name="agenda_kegiatan"
                                             placeholder="Input Data" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="shift" class="form-label">Deskripsi</label>
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Deskripsi</label>
                                         <input type="text" class="form-control text-white" name="agenda_deskripsi"
                                             placeholder="Input Data" required>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label">Lokasi</label>
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Lokasi</label>
                                                 <input type="text" class="form-control text-white" name="agenda_lokasi"
                                                     placeholder="Input Data" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Penanggung
-                                                    Jawab</label>
+                                                <label for="exampleFormControlTextarea1" class="form-label">
+                                                    <span class="wajib_isi">*</span> Penanggung Jawab
+                                                </label>
                                                 <input type="text" class="form-control text-white" name="agenda_pj"
                                                     placeholder="Input Data" required>
                                             </div>
@@ -340,9 +376,10 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Status</label>
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Status</label>
                                                 <select class="form-select text-white"
                                                     aria-label="Default select example" name="agenda_status" required>
                                                     <option selected disabled>Status</option>
@@ -356,7 +393,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Dokumen Risalah Rapat</label>
                                                 <input class="form-control text-white" type="file" name="file">

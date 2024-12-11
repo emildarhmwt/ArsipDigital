@@ -152,6 +152,10 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -294,7 +298,8 @@ if ($_SESSION['status'] != "admin_login") {
                         <form method="post" action="kategori_aksi.php">
                             <div class="banyak-data">
                                 <div class="mb-3">
-                                    <label for="shift" class="form-label">Nama Kategori</label>
+                                    <label for="shift" class="form-label"> <span class="wajib_isi">*</span> Nama
+                                        Kategori</label>
                                     <input type="text" class="form-control text-white" name="nama"
                                         placeholder="Input Data" required>
                                 </div>

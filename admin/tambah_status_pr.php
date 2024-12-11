@@ -105,6 +105,15 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
+    .judul-tabel {
+        font-family: "Varela Round", sans-serif;
+    }
+
+    .banyak-data {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
     .btn-custom-eye {
         background-color: #11475e !important;
         color: white !important;
@@ -135,25 +144,12 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
-    .judul-tabel {
-        font-family: "Varela Round", sans-serif;
-    }
-
-    .banyak-data {
-        font-family: "Varela Round", sans-serif;
-        color: white;
-    }
-
     input::placeholder {
         color: white !important;
     }
 
     textarea::placeholder {
         color: white !important;
-    }
-
-    #searchInput::placeholder {
-        color: white;
     }
 
     .wajib_isi {
@@ -298,58 +294,120 @@ if ($_SESSION['status'] != "admin_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">TAMBAH USER KONTRAK PKS
-                            </h5>
-                            <form method="post" action="userpks_aksi.php" enctype="multipart/form-data">
+                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM STATUS PR </h5>
+                            <form method="post" action="statuspr_aksi.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                            Nama</label>
-                                        <input type="text" class="form-control text-white" name="nama"
-                                            placeholder="Input Data" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                            Username</label>
-                                        <input type="text" class="form-control text-white" name="username"
-                                            placeholder="Input Data" required>
-                                    </div>
-                                    <div class="mb-1">
-                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                            Password</label>
-                                        <input type="password" class="form-control text-white" name="password"
-                                            placeholder="Input Data" id="password" required>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between mb-3">
-                                        <div class="form-check">
-                                            <input class="form-check-input primary" type="checkbox" value=""
-                                                id="showPassword" style="border-color: white;">
-                                            <label class="form-check-label text-white sub-judul" for="showPassword">
-                                                Show Password
-                                            </label>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Tanggal Pengajuan</label>
+                                                <input type="date" class="form-control text-white"
+                                                    name="statuspr_tanggal_pengajuan" placeholder="Input Data"
+                                                    id="tanggalPengajuan" onchange="calculateLamaProses()" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Tanggal Tahap Proses</label>
+                                                <input type="date" class="form-control text-white"
+                                                    name="statuspr_tanggal_proses" placeholder="Input Data"
+                                                    id="tanggalTahapProses" onchange="calculateLamaProses()">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Estimasi Penyelesaian</label>
+                                                <input type="date" class="form-control text-white"
+                                                    name="statuspr_estimasi" placeholder="Input Data" required>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="formFile" class="form-label">Foto</label>
-                                        <input class="form-control text-white" type="file" name="foto">
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Kode Pengadaan</label>
+                                                <input type="text" class="form-control text-white" name="statuspr_kode"
+                                                    placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Nama Barang / Jasa</label>
+                                                <input type="text" class="form-control text-white" name="statuspr_nama"
+                                                    placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Vendor</label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="statuspr_vendor" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label text-white">
-                                            <span class="wajib_isi">*</span> Jabatan
-                                        </label>
-                                        <select class="form-select text-white" name="level" required>
-                                            <option selected style="color: black;">Pilih Jabatan</option>
-                                            <option value="ASMEN" style="color: black;">Asisten Manager</option>
-                                            <option value="AVP" style="color: black;">Asisten Vice President</option>
-                                            <option value="VP" style="color: black;">Vice President</option>
-                                            <option value="GM" style="color: black;">General Manager</option>
-                                        </select>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="jumlah" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Jumlah</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="statuspr_jumlah" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Satuan
+                                                </label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="statuspr_satuan" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Tahap Proses</label>
+                                                <input type="text" class="form-control text-white" name="statuspr_tahap"
+                                                    placeholder="Input Data">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">Lama Proses</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="statuspr_lama" placeholder="Input Data" id="lamaProses">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Status</label>
+                                                <select class="form-select text-white"
+                                                    aria-label="Default select example" name="statuspr_status" required>
+                                                    <option selected disabled>Status</option>
+                                                    <option value="Belum Dimulai" style="color: black;">Belum Dimulai
+                                                    </option>
+                                                    <option value="Dalam Proses" style="color: black;">Dalam Proses
+                                                    </option>
+                                                    <option value="Selesai" style="color: black;">Selesai</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3">
-                                        <label for="kode" class="form-label"> <span class="wajib_isi">*</span>
-                                            Kode</label>
-                                        <input type="text" class="form-control text-white" name="kode"
-                                            placeholder="Input Data" required>
+                                        <label for="exampleFormControlTextarea1" class="form-label">Catatan</label>
+                                        <input type="text" class="form-control text-white" name="statuspr_catatan"
+                                            placeholder="Input Data">
                                     </div>
                                 </div>
                                 <div class="text-center">
@@ -374,34 +432,21 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
     function goBack() {
-        window.location.href = 'data_userpks.php';
+        window.location.href = 'status_pr.php';
     }
 
-    document.getElementById('showPassword').addEventListener('change', function() {
-        var passwordInput = document.getElementById('password');
-        if (this.checked) {
-            passwordInput.type = 'text';
-        } else {
-            passwordInput.type = 'password';
-        }
-    });
+    function calculateLamaProses() {
+        const tanggalPengajuan = document.getElementById('tanggalPengajuan').value;
+        const tanggalTahapProses = document.getElementById('tanggalTahapProses').value;
 
-    document.querySelector('select[name="level"]').addEventListener('change', function() {
-        var kodeInput = document.querySelector('input[name="kode"]');
-        var selectedValue = this.value;
-
-        if (selectedValue === "ASMEN") {
-            kodeInput.value = "AD-AM-";
-        } else if (selectedValue === "AVP") {
-            kodeInput.value = "AD-AVP-";
-        } else if (selectedValue === "VP") {
-            kodeInput.value = "AD-VP-";
-        } else if (selectedValue === "GM") {
-            kodeInput.value = "AD-GM-";
-        } else {
-            kodeInput.value = "";
+        if (tanggalPengajuan && tanggalTahapProses) {
+            const date1 = new Date(tanggalPengajuan);
+            const date2 = new Date(tanggalTahapProses);
+            const timeDiff = date2 - date1; // Difference in milliseconds
+            const dayDiff = timeDiff / (1000 * 3600 * 24); // Convert to days
+            document.getElementById('lamaProses').value = dayDiff;
         }
-    });
+    }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -156,6 +156,10 @@ if ($_SESSION['status'] != "admin_login") {
         color: white;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -299,17 +303,20 @@ if ($_SESSION['status'] != "admin_login") {
                             <form method="post" action="user_aksi.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="mb-3">
-                                        <label for="shift" class="form-label">Nama</label>
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Nama</label>
                                         <input type="text" class="form-control text-white" name="nama"
                                             placeholder="Input Data" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="shift" class="form-label">Username</label>
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Username</label>
                                         <input type="text" class="form-control text-white" name="username"
                                             placeholder="Input Data" required>
                                     </div>
                                     <div class="mb-1">
-                                        <label for="shift" class="form-label">Password</label>
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Password</label>
                                         <input type="password" class="form-control text-white" name="password"
                                             placeholder="Input Data" id="password" required>
                                     </div>
