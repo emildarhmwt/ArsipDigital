@@ -189,6 +189,11 @@ if ($_SESSION['status'] != "admin_login") {
             display: none;
         }
 
+        .col-44 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
     }
     </style>
 </head>
@@ -304,7 +309,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <div class="banyak-data">
                                     <input type="hidden" name="statuspr_id" value="<?php echo $d['statuspr_id']; ?>">
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Tanggal Pengajuan</label>
@@ -314,7 +319,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['statuspr_tanggal_pengajuan']; ?>" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Tanggal Tahap Proses</label>
                                                 <input type="date" class="form-control text-white"
@@ -323,7 +328,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['statuspr_tanggal_proses']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Estimasi Penyelesaian</label>
@@ -335,7 +340,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Kode Pengadaan</label>
@@ -344,7 +349,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Nama Barang / Jasa</label>
@@ -353,7 +358,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Vendor</label>
@@ -387,7 +392,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Tahap Proses</label>
                                                 <input type="text" class="form-control text-white" name="statuspr_tahap"
@@ -395,7 +400,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['statuspr_tahap']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Lama Proses</label>
                                                 <input type="number" class="form-control text-white"
@@ -403,7 +408,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['statuspr_lama']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Status</label>

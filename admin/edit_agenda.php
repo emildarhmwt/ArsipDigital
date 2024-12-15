@@ -185,6 +185,11 @@ if ($_SESSION['status'] != "admin_login") {
             display: none;
         }
 
+        .col-44 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
     }
     </style>
 </head>
@@ -365,7 +370,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Lokasi</label>
                                                 <input type="text" class="form-control text-white" name="agenda_lokasi"
@@ -373,7 +378,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agenda_lokasi']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Penanggung
                                                     Jawab</label>
@@ -385,7 +390,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Status</label>
                                                 <select class="form-select text-white"
@@ -397,16 +402,13 @@ if ($_SESSION['status'] != "admin_login") {
                                                     <option value="Dalam Proses" style="color: black;"
                                                         <?php echo ($d['agenda_status'] == 'Dalam Proses') ? 'selected' : ''; ?>>
                                                         Dalam Proses</option>
-                                                    <option value="Belum Selesai" style="color: black;"
-                                                        <?php echo ($d['agenda_status'] == 'Belum Selesai') ? 'selected' : ''; ?>>
-                                                        Belum Selesai</option>
                                                     <option value="Selesai" style="color: black;"
                                                         <?php echo ($d['agenda_status'] == 'Selesai') ? 'selected' : ''; ?>>
                                                         Selesai</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Dokumen Risalah Rapat</label>
                                                 <input class="form-control text-white" type="file" name="file">

@@ -305,7 +305,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             value="<?php echo $d['kontrak_desk']; ?>" required>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 col-4">
+                                        <div class="col-lg-4 col-12">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Jumlah</label>
                                                 <input type="number" class="form-control text-white"
@@ -314,7 +314,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     oninput="calculateTotal()" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-4">
+                                        <div class="col-lg-4 col-12">
                                             <div class="mb-3">
                                                 <label for="kategori" class="form-label">Tahun Pembuatan</label>
                                                 <input type="number" class="form-control text-white"
@@ -322,7 +322,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-4">
+                                        <div class="col-lg-4 col-12">
                                             <div class="mb-3">
                                                 <label for="kategori" class="form-label">Masa Sewa</label>
                                                 <input type="number" class="form-control text-white" name="kontrak_masa"

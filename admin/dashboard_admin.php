@@ -192,9 +192,25 @@ if ($_SESSION['status'] != "admin_login") {
         background-repeat: no-repeat;
     }
 
+    .nota-dinas2 {
+        background-image: url("../assets/images/bgnd3.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     .bgnd {
         position: absolute;
         top: 22%;
+        left: 0;
+        width: 100%;
+        height: 75%;
+        z-index: 1;
+    }
+
+    .bgnd2 {
+        position: absolute;
+        top: 24%;
         left: 0;
         width: 100%;
         height: 75%;
@@ -215,6 +231,34 @@ if ($_SESSION['status'] != "admin_login") {
         font-size: 15px;
         color: #08203f;
         font-weight: bold;
+        margin-left: 5%;
+    }
+
+    .sm-ooc4 {
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+        color: #08203f;
+        font-weight: bold;
+        margin-right: -15%;
+    }
+
+    .sm-ooc2 {
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+        color: #08203f;
+        font-weight: bold;
+        margin-left: 10%;
+        margin-right: 5%;
+        text-align: center;
+    }
+
+    .sm-ooc3 {
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+        color: #08203f;
+        font-weight: bold;
+        margin-right: -15%;
+        text-align: center;
     }
 
     .kontrak {
@@ -259,6 +303,44 @@ if ($_SESSION['status'] != "admin_login") {
 
         .navbar-collapse {
             flex-basis: 0% !important;
+        }
+
+        .sm-ooc2 {
+            margin-left: 9%;
+            text-align: left;
+        }
+
+        .sm-ooc3 {
+            margin-left: -22%;
+            text-align: right;
+        }
+
+        .sm-ooc {
+            text-align: left;
+            margin-left: 8%;
+        }
+
+        .sm-ooc4 {
+            text-align: right;
+            margin-left: -17%;
+        }
+
+        .gambar-kategori {
+            width: 100px;
+            height: auto;
+            margin-left: auto;
+            margin-top: -25px;
+            margin-right: 0;
+            float: right;
+        }
+
+        .gambar-user {
+            width: 140px;
+            height: auto;
+            margin-left: auto;
+            margin-top: -35px;
+            margin-right: -30px;
+            float: right;
         }
     }
 
@@ -317,6 +399,24 @@ if ($_SESSION['status'] != "admin_login") {
         .col-44 {
             flex: 0 0 100% !important;
             max-width: 100% !important;
+        }
+
+        .gambar-kategori {
+            width: 130px;
+            height: auto;
+            margin-left: auto;
+            margin-top: -35px;
+            margin-right: 0;
+            float: right;
+        }
+
+        .gambar-user {
+            width: 170px;
+            height: auto;
+            margin-left: auto;
+            margin-top: -45px;
+            margin-right: -30px;
+            float: right;
         }
 
     }
@@ -452,14 +552,34 @@ if ($_SESSION['status'] != "admin_login") {
                                     </span>
                                 </div>
 
-                                <div class="mt-4">
+                                <div class="mt-3">
                                     <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc Kajian</h5>
                                     <?php
-                                    $jumlah_kajian = mysqli_query($koneksi, "SELECT * FROM dockajian");
+                                    $jumlah_kajian = mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_asmen = 'Uploaded (Asmen)' AND dock_status_gm IS NULL");
                                     $total_kajian = mysqli_num_rows($jumlah_kajian);
+
+                                    $jumlah_kajian_done = mysqli_query($koneksi, "SELECT * FROM dockajian WHERE dock_status_gm = 'Done'");
+                                    $total_kajian_done = mysqli_num_rows($jumlah_kajian_done);
                                     ?>
-                                    <h5 class="doc-pks mb-0 fw-semibold fs-3">
-                                        <span class="counter" id="kajianCounter">0</span>
+                                    <h5>
+                                        <div class="row doc-pks mb-1 fw-bold fs-2">
+                                            <div class="col-lg-6 col-6 d-flex align-items-center">
+                                                Uploaded
+                                            </div>
+                                            <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+                                                <span class="counter" id="kajianCounter"> 0</span>
+                                            </div>
+                                        </div>
+                                    </h5>
+                                    <h5>
+                                        <div class="row doc-pks mb-0 fw-bold fs-2">
+                                            <div class="col-lg-6 col-6 d-flex align-items-center">
+                                                Done
+                                            </div>
+                                            <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+                                                <span class="counter" id="kajianDoneCounter"> 0</span>
+                                            </div>
+                                        </div>
                                     </h5>
                                 </div>
                             </div>
@@ -475,14 +595,34 @@ if ($_SESSION['status'] != "admin_login") {
                                     </span>
                                 </div>
 
-                                <div class="mt-4">
+                                <div class="mt-3">
                                     <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc KAK & HPS</h5>
                                     <?php
-                                    $jumlah_kak_hps = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps");
+                                    $jumlah_kak_hps = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_asmen = 'Uploaded (Asmen)' AND dockh_status_gm IS NULL");
                                     $total_kak_hps = mysqli_num_rows($jumlah_kak_hps);
+
+                                    $jumlah_kak_hpsdone = mysqli_query($koneksi, "SELECT * FROM doc_kak_hps WHERE dockh_status_gm = 'Done'");
+                                    $total_kak_hpsdone = mysqli_num_rows($jumlah_kak_hpsdone);
                                     ?>
-                                    <h5 class="doc-pks mb-0 fw-semibold fs-3">
-                                        <span class="counter" id="KHCounter">0</span>
+                                    <h5>
+                                        <div class="row doc-pks mb-1 fw-bold fs-2">
+                                            <div class="col-lg-6 col-6 d-flex align-items-center">
+                                                Uploaded
+                                            </div>
+                                            <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+                                                <span class="counter" id="KHCounter">0</span>
+                                            </div>
+                                        </div>
+                                    </h5>
+                                    <h5>
+                                        <div class="row doc-pks mb-0 fw-bold fs-2">
+                                            <div class="col-lg-6 col-6 d-flex align-items-center">
+                                                Done
+                                            </div>
+                                            <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+                                                <span class="counter" id="KHDoneCounter">0</span>
+                                            </div>
+                                        </div>
                                     </h5>
                                 </div>
                             </div>
@@ -498,24 +638,44 @@ if ($_SESSION['status'] != "admin_login") {
                                     </span>
                                 </div>
 
-                                <div class="mt-4">
+                                <div class="mt-3">
                                     <h5 class="doc-pks mb-2 fw-semibold fs-2">Doc Kontrak</h5>
                                     <?php
-                                    $jumlah_kontrak = mysqli_query($koneksi, "SELECT * FROM doc_kontrak");
+                                    $jumlah_kontrak = mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_asmen = 'Uploaded (Asmen)' AND dockt_status_gm IS NULL");
                                     $total_kontrak = mysqli_num_rows($jumlah_kontrak);
+
+                                    $jumlah_kontrakDone = mysqli_query($koneksi, "SELECT * FROM doc_kontrak WHERE dockt_status_gm = 'Done'");
+                                    $total_kontrak_done = mysqli_num_rows($jumlah_kontrakDone);
                                     ?>
-                                    <h5 class="doc-pks mb-0 fw-semibold fs-3">
-                                        <span class="counter" id="kontrakCounter">0</span>
+                                    <h5>
+                                        <div class="row doc-pks mb-1 fw-bold fs-2">
+                                            <div class="col-lg-6 col-6 d-flex align-items-center">
+                                                Uploaded
+                                            </div>
+                                            <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+                                                <span class="counter" id="kontrakCounter">0</span>
+                                            </div>
+                                        </div>
+                                    </h5>
+                                    <h5>
+                                        <div class="row doc-pks mb-0 fw-bold fs-2">
+                                            <div class="col-lg-6 col-6 d-flex align-items-center">
+                                                Done
+                                            </div>
+                                            <div class="col-lg-6 col-6 d-flex align-items-center justify-content-end">
+                                                <span class="counter" id="kontrakDoneCounter">0</span>
+                                            </div>
+                                        </div>
                                     </h5>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card nota-dinas">
                             <div class="card-body">
-                                <img src="../assets/images/bgnd2.png" class="bgnd">
+                                <img src="../assets/images/bgnd4.png" class="bgnd">
                                 <?php
                                     $jumlah_open = mysqli_query($koneksi, "SELECT COUNT(*) as total_open 
                                         FROM arsip 
@@ -547,7 +707,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openCounter">0</span>
                                         </div>
                                     </div>
@@ -557,7 +717,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogressCounter">0</span>
                                         </div>
                                     </div>
@@ -567,7 +727,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc4"> <span class="counter"
                                                 id="closeCounter">0</span>
                                         </div>
                                     </div>
@@ -576,10 +736,10 @@ if ($_SESSION['status'] != "admin_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card  nota-dinas">
                             <div class="card-body">
-                                <img src="../assets/images/bgnd2.png" class="bgnd">
+                                <img src="../assets/images/bgnd4.png" class="bgnd">
                                 <?php
                                     $jumlah_openk = mysqli_query($koneksi, "SELECT COUNT(*) as total_openk 
                                         FROM arsip 
@@ -611,7 +771,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openkCounter">0</span>
                                         </div>
                                     </div>
@@ -621,8 +781,8 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
-                                                id="onprogresskCounter">0</span>
+                                        <div class="col-lg-4 col-4 sm-ooc4">
+                                            <span class="counter" id="onprogresskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
@@ -631,7 +791,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="closekCounter">0</span>
                                         </div>
                                     </div>
@@ -640,10 +800,10 @@ if ($_SESSION['status'] != "admin_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card nota-dinas">
                             <div class="card-body">
-                                <img src="../assets/images/bgnd2.png" class="bgnd">
+                                <img src="../assets/images/bgnd4.png" class="bgnd">
                                 <?php
                                     $jumlah_opensm = mysqli_query($koneksi, "SELECT COUNT(*) as total_opensm 
                                         FROM arsip 
@@ -672,10 +832,10 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5 class="surat-masuk text-center"> Surat Masuk</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 col-8 sm-ooc mt-3">
+                                        <div class="col-lg-8 col-6 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-6 sm-ooc4 mt-3">
                                             <span class="counter" id="opensmCounter">0</span>
                                         </div>
                                     </div>
@@ -685,7 +845,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogresssmCounter">0</span>
                                         </div>
                                     </div>
@@ -695,7 +855,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="closesmCounter">0</span>
                                         </div>
                                     </div>
@@ -704,10 +864,10 @@ if ($_SESSION['status'] != "admin_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6 ">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card nota-dinas">
                             <div class="card-body">
-                                <img src="../assets/images/bgnd2.png" class="bgnd">
+                                <img src="../assets/images/bgnd4.png" class="bgnd">
                                 <?php
                                     $jumlah_opensk = mysqli_query($koneksi, "SELECT COUNT(*) as total_opensk 
                                         FROM arsip 
@@ -736,31 +896,129 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5 class="surat-masuk text-center"> Surat Keluar</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 col-8 sm-ooc mt-3">
+                                        <div class="col-lg-8 col-6 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-6 sm-ooc4 mt-3">
                                             <span class="counter" id="openskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 col-8 sm-ooc">
+                                        <div class="col-lg-8 col-6 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc4"> <span class="counter"
                                                 id="onprogressskCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-8 col-8 sm-ooc">
+                                        <div class="col-lg-8 col-6 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc4"> <span class="counter"
                                                 id="closeskCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-6 col-44">
+                        <div class="card nota-dinas2">
+                            <div class=card-body>
+                                <img src="../assets/images/bgnd4.png" class="bgnd2">
+                                <?php
+                                $agenda = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Belum Dimulai'");
+                                $total_agenda = mysqli_num_rows($agenda);
+
+                                $agenda_dalam = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Dalam Proses'");
+                                $total_agendaDalam = mysqli_num_rows($agenda_dalam);
+
+                                $agenda_selesai = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Selesai'");
+                                $total_agendaSelesai = mysqli_num_rows($agenda_selesai);
+                                ?>
+                                <h5 class="surat-masuk text-center"> Agenda Rapat</h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2 mt-4">
+                                            Belum Dimulai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3 mt-4">
+                                            <span class="counter" id="BelumCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Dalam Proses
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="DalamCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Selesai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="SelesaiCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-6 col-44">
+                        <div class="card nota-dinas2">
+                            <div class=card-body>
+                                <img src="../assets/images/bgnd4.png" class="bgnd2">
+                                <?php
+                                $statuspr = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Belum Dimulai'");
+                                $total_statuspr = mysqli_num_rows($statuspr);
+
+                                $statuspr_dalam = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Dalam Proses'");
+                                $total_statusprDalam = mysqli_num_rows($statuspr_dalam);
+
+                                $statuspr_selesai = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Selesai'");
+                                $total_statusprSelesai = mysqli_num_rows($statuspr_selesai);
+                                ?>
+                                <h5 class="surat-masuk text-center"> Status PR</h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2 mt-4">
+                                            Belum Dimulai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3 mt-4">
+                                            <span class="counter" id="BelumPRCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Dalam Proses
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="DalamPRCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Selesai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="SelesaiPRCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
@@ -911,13 +1169,12 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="card-body p-4">
                                         <div class="row align-items-center">
                                             <div class="col-lg-12 d-flex align-items-center">
-                                                <div class="col-lg-8">
+                                                <div class="col-lg-8 col-8">
                                                     <h5 class="card-title mb-10 fw-semibold mt-3 fs-7">
-                                                        Jumlah Arsip
-                                                        :
+                                                        Jumlah Arsip :
                                                     </h5>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-4 col-4 text-center">
                                                     <?php
                                                         $jumlah_arsip = mysqli_query($koneksi, "select * from arsip");
                                                         ?>
@@ -1189,8 +1446,11 @@ if ($_SESSION['status'] != "admin_login") {
 
         // Get the total counts from PHP
         const totalKajian = <?php echo $total_kajian; ?>;
+        const totalKajianDone = <?php echo $total_kajian_done; ?>;
         const totalKakHps = <?php echo $total_kak_hps; ?>;
+        const totalKakHpsDone = <?php echo $total_kak_hpsdone; ?>;
         const totalKontrak = <?php echo $total_kontrak; ?>;
+        const totalKontrakDone = <?php echo $total_kontrak_done; ?>;
         const totalKategori = <?php echo $total_kategori; ?>;
         const totalPetugas = <?php echo $total_petugas; ?>;
         const totalUser = <?php echo $total_user; ?>;
@@ -1206,26 +1466,41 @@ if ($_SESSION['status'] != "admin_login") {
         const totalOpensk = <?php echo $total_opensk; ?>;
         const totalOnProgresssk = <?php echo $total_onprogresssk; ?>;
         const totalClosesk = <?php echo $total_closesk; ?>;
+        const totalAgenda = <?php echo $total_agenda; ?>;
+        const totalAgendaDalam = <?php echo $total_agendaDalam; ?>;
+        const totalAgendaSelesai = <?php echo $total_agendaSelesai; ?>;
+        const totalStatusPR = <?php echo $total_statuspr; ?>;
+        const totalStatusPRDalam = <?php echo $total_statusprDalam; ?>;
+        const totalStatusPRSelesai = <?php echo $total_statusprSelesai; ?>;
 
         // Animate each counter
-        animateCounter(document.getElementById('kajianCounter'), 0, totalKajian, 2000);
-        animateCounter(document.getElementById('KHCounter'), 0, totalKakHps, 2000);
-        animateCounter(document.getElementById('kontrakCounter'), 0, totalKontrak, 2000);
-        animateCounter(document.getElementById('kategoriCounter'), 0, totalKategori, 2000);
-        animateCounter(document.getElementById('petugasCounter'), 0, totalPetugas, 2000);
-        animateCounter(document.getElementById('userCounter'), 0, totalUser, 2000);
-        animateCounter(document.getElementById('openCounter'), 0, totalOpen, 2000);
-        animateCounter(document.getElementById('onprogressCounter'), 0, totalOnProgress, 2000);
-        animateCounter(document.getElementById('closeCounter'), 0, totalClose, 2000);
-        animateCounter(document.getElementById('openkCounter'), 0, totalOpenk, 2000);
-        animateCounter(document.getElementById('onprogresskCounter'), 0, totalOnProgressk, 2000);
-        animateCounter(document.getElementById('closekCounter'), 0, totalClosek, 2000);
-        animateCounter(document.getElementById('opensmCounter'), 0, totalOpensm, 2000);
-        animateCounter(document.getElementById('onprogresssmCounter'), 0, totalOnProgresssm, 2000);
-        animateCounter(document.getElementById('closesmCounter'), 0, totalClosesm, 2000);
-        animateCounter(document.getElementById('openskCounter'), 0, totalOpensk, 2000);
-        animateCounter(document.getElementById('onprogressskCounter'), 0, totalOnProgresssk, 2000);
-        animateCounter(document.getElementById('closeskCounter'), 0, totalClosesk, 2000);
+        animateCounter(document.getElementById('kajianCounter'), 0, totalKajian, 1000);
+        animateCounter(document.getElementById('kajianDoneCounter'), 0, totalKajianDone, 1000);
+        animateCounter(document.getElementById('KHCounter'), 0, totalKakHps, 1000);
+        animateCounter(document.getElementById('KHDoneCounter'), 0, totalKakHpsDone, 1000);
+        animateCounter(document.getElementById('kontrakCounter'), 0, totalKontrak, 1000);
+        animateCounter(document.getElementById('kontrakDoneCounter'), 0, totalKontrakDone, 1000);
+        animateCounter(document.getElementById('kategoriCounter'), 0, totalKategori, 1000);
+        animateCounter(document.getElementById('petugasCounter'), 0, totalPetugas, 1000);
+        animateCounter(document.getElementById('userCounter'), 0, totalUser, 1000);
+        animateCounter(document.getElementById('openCounter'), 0, totalOpen, 1000);
+        animateCounter(document.getElementById('onprogressCounter'), 0, totalOnProgress, 1000);
+        animateCounter(document.getElementById('closeCounter'), 0, totalClose, 1000);
+        animateCounter(document.getElementById('openkCounter'), 0, totalOpenk, 1000);
+        animateCounter(document.getElementById('onprogresskCounter'), 0, totalOnProgressk, 1000);
+        animateCounter(document.getElementById('closekCounter'), 0, totalClosek, 1000);
+        animateCounter(document.getElementById('opensmCounter'), 0, totalOpensm, 1000);
+        animateCounter(document.getElementById('onprogresssmCounter'), 0, totalOnProgresssm, 1000);
+        animateCounter(document.getElementById('closesmCounter'), 0, totalClosesm, 1000);
+        animateCounter(document.getElementById('openskCounter'), 0, totalOpensk, 1000);
+        animateCounter(document.getElementById('onprogressskCounter'), 0, totalOnProgresssk, 1000);
+        animateCounter(document.getElementById('closeskCounter'), 0, totalClosesk, 1000);
+        animateCounter(document.getElementById('BelumCounter'), 0, totalAgenda, 1000);
+        animateCounter(document.getElementById('DalamCounter'), 0, totalAgendaDalam, 1000);
+        animateCounter(document.getElementById('SelesaiCounter'), 0, totalAgendaSelesai, 1000);
+        animateCounter(document.getElementById('BelumPRCounter'), 0, totalStatusPR, 1000);
+        animateCounter(document.getElementById('DalamPRCounter'), 0, totalStatusPRDalam, 1000);
+        animateCounter(document.getElementById('SelesaiPRCounter'), 0, totalStatusPRSelesai, 1000);
 
         const categoryData =
             <?php
@@ -1331,13 +1606,15 @@ if ($_SESSION['status'] != "admin_login") {
             return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
         };
 
-        const fetchData = (startDate = getLastWeekDate(), endDate = '') => {
+        const fetchData = (startDate = '', endDate = '') => {
             const url = endDate ?
                 `grafik.php?startDate=${startDate}&endDate=${endDate}` :
-                `grafik.php?startDate=${startDate}`;
+                `grafik.php`;
+
             fetch(url)
                 .then(response => response.json())
                 .then(data => {
+                    console.log('Data fetched:', data); // Debugging
                     const ctx = document.getElementById('downloadChart').getContext('2d');
 
                     // Destroy the existing chart if it exists
@@ -1384,10 +1661,18 @@ if ($_SESSION['status'] != "admin_login") {
                 .catch(error => console.error('Error fetching data:', error));
         };
 
+        // Call fetchData on page load to display data for the current month
+        fetchData();
+
+
         document.querySelector('#dateFilterForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
+
+            console.log('Start Date:', startDate); // Debugging
+            console.log('End Date:', endDate); // Debugging
+
             fetchData(startDate, endDate);
         });
 
@@ -1396,9 +1681,11 @@ if ($_SESSION['status'] != "admin_login") {
             // Clear the date inputs
             document.getElementById('startDate').value = '';
             document.getElementById('endDate').value = '';
-            // Call fetchData without parameters to get all data
+
+            // Fetch default data (entire current month)
             fetchData();
         });
+
 
         // Call fetchData on page load
         fetchData(getLastWeekDate());
@@ -1429,7 +1716,8 @@ if ($_SESSION['status'] != "admin_login") {
 
         const now = new Date();
         const currentYear = now.getFullYear();
-        document.getElementById('yearText').textContent = currentYear;
+        document.getElementById('yearText').textContent =
+            currentYear;
         fetchDataByYear(currentYear);
 
         document.querySelector('#yearFilterForm').addEventListener('submit', function(event) {
@@ -1481,7 +1769,8 @@ if ($_SESSION['status'] != "admin_login") {
 
         const nowKajian = new Date();
         const currentYearKajian = new Date().getFullYear();
-        document.getElementById('yearTextKajian').textContent = currentYearKajian;
+        document.getElementById('yearTextKajian')
+            .textContent = currentYearKajian;
         fetchDataByYear(currentYearKajian);
 
         document.querySelector('#kajianYearFilterForm').addEventListener('submit', function(event) {
@@ -1544,7 +1833,8 @@ if ($_SESSION['status'] != "admin_login") {
 
         const nowKH = new Date();
         const currentYearKH = now.getFullYear();
-        document.getElementById('yearTextKH').textContent = currentYearKH;
+        document.getElementById('yearTextKH').textContent =
+            currentYearKH;
         fetchDataByYear(currentYearKH);
 
         document.querySelector('#kakHpsYearFilterForm').addEventListener('submit', function(event) {
@@ -1606,7 +1896,8 @@ if ($_SESSION['status'] != "admin_login") {
 
         const nowKontrak = new Date();
         const currentYearKontrak = now.getFullYear();
-        document.getElementById('yearTextKontrak').textContent = currentYearKontrak;
+        document.getElementById('yearTextKontrak').textContent =
+            currentYearKontrak;
         fetchDataByYear(currentYearKontrak);
 
         document.querySelector('#kontrakYearFilterForm').addEventListener('submit', function(event) {

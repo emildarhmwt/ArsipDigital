@@ -313,38 +313,52 @@
                                          <input type="text" class="form-control text-white" name="nama"
                                              placeholder="Input Data" required>
                                      </div>
-                                     <div class="mb-3">
-                                         <label for="kategori" class="form-label"><span class="wajib_isi">*</span>
-                                             Kategori</label>
-                                         <select class="form-control text-white" name="kategori" required="required">
-                                             <option value="" style="color: black;">Pilih kategori</option>
-                                             <?php
+                                     <div class="row">
+                                         <div class="col-lg-6 col-6">
+                                             <div class="mb-3">
+                                                 <label for="kategori" class="form-label"><span
+                                                         class="wajib_isi">*</span>
+                                                     Kategori</label>
+                                                 <select class="form-control text-white" name="kategori"
+                                                     required="required">
+                                                     <option value="" style="color: black;">Pilih kategori</option>
+                                                     <?php
                                                 $kategori = mysqli_query($koneksi, "SELECT * FROM kategori");
                                                 while ($k = mysqli_fetch_array($kategori)) {
                                                 ?>
-                                             <option value="<?php echo $k['kategori_id']; ?>" style="color: black;">
-                                                 <?php echo $k['kategori_nama']; ?></option>
-                                             <?php
+                                                     <option value="<?php echo $k['kategori_id']; ?>"
+                                                         style="color: black;">
+                                                         <?php echo $k['kategori_nama']; ?></option>
+                                                     <?php
                                                 }
                                                 ?>
-                                         </select>
-                                     </div>
-                                     <div class="mb-3">
-                                         <label for="kategori" class="form-label"><span class="wajib_isi">*</span>
-                                             Status</label>
-                                         <select class="form-control text-white" name="status" required="required">
-                                             <option value="" style="color: black;">Pilih status</option>
-                                             <?php
+                                                 </select>
+                                             </div>
+                                         </div>
+
+                                         <div class="col-lg-6 col-6">
+                                             <div class="mb-3">
+                                                 <label for="kategori" class="form-label"><span
+                                                         class="wajib_isi">*</span>
+                                                     Status</label>
+                                                 <select class="form-control text-white" name="status"
+                                                     required="required">
+                                                     <option value="" style="color: black;">Pilih status</option>
+                                                     <?php
                                                 $status = mysqli_query($koneksi, "SELECT * FROM status_arsip");
                                                 while ($s = mysqli_fetch_array($status)) {
                                                 ?>
-                                             <option value="<?php echo $s['status_id']; ?>" style="color: black;">
-                                                 <?php echo $s['status_nama']; ?></option>
-                                             <?php
+                                                     <option value="<?php echo $s['status_id']; ?>"
+                                                         style="color: black;">
+                                                         <?php echo $s['status_nama']; ?></option>
+                                                     <?php
                                                 }
                                                 ?>
-                                         </select>
+                                                 </select>
+                                             </div>
+                                         </div>
                                      </div>
+
                                      <div class="mb-3">
                                          <label for="exampleFormControlTextarea1" class="form-label"><span
                                                  class="wajib_isi">*</span> Keterangan</label>
@@ -361,7 +375,8 @@
                                      <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
                                          Submit</button>
                                      <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                             class="bi bi-arrow-left-circle"></i> Kembali</button>
+                                             class="bi bi-arrow-left-circle"></i>
+                                         Kembali</button>
                                  </div>
                              </form>
                          </div>

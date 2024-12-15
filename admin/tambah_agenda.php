@@ -189,6 +189,11 @@ if ($_SESSION['status'] != "admin_login") {
             display: none;
         }
 
+        .col-44 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
     }
     </style>
 </head>
@@ -356,7 +361,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Lokasi</label>
@@ -364,7 +369,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     placeholder="Input Data" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">
                                                     <span class="wajib_isi">*</span> Penanggung Jawab
@@ -376,7 +381,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Status</label>
@@ -387,13 +392,11 @@ if ($_SESSION['status'] != "admin_login") {
                                                     </option>
                                                     <option value="Dalam Proses" style="color: black;">Dalam Proses
                                                     </option>
-                                                    <option value="Belum Selesai" style="color: black;">Belum Selesai
-                                                    </option>
                                                     <option value="Selesai" style="color: black;">Selesai</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">Dokumen Risalah Rapat</label>
                                                 <input class="form-control text-white" type="file" name="file">

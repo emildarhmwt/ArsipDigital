@@ -179,6 +179,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             display: none;
         }
 
+        .col-44 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
     }
     </style>
 </head>
@@ -266,19 +271,19 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                             <div class=" card-body">
                                 <form method="post" action="kajian_aksi.php" enctype="multipart/form-data">
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span> Nama
                                                 Permintaan :</label>
                                             <input type="text" class="form-control text-white" name="nama"
                                                 placeholder="Input Data" required>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span>
                                                 Deskripsi Permintaan :</label>
                                             <input type="text" class="form-control text-white" name="deskripsi"
                                                 placeholder="Input Data" required>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span> Jenis
                                                 Permintaan :</label>
                                             <select class="form-select text-white" aria-label="Default select example"
@@ -290,7 +295,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span>
                                                 Kategori Permintaan :</label>
                                             <select class="form-select text-white" aria-label="Default select example"
@@ -301,13 +306,13 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                                 <option value="Mendesak" class="text-black">Mendesak</option>
                                             </select>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span> Aspek
                                                 K3/Lingkungan :</label>
                                             <input type="text" class="form-control text-white" name="aspek"
                                                 placeholder="Input Data" required>
                                         </div>
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span>
                                                 Lokasi Penyerahan :</label>
                                             <input type="text" class="form-control text-white" name="lokasi"
@@ -315,7 +320,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-lg-4 mb-3">
+                                        <div class="col-lg-4 col-4 col-44 mb-3">
                                             <label for="shift" class="form-label"><span class="wajib_isi">*</span>
                                                 Tanggal Dibutuhkan <span class="minimum fs-1">(Min 3 bulan dari Tanggal
                                                     Pembuatan) :</span>

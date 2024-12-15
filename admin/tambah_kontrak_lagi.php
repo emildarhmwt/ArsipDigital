@@ -152,6 +152,10 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
+    .wajib_isi {
+        color: red;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -295,14 +299,16 @@ if ($_SESSION['status'] != "admin_login") {
                             <form method="post" action="kontrak_aksi.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="mb-3">
-                                        <label for="shift" class="form-label">Deskripsi</label>
+                                        <label for="shift" class="form-label"><span class="wajib_isi">*</span>
+                                            Deskripsi</label>
                                         <input type="text" class="form-control text-white" name="kontrak_desk"
                                             placeholder="Input Data" required>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label">Jumlah</label>
+                                                <label for="shift" class="form-label"><span class="wajib_isi">*</span>
+                                                    Jumlah</label>
                                                 <input type="number" class="form-control text-white"
                                                     name="kontrak_jumlah" id="kontrak_jumlah" placeholder="Input Data"
                                                     oninput="calculateTotal()" required>
@@ -310,14 +316,16 @@ if ($_SESSION['status'] != "admin_login") {
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">Tahun Pembuatan</label>
+                                                <label for="kategori" class="form-label"><span
+                                                        class="wajib_isi">*</span> Tahun Pembuatan</label>
                                                 <input type="number" class="form-control text-white"
                                                     name="kontrak_tahun" placeholder="Input Data" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">Masa Sewa</label>
+                                                <label for="kategori" class="form-label"><span
+                                                        class="wajib_isi">*</span> Masa Sewa</label>
                                                 <input type="number" class="form-control text-white" name="kontrak_masa"
                                                     id="kontrak_masa" placeholder="Input Data"
                                                     oninput="calculateTotal()" required>
@@ -328,14 +336,16 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="row">
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">Start Date</label>
+                                                <label for="kategori" class="form-label"><span
+                                                        class="wajib_isi">*</span> Start Date</label>
                                                 <input type="date" class="form-control text-white" name="kontrak_awal"
                                                     placeholder="Input Data" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">End Date</label>
+                                                <label for="kategori" class="form-label"><span
+                                                        class="wajib_isi">*</span> End Date</label>
                                                 <input type="date" class="form-control text-white" name="kontrak_akhir"
                                                     placeholder="Input Data" required>
                                             </div>
@@ -345,14 +355,16 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="row">
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">Min HM</label>
+                                                <label for="kategori" class="form-label"><span
+                                                        class="wajib_isi">*</span> Min HM</label>
                                                 <input type="number" class="form-control text-white"
                                                     name="kontrak_minhm" placeholder="Input Data" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">Max HM</label>
+                                                <label for="kategori" class="form-label"><span
+                                                        class="wajib_isi">*</span> Max HM</label>
                                                 <input type="number" class="form-control text-white"
                                                     name="kontrak_maxhm" id="kontrak_maxhm" placeholder="Input Data"
                                                     oninput="calculateTotal()" required>
@@ -363,7 +375,9 @@ if ($_SESSION['status'] != "admin_login") {
                                     <div class="row">
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="kategori" class="form-label">Tarif</label>
+                                                <label for="kategori" class="form-label">
+                                                    <span class="wajib_isi">*</span> Tarif
+                                                </label>
                                                 <input type="text" class="form-control text-white" name="kontrak_tarif"
                                                     id="kontrak_tarif" placeholder="Input Data"
                                                     oninput="calculateTotal()" required>

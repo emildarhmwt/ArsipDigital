@@ -1,14 +1,26 @@
 <?php
 include '../koneksi.php';
 
-// Get the start and end dates from the request
-$currentMonth = date('m');
-$currentYear = date('Y');
+// Get parameters
+$startDate = $_GET['startDate'] ?? null;
+$endDate = $_GET['endDate'] ?? null;
 
-// Prepare the SQL query to fetch data for the current month
+// Get the current month and year if no filter is applied
+if (!$startDate && !$endDate) {
+    $currentYear = date('Y');
+    $currentMonth = date('m');
+    $startDate = "$currentYear-$currentMonth-01";
+    $endDate = date('Y-m-t', strtotime($startDate)); // Automatically gets the last day of the current month
+}
+
+// Debug: Log the dates
+error_log('Start Date: ' . $startDate);
+error_log('End Date: ' . $endDate);
+
+// Prepare the SQL query
 $query = "SELECT COUNT(*) as count, DATE(riwayat_waktu) as date 
           FROM riwayat 
-          WHERE MONTH(riwayat_waktu) = '$currentMonth' AND YEAR(riwayat_waktu) = '$currentYear' 
+          WHERE DATE(riwayat_waktu) BETWEEN '$startDate' AND '$endDate' 
           GROUP BY DATE(riwayat_waktu)";
 
 $result = mysqli_query($koneksi, $query);

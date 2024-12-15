@@ -371,15 +371,15 @@
                          <div class="table-responsive products-table" data-simplebar>
                              <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                  <thead class="fs-4">
-                                     <tr class="text-center">
+                                     <tr class="align-middle text-center">
                                          <th class="fs-3" style="width: 5%;">No</th>
-                                         <th class="fs-3" style="width: 10%;">Waktu Upload</th>
-                                         <th class="fs-3" style="width: 25%;">Arsip</th>
-                                         <th class="fs-3" style="width: 15%;">Kategori</th>
-                                         <th class="fs-3" style="width: 15%;">Status</th>
-                                         <th class="fs-3" style="width: 10%;">Petugas</th>
-                                         <th class="fs-3" style="width: 30%;">Keterangan</th>
-                                         <th class="fs-3" style="width: 5%;">Opsi</th>
+                                         <th class="fs-3" style="padding: 0 20px;">Waktu Upload</th>
+                                         <th class="fs-3" style="padding: 0 60px;">Arsip</th>
+                                         <th class="fs-3" style="padding: 0 30px;">Kategori</th>
+                                         <th class="fs-3" style="padding: 0 30px;">Status</th>
+                                         <th class="fs-3" style="padding: 0 30px;">Petugas</th>
+                                         <th class="fs-3" style="padding: 0 60px;">Keterangan</th>
+                                         <th class="fs-3" style="padding: 0 5px;">Opsi</th>
                                      </tr>
                                  </thead>
                                  <tbody>
@@ -397,7 +397,7 @@
                                             ORDER BY arsip.arsip_id DESC");
                                         while ($p = mysqli_fetch_array($arsip)) {
                                         ?>
-                                     <tr>
+                                     <tr class="fs-2">
                                          <td class="text-center"><?php echo $no++; ?></td>
                                          <td>
                                              <div class="text-center">

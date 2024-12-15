@@ -196,9 +196,25 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         background-repeat: no-repeat;
     }
 
+    .nota-dinas2 {
+        background-image: url("../assets/images/bgnd3.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     .bgnd {
         position: absolute;
         top: 22%;
+        left: 0;
+        width: 100%;
+        height: 75%;
+        z-index: 1;
+    }
+
+    .bgnd2 {
+        position: absolute;
+        top: 24%;
         left: 0;
         width: 100%;
         height: 75%;
@@ -219,6 +235,34 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
         font-size: 15px;
         color: #08203f;
         font-weight: bold;
+        margin-left: 5%;
+    }
+
+    .sm-ooc4 {
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+        color: #08203f;
+        font-weight: bold;
+        margin-right: -15%;
+    }
+
+    .sm-ooc2 {
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+        color: #08203f;
+        font-weight: bold;
+        margin-left: 10%;
+        margin-right: 5%;
+        text-align: center;
+    }
+
+    .sm-ooc3 {
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+        color: #08203f;
+        font-weight: bold;
+        margin-right: -15%;
+        text-align: center;
     }
 
     @media (max-width: 768px) {
@@ -229,6 +273,26 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
 
         .navbar-collapse {
             flex-basis: 0% !important;
+        }
+
+        .sm-ooc2 {
+            margin-left: 9%;
+            text-align: left;
+        }
+
+        .sm-ooc3 {
+            margin-left: -22%;
+            text-align: right;
+        }
+
+        .sm-ooc {
+            text-align: left;
+            margin-left: 8%;
+        }
+
+        .sm-ooc4 {
+            text-align: right;
+            margin-left: -17%;
         }
     }
 
@@ -282,6 +346,11 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
             float: right;
             margin-top: -20px;
             margin-right: -37px;
+        }
+
+        .col-44 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
         }
 
     }
@@ -500,7 +569,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -535,7 +604,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openCounter">0</span>
                                         </div>
                                     </div>
@@ -545,7 +614,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogressCounter">0</span>
                                         </div>
                                     </div>
@@ -555,7 +624,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc4"> <span class="counter"
                                                 id="closeCounter">0</span>
                                         </div>
                                     </div>
@@ -564,7 +633,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card  nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -599,7 +668,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openkCounter">0</span>
                                         </div>
                                     </div>
@@ -609,7 +678,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc4"> <span class="counter"
                                                 id="onprogresskCounter">0</span>
                                         </div>
                                     </div>
@@ -619,7 +688,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="closekCounter">0</span>
                                         </div>
                                     </div>
@@ -628,7 +697,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -663,7 +732,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="opensmCounter">0</span>
                                         </div>
                                     </div>
@@ -673,7 +742,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogresssmCounter">0</span>
                                         </div>
                                     </div>
@@ -683,7 +752,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc">
+                                        <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="closesmCounter">0</span>
                                         </div>
                                     </div>
@@ -692,7 +761,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-3 col-6">
+                    <div class="col-lg-3 col-6 col-44">
                         <div class="card nota-dinas">
                             <div class="card-body">
                                 <img src="../assets/images/bgnd2.png" class="bgnd">
@@ -727,7 +796,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc mt-3">
+                                        <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openskCounter">0</span>
                                         </div>
                                     </div>
@@ -737,7 +806,7 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc4"> <span class="counter"
                                                 id="onprogressskCounter">0</span>
                                         </div>
                                     </div>
@@ -747,8 +816,106 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
                                         <div class="col-lg-8 col-8 sm-ooc">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc4"> <span class="counter"
                                                 id="closeskCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-6 col-44">
+                        <div class="card nota-dinas2">
+                            <div class=card-body>
+                                <img src="../assets/images/bgnd4.png" class="bgnd2">
+                                <?php
+                                $agenda = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Belum Dimulai'");
+                                $total_agenda = mysqli_num_rows($agenda);
+
+                                $agenda_dalam = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Dalam Proses'");
+                                $total_agendaDalam = mysqli_num_rows($agenda_dalam);
+
+                                $agenda_selesai = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Selesai'");
+                                $total_agendaSelesai = mysqli_num_rows($agenda_selesai);
+                                ?>
+                                <h5 class="surat-masuk text-center"> Agenda Rapat</h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2 mt-4">
+                                            Belum Dimulai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3 mt-4">
+                                            <span class="counter" id="BelumCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Dalam Proses
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="DalamCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Selesai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="SelesaiCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-6 col-44">
+                        <div class="card nota-dinas2">
+                            <div class=card-body>
+                                <img src="../assets/images/bgnd4.png" class="bgnd2">
+                                <?php
+                                $statuspr = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Belum Dimulai'");
+                                $total_statuspr = mysqli_num_rows($statuspr);
+
+                                $statuspr_dalam = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Dalam Proses'");
+                                $total_statusprDalam = mysqli_num_rows($statuspr_dalam);
+
+                                $statuspr_selesai = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Selesai'");
+                                $total_statusprSelesai = mysqli_num_rows($statuspr_selesai);
+                                ?>
+                                <h5 class="surat-masuk text-center"> Status PR</h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2 mt-4">
+                                            Belum Dimulai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3 mt-4">
+                                            <span class="counter" id="BelumPRCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Dalam Proses
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="DalamPRCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-6 sm-ooc2">
+                                            Selesai
+                                        </div>
+                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                                id="SelesaiPRCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
@@ -1043,6 +1210,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     const totalOpensk = <?php echo $total_opensk; ?>;
     const totalOnProgresssk = <?php echo $total_onprogresssk; ?>;
     const totalClosesk = <?php echo $total_closesk; ?>;
+    const totalAgenda = <?php echo $total_agenda; ?>;
+    const totalAgendaDalam = <?php echo $total_agendaDalam; ?>;
+    const totalAgendaSelesai = <?php echo $total_agendaSelesai; ?>;
+    const totalStatusPR = <?php echo $total_statuspr; ?>;
+    const totalStatusPRDalam = <?php echo $total_statusprDalam; ?>;
+    const totalStatusPRSelesai = <?php echo $total_statusprSelesai; ?>;
 
     // Animate each counter
     animateCounter(document.getElementById('kajianCounter'), 0, totalKajian, 2000);
@@ -1060,6 +1233,12 @@ if (!isset($_SESSION['status']) || $_SESSION['status'] != "asmen_login") {
     animateCounter(document.getElementById('openskCounter'), 0, totalOpensk, 2000);
     animateCounter(document.getElementById('onprogressskCounter'), 0, totalOnProgresssk, 2000);
     animateCounter(document.getElementById('closeskCounter'), 0, totalClosesk, 2000);
+    animateCounter(document.getElementById('BelumCounter'), 0, totalAgenda, 1000);
+    animateCounter(document.getElementById('DalamCounter'), 0, totalAgendaDalam, 1000);
+    animateCounter(document.getElementById('SelesaiCounter'), 0, totalAgendaSelesai, 1000);
+    animateCounter(document.getElementById('BelumPRCounter'), 0, totalStatusPR, 1000);
+    animateCounter(document.getElementById('DalamPRCounter'), 0, totalStatusPRDalam, 1000);
+    animateCounter(document.getElementById('SelesaiPRCounter'), 0, totalStatusPRSelesai, 1000);
 
     //Grafik Semua Data
     function fetchCurrentMonthData() {
