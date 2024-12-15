@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2024 at 08:37 AM
+-- Generation Time: Dec 14, 2024 at 01:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -46,6 +46,36 @@ INSERT INTO `admin` (`admin_id`, `admin_nama`, `admin_username`, `admin_password
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `agenda`
+--
+
+CREATE TABLE `agenda` (
+  `agenda_id` int(11) NOT NULL,
+  `agenda_kategori` varchar(255) NOT NULL,
+  `agenda_tanggal` date NOT NULL,
+  `agenda_waktu_awal` time NOT NULL,
+  `agenda_waktu_akhir` time NOT NULL,
+  `agenda_kegiatan` varchar(255) NOT NULL,
+  `agenda_deskripsi` varchar(255) NOT NULL,
+  `agenda_lokasi` varchar(255) NOT NULL,
+  `agenda_pj` varchar(255) NOT NULL,
+  `agenda_status` varchar(255) NOT NULL,
+  `agenda_dokumen` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `agenda`
+--
+
+INSERT INTO `agenda` (`agenda_id`, `agenda_kategori`, `agenda_tanggal`, `agenda_waktu_awal`, `agenda_waktu_akhir`, `agenda_kegiatan`, `agenda_deskripsi`, `agenda_lokasi`, `agenda_pj`, `agenda_status`, `agenda_dokumen`) VALUES
+(11, 'Daily', '2024-12-12', '08:00:00', '09:00:00', 'Rapat Koordinasi', 'Koordinasi proyek efisiensi biaya', 'Ruang Rapat A', 'Mark Lee', 'Belum Selesai', NULL),
+(12, 'Weekly', '2024-12-12', '09:15:00', '10:00:00', 'Supervisi Lapangan', 'Monitoring alat berat di tambang', 'Lokasi Penambangan', 'Jaehyun', 'Dalam Proses', '1297381362_1451734872_1258905874_Laporan Produksi - 11 Nov 2024 (2) (1).pdf'),
+(13, 'Monthly', '2024-12-12', '13:00:00', '14:30:00', 'Penyusunan Laporan', 'Menyusun laporan mingguan operasional', 'Kantor Utama', 'Sehun', 'Belum Dimulai', NULL),
+(14, 'Yearly', '2024-12-12', '15:00:00', '16:00:00', 'Training Teknologi Baru', 'Pelatihan fleet management system', 'Ruang Pelatihan', 'Nana', 'Belum Selesai', '1422047834_Supervisor1.pdf');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `arsip`
 --
 
@@ -79,12 +109,224 @@ INSERT INTO `arsip` (`arsip_id`, `arsip_waktu_upload`, `arsip_petugas`, `arsip_a
 (35, '2024-12-03 10:57:02', 0, 1, 'sdfsdf', 'sfdsd', 'pdf', 20, '4', 'sdfsd', '1244180418_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
 (36, '2024-12-03 10:57:12', 0, 1, 'sdfsdf', 'sdfsdf', 'pdf', 20, '4', 'sdfds', '476522434_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
 (37, '2024-12-03 10:57:23', 0, 1, 'sdfsdf', 'sdfsdf', 'pdf', 20, '5', 'sdfsdf', '439416700_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
-(38, '2024-12-03 10:57:33', 0, 1, 'sfsdf', 'sdfsdf', 'pdf', 20, '6', 'sdfsdf', '2116828800_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
 (39, '2024-12-03 10:57:51', 0, 1, 'sdfds', 'sdfsd', 'pdf', 21, '4', 'sdfdsf', '1628068299_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
 (40, '2024-12-03 10:57:59', 0, 1, 'sdfsdf', 'sdfdsf', 'pdf', 21, '5', 'sdfsdf', '1456974522_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
 (41, '2024-12-03 10:58:08', 0, 1, 'sdfdsf', 'sdfsdf', 'pdf', 21, '6', 'sdfsdf', '1669326370_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
-(42, '2024-12-03 13:56:50', 4, 0, 'dfsdf', 'sfsdf', 'pdf', 18, '6', 'sdfsdfdffhdrh', '1451734872_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf'),
-(43, '2024-12-03 14:02:38', 5, 0, 'sdgsgsdg', 'sdgsdg', 'pdf', 19, '6', 'dsgdsg', '1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1).pdf');
+(42, '2024-12-03 13:56:50', 4, 0, 'dfsdf', 'sfsdf', 'pdf', 18, '6', 'sdfsdfdffhdrh', '1451734872_1258905874_Laporan Produksi - 11 Nov 2024 (2).pdf');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bulan_kontrak`
+--
+
+CREATE TABLE `bulan_kontrak` (
+  `bulan_id` int(11) NOT NULL,
+  `bulan_header_id` int(11) NOT NULL,
+  `bulan_bulan` date NOT NULL,
+  `bulan_invoice` double NOT NULL,
+  `bulan_denda` double NOT NULL,
+  `bulan_realisasi` double NOT NULL,
+  `bulan_rk` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bulan_kontrak`
+--
+
+INSERT INTO `bulan_kontrak` (`bulan_id`, `bulan_header_id`, `bulan_bulan`, `bulan_invoice`, `bulan_denda`, `bulan_realisasi`, `bulan_rk`) VALUES
+(1, 4, '2020-10-01', 0, 0, 0, 0),
+(2, 4, '2020-11-01', 0, 0, 0, 0),
+(3, 4, '2020-12-01', 0, 0, 0, 0),
+(4, 4, '2021-01-01', 0, 0, 0, 0),
+(5, 4, '2021-02-01', 0, 0, 0, 0),
+(6, 4, '2021-03-01', 0, 0, 0, 0),
+(7, 4, '2021-04-01', 0, 0, 0, 0),
+(8, 4, '2021-05-01', 0, 0, 0, 0),
+(9, 4, '2021-06-01', 0, 0, 0, 0),
+(10, 4, '2021-07-01', 0, 0, 0, 0),
+(11, 4, '2021-08-01', 0, 0, 0, 0),
+(12, 4, '2021-09-01', 0, 0, 0, 0),
+(13, 4, '2021-10-01', 0, 0, 0, 0),
+(14, 4, '2021-11-01', 0, 0, 0, 0),
+(15, 4, '2021-12-01', 0, 0, 0, 0),
+(16, 4, '2022-01-01', 0, 0, 0, 0),
+(17, 4, '2022-02-01', 0, 0, 0, 0),
+(18, 4, '2022-03-01', 0, 0, 0, 0),
+(19, 4, '2022-04-01', 0, 0, 0, 0),
+(20, 4, '2022-05-01', 0, 0, 0, 0),
+(21, 4, '2022-06-01', 0, 0, 0, 0),
+(22, 4, '2022-07-01', 0, 0, 0, 0),
+(23, 4, '2022-08-01', 0, 0, 0, 0),
+(24, 4, '2022-09-01', 0, 0, 0, 0),
+(25, 4, '2022-10-01', 0, 0, 0, 0),
+(26, 4, '2022-11-01', 0, 0, 0, 0),
+(27, 4, '2022-12-01', 0, 0, 0, 0),
+(28, 4, '2023-01-01', 0, 0, 0, 0),
+(29, 4, '2023-02-01', 0, 0, 0, 0),
+(30, 4, '2023-03-01', 0, 0, 0, 0),
+(31, 4, '2023-04-01', 0, 0, 0, 0),
+(32, 4, '2023-05-01', 0, 0, 0, 0),
+(33, 4, '2023-06-01', 0, 0, 0, 0),
+(34, 4, '2023-07-01', 0, 0, 0, 0),
+(35, 4, '2023-08-01', 0, 0, 0, 0),
+(36, 4, '2023-09-01', 0, 0, 0, 0),
+(37, 4, '2023-10-01', 0, 0, 0, 0),
+(38, 4, '2023-11-01', 0, 0, 0, 0),
+(39, 4, '2023-12-01', 0, 0, 0, 0),
+(40, 4, '2024-01-01', 0, 0, 0, 0),
+(41, 4, '2024-02-01', 0, 0, 0, 0),
+(42, 4, '2024-03-01', 0, 0, 0, 0),
+(43, 4, '2024-04-01', 0, 0, 0, 0),
+(44, 4, '2024-05-01', 0, 0, 0, 0),
+(45, 4, '2024-06-01', 0, 0, 0, 0),
+(46, 4, '2024-07-01', 0, 0, 0, 0),
+(47, 4, '2024-08-01', 0, 0, 0, 0),
+(48, 4, '2024-09-01', 0, 0, 0, 0),
+(49, 6, '2021-05-01', 0, 0, 0, 0),
+(50, 6, '2021-06-01', 0, 0, 0, 0),
+(51, 6, '2021-07-01', 0, 0, 0, 0),
+(52, 6, '2021-08-01', 0, 0, 0, 0),
+(53, 6, '2021-09-01', 0, 0, 0, 0),
+(54, 6, '2021-10-01', 0, 0, 0, 0),
+(55, 6, '2021-11-01', 0, 0, 0, 0),
+(56, 6, '2021-12-01', 0, 0, 0, 0),
+(57, 6, '2022-01-01', 0, 0, 0, 0),
+(58, 6, '2022-02-01', 0, 0, 0, 0),
+(59, 6, '2022-03-01', 0, 0, 0, 0),
+(60, 6, '2022-04-01', 0, 0, 0, 0),
+(61, 6, '2022-05-01', 0, 0, 0, 0),
+(62, 6, '2022-06-01', 0, 0, 0, 0),
+(63, 6, '2022-07-01', 0, 0, 0, 0),
+(64, 6, '2022-08-01', 0, 0, 0, 0),
+(65, 6, '2022-09-01', 0, 0, 0, 0),
+(66, 6, '2022-10-01', 0, 0, 0, 0),
+(67, 6, '2022-11-01', 0, 0, 0, 0),
+(68, 6, '2022-12-01', 0, 0, 0, 0),
+(69, 6, '2023-01-01', 0, 0, 0, 0),
+(70, 6, '2023-02-01', 0, 0, 0, 0),
+(71, 6, '2023-03-01', 0, 0, 0, 0),
+(72, 6, '2023-04-01', 0, 0, 0, 0),
+(73, 6, '2023-05-01', 0, 0, 0, 0),
+(74, 6, '2023-06-01', 0, 0, 0, 0),
+(75, 6, '2023-07-01', 0, 0, 0, 0),
+(76, 6, '2023-08-01', 0, 0, 0, 0),
+(77, 6, '2023-09-01', 0, 0, 0, 0),
+(78, 6, '2023-10-01', 0, 0, 0, 0),
+(79, 6, '2023-11-01', 0, 0, 0, 0),
+(80, 6, '2023-12-01', 0, 0, 0, 0),
+(81, 6, '2024-01-01', 0, 0, 0, 0),
+(82, 6, '2024-02-01', 0, 0, 0, 0),
+(83, 6, '2024-03-01', 0, 0, 0, 0),
+(84, 6, '2024-04-01', 0, 0, 0, 0),
+(85, 6, '2024-05-01', 0, 0, 0, 0),
+(86, 6, '2024-06-01', 0, 0, 0, 0),
+(87, 6, '2024-07-01', 0, 0, 0, 0),
+(88, 6, '2024-08-01', 0, 0, 0, 0),
+(89, 6, '2024-09-01', 0, 0, 0, 0),
+(90, 6, '2024-10-01', 0, 0, 0, 0),
+(91, 6, '2024-11-01', 0, 0, 0, 0),
+(92, 6, '2024-12-01', 0, 0, 0, 0),
+(93, 6, '2025-01-01', 0, 0, 0, 0),
+(94, 6, '2025-02-01', 0, 0, 0, 0),
+(95, 6, '2025-03-01', 0, 0, 0, 0),
+(96, 6, '2025-04-01', 0, 0, 0, 0),
+(97, 7, '2021-11-01', 0, 0, 0, 0),
+(98, 7, '2021-12-01', 0, 0, 0, 0),
+(99, 7, '2022-01-01', 0, 0, 0, 0),
+(100, 7, '2022-02-01', 0, 0, 0, 0),
+(101, 7, '2022-03-01', 0, 0, 0, 0),
+(102, 7, '2022-04-01', 0, 0, 0, 0),
+(103, 7, '2022-05-01', 0, 0, 0, 0),
+(104, 7, '2022-06-01', 0, 0, 0, 0),
+(105, 7, '2022-07-01', 0, 0, 0, 0),
+(106, 7, '2022-08-01', 0, 0, 0, 0),
+(107, 7, '2022-09-01', 0, 0, 0, 0),
+(108, 7, '2022-10-01', 0, 0, 0, 0),
+(109, 7, '2022-11-01', 0, 0, 0, 0),
+(110, 7, '2022-12-01', 0, 0, 0, 0),
+(111, 7, '2023-01-01', 0, 0, 0, 0),
+(112, 7, '2023-02-01', 0, 0, 0, 0),
+(113, 7, '2023-03-01', 0, 0, 0, 0),
+(114, 7, '2023-04-01', 0, 0, 0, 0),
+(115, 7, '2023-05-01', 0, 0, 0, 0),
+(116, 7, '2023-06-01', 0, 0, 0, 0),
+(117, 7, '2023-07-01', 0, 0, 0, 0),
+(118, 7, '2023-08-01', 0, 0, 0, 0),
+(119, 7, '2023-09-01', 0, 0, 0, 0),
+(120, 7, '2023-10-01', 0, 0, 0, 0),
+(121, 7, '2023-11-01', 0, 0, 0, 0),
+(122, 7, '2023-12-01', 0, 0, 0, 0),
+(123, 7, '2024-01-01', 0, 0, 0, 0),
+(124, 7, '2024-02-01', 0, 0, 0, 0),
+(125, 7, '2024-03-01', 0, 0, 0, 0),
+(126, 7, '2024-04-01', 0, 0, 0, 0),
+(127, 7, '2024-05-01', 0, 0, 0, 0),
+(128, 7, '2024-06-01', 0, 0, 0, 0),
+(129, 7, '2024-07-01', 0, 0, 0, 0),
+(130, 7, '2024-08-01', 0, 0, 0, 0),
+(131, 7, '2024-09-01', 0, 0, 0, 0),
+(132, 7, '2024-10-01', 0, 0, 0, 0),
+(133, 7, '2024-11-01', 0, 0, 0, 0),
+(134, 7, '2024-12-01', 0, 0, 0, 0),
+(135, 7, '2025-01-01', 0, 0, 0, 0),
+(136, 7, '2025-02-01', 0, 0, 0, 0),
+(137, 7, '2025-03-01', 0, 0, 0, 0),
+(138, 7, '2025-04-01', 0, 0, 0, 0),
+(139, 7, '2025-05-01', 0, 0, 0, 0),
+(140, 7, '2025-06-01', 0, 0, 0, 0),
+(141, 7, '2025-07-01', 0, 0, 0, 0),
+(142, 7, '2025-08-01', 0, 0, 0, 0),
+(143, 7, '2025-09-01', 0, 0, 0, 0),
+(144, 7, '2025-10-01', 0, 0, 0, 0),
+(145, 5, '2021-05-01', 0, 0, 0, 0),
+(146, 5, '2021-06-01', 0, 0, 0, 0),
+(147, 5, '2021-07-01', 0, 0, 0, 0),
+(148, 5, '2021-08-01', 0, 0, 0, 0),
+(149, 5, '2021-09-01', 0, 0, 0, 0),
+(150, 5, '2021-10-01', 0, 0, 0, 0),
+(151, 5, '2021-11-01', 0, 0, 0, 0),
+(152, 5, '2021-12-01', 0, 0, 0, 0),
+(153, 5, '2022-01-01', 0, 0, 0, 0),
+(154, 5, '2022-02-01', 0, 0, 0, 0),
+(155, 5, '2022-03-01', 0, 0, 0, 0),
+(156, 5, '2022-04-01', 0, 0, 0, 0),
+(157, 5, '2022-05-01', 0, 0, 0, 0),
+(158, 5, '2022-06-01', 0, 0, 0, 0),
+(159, 5, '2022-07-01', 0, 0, 0, 0),
+(160, 5, '2022-08-01', 0, 0, 0, 0),
+(161, 5, '2022-09-01', 0, 0, 0, 0),
+(162, 5, '2022-10-01', 0, 0, 0, 0),
+(163, 5, '2022-11-01', 0, 0, 0, 0),
+(164, 5, '2022-12-01', 0, 0, 0, 0),
+(165, 5, '2023-01-01', 0, 0, 0, 0),
+(166, 5, '2023-02-01', 0, 0, 0, 0),
+(167, 5, '2023-03-01', 0, 0, 0, 0),
+(168, 5, '2023-04-01', 0, 0, 0, 0),
+(169, 5, '2023-05-01', 0, 0, 0, 0),
+(170, 5, '2023-06-01', 0, 0, 0, 0),
+(171, 5, '2023-07-01', 0, 0, 0, 0),
+(172, 5, '2023-08-01', 0, 0, 0, 0),
+(173, 5, '2023-09-01', 0, 0, 0, 0),
+(174, 5, '2023-10-01', 0, 0, 0, 0),
+(175, 5, '2023-11-01', 0, 0, 0, 0),
+(176, 5, '2023-12-01', 0, 0, 0, 0),
+(177, 5, '2024-01-01', 0, 0, 0, 0),
+(178, 5, '2024-02-01', 0, 0, 0, 0),
+(179, 5, '2024-03-01', 0, 0, 0, 0),
+(180, 5, '2024-04-01', 0, 0, 0, 0),
+(181, 5, '2024-05-01', 0, 0, 0, 0),
+(182, 5, '2024-06-01', 0, 0, 0, 0),
+(183, 5, '2024-07-01', 0, 0, 0, 0),
+(184, 5, '2024-08-01', 0, 0, 0, 0),
+(185, 5, '2024-09-01', 0, 0, 0, 0),
+(186, 5, '2024-10-01', 0, 0, 0, 0),
+(187, 5, '2024-11-01', 0, 0, 0, 0),
+(188, 5, '2024-12-01', 0, 0, 0, 0),
+(189, 5, '2025-01-01', 0, 0, 0, 0),
+(190, 5, '2025-02-01', 0, 0, 0, 0),
+(191, 5, '2025-03-01', 0, 0, 0, 0),
+(192, 5, '2025-04-01', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -152,7 +394,10 @@ INSERT INTO `dockajian` (`dock_id`, `dock_petugas`, `dock_waktu_asmen`, `dock_wa
 (26, 34, '2024-10-15 09:56:54', '2024-10-15 11:48:13', '2024-10-15 13:29:58', '2024-10-15 14:17:10', 45, 49, 50, 49, 45, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Normal', 'Sesuai dengan Aspek K3L PTBA', '2024-10-24', 'Kantor Penambangan Klawas', '330061049_Tampilan Website.pdf', 'Daging lebih mahal, lebih bergengsi, dan dalam bentuk permainan berburu biasanya hanya sebagai konsumsi kaum bangsawan. Yang paling umum dijual oleh tukang daging adalah daging babi, ayam, dan unggas domestik lainnya; sapi, yang mana membutuhkan investasi lahan lebih besar, lebih jarang dijumpai. Ikan kod dan haring menjadi andalan di daerah bagian utara; bahan makanan tersebut dikeringkan, diasap atau diasinkan oleh mereka yang tinggal di pedalaman, tetapi berbagai ikan air tawar dan ikan air asin lainnya juga dikonsumsi oleh mereka.', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
 (27, 35, '2024-10-15 09:57:37', '2024-10-15 11:48:46', '2024-10-15 13:29:52', '2024-10-15 14:17:01', 46, 49, 50, 49, 46, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-25', 'Kantor Penambangan Klawas', '491663930_Tampilan Website.pdf', 'Daging lebih mahal, lebih bergengsi, dan dalam bentuk permainan berburu biasanya hanya sebagai konsumsi kaum bangsawan. Yang paling umum dijual oleh tukang daging adalah daging babi, ayam, dan unggas domestik lainnya; sapi, yang mana membutuhkan investasi lahan lebih besar, lebih jarang dijumpai. Ikan kod dan haring menjadi andalan di daerah bagian utara; bahan makanan tersebut dikeringkan, diasap atau diasinkan oleh mereka yang tinggal di pedalaman, tetapi berbagai ikan air tawar dan ikan air asin lainnya juga dikonsumsi oleh mereka.', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
 (30, 36, '2024-10-15 10:07:54', '2024-10-15 11:48:42', '2024-10-15 13:29:47', '2024-10-15 14:16:56', 46, 49, 50, 49, 46, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-26', 'Kantor Penambangan Klawas', '414165017_Tampilan Website.pdf', 'Daging lebih mahal, lebih bergengsi, dan dalam bentuk permainan berburu biasanya hanya sebagai konsumsi kaum bangsawan. Yang paling umum dijual oleh tukang daging adalah daging babi, ayam, dan unggas domestik lainnya; sapi, yang mana membutuhkan investasi lahan lebih besar, lebih jarang dijumpai. Ikan kod dan haring menjadi andalan di daerah bagian utara; bahan makanan tersebut dikeringkan, diasap atau diasinkan oleh mereka yang tinggal di pedalaman, tetapi berbagai ikan air tawar dan ikan air asin lainnya juga dikonsumsi oleh mereka.', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
-(31, 37, '2024-10-15 10:08:38', '2024-10-15 11:48:38', '2024-10-15 13:29:43', '2024-10-15 14:16:23', 46, 49, 50, 49, 46, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-27', 'Kantor Penambangan Klawas', '173243151_Tampilan Website.pdf', 'Daging lebih mahal, lebih bergengsi, dan dalam bentuk permainan berburu biasanya hanya sebagai konsumsi kaum bangsawan. Yang paling umum dijual oleh tukang daging adalah daging babi, ayam, dan unggas domestik lainnya; sapi, yang mana membutuhkan investasi lahan lebih besar, lebih jarang dijumpai. Ikan kod dan haring menjadi andalan di daerah bagian utara; bahan makanan tersebut dikeringkan, diasap atau diasinkan oleh mereka yang tinggal di pedalaman, tetapi berbagai ikan air tawar dan ikan air asin lainnya juga dikonsumsi oleh mereka.', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done');
+(31, 37, '2024-10-15 10:08:38', '2024-10-15 11:48:38', '2024-10-15 13:29:43', '2024-10-15 14:16:23', 46, 49, 50, 49, 46, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-27', 'Kantor Penambangan Klawas', '173243151_Tampilan Website.pdf', 'Daging lebih mahal, lebih bergengsi, dan dalam bentuk permainan berburu biasanya hanya sebagai konsumsi kaum bangsawan. Yang paling umum dijual oleh tukang daging adalah daging babi, ayam, dan unggas domestik lainnya; sapi, yang mana membutuhkan investasi lahan lebih besar, lebih jarang dijumpai. Ikan kod dan haring menjadi andalan di daerah bagian utara; bahan makanan tersebut dikeringkan, diasap atau diasinkan oleh mereka yang tinggal di pedalaman, tetapi berbagai ikan air tawar dan ikan air asin lainnya juga dikonsumsi oleh mereka.', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
+(33, 10, '2024-12-04 14:24:58', '2024-12-04 14:26:41', NULL, NULL, 38, NULL, NULL, NULL, 38, NULL, 'aaa', 'aaa', 'Barang', 'Normal', 'aaa', '2024-12-03', 'Kantor Penambangan Bangko', '2042091250_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', 'assa', 'asdasd', 'Uploaded (Asmen)', 'Rejected (AVP)', NULL, NULL),
+(34, 10, '2024-12-04 14:25:55', '2024-12-04 14:28:55', '2024-12-04 14:27:10', '2024-12-04 14:27:36', 38, 47, 50, 47, 38, 50, 'dsfsd', 'ghfhg', 'Barang', 'Normal', 'vs', '2025-01-10', 'sdfsdf', '1437943974_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', 'sdfsd', 'dsfasd', 'Uploaded (Asmen)', 'Rejected (AVP)', 'Approved (VP)', 'Done'),
+(35, 10, '2024-12-04 14:26:10', '2024-12-04 14:38:12', '2024-12-04 14:38:37', '2024-12-04 14:39:14', 38, 47, 50, 47, 38, 50, 'sdf', 'sdf', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2025-01-02', 'Kantor Penambangan Klawas', '13541125_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', 'sdf', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done');
 
 -- --------------------------------------------------------
 
@@ -203,7 +448,9 @@ CREATE TABLE `doc_kak_hps` (
 INSERT INTO `doc_kak_hps` (`dockh_id`, `dockh_dock_id`, `dockh_petugas`, `dockh_waktu_asmen`, `dockh_waktu_avp`, `dockh_waktu_vp`, `dockh_waktu_gm`, `dockh_avp`, `dockh_vp`, `dockh_gm`, `dockh_tujuan_avp`, `dockh_tujuan_vp`, `dockh_tujuan_gm`, `dockh_nama`, `dockh_desk`, `dockh_jenis`, `dockh_kategori`, `dockh_aspek`, `dockh_tanggal`, `dockh_lokasi`, `dockh_cost`, `dockh_satuan`, `dockh_harga`, `dockh_jumlah`, `dockh_harga_total`, `dockh_file_kak`, `dockh_file_hps`, `dockh_comment`, `dockh_alasan_reject`, `dockh_status_asmen`, `dockh_status_avp`, `dockh_status_vp`, `dockh_status_gm`) VALUES
 (2, 3, 10, '2024-10-15 14:29:10', '2024-10-15 14:39:14', '2024-10-15 14:45:37', '2024-10-15 14:49:30', 38, 47, 50, 38, 47, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Normal', 'Sesuai dengan Aspek K3L PTBA', '2024-10-01', 'Kantor Penambangan Klawas', 'A13424332 1244', 'Pcs', 2000, 12, 24000, '229238819_Tampilan Website.pdf', '1774080360_Tampilan Website.pdf', 'Suatu jenis masakan olahan dikembangkan pada Abad Pertengahan Akhir yang mana menjadi norma kalangan bangsawan di seluruh Eropa. Bumbu-bumbu penyedap yang umum dalam perbendaharaan asam-manis yang sangat berbumbu khas makanan abad pertengahan kelas atas meliputi jus masam (verjuice), anggur, dan vinegar dikombinasikan dengan rempah seperti lada hitam, kuma-kuma, dan jahe. Semua itu, seiring dengan meluasnya penggunaan gula atau madu, memberi rasa asam-manis pada banyak hidangan. Almond sangat populer sebagai pengental dalam sup, rebusan, dan saus, terutama sebagai susu almond.', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
 (3, 4, 11, '2024-10-15 15:01:31', NULL, NULL, NULL, NULL, NULL, NULL, 38, NULL, NULL, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Tambang untuk ruangan VP Penambangan', 'Jasa', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-02', 'Kantor Penambangan Klawas', 'A13424332 1244', 'Set', 2000, 12, 24000, '2080995532_Tampilan Website.pdf', '1432575057_Tampilan Website.pdf', 'Teknik pengawetan makanan (terutama pengeringan, pengasinan, pengasapan, dan pengasaman) dan waktu pengangkutan yang lama menjadikan perdagangan jarak jauh atas banyak jenis makanan sangatlah mahal. Karena itu, makanan kaum bangsawan lebih cenderung terpengaruh bangsa asing dibanding dengan masakan kaum miskin; ini bergantung pada rempah-rempah eksotis dan biaya impor yang mahal. Sebagaimana setiap lapisan masyarakat mengikuti salah satu hal di atas, inovasi-inovasi dari perdagangan internasional dan peperangan dengan bangsa asing sejak abad ke-12 dan seterusnya secara bertahap tersebar luas melalui kelas menengah atas di kota-kota abad pertengahan. Selain tidak tersedianya barang mewah — seperti rempah-rempah — secara ekonomis, ada berbagai ketetapan yang melarang konsumsi makanan tertentu di kelas-kelas sosial tertentu dan hukum yang membatasi konsumsi berlebihan (demi publisitas) pada golongan orang kaya baru. Norma sosial juga menetapkan bahwa makanan kelas pekerja harus lebih sederhana, karena diyakini ada kemiripan alamiah antara pekerjaan dan makanan seseorang; pekerja kasar perlu makanan yang lebih kesat, yang lebih murah.', NULL, 'Uploaded (Asmen)', NULL, NULL, NULL),
-(4, 8, 16, '2024-10-15 15:04:01', NULL, NULL, NULL, NULL, NULL, NULL, 39, NULL, NULL, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Jasa', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-06', 'Kantor Penambangan Klawas', 'A13424332 1244', 'Set', 2000, 12, 24000, '1543771395_Tampilan Website.pdf', '714652381_Tampilan Website.pdf', 'Teknik pengawetan makanan (terutama pengeringan, pengasinan, pengasapan, dan pengasaman) dan waktu pengangkutan yang lama menjadikan perdagangan jarak jauh atas banyak jenis makanan sangatlah mahal. Karena itu, makanan kaum bangsawan lebih cenderung terpengaruh bangsa asing dibanding dengan masakan kaum miskin; ini bergantung pada rempah-rempah eksotis dan biaya impor yang mahal. Sebagaimana setiap lapisan masyarakat mengikuti salah satu hal di atas, inovasi-inovasi dari perdagangan internasional dan peperangan dengan bangsa asing sejak abad ke-12 dan seterusnya secara bertahap tersebar luas melalui kelas menengah atas di kota-kota abad pertengahan. Selain tidak tersedianya barang mewah — seperti rempah-rempah — secara ekonomis, ada berbagai ketetapan yang melarang konsumsi makanan tertentu di kelas-kelas sosial tertentu dan hukum yang membatasi konsumsi berlebihan (demi publisitas) pada golongan orang kaya baru. Norma sosial juga menetapkan bahwa makanan kelas pekerja harus lebih sederhana, karena diyakini ada kemiripan alamiah antara pekerjaan dan makanan seseorang; pekerja kasar perlu makanan yang lebih kesat, yang lebih murah.', NULL, 'Uploaded (Asmen)', NULL, NULL, NULL);
+(4, 8, 16, '2024-10-15 15:04:01', NULL, NULL, NULL, NULL, NULL, NULL, 39, NULL, NULL, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Jasa', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2024-10-06', 'Kantor Penambangan Klawas', 'A13424332 1244', 'Set', 2000, 12, 24000, '1543771395_Tampilan Website.pdf', '714652381_Tampilan Website.pdf', 'Teknik pengawetan makanan (terutama pengeringan, pengasinan, pengasapan, dan pengasaman) dan waktu pengangkutan yang lama menjadikan perdagangan jarak jauh atas banyak jenis makanan sangatlah mahal. Karena itu, makanan kaum bangsawan lebih cenderung terpengaruh bangsa asing dibanding dengan masakan kaum miskin; ini bergantung pada rempah-rempah eksotis dan biaya impor yang mahal. Sebagaimana setiap lapisan masyarakat mengikuti salah satu hal di atas, inovasi-inovasi dari perdagangan internasional dan peperangan dengan bangsa asing sejak abad ke-12 dan seterusnya secara bertahap tersebar luas melalui kelas menengah atas di kota-kota abad pertengahan. Selain tidak tersedianya barang mewah — seperti rempah-rempah — secara ekonomis, ada berbagai ketetapan yang melarang konsumsi makanan tertentu di kelas-kelas sosial tertentu dan hukum yang membatasi konsumsi berlebihan (demi publisitas) pada golongan orang kaya baru. Norma sosial juga menetapkan bahwa makanan kelas pekerja harus lebih sederhana, karena diyakini ada kemiripan alamiah antara pekerjaan dan makanan seseorang; pekerja kasar perlu makanan yang lebih kesat, yang lebih murah.', NULL, 'Uploaded (Asmen)', NULL, NULL, NULL),
+(5, 35, 10, '2024-12-04 14:28:12', '2024-12-04 14:38:16', '2024-12-04 14:39:04', '2024-12-04 14:39:22', 38, 47, 50, 38, 47, 50, 'sdf', 'sdf', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2025-01-02', 'Kantor Penambangan Klawas', 'ssdaasd', 'Ea', 11, 11, 121, '206828320_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', '1085269323_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', 'dfsdf', NULL, 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
+(6, 34, 10, '2024-12-04 14:28:29', '2024-12-04 14:29:04', NULL, NULL, 38, NULL, NULL, 38, NULL, NULL, 'dsfsd', 'ghfhg', 'Barang', 'Normal', 'vs', '2025-01-10', 'sdfsdf', 'sadasd', 'Carton', 12, 21, 252, '993702935_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', '93851115_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', 'dsfd', 'cvsdcsd', 'Uploaded (Asmen)', 'Rejected (AVP)', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,7 +493,32 @@ CREATE TABLE `doc_kontrak` (
 --
 
 INSERT INTO `doc_kontrak` (`dockt_id`, `dockt_dock_id`, `dockt_petugas`, `dockt_waktu_asmen`, `dockt_waktu_avp`, `dockt_waktu_vp`, `dockt_waktu_gm`, `dockt_avp`, `dockt_vp`, `dockt_gm`, `dockt_tujuan_avp`, `dockt_tujuan_vp`, `dockt_tujuan_gm`, `dockt_nama`, `dockt_desk`, `dockt_jenis`, `dockt_kategori`, `dockt_aspek`, `dockt_tanggal`, `dockt_lokasi`, `dockt_file`, `dockt_comment`, `dockt_alasan_reject`, `dockt_status_asmen`, `dockt_status_avp`, `dockt_status_vp`, `dockt_status_gm`) VALUES
-(3, 3, 10, '2024-10-15 15:00:38', '2024-10-15 15:21:12', '2024-10-15 15:29:11', '2024-10-15 15:35:02', 38, 47, 50, 38, 47, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Normal', 'Sesuai dengan Aspek K3L PTBA', '2024-10-01', 'Kantor Penambangan Klawas', '1459105342_Tampilan Website.pdf', 'Teknik pengawetan makanan (terutama pengeringan, pengasinan, pengasapan, dan pengasaman) dan waktu pengangkutan yang lama menjadikan perdagangan jarak jauh atas banyak jenis makanan sangatlah mahal. Karena itu, makanan kaum bangsawan lebih cenderung terpengaruh bangsa asing dibanding dengan masakan kaum miskin; ini bergantung pada rempah-rempah eksotis dan biaya impor yang mahal. Sebagaimana setiap lapisan masyarakat mengikuti salah satu hal di atas, inovasi-inovasi dari perdagangan internasional dan peperangan dengan bangsa asing sejak abad ke-12 dan seterusnya secara bertahap tersebar luas melalui kelas menengah atas di kota-kota abad pertengahan. Selain tidak tersedianya barang mewah — seperti rempah-rempah — secara ekonomis, ada berbagai ketetapan yang melarang konsumsi makanan tertentu di kelas-kelas sosial tertentu dan hukum yang membatasi konsumsi berlebihan (demi publisitas) pada golongan orang kaya baru. Norma sosial juga menetapkan bahwa makanan kelas pekerja harus lebih sederhana, karena diyakini ada kemiripan alamiah antara pekerjaan dan makanan seseorang; pekerja kasar perlu makanan yang lebih kesat, yang lebih murah.', 'berkas tidak lengkap', 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done');
+(3, 3, 10, '2024-10-15 15:00:38', '2024-10-15 15:21:12', '2024-10-15 15:29:11', '2024-10-15 15:35:02', 38, 47, 50, 38, 47, 50, 'Pengadaan Perlengkapan Kantor', 'Pengadaan Perlengkapan Kantor untuk ruangan VP Penambangan', 'Barang', 'Normal', 'Sesuai dengan Aspek K3L PTBA', '2024-10-01', 'Kantor Penambangan Klawas', '1459105342_Tampilan Website.pdf', 'Teknik pengawetan makanan (terutama pengeringan, pengasinan, pengasapan, dan pengasaman) dan waktu pengangkutan yang lama menjadikan perdagangan jarak jauh atas banyak jenis makanan sangatlah mahal. Karena itu, makanan kaum bangsawan lebih cenderung terpengaruh bangsa asing dibanding dengan masakan kaum miskin; ini bergantung pada rempah-rempah eksotis dan biaya impor yang mahal. Sebagaimana setiap lapisan masyarakat mengikuti salah satu hal di atas, inovasi-inovasi dari perdagangan internasional dan peperangan dengan bangsa asing sejak abad ke-12 dan seterusnya secara bertahap tersebar luas melalui kelas menengah atas di kota-kota abad pertengahan. Selain tidak tersedianya barang mewah — seperti rempah-rempah — secara ekonomis, ada berbagai ketetapan yang melarang konsumsi makanan tertentu di kelas-kelas sosial tertentu dan hukum yang membatasi konsumsi berlebihan (demi publisitas) pada golongan orang kaya baru. Norma sosial juga menetapkan bahwa makanan kelas pekerja harus lebih sederhana, karena diyakini ada kemiripan alamiah antara pekerjaan dan makanan seseorang; pekerja kasar perlu makanan yang lebih kesat, yang lebih murah.', 'berkas tidak lengkap', 'Uploaded (Asmen)', 'Approved (AVP)', 'Approved (VP)', 'Done'),
+(4, 35, 10, '2024-12-04 14:39:56', '2024-12-04 14:40:15', NULL, NULL, 38, NULL, NULL, 38, NULL, NULL, 'sdf', 'sdf', 'Barang', 'Penting', 'Sesuai dengan Aspek K3L PTBA', '2025-01-02', 'Kantor Penambangan Klawas', '263721062_1279308882_1258905874_Laporan Produksi - 11 Nov 2024 (1) (1).pdf', 'adasd', 'sd', 'Uploaded (Asmen)', 'Rejected (AVP)', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `header_kontrak`
+--
+
+CREATE TABLE `header_kontrak` (
+  `header_id` int(11) NOT NULL,
+  `header_judul` varchar(255) NOT NULL,
+  `header_nomor` int(11) NOT NULL,
+  `header_kategori` varchar(255) NOT NULL,
+  `header_ket` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `header_kontrak`
+--
+
+INSERT INTO `header_kontrak` (`header_id`, `header_judul`, `header_nomor`, `header_kategori`, `header_ket`) VALUES
+(4, 'PEKERJAAN JASA SEWA ALAT-ALAT BERAT BULLDOZER D65-12 DAN EXCAVATOR 320 GC SATKER PENAMBANGAN', 13636, 'JASA SEWA ALAT', ''),
+(5, 'PEKERJAAN JASA SEWA ALAT PENUNJANG TAMBANG (APT)', 14369, 'JASA SEWA ALAT', ''),
+(6, 'PEKERJAAN JASA SEWA HD 785 & WATER TRUK 16 KL', 16147, 'JASA SEWA ALAT', ''),
+(7, 'PEKERJAAN JASA SEWA ALAT BERAT DAN ALAT PENUNJANG TAMBANG (APT)', 16002, 'JASA SEWA ALAT', '');
 
 -- --------------------------------------------------------
 
@@ -273,6 +545,44 @@ INSERT INTO `kategori` (`kategori_id`, `kategori_nama`) VALUES
 (23, 'Rencana Kerja'),
 (24, 'Risalah Rapat'),
 (25, 'Logbook');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kontrak`
+--
+
+CREATE TABLE `kontrak` (
+  `kontrak_id` int(11) NOT NULL,
+  `kontrak_header_id` int(11) NOT NULL,
+  `kontrak_desk` varchar(255) NOT NULL,
+  `kontrak_jumlah` int(11) NOT NULL,
+  `kontrak_tahun` year(4) NOT NULL,
+  `kontrak_masa` int(11) NOT NULL,
+  `kontrak_awal` date NOT NULL,
+  `kontrak_akhir` date NOT NULL,
+  `kontrak_minhm` int(11) NOT NULL,
+  `kontrak_maxhm` int(11) NOT NULL,
+  `kontrak_tarif` double NOT NULL,
+  `kontrak_total` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kontrak`
+--
+
+INSERT INTO `kontrak` (`kontrak_id`, `kontrak_header_id`, `kontrak_desk`, `kontrak_jumlah`, `kontrak_tahun`, `kontrak_masa`, `kontrak_awal`, `kontrak_akhir`, `kontrak_minhm`, `kontrak_maxhm`, `kontrak_tarif`, `kontrak_total`) VALUES
+(7, 4, 'SEWA ALAT BULLDOZER D65-12', 1, '2020', 48, '2020-10-01', '2024-10-01', 150, 450, 417955, 9027828000),
+(8, 4, 'SEWA ALAT EXCAVATOR 320 GC', 1, '2020', 48, '2020-10-01', '2024-10-01', 150, 450, 239915.37037037, 5182172000),
+(9, 5, 'SEWA ALAT EXCAVATOR PC200', 1, '2021', 48, '2021-05-01', '2025-05-01', 200, 380, 306107.037213268, 5583392358.77),
+(10, 5, 'SEWA ALAT BULLDOZER D85ESS-2A', 2, '2021', 48, '2021-05-01', '2025-05-01', 200, 380, 527647.668109375, 19248586932.63),
+(11, 5, 'SEWA ALAT COMPACTOR 20 TON', 1, '2021', 48, '2021-05-01', '2025-05-01', 200, 300, 459243.331185417, 6613103969.07),
+(12, 6, 'SEWA ALAT KOMATSU HD 785-7', 10, '2016', 12, '2021-05-01', '2022-05-01', 250, 400, 2317141, 111222768000),
+(13, 6, 'SEWA ALAT WATER TRUCK 16 KL', 3, '2021', 48, '2021-05-01', '2025-05-01', 200, 400, 139000000, 8006400000000),
+(15, 7, 'SEWA ALAT MOTOR GRADER 14', 2, '2021', 48, '2021-11-01', '2025-11-01', 300, 400, 895000, 34368000000),
+(16, 7, 'SEWA ALAT BULLDOZER D9', 3, '2021', 48, '2021-11-01', '2025-11-01', 300, 400, 1284400, 73981440000),
+(17, 7, 'SEWA ALAT BULLDOZER D65P-12', 2, '2021', 48, '2021-11-01', '2025-11-01', 300, 400, 537000, 20620800000),
+(18, 7, 'SEWA ALAT COMPACTOR 20 TON', 2, '2021', 48, '2021-11-01', '2025-11-01', 200, 300, 415700, 11972160000);
 
 -- --------------------------------------------------------
 
@@ -318,7 +628,8 @@ CREATE TABLE `riwayat` (
 
 INSERT INTO `riwayat` (`riwayat_id`, `riwayat_waktu`, `riwayat_user`, `riwayat_arsip`) VALUES
 (26, '2024-12-03 14:10:30', 8, 42),
-(27, '2024-12-03 14:10:34', 8, 43);
+(27, '2024-12-03 14:10:34', 8, 43),
+(28, '2024-12-04 07:32:25', 50, 43);
 
 -- --------------------------------------------------------
 
@@ -339,6 +650,37 @@ INSERT INTO `status_arsip` (`status_id`, `status_nama`) VALUES
 (4, 'Open'),
 (5, 'On Progress'),
 (6, 'Close');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `status_pr`
+--
+
+CREATE TABLE `status_pr` (
+  `statuspr_id` int(11) NOT NULL,
+  `statuspr_tanggal_pengajuan` date NOT NULL,
+  `statuspr_kode` varchar(255) NOT NULL,
+  `statuspr_nama` varchar(255) NOT NULL,
+  `statuspr_jumlah` int(11) NOT NULL,
+  `statuspr_satuan` varchar(255) NOT NULL,
+  `statuspr_vendor` varchar(255) NOT NULL,
+  `statuspr_tanggal_proses` date DEFAULT NULL,
+  `statuspr_tahap` varchar(255) DEFAULT NULL,
+  `statuspr_lama` int(11) DEFAULT NULL,
+  `statuspr_estimasi` date NOT NULL,
+  `statuspr_status` varchar(255) NOT NULL,
+  `statuspr_catatan` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `status_pr`
+--
+
+INSERT INTO `status_pr` (`statuspr_id`, `statuspr_tanggal_pengajuan`, `statuspr_kode`, `statuspr_nama`, `statuspr_jumlah`, `statuspr_satuan`, `statuspr_vendor`, `statuspr_tanggal_proses`, `statuspr_tahap`, `statuspr_lama`, `statuspr_estimasi`, `statuspr_status`, `statuspr_catatan`) VALUES
+(8, '2024-12-01', 'PR-202412-001', 'Alat Berat Excavator', 2, 'Unit', 'PT Mesin Tambang', '0000-00-00', NULL, 0, '2024-12-15', 'Belum Dimulai', NULL),
+(9, '2024-12-03', 'PR-202412-002', 'Komponen Convoyer', 50, 'Pcs', 'PT Sparepart Nusantara', '2024-12-12', 'Negosiasi Harga', 9, '2024-12-17', 'Dalam Proses', 'Harga masih dinegosiasikan.'),
+(10, '2024-12-07', 'PR-202412-003', 'Komputer & Aksesori', 15, 'Set', 'PT Teknologi Digital', '2025-01-02', 'Selesai', 26, '2024-12-10', 'Selesai', 'Barang telah diterima.');
 
 -- --------------------------------------------------------
 
@@ -440,10 +782,22 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`admin_id`);
 
 --
+-- Indexes for table `agenda`
+--
+ALTER TABLE `agenda`
+  ADD PRIMARY KEY (`agenda_id`);
+
+--
 -- Indexes for table `arsip`
 --
 ALTER TABLE `arsip`
   ADD PRIMARY KEY (`arsip_id`);
+
+--
+-- Indexes for table `bulan_kontrak`
+--
+ALTER TABLE `bulan_kontrak`
+  ADD PRIMARY KEY (`bulan_id`);
 
 --
 -- Indexes for table `dockajian`
@@ -466,10 +820,22 @@ ALTER TABLE `doc_kontrak`
   ADD KEY `fk_dockt_dock_id` (`dockt_dock_id`);
 
 --
+-- Indexes for table `header_kontrak`
+--
+ALTER TABLE `header_kontrak`
+  ADD PRIMARY KEY (`header_id`);
+
+--
 -- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`kategori_id`);
+
+--
+-- Indexes for table `kontrak`
+--
+ALTER TABLE `kontrak`
+  ADD PRIMARY KEY (`kontrak_id`);
 
 --
 -- Indexes for table `petugas`
@@ -488,6 +854,12 @@ ALTER TABLE `riwayat`
 --
 ALTER TABLE `status_arsip`
   ADD PRIMARY KEY (`status_id`);
+
+--
+-- Indexes for table `status_pr`
+--
+ALTER TABLE `status_pr`
+  ADD PRIMARY KEY (`statuspr_id`);
 
 --
 -- Indexes for table `user`
@@ -512,28 +884,46 @@ ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `agenda`
+--
+ALTER TABLE `agenda`
+  MODIFY `agenda_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
 -- AUTO_INCREMENT for table `arsip`
 --
 ALTER TABLE `arsip`
-  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `arsip_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
+--
+-- AUTO_INCREMENT for table `bulan_kontrak`
+--
+ALTER TABLE `bulan_kontrak`
+  MODIFY `bulan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `dockajian`
 --
 ALTER TABLE `dockajian`
-  MODIFY `dock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `dock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `doc_kak_hps`
 --
 ALTER TABLE `doc_kak_hps`
-  MODIFY `dockh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `dockh_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `doc_kontrak`
 --
 ALTER TABLE `doc_kontrak`
-  MODIFY `dockt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `dockt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `header_kontrak`
+--
+ALTER TABLE `header_kontrak`
+  MODIFY `header_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -542,22 +932,34 @@ ALTER TABLE `kategori`
   MODIFY `kategori_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT for table `kontrak`
+--
+ALTER TABLE `kontrak`
+  MODIFY `kontrak_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `petugas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `petugas_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `riwayat`
 --
 ALTER TABLE `riwayat`
-  MODIFY `riwayat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `riwayat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `status_arsip`
 --
 ALTER TABLE `status_arsip`
   MODIFY `status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `status_pr`
+--
+ALTER TABLE `status_pr`
+  MODIFY `statuspr_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
