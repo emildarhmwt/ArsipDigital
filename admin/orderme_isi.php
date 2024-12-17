@@ -267,6 +267,11 @@ if ($_SESSION['status'] != "admin_login") {
             display: none;
         }
 
+        .col-44 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+
     }
     </style>
 </head>
@@ -391,13 +396,13 @@ if ($_SESSION['status'] != "admin_login") {
                                         <td><?php echo $p['orderme_kategori'] ?></td>
                                     </p>
                                 </div>
-                                <div class="col-lg-4 col-4 mb-3">
+                                <div class="col-lg-4 col-4 col-44 mb-3">
                                     <label for="shift" class="form-label">Tanggal Pengajuan :</label>
                                     <p>
                                         <td><?php echo date('d/m/Y', strtotime($p['orderme_tanggal'])) ?></td>
                                     </p>
                                 </div>
-                                <div class="col-lg-4 col-4 mb-3">
+                                <div class="col-lg-4 col-4 col-44 mb-3">
                                     <label for="shift" class="form-label">Lokasi :</label>
                                     <p>
                                         <td><?php echo $p['orderme_lokasi'] ?></td>
@@ -406,19 +411,19 @@ if ($_SESSION['status'] != "admin_login") {
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4 col-4 mb-3">
+                                <div class="col-lg-4 col-4 col-44 mb-3">
                                     <label for="shift" class="form-label">Penanggung Jawab :</label>
                                     <p>
                                         <td><?php echo $p['orderme_pj'] ? $p['orderme_pj'] : '-'; ?></td>
                                     </p>
                                 </div>
-                                <div class="col-lg-4 col-4 mb-3">
+                                <div class="col-lg-4 col-4 col-44 mb-3">
                                     <label for="shift" class="form-label">Penerima Request :</label>
                                     <p>
                                         <td><?php echo $p['orderme_penerima'] ?></td>
                                     </p>
                                 </div>
-                                <div class="col-lg-4 col-4 mb-3">
+                                <div class="col-lg-4 col-4 col-44 mb-3">
                                     <label for="shift" class="form-label">Tanggal Selesai :</label>
                                     <p>
                                         <td>
@@ -435,13 +440,13 @@ if ($_SESSION['status'] != "admin_login") {
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-4 col-6">
+                                <div class="col-lg-4 col-4 col-44">
                                     <label for="shift" class="form-label">Request Order :</label>
                                     <p>
                                         <td><?php echo $p['orderme_request'] ?></td>
                                     </p>
                                 </div>
-                                <div class="col-lg-8 col-6">
+                                <div class="col-lg-8 col-8 col-44">
                                     <label for="shift" class="form-label">Deskripsi :</label>
                                     <p>
                                         <td><?php echo $p['orderme_desk'] ?></td>
