@@ -105,15 +105,6 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
-    .judul-tabel {
-        font-family: "Varela Round", sans-serif;
-    }
-
-    .banyak-data {
-        font-family: "Varela Round", sans-serif;
-        color: white;
-    }
-
     .btn-custom-eye {
         background-color: #11475e !important;
         color: white !important;
@@ -135,48 +126,38 @@ if ($_SESSION['status'] != "admin_login") {
     }
 
     .btn-custom-edit {
-        background-color: #1593a4 !important;
-        color: white !important;
-    }
-
-    .btn-custom-edit:hover {
-        background-color: #1593a487 !important;
-        color: white !important;
-    }
-
-    .btn-custom-hapus {
         background-color: #7c1919 !important;
         color: white !important;
     }
 
-    .btn-custom-hapus:hover {
+    .btn-custom-edit:hover {
         background-color: #b27373 !important;
         color: white !important;
     }
 
-    .pilihan-doc a {
-        cursor: pointer;
-        color: grey;
-        font-weight: bold;
-        text-decoration: none;
+    .judul-tabel {
         font-family: "Varela Round", sans-serif;
-        font-size: 15px;
     }
 
-    .pilihan-doc-kajian a {
-        color: white;
-        text-decoration: underline;
+    .banyak-data {
         font-family: "Varela Round", sans-serif;
-        font-size: 15px;
+        color: white;
     }
 
-    .pilihan_dokumen {
-        font-family: "Varela Round", sans-serif;
-        color: white;
+    input::placeholder {
+        color: white !important;
+    }
+
+    textarea::placeholder {
+        color: white !important;
     }
 
     #searchInput::placeholder {
         color: white;
+    }
+
+    .wajib_isi {
+        color: red;
     }
 
     @media (max-width: 768px) {
@@ -236,7 +217,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -314,112 +295,58 @@ if ($_SESSION['status'] != "admin_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA PETUGAS
-                        </h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-6 col-6 border-end pilihan-doc-kajian pilihan_dokumen">
-                                <a href="data_petugas.php"> Data Petugas</a>
-                            </div>
-                            <div class="col-lg-6 col-6">
-                                <a href="data_admin.php">Data Admin</a>
-                            </div>
-                            <!-- <div class="col-lg-4 col-4 ">
-                                <a href="data_superadmin.php">Data Super Admin</a>
-                            </div> -->
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">TAMBAH ADMIN
+                            </h5>
+                            <form method="post" action="superadmin_aksi.php" enctype="multipart/form-data">
+                                <div class="banyak-data">
+                                    <div class="mb-3">
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Nama</label>
+                                        <input type="text" class="form-control text-white" name="nama"
+                                            placeholder="Input Data" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Username</label>
+                                        <input type="text" class="form-control text-white" name="username"
+                                            placeholder="Input Data" required>
+                                    </div>
+                                    <div class="mb-1">
+                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                            Password</label>
+                                        <input type="password" class="form-control text-white" name="password"
+                                            placeholder="Input Password" id="password" required>
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-between mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input primary" type="checkbox" value=""
+                                                id="showPassword" style="border-color: white;">
+                                            <label class="form-check-label text-white sub-judul" for="showPassword">
+                                                Show Password
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Foto</label>
+                                        <input class="form-control text-white" type="file" name="foto">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                        Submit</button>
+                                    <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                            class="bi bi-arrow-left-circle"></i>
+                                        Kembali </button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- table -->
-                        <div class="row mb-3">
-                            <div class="col-md-6 col-6 banyak-data">
-                                <label for="rowsPerPageSelect" class="form-label tampil">Tampilkan:</label>
-                                <select id="rowsPerPageSelect" class="form-select text-white"
-                                    style="width: auto; display: inline-block;">
-                                    <option value="5" style="color: black;">5</option>
-                                    <option value="10" selected style="color: black;">10</option>
-                                    <option value="15" style="color: black;">15</option>
-                                    <option value="20" style="color: black;">20</option>
-                                </select>
-                                <span class="tampil"> data per halaman</span>
-                            </div>
-                            <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
-                                <input type="text" class="form-control me-2 text-white" id="searchInput"
-                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <!-- <button type="button" class="btn btn-custom-eye"
-                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                    onclick="tambahPetugas()">
-                                    <i class="bi bi-plus-square"></i> Tambah
-                                </button> -->
-                            </div>
-                        </div>
-
-                        <div class="table-responsive products-table" data-simplebar>
-                            <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                <thead class="fs-4">
-                                    <tr class="text-center">
-                                        <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 10%;">Foto</th>
-                                        <th class="fs-3">Nama</th>
-                                        <th class="fs-3">Username</th>
-                                        <!-- <th class="fs-3" style="width: 5%;">Opsi</th> -->
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    include '../koneksi.php';
-                                    $no = 1;
-                                    $petugas = mysqli_query($koneksi, "SELECT * FROM petugas ORDER BY petugas_id DESC");
-                                    while ($p = mysqli_fetch_array($petugas)) {
-                                    ?>
-                                    <tr class="fs-3">
-                                        <td class="text-center"><?php echo $no++; ?></td>
-                                        <td class="text-center">
-                                            <?php
-                                                if ($p['petugas_foto'] == "") {
-                                                ?>
-                                            <img class="img-user" src="../gambar/sistem/user.png" width="50"
-                                                height="50">
-                                            <?php
-                                                } else {
-                                                ?>
-                                            <img class="img-user"
-                                                src="../gambar/petugas/<?php echo $p['petugas_foto']; ?>" width="50"
-                                                height="50">
-                                            <?php
-                                                }
-                                                ?>
-                                        </td>
-                                        <td><?php echo $p['petugas_nama'] ?></td>
-                                        <td><?php echo $p['petugas_username'] ?></td>
-                                        <!-- <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="edit_petugas.php?id=<?php echo $p['petugas_id']; ?>"
-                                                    class="btn btn-custom-edit btn-sm"><i
-                                                        class="ti ti-edit fs-5"></i></a>
-                                                <a href="petugas_hapus.php?id=<?php echo $p['petugas_id']; ?>"
-                                                    class="btn btn-custom-hapus btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
-                                                        class="ti ti-trash fs-5"></i></a>
-                                            </div>
-                                        </td> -->
-                                    </tr>
-                                    <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                        </div>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                <!-- Pagination items will be added here by JavaScript -->
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')
@@ -428,83 +355,17 @@ if ($_SESSION['status'] != "admin_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function tambahPetugas() {
-        window.location.href = 'tambah_petugas.php';
+    function goBack() {
+        window.location.href = 'data_admin.php';
     }
 
-    // Fungsi untuk menangani paginasi dan pencarian
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector('.table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-        const searchInput = document.getElementById('searchInput');
-        const paginationContainer = document.getElementById('paginationContainer');
-
-        let currentPage = 1;
-        let rowsPerPage = parseInt(rowsPerPageSelect.value);
-
-        function displayTable(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedRows = rows.slice(start, end);
-
-            tbody.innerHTML = '';
-            paginatedRows.forEach(row => tbody.appendChild(row));
-
-            updatePagination();
+    document.getElementById('showPassword').addEventListener('change', function() {
+        var passwordInput = document.getElementById('password');
+        if (this.checked) {
+            passwordInput.type = 'text';
+        } else {
+            passwordInput.type = 'password';
         }
-
-        function updatePagination() {
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-            paginationContainer.innerHTML = '';
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayTable(currentPage);
-                });
-
-                li.appendChild(a);
-                paginationContainer.appendChild(li);
-            }
-        }
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredRows = rows.filter(row => {
-                return Array.from(row.cells).some(cell =>
-                    cell.textContent.toLowerCase().includes(searchTerm)
-                );
-            });
-
-            tbody.innerHTML = '';
-            filteredRows.forEach(row => tbody.appendChild(row));
-
-            currentPage = 1;
-            updatePagination();
-        }
-
-        rowsPerPageSelect.addEventListener('change', () => {
-            rowsPerPage = parseInt(rowsPerPageSelect.value);
-            currentPage = 1;
-            displayTable(currentPage);
-        });
-
-        searchInput.addEventListener('input', filterTable);
-
-        // Inisialisasi tampilan tabel
-        displayTable(currentPage);
     });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
