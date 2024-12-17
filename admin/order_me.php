@@ -5,6 +5,7 @@ if ($_SESSION['status'] != "admin_login") {
     header("location:../login/loginadmin.php?alert=belum_login");
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -105,6 +106,34 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
+    .table td {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+
+    .btn-custom {
+        background-color: #bcddeb !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom:hover {
+        background-color: #266d8b !important;
+        color: white !important;
+    }
+
+    .pilihan-doc a {
+        cursor: pointer;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .pilihan-doc-kajian a {
+        color: black;
+        text-decoration: underline;
+    }
+
     .judul-tabel {
         font-family: "Varela Round", sans-serif;
     }
@@ -124,13 +153,17 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
-    .btn-custom-upload {
-        background-color: #eb9009 !important;
+    #searchInput::placeholder {
+        color: white;
+    }
+
+    .btn-custom-hapus {
+        background-color: #7c1919 !important;
         color: white !important;
     }
 
-    .btn-custom-upload:hover {
-        background-color: #eb900970 !important;
+    .btn-custom-hapus:hover {
+        background-color: #b27373 !important;
         color: white !important;
     }
 
@@ -144,39 +177,35 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
-    .btn-custom-hapus {
-        background-color: #7c1919 !important;
+    .btn-custom-review {
+        background-color: #11475e !important;
         color: white !important;
     }
 
-    .btn-custom-hapus:hover {
-        background-color: #b27373 !important;
+    .btn-custom-review:hover {
+        background-color: #609fb2 !important;
         color: white !important;
     }
 
-    .pilihan-doc a {
-        cursor: pointer;
-        color: grey;
-        font-weight: bold;
-        text-decoration: none;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
+    .btn-custom-back {
+        background-color: #4474a2 !important;
+        color: white !important;
     }
 
-    .pilihan-doc-kajian a {
-        color: white;
-        text-decoration: underline;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
+    .btn-custom-back:hover {
+        background-color: #4474a287 !important;
+        color: white !important;
     }
 
-    .pilihan_dokumen {
-        font-family: "Varela Round", sans-serif;
-        color: white;
+
+    .btn-custom-upload {
+        background-color: #eb9009 !important;
+        color: white !important;
     }
 
-    #searchInput::placeholder {
-        color: white;
+    .btn-custom-upload:hover {
+        background-color: #eb900970 !important;
+        color: white !important;
     }
 
     @media (max-width: 768px) {
@@ -236,7 +265,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -316,19 +345,10 @@ if ($_SESSION['status'] != "admin_login") {
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA USER
+                        <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">ORDER ME
                         </h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-6 col-6 border-end pilihan-doc-kajian pilihan_dokumen">
-                                <a href="data_user.php"> Data User</a>
-                            </div>
-                            <div class="col-lg-6 col-6">
-                                <a href="data_userpks.php">Data User PKS</a>
-                            </div>
-                        </div>
-                        <!-- table -->
                         <div class="row mb-3">
-                            <div class="col-md- col-6 banyak-data">
+                            <div class="col-md-6 col-6 banyak-data">
                                 <label for="rowsPerPageSelect" class="form-label tampil">Tampilkan:</label>
                                 <select id="rowsPerPageSelect" class="form-select text-white"
                                     style="width: auto; display: inline-block;">
@@ -342,70 +362,113 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <!-- <button type="button" class="btn btn-custom-eye"
+                                <button type="button" class="btn btn-custom-eye"
                                     style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                    onclick="tambahPetugas()">
+                                    onclick="tambahKategori()">
                                     <i class="bi bi-plus-square"></i> Tambah
-                                </button> -->
+                                </button>
+                                <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
+                                    href="export_statuspr.php">
+                                    <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
+                                </a>
                             </div>
                         </div>
 
+                        <center>
+                            <?php
+                            if (isset($_GET['alert'])) {
+                                if ($_GET['alert'] == "gagal") {
+                            ?>
+                            <div class="alert alert-danger">File arsip gagal diupload. krena demi
+                                keamanan
+                                file
+                                .php tidak diperbolehkan.</div>
+                            <?php
+                                } else {
+                                ?>
+                            <div class="alert alert-success">Arsip berhasil tersimpan.</div>
+                            <?php
+                                }
+                            }
+                            ?>
+                        </center>
+
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                <thead class="fs-4">
+                                <thead class="align-middle">
                                     <tr class="text-center">
-                                        <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 10%;">Foto</th>
-                                        <th class="fs-3">Nama</th>
-                                        <th class="fs-3">Username</th>
-                                        <!-- <th class="fs-3" style="width: 5%;">Opsi</th> -->
+                                        <th class="fs-3">No</th>
+                                        <th class="fs-3 text-center" style="padding: 0 17px;">Kategori
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 15px;">Tanggal <br> Pengajuan
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Request Order</th>
+                                        <th class="fs-3 text-center" style="padding: 0 40px;">Deskripsi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Lokasi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Penanggung <br> Jawab</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Penerima <br> Request</th>
+                                        <th class="fs-3 text-center" style="padding: 0 27px;">Status</th>
+                                        <th class="fs-3 text-center" style="padding: 0 25px;">Tanggal <br> Selesai
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 15px;">Dokumen / <br> Eviden
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 35px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                            include '../koneksi.php';
-                                            $no = 1;
-                                            $user = mysqli_query($koneksi, "SELECT * FROM user ORDER BY user_id DESC");
-                                            while ($p = mysqli_fetch_array($user)) {
-                                            ?>
-                                    <tr class="fs-3">
+                                    include '../koneksi.php';
+                                    $no = 1;
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM order_me");
+                                    while ($p = mysqli_fetch_array($kategori)) {
+                                    ?>
+                                    <tr class="fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
+                                        <td class="text-center"><?php echo $p['orderme_kategori'] ?></td>
                                         <td class="text-center">
-                                            <?php
-                                                        if ($p['user_foto'] == "") {
-                                                        ?>
-                                            <img class="img-user" src="../gambar/sistem/user.png" width="50"
-                                                height="50">
-                                            <?php
-                                                        } else {
-                                                        ?>
-                                            <img class="img-user" src="../gambar/user/<?php echo $p['user_foto']; ?>"
-                                                width="50" height="50">
-                                            <?php
-                                                        }
-                                                        ?>
+                                            <?php echo date('d/m/Y', strtotime($p['orderme_tanggal'])); ?>
                                         </td>
-                                        <td><?php echo $p['user_nama'] ?></td>
-                                        <td><?php echo $p['user_username'] ?></td>
-                                        <!-- <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="edit_user.php?id=<?php echo $p['user_id']; ?>"
-                                                    class="btn btn-custom-edit btn-sm"><i
-                                                        class="ti ti-edit fs-5"></i></a>
-                                                <a href="user_hapus.php?id=<?php echo $p['user_id']; ?>"
-                                                    class="btn btn-custom-hapus btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
-                                                        class="ti ti-trash fs-5"></i></a>
-                                            </div>
-                                        </td> -->
-                                    </tr>
-                                    <?php
+                                        <td class="text-center"><?php echo $p['orderme_request'] ?></td>
+                                        <td class="text-center"><?php echo $p['orderme_desk'] ?></td>
+                                        <td class="text-center"><?php echo $p['orderme_lokasi'] ?></td>
+                                        <td class="text-center"><?php echo $p['orderme_pj'] ?? '-'; ?></td>
+                                        <td class="text-center"><?php echo $p['orderme_penerima'] ?></td>
+                                        <td class="text-center"><?php echo $p['orderme_status'] ?></td>
+                                        <td class="text-center">
+                                            <?php 
+                                            if ($p['orderme_tglselesai'] == '0000-00-00' || empty($p['orderme_tglselesai'])) {
+                                                echo '-';
+                                            } else {
+                                                echo date('d/m/Y', strtotime($p['orderme_tglselesai']));
                                             }
                                             ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php if (!empty($p['orderme_dokumen'])) { ?>
+                                            <a href="../orderme/<?php echo $p['orderme_dokumen']; ?>"
+                                                target="_blank">Upload</a>
+                                            <?php } else { ?>
+                                            Belum Upload
+                                            <?php } ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="orderme_isi.php?id=<?php echo $p['orderme_id']; ?>"
+                                                class="btn btn-custom-eye btn-sm"><i class="ti ti-eye fs-3"></i></a>
+                                            <a href="edit_orderme.php?id=<?php echo $p['orderme_id']; ?>"
+                                                class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
+                                            <button type="button" class="btn btn-custom-hapus btn-sm mt-1"
+                                                onclick="hapusOrderme(<?php echo $p['orderme_id']; ?>)">
+                                                <i class="ti ti-trash fs-3"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
-                        <nav aria-label="Page navigation">
+                        <nav aria-label="Page navdivtion">
                             <ul class="pagination justify-content-center mt-3" id="paginationContainer">
                                 <!-- Pagination items will be added here by JavaScript -->
                             </ul>
@@ -422,8 +485,29 @@ if ($_SESSION['status'] != "admin_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function tambahPetugas() {
-        window.location.href = 'tambah_user.php';
+    function tambahKategori() {
+        window.location.href = 'tambah_oderme.php';
+    }
+
+    function hapusOrderme(id) {
+        if (confirm(
+                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
+            )) {
+            fetch(`orderme_hapus.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Order me berhasil dihapus');
+                        location.reload();
+                    } else {
+                        alert('Gagal menghapus order me');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menghapus order me');
+                });
+        }
     }
 
     // Fungsi untuk menangani paginasi dan pencarian

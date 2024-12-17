@@ -399,11 +399,11 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <select class="form-select text-white"
                                                     aria-label="Default select example" name="statuspr_status" required>
                                                     <option selected disabled>Status</option>
-                                                    <option value="Belum Dimulai" style="color: black;">Belum Dimulai
+                                                    <option value="Open" style="color: black;">Open
                                                     </option>
-                                                    <option value="Dalam Proses" style="color: black;">Dalam Proses
+                                                    <option value="On Progress" style="color: black;">On Progress
                                                     </option>
-                                                    <option value="Selesai" style="color: black;">Selesai</option>
+                                                    <option value="Close" style="color: black;">Close</option>
                                                 </select>
                                             </div>
                                         </div>

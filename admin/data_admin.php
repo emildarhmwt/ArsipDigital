@@ -342,11 +342,11 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <button type="button" class="btn btn-custom-eye"
+                                <!-- <button type="button" class="btn btn-custom-eye"
                                     style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                     onclick="tambahPetugas()">
                                     <i class="bi bi-plus-square"></i> Tambah
-                                </button>
+                                </button> -->
                             </div>
                         </div>
 
@@ -358,7 +358,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3" style="width: 10%;">Foto</th>
                                         <th class="fs-3">Nama</th>
                                         <th class="fs-3">Username</th>
-                                        <th class="fs-3" style="width: 5%;">Opsi</th>
+                                        <!-- <th class="fs-3" style="width: 5%;">Opsi</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -387,7 +387,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         </td>
                                         <td><?php echo $p['admin_nama'] ?></td>
                                         <td><?php echo $p['admin_username'] ?></td>
-                                        <td class="text-center">
+                                        <!-- <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="edit_admin.php?id=<?php echo $p['admin_id']; ?>"
                                                     class="btn btn-custom-edit btn-sm"><i
@@ -397,7 +397,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus admin ini?');"><i
                                                         class="ti ti-trash fs-5"></i></a>
                                             </div>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     <?php
                                     }

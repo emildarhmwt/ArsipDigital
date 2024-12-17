@@ -299,119 +299,131 @@ if ($_SESSION['status'] != "admin_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM AGENDA RAPAT </h5>
-                            <form method="post" action="agenda_aksi.php" enctype="multipart/form-data">
+                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM EDIT ORDER ME</h5>
+                            <?php
+                            $id = $_GET['id'];
+                            $data = mysqli_query($koneksi, "SELECT * from order_me where orderme_id='$id'");
+                            while ($d = mysqli_fetch_array($data)) {
+                            ?>
+                            <form method="post" action="orderme_update.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <input type="hidden" class="form-control text-white" name="orderme_id"
+                                            placeholder="Input Data" required value="<?php echo $d['orderme_id']; ?>">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                <label for="shift" class="form-label">
                                                     Kategori</label>
-                                                <select class="form-select text-white"
-                                                    aria-label="Default select example" name="agenda_kategori" required>
-                                                    <option selected disabled>Kategori</option>
-                                                    <option value="Daily" style="color: black;">Daily</option>
-                                                    <option value="Weekly" style="color: black;">Weekly</option>
-                                                    <option value="Monthly" style="color: black;">Monthly</option>
-                                                    <option value="Yearly" style="color: black;">Yearly</option>
-                                                </select>
+                                                <input type="text" class="form-control text-white"
+                                                    name="orderme_kategori" placeholder="Input Data" required
+                                                    value="<?php echo $d['orderme_kategori']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                                    Tanggal</label>
-                                                <input type="date" class="form-control text-white" name="agenda_tanggal"
-                                                    placeholder="Input Data" required>
+                                                <label for="shift" class="form-label">
+                                                    Tanggal Pengajuan</label>
+                                                <input type="date" class="form-control text-white"
+                                                    name="orderme_tanggal" placeholder="Input Data" id="orderme_tanggal"
+                                                    value="<?php echo $d['orderme_tanggal']; ?>">
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-4 col-4 col-44">
                                             <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">
-                                                    <span class="wajib_isi">*</span> Waktu Awal
-                                                </label>
-                                                <input type="time" class="form-control text-white"
-                                                    name="agenda_waktu_awal" placeholder="Input Data" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-6">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">
-                                                    <span class="wajib_isi">*</span> Waktu Akhir</label>
-                                                <input type="time" class="form-control text-white"
-                                                    name="agenda_waktu_akhir" placeholder="Input Data" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">
-                                            <span class="wajib_isi">*</span> Kegiatan</label>
-                                        <input type="text" class="form-control text-white" name="agenda_kegiatan"
-                                            placeholder="Input Data" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                            Deskripsi</label>
-                                        <input type="text" class="form-control text-white" name="agenda_deskripsi"
-                                            placeholder="Input Data" required>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-6 col-44">
-                                            <div class="mb-3">
-                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                <label for="shift" class="form-label">
                                                     Lokasi</label>
-                                                <input type="text" class="form-control text-white" name="agenda_lokasi"
-                                                    placeholder="Input Data" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-6 col-44">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">
-                                                    <span class="wajib_isi">*</span> Penanggung Jawab
-                                                </label>
-                                                <input type="text" class="form-control text-white" name="agenda_pj"
-                                                    placeholder="Input Data" required>
+                                                <input type="text" class="form-control text-white" name="orderme_lokasi"
+                                                    placeholder="Input Data" required
+                                                    value="<?php echo $d['orderme_lokasi']; ?>">
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6 col-44">
+                                        <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">
-                                                    <span class="wajib_isi">*</span> Status</label>
-                                                <select class="form-select text-white"
-                                                    aria-label="Default select example" name="agenda_status" required>
-                                                    <option selected disabled>Status</option>
-                                                    <option value="Open" style="color: black;">Open
-                                                    </option>
-                                                    <option value="On Progress" style="color: black;">On Progress
-                                                    </option>
-                                                    <option value="Close" style="color: black;">Close</option>
-                                                </select>
+                                                <label for="jumlah" class="form-label">
+                                                    Request Order</label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="orderme_request" placeholder="Input Data" required
+                                                    value="<?php echo $d['orderme_request']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6 col-44">
+                                        <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Dokumen Risalah Rapat</label>
-                                                <input class="form-control text-white" type="file" name="file">
+                                                <label for="formFile" class="form-label">
+                                                    Deskripsi
+                                                </label>
+                                                <input type="text" class="form-control text-white" name="orderme_desk"
+                                                    placeholder="Input Data" required
+                                                    value="<?php echo $d['orderme_desk']; ?>">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
-                                        Submit</button>
-                                    <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
-                                            class="bi bi-arrow-left-circle"></i>
-                                        Kembali</button>
-                                </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-4 col-44">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">
+                                                    Penanggung Jawab</label>
+                                                <input type="text" class="form-control text-white" name="orderme_pj"
+                                                    placeholder="Input Data" value="<?php echo $d['orderme_pj']; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-4 col-44">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">
+                                                    Penerima Request</label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="orderme_penerima" placeholder="Input Data" required
+                                                    value="<?php echo $d['orderme_penerima']; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-4 col-44">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label">
+                                                    Status</label>
+                                                <input type="text" class="form-control text-white" name="orderme_status"
+                                                    placeholder="Status" readonly id="orderme_status"
+                                                    value="<?php echo $d['orderme_status']; ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="jumlah" class="form-label">
+                                                    Tanggal Selesai</label>
+                                                <input type="date" class="form-control text-white"
+                                                    name="orderme_tglselesai" id="orderme_tglselesai"
+                                                    placeholder="Input Data" required
+                                                    value="<?php echo $d['orderme_tglselesai']; ?>"
+                                                    onchange="setStatusOpen()">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-6">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">
+                                                    Dokumen / Eviden
+                                                </label>
+                                                <input type="file" class="form-control text-white" name="file"
+                                                    placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
+                                            Submit</button>
+                                        <button type="button" class="btn btn-custom-edit mx-3" onclick="goBack()"><i
+                                                class="bi bi-arrow-left-circle"></i>
+                                            Kembali</button>
+                                    </div>
                             </form>
+                            <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -426,7 +438,11 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
     function goBack() {
-        window.location.href = 'agenda.php';
+        window.location.href = 'order_me.php';
+    }
+
+    function setStatusOpen() {
+        document.getElementById('orderme_status').value = "Close";
     }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

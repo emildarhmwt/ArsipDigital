@@ -105,8 +105,104 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: 400;
     }
 
-    .judul-tabel {
-        font-family: "Varela Round", sans-serif;
+    .btn-custom2 {
+        background-color: #ede0a0 !important;
+        color: black !important;
+        cursor: pointer;
+    }
+
+    .btn-custom2:hover {
+        background-color: #bdb57b !important;
+        color: white !important;
+    }
+
+    .timeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        margin-top: 20px;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: #ccc;
+        z-index: 1;
+    }
+
+    .timeline-item {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .timeline-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #00bfff;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    .timeline-item p {
+        margin: 0;
+        font-size: 14px;
+        color: #00bfff;
+    }
+
+    .bg-blue {
+        background-color: #0e4551;
+        ;
+    }
+
+    .bg-gray {
+        background-color: #ccc;
+    }
+
+    .card-preview {
+        background-color: #0e45515c !important;
+        color: white !important;
+    }
+
+    .btn-custom-review {
+        background-color: #11475e !important;
+        color: white !important;
+    }
+
+    .btn-custom-review:hover {
+        background-color: #609fb2 !important;
+        color: white !important;
+    }
+
+    .btn-custom-back {
+        background-color: #4474a2 !important;
+        color: white !important;
+    }
+
+    .btn-custom-back:hover {
+        background-color: #4474a287 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit {
+        background-color: #7c1919 !important;
+        color: white !important;
+    }
+
+    .btn-custom-edit:hover {
+        background-color: #b27373 !important;
+        color: white !important;
+    }
+
+    .table td {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
     }
 
     .banyak-data {
@@ -114,14 +210,8 @@ if ($_SESSION['status'] != "admin_login") {
         color: white;
     }
 
-    .btn-custom-eye {
-        background-color: #11475e !important;
-        color: white !important;
-    }
-
-    .btn-custom-eye:hover {
-        background-color: #609fb2 !important;
-        color: white !important;
+    #secondSearchInput::placeholder {
+        color: white;
     }
 
     .btn-custom-upload {
@@ -134,16 +224,6 @@ if ($_SESSION['status'] != "admin_login") {
         color: white !important;
     }
 
-    .btn-custom-edit {
-        background-color: #1593a4 !important;
-        color: white !important;
-    }
-
-    .btn-custom-edit:hover {
-        background-color: #1593a487 !important;
-        color: white !important;
-    }
-
     .btn-custom-hapus {
         background-color: #7c1919 !important;
         color: white !important;
@@ -152,31 +232,6 @@ if ($_SESSION['status'] != "admin_login") {
     .btn-custom-hapus:hover {
         background-color: #b27373 !important;
         color: white !important;
-    }
-
-    .pilihan-doc a {
-        cursor: pointer;
-        color: grey;
-        font-weight: bold;
-        text-decoration: none;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
-    }
-
-    .pilihan-doc-kajian a {
-        color: white;
-        text-decoration: underline;
-        font-family: "Varela Round", sans-serif;
-        font-size: 15px;
-    }
-
-    .pilihan_dokumen {
-        font-family: "Varela Round", sans-serif;
-        color: white;
-    }
-
-    #searchInput::placeholder {
-        color: white;
     }
 
     @media (max-width: 768px) {
@@ -216,12 +271,13 @@ if ($_SESSION['status'] != "admin_login") {
     </style>
 </head>
 
-<body>
+<f>
     <!--  Body Wrapper -->
     <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
+        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -236,7 +292,7 @@ if ($_SESSION['status'] != "admin_login") {
                             </a>
                         </li>
                         <li>
-                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan </p>
+                            <p class="navbar-judul"> Administrasi & Pelaporan Penambangan</p>
                         </li>
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
@@ -314,102 +370,165 @@ if ($_SESSION['status'] != "admin_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
+
+                <?php
+                $no = 1;
+                include '../koneksi.php';
+                $id = $_GET['id'];
+                $arsip = mysqli_query($koneksi, "SELECT * FROM order_me  WHERE orderme_id='$id'");
+                while ($p = mysqli_fetch_assoc($arsip)) {
+                ?>
+                <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
+                    <div class="card-header" style="background-color: #0e4551; width: 100%;">
+                        Header
+                    </div>
+                    <div class="card-body">
+                        <form method="get" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-lg-4 col-4 mb-3">
+                                    <label for="shift" class="form-label">Kategori :</label>
+                                    <p>
+                                        <td><?php echo $p['orderme_kategori'] ?></td>
+                                    </p>
+                                </div>
+                                <div class="col-lg-4 col-4 mb-3">
+                                    <label for="shift" class="form-label">Tanggal Pengajuan :</label>
+                                    <p>
+                                        <td><?php echo date('d/m/Y', strtotime($p['orderme_tanggal'])) ?></td>
+                                    </p>
+                                </div>
+                                <div class="col-lg-4 col-4 mb-3">
+                                    <label for="shift" class="form-label">Lokasi :</label>
+                                    <p>
+                                        <td><?php echo $p['orderme_lokasi'] ?></td>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-4 mb-3">
+                                    <label for="shift" class="form-label">Penanggung Jawab :</label>
+                                    <p>
+                                        <td><?php echo $p['orderme_pj'] ? $p['orderme_pj'] : '-'; ?></td>
+                                    </p>
+                                </div>
+                                <div class="col-lg-4 col-4 mb-3">
+                                    <label for="shift" class="form-label">Penerima Request :</label>
+                                    <p>
+                                        <td><?php echo $p['orderme_penerima'] ?></td>
+                                    </p>
+                                </div>
+                                <div class="col-lg-4 col-4 mb-3">
+                                    <label for="shift" class="form-label">Tanggal Selesai :</label>
+                                    <p>
+                                        <td>
+                                            <?php 
+                                            if ($p['orderme_tglselesai'] == '0000-00-00' || empty($p['orderme_tglselesai'])) {
+                                                echo '-';
+                                            } else {
+                                                echo date('d/m/Y', strtotime($p['orderme_tglselesai']));
+                                            }
+                                            ?>
+                                        </td>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-6">
+                                    <label for="shift" class="form-label">Request Order :</label>
+                                    <p>
+                                        <td><?php echo $p['orderme_request'] ?></td>
+                                    </p>
+                                </div>
+                                <div class="col-lg-8 col-6">
+                                    <label for="shift" class="form-label">Deskripsi :</label>
+                                    <p>
+                                        <td><?php echo $p['orderme_desk'] ?></td>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+                <?php
+                }
+                ?>
+
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">DATA USER
-                        </h5>
-                        <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-6 col-6 border-end pilihan-doc-kajian pilihan_dokumen">
-                                <a href="data_user.php"> Data User</a>
-                            </div>
-                            <div class="col-lg-6 col-6">
-                                <a href="data_userpks.php">Data User PKS</a>
-                            </div>
-                        </div>
-                        <!-- table -->
                         <div class="row mb-3">
-                            <div class="col-md- col-6 banyak-data">
-                                <label for="rowsPerPageSelect" class="form-label tampil">Tampilkan:</label>
-                                <select id="rowsPerPageSelect" class="form-select text-white"
-                                    style="width: auto; display: inline-block;">
-                                    <option value="5" style="color: black;">5</option>
-                                    <option value="10" selected style="color: black;">10</option>
-                                    <option value="15" style="color: black;">15</option>
-                                    <option value="20" style="color: black;">20</option>
-                                </select>
-                                <span class="tampil"> data per halaman</span>
+                            <div class="col-md-6 col-6 d-flex justify-content-start align-items-center">
+                                <?php
+                                $no = 1;
+                                include '../koneksi.php';
+                                $id = $_GET['id'];
+                                $arsip = mysqli_query($koneksi, "SELECT * FROM order_me  WHERE orderme_id='$id'");
+                                while ($p = mysqli_fetch_assoc($arsip)) {
+                                ?>
+                                <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2 fs-3"
+                                    href="#"><?php echo $p['orderme_status']; ?>
+                                </a>
+
                             </div>
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
-                                <input type="text" class="form-control me-2 text-white" id="searchInput"
-                                    placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <!-- <button type="button" class="btn btn-custom-eye"
-                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                    onclick="tambahPetugas()">
-                                    <i class="bi bi-plus-square"></i> Tambah
-                                </button> -->
+                                <?php if ($p['orderme_status'] != 'Close') { ?>
+                                <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"
+                                    href="tambah_orderme_isi.php?ordermeisi_order_id=<?php echo $id; ?>">
+                                    <i class="ti ti-plus fs-7 me-1"></i> Tambah
+                                </a>
+                                <?php } ?>
+                                <?php
+                                }
+                                ?>
+
+                                <a class="btn btn-custom-back btn-sm d-flex justify-content-end align-items-center mx-2"
+                                    href="order_me.php">
+                                    <i class="ti ti-arrow-narrow-left fs-7 me-1"></i> Kembali
+                                </a>
                             </div>
                         </div>
 
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="fs-4">
-                                    <tr class="text-center">
-                                        <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="width: 10%;">Foto</th>
-                                        <th class="fs-3">Nama</th>
-                                        <th class="fs-3">Username</th>
-                                        <!-- <th class="fs-3" style="width: 5%;">Opsi</th> -->
+                                    <tr class="text-center align-middle">
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">No</th>
+                                        <th class="fs-3 text-center" style="padding: 0 5px;">Tanggal Follow Up</th>
+                                        <th class="fs-3 text-center" style="padding: 0 80px;">Histori Follow Up</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                            include '../koneksi.php';
-                                            $no = 1;
-                                            $user = mysqli_query($koneksi, "SELECT * FROM user ORDER BY user_id DESC");
-                                            while ($p = mysqli_fetch_array($user)) {
-                                            ?>
-                                    <tr class="fs-3">
+                                    include '../koneksi.php';
+                                    $no = 1;
+                                    $id = $_GET['id'];
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM orderme_isi where ordermeisi_order_id='$id'");
+                                    while ($p = mysqli_fetch_array($kategori)) {
+                                    ?>
+                                    <tr class="fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td class="text-center">
-                                            <?php
-                                                        if ($p['user_foto'] == "") {
-                                                        ?>
-                                            <img class="img-user" src="../gambar/sistem/user.png" width="50"
-                                                height="50">
-                                            <?php
-                                                        } else {
-                                                        ?>
-                                            <img class="img-user" src="../gambar/user/<?php echo $p['user_foto']; ?>"
-                                                width="50" height="50">
-                                            <?php
-                                                        }
-                                                        ?>
+                                            <?php echo date('d/m/Y', strtotime($p['ordermeisi_tanggal'])); ?>
                                         </td>
-                                        <td><?php echo $p['user_nama'] ?></td>
-                                        <td><?php echo $p['user_username'] ?></td>
-                                        <!-- <td class="text-center">
-                                            <div class="btn-group">
-                                                <a href="edit_user.php?id=<?php echo $p['user_id']; ?>"
-                                                    class="btn btn-custom-edit btn-sm"><i
-                                                        class="ti ti-edit fs-5"></i></a>
-                                                <a href="user_hapus.php?id=<?php echo $p['user_id']; ?>"
-                                                    class="btn btn-custom-hapus btn-sm"
-                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
-                                                        class="ti ti-trash fs-5"></i></a>
-                                            </div>
-                                        </td> -->
+                                        <td class="text-center"><?php echo $p['ordermeisi_history'] ?></td>
+                                        <td class="text-center">
+                                            <a href="edit_ordermeisi.php?id=<?php echo $p['ordermeisi_id']; ?>"
+                                                class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
+                                            <button type="button" class="btn btn-custom-hapus btn-sm mt-1"
+                                                onclick="hapusOrderme(<?php echo $p['ordermeisi_id']; ?>)">
+                                                <i class="ti ti-trash fs-3"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                     <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center mt-3" id="paginationContainer">
-                                <!-- Pagination items will be added here by JavaScript -->
-                            </ul>
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -422,90 +541,32 @@ if ($_SESSION['status'] != "admin_login") {
             document.getElementById('sidebar').innerHTML = data;
         });
 
-    function tambahPetugas() {
-        window.location.href = 'tambah_user.php';
-    }
-
-    // Fungsi untuk menangani paginasi dan pencarian
-    document.addEventListener('DOMContentLoaded', function() {
-        const table = document.querySelector('.table');
-        const tbody = table.querySelector('tbody');
-        const rows = Array.from(tbody.querySelectorAll('tr'));
-        const rowsPerPageSelect = document.getElementById('rowsPerPageSelect');
-        const searchInput = document.getElementById('searchInput');
-        const paginationContainer = document.getElementById('paginationContainer');
-
-        let currentPage = 1;
-        let rowsPerPage = parseInt(rowsPerPageSelect.value);
-
-        function displayTable(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
-            const paginatedRows = rows.slice(start, end);
-
-            tbody.innerHTML = '';
-            paginatedRows.forEach(row => tbody.appendChild(row));
-
-            updatePagination();
-        }
-
-        function updatePagination() {
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-            paginationContainer.innerHTML = '';
-
-            for (let i = 1; i <= pageCount; i++) {
-                const li = document.createElement('li');
-                li.classList.add('page-item');
-                if (i === currentPage) li.classList.add('active');
-
-                const a = document.createElement('a');
-                a.classList.add('page-link');
-                a.href = '#';
-                a.textContent = i;
-
-                a.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    currentPage = i;
-                    displayTable(currentPage);
+    function hapusOrderme(id) {
+        if (confirm(
+                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
+            )) {
+            fetch(`ordermeisi_hapus.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Order me berhasil dihapus');
+                        location.reload();
+                    } else {
+                        alert('Gagal menghapus order me');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menghapus order me');
                 });
-
-                li.appendChild(a);
-                paginationContainer.appendChild(li);
-            }
         }
-
-        function filterTable() {
-            const searchTerm = searchInput.value.toLowerCase();
-            const filteredRows = rows.filter(row => {
-                return Array.from(row.cells).some(cell =>
-                    cell.textContent.toLowerCase().includes(searchTerm)
-                );
-            });
-
-            tbody.innerHTML = '';
-            filteredRows.forEach(row => tbody.appendChild(row));
-
-            currentPage = 1;
-            updatePagination();
-        }
-
-        rowsPerPageSelect.addEventListener('change', () => {
-            rowsPerPage = parseInt(rowsPerPageSelect.value);
-            currentPage = 1;
-            displayTable(currentPage);
-        });
-
-        searchInput.addEventListener('input', filterTable);
-
-        // Inisialisasi tampilan tabel
-        displayTable(currentPage);
-    });
+    }
     </script>
-    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src=" ../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/sidebarmenu.js"></script>
     <script src="../assets/js/app.min.js"></script>
     <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-</body>
+    </body>
 
 </html>

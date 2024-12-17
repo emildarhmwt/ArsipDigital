@@ -342,11 +342,11 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <button type="button" class="btn btn-custom-eye"
+                                <!-- <button type="button" class="btn btn-custom-eye"
                                     style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
                                     onclick="tambahPetugas()">
                                     <i class="bi bi-plus-square"></i> Tambah
-                                </button>
+                                </button> -->
                             </div>
                         </div>
 
@@ -360,38 +360,38 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3">Nama</th>
                                         <th class="fs-3">Username</th>
                                         <th class="fs-3" style="width: 10%;">Jabatan</th>
-                                        <th class="fs-3" style="width: 5%;">Opsi</th>
+                                        <!-- <th class="fs-3" style="width: 5%;">Opsi</th> -->
                                     </tr>
                                 </thead>
                                 <tbody class="text-center fs-3">
                                     <?php
-                                            include '../koneksi.php';
-                                            $no = 1;
-                                            $user = mysqli_query($koneksi, "SELECT * FROM user_pks ORDER BY pks_id DESC");
-                                            while ($p = mysqli_fetch_array($user)) {
-                                            ?>
+                                    include '../koneksi.php';
+                                    $no = 1;
+                                    $user = mysqli_query($koneksi, "SELECT * FROM user_pks ORDER BY pks_id DESC");
+                                    while ($p = mysqli_fetch_array($user)) {
+                                    ?>
                                     <tr>
                                         <td class="text-center"><?php echo $no++; ?></td>
                                         <td class="text-center">
                                             <?php
-                                                        if ($p['pks_foto'] == "") {
-                                                        ?>
+                                                if ($p['pks_foto'] == "") {
+                                                ?>
                                             <img class="img-user" src="../gambar/sistem/user.png" width="50"
                                                 height="50">
                                             <?php
-                                                        } else {
-                                                        ?>
+                                                } else {
+                                                ?>
                                             <img class="img-user" src="../gambar/asmen/<?php echo $p['pks_foto']; ?>"
                                                 width="50" height="50">
                                             <?php
-                                                        }
-                                                        ?>
+                                                }
+                                                ?>
                                         </td>
                                         <td><?php echo $p['pks_kode'] ?></td>
                                         <td><?php echo $p['pks_nama'] ?></td>
                                         <td><?php echo $p['pks_username'] ?></td>
                                         <td><?php echo $p['pks_level'] ?></td>
-                                        <td class="text-center">
+                                        <!-- <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="edit_asmen.php?id=<?php echo $p['pks_id']; ?>"
                                                     class="btn btn-custom-edit btn-sm"><i
@@ -401,11 +401,11 @@ if ($_SESSION['status'] != "admin_login") {
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus petugas ini?');"><i
                                                         class="ti ti-trash fs-5"></i></a>
                                             </div>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     <?php
-                                            }
-                                            ?>
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -418,8 +418,6 @@ if ($_SESSION['status'] != "admin_login") {
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
     <script>
     fetch('sidebar_admin.php')

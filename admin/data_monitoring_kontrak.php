@@ -437,7 +437,7 @@ if ($_SESSION['status'] != "admin_login") {
                         <div class="row mb-3">
                             <div class="col-md-6 col-6 d-flex justify-content-start align-items-center">
                                 <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"
-                                    href="export_excel_kontrak.php?kontrak_header_id=<?php echo $id; ?>"">
+                                    href="export_excel_kontrak.php?kontrak_header_id=<?php echo $id; ?>">
                                     <i class=" bi bi-file-spreadsheet fs-4 me-1"></i> Export
                                 </a>
                             </div>

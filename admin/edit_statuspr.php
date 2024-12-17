@@ -415,15 +415,15 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <select class="form-select text-white"
                                                     aria-label="Default select example" name="statuspr_status" required>
                                                     <option selected disabled>Status</option>
-                                                    <option value="Belum Dimulai" style="color: black;"
-                                                        <?php echo ($d['statuspr_status'] == 'Belum Dimulai') ? 'selected' : ''; ?>>
-                                                        Belum Dimulai</option>
-                                                    <option value="Dalam Proses" style="color: black;"
-                                                        <?php echo ($d['statuspr_status'] == 'Dalam Proses') ? 'selected' : ''; ?>>
-                                                        Dalam Proses</option>
-                                                    <option value="Selesai" style="color: black;"
-                                                        <?php echo ($d['statuspr_status'] == 'Selesai') ? 'selected' : ''; ?>>
-                                                        Selesai</option>
+                                                    <option value="Open" style="color: black;"
+                                                        <?php echo ($d['statuspr_status'] == 'Open') ? 'selected' : ''; ?>>
+                                                        Open</option>
+                                                    <option value="On Progress" style="color: black;"
+                                                        <?php echo ($d['statuspr_status'] == 'On Progress') ? 'selected' : ''; ?>>
+                                                        On Progress</option>
+                                                    <option value="Close" style="color: black;"
+                                                        <?php echo ($d['statuspr_status'] == 'Close') ? 'selected' : ''; ?>>
+                                                        Close</option>
                                                 </select>
                                             </div>
                                         </div>

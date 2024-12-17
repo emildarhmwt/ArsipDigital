@@ -249,7 +249,7 @@ if ($_SESSION['status'] != "admin_login") {
         font-weight: bold;
         margin-left: 10%;
         margin-right: 5%;
-        text-align: center;
+        text-align: left;
     }
 
     .sm-ooc3 {
@@ -928,47 +928,47 @@ if ($_SESSION['status'] != "admin_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-6 col-44">
+                    <div class="col-lg-4 col-4 col-44">
                         <div class="card nota-dinas2">
                             <div class=card-body>
                                 <img src="../assets/images/bgnd4.png" class="bgnd2">
                                 <?php
-                                $agenda = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Belum Dimulai'");
+                                $agenda = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Open'");
                                 $total_agenda = mysqli_num_rows($agenda);
 
-                                $agenda_dalam = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Dalam Proses'");
+                                $agenda_dalam = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'On Progress'");
                                 $total_agendaDalam = mysqli_num_rows($agenda_dalam);
 
-                                $agenda_selesai = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Selesai'");
+                                $agenda_selesai = mysqli_query($koneksi, "SELECT * FROM agenda WHERE agenda_status = 'Close'");
                                 $total_agendaSelesai = mysqli_num_rows($agenda_selesai);
                                 ?>
                                 <h5 class="surat-masuk text-center"> Agenda Rapat</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-4 col-6 sm-ooc2 mt-4">
-                                            Belum Dimulai
+                                        <div class="col-lg-6 col-6 sm-ooc2 mt-4">
+                                            Open
                                         </div>
-                                        <div class="col-lg-6 col-6 sm-ooc3 mt-4">
+                                        <div class="col-lg-4 col-4 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-4 col-6 sm-ooc2">
-                                            Dalam Proses
+                                        <div class="col-lg-6 col-6 sm-ooc2">
+                                            On Progress
                                         </div>
-                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
                                                 id="DalamCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-4 col-6 sm-ooc2">
-                                            Selesai
+                                        <div class="col-lg-6 col-6 sm-ooc2">
+                                            Close
                                         </div>
-                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
                                                 id="SelesaiCounter">0</span>
                                         </div>
                                     </div>
@@ -977,48 +977,97 @@ if ($_SESSION['status'] != "admin_login") {
                         </div>
                     </div>
 
-                    <div class="col-lg-6 col-6 col-44">
+                    <div class="col-lg-4 col-4 col-44">
                         <div class="card nota-dinas2">
                             <div class=card-body>
                                 <img src="../assets/images/bgnd4.png" class="bgnd2">
                                 <?php
-                                $statuspr = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Belum Dimulai'");
+                                $statuspr = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Open'");
                                 $total_statuspr = mysqli_num_rows($statuspr);
 
-                                $statuspr_dalam = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Dalam Proses'");
+                                $statuspr_dalam = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'On Progress'");
                                 $total_statusprDalam = mysqli_num_rows($statuspr_dalam);
 
-                                $statuspr_selesai = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Selesai'");
+                                $statuspr_selesai = mysqli_query($koneksi, "SELECT * FROM status_pr WHERE statuspr_status = 'Close'");
                                 $total_statusprSelesai = mysqli_num_rows($statuspr_selesai);
                                 ?>
                                 <h5 class="surat-masuk text-center"> Status PR</h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-4 col-6 sm-ooc2 mt-4">
-                                            Belum Dimulai
+                                        <div class="col-lg-6 col-6 sm-ooc2 mt-4">
+                                            Open
                                         </div>
-                                        <div class="col-lg-6 col-6 sm-ooc3 mt-4">
+                                        <div class="col-lg-4 col-4 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumPRCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-4 col-6 sm-ooc2">
-                                            Dalam Proses
+                                        <div class="col-lg-6 col-6 sm-ooc2">
+                                            On Progress
                                         </div>
-                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
                                                 id="DalamPRCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
                                 <h5>
                                     <div class="row">
-                                        <div class="col-lg-4 col-6 sm-ooc2">
-                                            Selesai
+                                        <div class="col-lg-6 col-6 sm-ooc2">
+                                            Close
                                         </div>
-                                        <div class="col-lg-6 col-6 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
                                                 id="SelesaiPRCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-4 col-44">
+                        <div class="card nota-dinas2">
+                            <div class=card-body>
+                                <img src="../assets/images/bgnd4.png" class="bgnd2">
+                                <?php
+                                $orderme = mysqli_query($koneksi, "SELECT * FROM order_me WHERE orderme_status = 'Open'");
+                                $total_orderme = mysqli_num_rows($orderme);
+
+                                $orderme_dalam = mysqli_query($koneksi, "SELECT * FROM order_me WHERE orderme_status = 'On Progress'");
+                                $total_ordermeDalam = mysqli_num_rows($orderme_dalam);
+
+                                $orderme_selesai = mysqli_query($koneksi, "SELECT * FROM order_me WHERE orderme_status = 'Close'");
+                                $total_ordermeSelesai = mysqli_num_rows($orderme_selesai);
+                                ?>
+                                <h5 class="surat-masuk text-center"> Order Me</h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6 sm-ooc2 mt-4">
+                                            Open
+                                        </div>
+                                        <div class="col-lg-4 col-4 sm-ooc3 mt-4">
+                                            <span class="counter" id="BelumORCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6 sm-ooc2">
+                                            On Progress
+                                        </div>
+                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                                id="DalamORCounter">0</span>
+                                        </div>
+                                    </div>
+                                </h5>
+                                <h5>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-6 sm-ooc2">
+                                            Close
+                                        </div>
+                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                                id="SelesaiORCounter">0</span>
                                         </div>
                                     </div>
                                 </h5>
@@ -1472,6 +1521,9 @@ if ($_SESSION['status'] != "admin_login") {
         const totalStatusPR = <?php echo $total_statuspr; ?>;
         const totalStatusPRDalam = <?php echo $total_statusprDalam; ?>;
         const totalStatusPRSelesai = <?php echo $total_statusprSelesai; ?>;
+        const totalOrderMe = <?php echo $total_orderme; ?>;
+        const totalOrderMeDalam = <?php echo $total_ordermeDalam; ?>;
+        const totalOrderMeSelesai = <?php echo $total_ordermeSelesai; ?>;
 
         // Animate each counter
         animateCounter(document.getElementById('kajianCounter'), 0, totalKajian, 1000);
@@ -1501,6 +1553,9 @@ if ($_SESSION['status'] != "admin_login") {
         animateCounter(document.getElementById('BelumPRCounter'), 0, totalStatusPR, 1000);
         animateCounter(document.getElementById('DalamPRCounter'), 0, totalStatusPRDalam, 1000);
         animateCounter(document.getElementById('SelesaiPRCounter'), 0, totalStatusPRSelesai, 1000);
+        animateCounter(document.getElementById('BelumORCounter'), 0, totalOrderMe, 1000);
+        animateCounter(document.getElementById('DalamORCounter'), 0, totalOrderMeDalam, 1000);
+        animateCounter(document.getElementById('SelesaiORCounter'), 0, totalOrderMeSelesai, 1000);
 
         const categoryData =
             <?php
