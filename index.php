@@ -21,8 +21,10 @@
     }
 
     input[type="radio"]:checked+label {
-        border: 2px solid #0b1f5f !important;
+        border: 2px solid #7c1919 !important;
         box-shadow: 0 0 0 2px rgba(127, 86, 217, 0.2) !important;
+        background-color: #7c1919;
+        color: white;
     }
 
     .login-container {
