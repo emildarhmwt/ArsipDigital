@@ -262,6 +262,14 @@ if ($_SESSION['status'] != "admin_login") {
             display: none;
         }
 
+        .pilihan-doc a {
+            font-size: 5px;
+        }
+
+        .pilihan-doc-kajian a {
+            font-size: 5px;
+        }
+
     }
     </style>
 </head>
@@ -372,7 +380,7 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="col-lg-6 col-6 border-end pilihan-doc-kajian pilihan_dokumen">
                                 <a href="agenda.php"> Data Peminjaman Ruang / Gedung</a>
                             </div>
-                            <div class="col-lg-6 col-6 ">
+                            <div class="col-lg-6 col-6">
                                 <a href="agenda_semua.php">Data Agenda Rapat</a>
                             </div>
                         </div>
@@ -471,7 +479,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             <a href="approve_agenda.php?id=<?php echo $p['agendaheader_id']; ?>"
                                                 class="btn btn-custom-eye btn-sm mt-1"><i
                                                     class="bi bi-check fs-3"></i></a>
-                                            <button class="btn btn-custom-hapus btn-sm mt-1"
+                                            <button class="btn btn-custom-edit btn-sm mt-1"
                                                 onclick="openRejectModal(<?php echo $p['agendaheader_id']; ?>)">
                                                 <i class="bi bi-x fs-3"></i>
                                             </button>

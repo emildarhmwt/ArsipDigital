@@ -303,7 +303,7 @@ if ($_SESSION['status'] != "admin_login") {
                             <form method="post" action="agenda_aksi.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Kategori</label>

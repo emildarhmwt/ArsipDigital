@@ -340,7 +340,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="jumlah" class="form-label">
                                                     Request Order</label>
@@ -349,7 +349,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['orderme_request']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     Deskripsi
@@ -391,7 +391,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="jumlah" class="form-label">
                                                     Tanggal Selesai</label>
@@ -402,7 +402,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     onchange="setStatusOpen()">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     Dokumen / Eviden

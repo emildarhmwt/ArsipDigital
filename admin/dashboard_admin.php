@@ -948,7 +948,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2 mt-4">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3 mt-4">
+                                        <div class="col-lg-4 col-6 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumCounter">0</span>
                                         </div>
                                     </div>
@@ -958,7 +958,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="DalamCounter">0</span>
                                         </div>
                                     </div>
@@ -968,7 +968,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="SelesaiCounter">0</span>
                                         </div>
                                     </div>
@@ -997,7 +997,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2 mt-4">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3 mt-4">
+                                        <div class="col-lg-4 col-6 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumPRCounter">0</span>
                                         </div>
                                     </div>
@@ -1007,7 +1007,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="DalamPRCounter">0</span>
                                         </div>
                                     </div>
@@ -1017,7 +1017,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="SelesaiPRCounter">0</span>
                                         </div>
                                     </div>
@@ -1046,7 +1046,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2 mt-4">
                                             Open
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3 mt-4">
+                                        <div class="col-lg-4 col-6 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumORCounter">0</span>
                                         </div>
                                     </div>
@@ -1056,7 +1056,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2">
                                             On Progress
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="DalamORCounter">0</span>
                                         </div>
                                     </div>
@@ -1066,7 +1066,7 @@ if ($_SESSION['status'] != "admin_login") {
                                         <div class="col-lg-6 col-6 sm-ooc2">
                                             Close
                                         </div>
-                                        <div class="col-lg-4 col-4 sm-ooc3"> <span class="counter"
+                                        <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="SelesaiORCounter">0</span>
                                         </div>
                                     </div>

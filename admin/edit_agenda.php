@@ -305,7 +305,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <div class="banyak-data">
                                     <input type="hidden" name="agenda_id" value="<?php echo $d['agenda_id']; ?>">
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label">Kategori</label>
                                                 <select class="form-select text-white"
@@ -326,7 +326,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Penanggung
                                                     Jawab</label>

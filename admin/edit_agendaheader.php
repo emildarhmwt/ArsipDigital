@@ -330,7 +330,7 @@ if ($_SESSION['status'] != "admin_login") {
                             <form method="post" action="agendaheader_update.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">
                                                     No Ticket
@@ -340,7 +340,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agendaheader_ticket']; ?>" readonly>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Nopeg/Nama Peminta</label>
@@ -350,7 +350,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-8 col-6">
+                                        <div class="col-lg-8 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Kegiatan</label>
@@ -359,7 +359,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agendaheader_kegiatan']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
                                                     Nomor HP</label>
@@ -368,7 +368,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agendaheader_nomor']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label"> <span
                                                         class="wajib_isi">*</span> Tanggal
@@ -378,7 +378,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agendaheader_tanggal']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label"> <span
                                                         class="wajib_isi">*</span> Waktu Mulai
@@ -388,7 +388,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agendaheader_tanggalawal']; ?>">
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Waktu Akhir</label>
@@ -398,7 +398,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">
                                                     <span class="wajib_isi">*</span> Lokasi Fasilitas
@@ -443,7 +443,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Fasilitas </label>
@@ -453,7 +453,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-4 col-6">
+                                        <div class="col-lg-4 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Jumlah Orang</label>
@@ -463,7 +463,7 @@ if ($_SESSION['status'] != "admin_login") {
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-12 col-6">
+                                        <div class="col-lg-12 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Kebutuhan tambahan (Sound, Jml

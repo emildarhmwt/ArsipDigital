@@ -262,6 +262,14 @@ if ($_SESSION['status'] != "admin_login") {
             display: none;
         }
 
+        .pilihan-doc a {
+            font-size: 5px;
+        }
+
+        .pilihan-doc-kajian a {
+            font-size: 5px;
+        }
+
     }
     </style>
 </head>

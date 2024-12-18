@@ -331,7 +331,7 @@ if ($_SESSION['status'] != "admin_login") {
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="jumlah" class="form-label"> <span class="wajib_isi">*</span>
                                                     Request Order</label>
@@ -339,7 +339,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                     name="orderme_request" placeholder="Input Data" required>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6">
+                                        <div class="col-lg-6 col-6 col-44">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
                                                     <span class="wajib_isi">*</span> Deskripsi
