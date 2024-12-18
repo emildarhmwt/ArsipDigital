@@ -156,6 +156,11 @@ if ($_SESSION['status'] != "admin_login") {
         color: red;
     }
 
+    select option:disabled {
+        color: gray !important;
+        background-color: #f5f5f5;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -299,85 +304,176 @@ if ($_SESSION['status'] != "admin_login") {
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM AGENDA RAPAT </h5>
-                            <form method="post" action="agenda_aksi.php" enctype="multipart/form-data">
+                            <h5 class="card-title fw-semibold mb-5 text-center fs-7 judul-tabel">FORM PEMINJAMAN RUANGAN
+                                / GEDUNG </h5>
+                            <form method="post" action="agendaheader_aksi.php" enctype="multipart/form-data">
                                 <div class="banyak-data">
                                     <div class="row">
                                         <div class="col-lg-6 col-6">
-                                            <div class="mb-3">
-                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                                    Kategori</label>
-                                                <select class="form-select text-white"
-                                                    aria-label="Default select example" name="agenda_kategori" required>
-                                                    <option selected disabled>Kategori</option>
-                                                    <option value="Daily" style="color: black;">Daily</option>
-                                                    <option value="Weekly" style="color: black;">Weekly</option>
-                                                    <option value="Monthly" style="color: black;">Monthly</option>
-                                                    <option value="Yearly" style="color: black;">Yearly</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-6 col-44">
+                                            <?php
+                                            $result = mysqli_query($koneksi, "SELECT agendaheader_ticket FROM agenda_header ORDER BY agendaheader_ticket DESC LIMIT 1");
+                                            $last_ticket = mysqli_fetch_assoc($result);
+
+                                            if ($last_ticket) {
+                                                $last_number = intval(substr($last_ticket['agendaheader_ticket'], 3)); // Get the numeric part
+                                                $next_number = $last_number + 1; // Increment the number
+                                                $ticket_number = "AR-" . str_pad($next_number, 3, '0', STR_PAD_LEFT); // Format to AR-XXX
+                                            } else {
+                                                $ticket_number = "AR-001"; // Default value if no tickets exist
+                                            }
+
+                                            $jadwal_query = "SELECT agendaheader_lokasi, agendaheader_tanggal, agendaheader_tanggalawal, agendaheader_tanggalakhir FROM agenda_header";
+                                            $jadwal_result = mysqli_query($koneksi, $jadwal_query);
+
+                                            $jadwal_terpakai = [];
+                                            while ($row = mysqli_fetch_assoc($jadwal_result)) {
+                                                $jadwal_terpakai[] = [
+                                                    'lokasi' => $row['agendaheader_lokasi'],
+                                                    'tanggal' => $row['agendaheader_tanggal'],
+                                                    'tanggalawal' => $row['agendaheader_tanggalawal'],
+                                                    'tanggalakhir' => $row['agendaheader_tanggalakhir'],
+                                                ];
+                                            }
+
+                                            ?>
+
                                             <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">
-                                                    <span class="wajib_isi">*</span> Penanggung Jawab
+                                                    No Ticket
                                                 </label>
-                                                <input type="text" class="form-control text-white" name="agenda_pj"
-                                                    placeholder="Input Data" required>
+                                                <input type="text" class="form-control text-white"
+                                                    name="agendaheader_ticket" value="<?php echo $ticket_number; ?>"
+                                                    readonly>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
-                                            Deskripsi</label>
-                                        <input type="text" class="form-control text-white" name="agenda_deskripsi"
-                                            placeholder="Input Data" required>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-6 col-44">
+                                        <div class="col-lg-6 col-6">
                                             <div class="mb-3">
                                                 <label for="formFile" class="form-label">
-                                                    <span class="wajib_isi">*</span> Status</label>
+                                                    <span class="wajib_isi">*</span> Nopeg/Nama Peminta</label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="agendaheader_nopeg" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-8 col-6">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Kegiatan</label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="agendaheader_kegiatan" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-6">
+                                            <div class="mb-3">
+                                                <label for="shift" class="form-label"> <span class="wajib_isi">*</span>
+                                                    Nomor HP</label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="agendaheader_nomor" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label"> <span
+                                                        class="wajib_isi">*</span> Tanggal
+                                                </label>
+                                                <input type="date" class="form-control text-white"
+                                                    name="agendaheader_tanggal" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label"> <span
+                                                        class="wajib_isi">*</span> Waktu Mulai
+                                                </label>
+                                                <input type="time" class="form-control text-white"
+                                                    name="agendaheader_tanggalawal" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-6">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Waktu Akhir</label>
+                                                <input type="time" class="form-control text-white"
+                                                    name="agendaheader_tanggalakhir" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-6">
+                                            <div class="mb-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label">
+                                                    <span class="wajib_isi">*</span> Lokasi Fasilitas
+                                                </label>
                                                 <select class="form-select text-white"
-                                                    aria-label="Default select example" name="agenda_status" required>
-                                                    <option selected disabled>Status</option>
-                                                    <option value="Open" style="color: black;">Open
+                                                    aria-label="Default select example" name="agendaheader_lokasi"
+                                                    required>
+                                                    <option selected disabled style="color: black;">Lokasi Fasilitas
                                                     </option>
-                                                    <option value="On Progress" style="color: black;">On Progress
+                                                    <option value="Ruang Rapat Klawas-Blok Timur" style="color: black;">
+                                                        Ruang Rapat Klawas-Blok Timur
                                                     </option>
-                                                    <option value="Close" style="color: black;">Close</option>
+                                                    <option value="Ruang Rapat Klawas-Blok Barat" style="color: black;">
+                                                        Ruang Rapat Klawas-Blok Barat
+                                                    </option>
+                                                    <option value="Ruang Rapat Klawas-Utama" style="color: black;">
+                                                        Ruang Rapat Klawas-Utama
+                                                    </option>
+                                                    <option value="Ruang Rapat Klawas-Milenial" style="color: black;">
+                                                        Ruang Rapat Klawas-Milenial
+                                                    </option>
+                                                    <option value="Ruang Rapat MSF Lantai 2" style="color: black;">
+                                                        Ruang Rapat MSF Lantai 2
+                                                    </option>
+                                                    <option value="Ruang Rapat MCC" style="color: black;">
+                                                        Ruang Rapat MCC
+                                                    </option>
+                                                    <option value="Ruang Rapat KOHP" style="color: black;">
+                                                        Ruang Rapat KOHP
+                                                    </option>
+                                                    <option value="Rapat Online" style="color: black;">
+                                                        Rapat Online
+                                                    </option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6 col-6 col-44">
+                                        <div class="col-lg-4 col-6">
                                             <div class="mb-3">
-                                                <label for="formFile" class="form-label">Dokumen Risalah Rapat</label>
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Fasilitas </label>
+                                                <input type="text" class="form-control text-white"
+                                                    name="agendaheader_fasilitas" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-6">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Jumlah Orang</label>
+                                                <input type="number" class="form-control text-white"
+                                                    name="agendaheader_jumlah" placeholder="Input Data" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-6">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">
+                                                    <span class="wajib_isi">*</span> Kebutuhan tambahan (Sound, Jml
+                                                    Kursi, dll)</label>
+                                                <textarea class="form-control text-white" name="agendaheader_kebutuhan"
+                                                    rows="5"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-12 col-6 col-44">
+                                            <div class="mb-3">
+                                                <label for="formFile" class="form-label">Layout Ruangan</label>
                                                 <input class="form-control text-white" type="file" name="file">
                                             </div>
                                         </div>
+
+                                        <input type="hidden" class="form-control text-white" name="agendaheader_status"
+                                            readonly>
+
                                     </div>
-                                    <?php
-                                    $agenda_header_id = $_GET['id'];
-                                    $header_data = mysqli_query($koneksi, "SELECT * FROM agenda_header WHERE agendaheader_id='$agenda_header_id'");
-                                    $header = mysqli_fetch_assoc($header_data);
-                                    ?>
-                                    <input type="hidden" class="form-control text-white" name="agenda_header_id"
-                                        placeholder="Input Data" value="<?php echo $header['agendaheader_id']; ?>">
-                                    <input type="hidden" class="form-control text-white" name="agenda_tanggal"
-                                        placeholder="Input Data" value="<?php echo $header['agendaheader_tanggal']; ?>">
-                                    <input type="hidden" class="form-control text-white" name="agenda_tanggalawal"
-                                        placeholder="Input Data"
-                                        value="<?php echo $header['agendaheader_tanggalawal']; ?>">
-                                    <input type="hidden" class="form-control text-white" name="agenda_tanggalakhir"
-                                        placeholder="Input Data"
-                                        value="<?php echo $header['agendaheader_tanggalakhir']; ?>">
-                                    <input type="hidden" class="form-control text-white" name="agenda_kegiatan"
-                                        placeholder="Input Data"
-                                        value="<?php echo $header['agendaheader_kegiatan']; ?>">
-                                    <input type="hidden" class="form-control text-white" name="agenda_lokasi"
-                                        placeholder="Input Data" value="<?php echo $header['agendaheader_lokasi']; ?>">
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-custom-eye"><i class="bi bi-send"></i>
@@ -403,6 +499,65 @@ if ($_SESSION['status'] != "admin_login") {
     function goBack() {
         window.location.href = 'agenda.php';
     }
+
+    const jadwalTerpakai = <?php echo json_encode($jadwal_terpakai); ?>;
+
+    function checkAvailability() {
+        const tanggalInput = document.querySelector('[name="agendaheader_tanggal"]');
+        const tanggalAwalInput = document.querySelector('[name="agendaheader_tanggalawal"]');
+        const tanggalAkhirInput = document.querySelector('[name="agendaheader_tanggalakhir"]');
+        const lokasiSelect = document.querySelector('[name="agendaheader_lokasi"]');
+        const options = lokasiSelect.querySelectorAll('option');
+
+        const tanggal = tanggalInput.value;
+        const waktuAwal = tanggalAwalInput.value;
+        const waktuAkhir = tanggalAkhirInput.value;
+
+        if (!tanggal || !waktuAwal || !waktuAkhir) {
+            return;
+        }
+
+        options.forEach(option => {
+            option.disabled = false;
+
+            if (option.value !== "" && option.value !== "Lokasi Fasilitas") {
+
+                if (option.value === "Rapat Online") {
+                    return;
+                }
+
+                jadwalTerpakai.forEach(jadwal => {
+                    const jadwalTanggal = jadwal.tanggal;
+                    const jadwalAwal = jadwal.tanggalawal;
+                    const jadwalAkhir = jadwal.tanggalakhir;
+                    if (
+                        jadwal.lokasi === option.value &&
+                        jadwalTanggal === tanggal && // Tanggal harus sama
+                        (
+                            (waktuAwal >= jadwalAwal && waktuAwal < jadwalAkhir) ||
+                            // Awal input dalam rentang jadwal
+                            (waktuAkhir > jadwalAwal && waktuAkhir <= jadwalAkhir) ||
+                            // Akhir input dalam rentang jadwal
+                            (waktuAwal <= jadwalAwal && waktuAkhir >=
+                                jadwalAkhir) // Input mencakup jadwal
+                        )
+                    ) {
+                        option.disabled = true; // Disable lokasi jika ada konflik
+                    }
+                });
+            }
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const tanggalInput = document.querySelector('[name="agendaheader_tanggal"]');
+        const tanggalAwalInput = document.querySelector('[name="agendaheader_tanggalawal"]');
+        const tanggalAkhirInput = document.querySelector('[name="agendaheader_tanggalakhir"]');
+
+        tanggalInput.addEventListener('change', checkAvailability);
+        tanggalAwalInput.addEventListener('change', checkAvailability);
+        tanggalAkhirInput.addEventListener('change', checkAvailability);
+    });
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
     <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -59,15 +59,15 @@ if (mysqli_num_rows($result) > 0) {
         $sheet->getStyle('N' . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         // Split the concatenated dates and histories
-       $followUpDates = explode("\n", $rowData['ordermeisi_tanggal']);
+        $followUpDates = explode("\n", $rowData['ordermeisi_tanggal']);
         $followUpHistories = explode("\n", $rowData['ordermeisi_history']);
 
         // Insert follow-up data in new rows
         if (empty($followUpDates[0]) && empty($followUpHistories[0])) {
             $sheet->setCellValue('K' . $row, '-');
-            $sheet->getStyle('K' . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); 
+            $sheet->getStyle('K' . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
             $sheet->setCellValue('L' . $row, '-');
-            $sheet->getStyle('L' . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER); 
+            $sheet->getStyle('L' . $row)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
             $row++;
         } else {
             // Insert follow-up data in new rows
