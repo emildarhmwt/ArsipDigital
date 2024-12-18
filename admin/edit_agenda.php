@@ -328,58 +328,6 @@ if ($_SESSION['status'] != "admin_login") {
                                         </div>
                                         <div class="col-lg-6 col-6">
                                             <div class="mb-3">
-                                                <label for="shift" class="form-label">Tanggal</label>
-                                                <input type="date" class="form-control text-white" name="agenda_tanggal"
-                                                    placeholder="Input Data" required
-                                                    value="<?php echo $d['agenda_tanggal']; ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-6">
-                                            <div class="mb-3">
-                                                <label for="exampleFormControlTextarea1" class="form-label">Waktu
-                                                    Awal</label>
-                                                <input type="time" class="form-control text-white"
-                                                    name="agenda_waktu_awal" placeholder="Input Data" required
-                                                    value="<?php echo $d['agenda_waktu_awal']; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-6">
-                                            <div class="mb-3">
-                                                <label for="formFile" class="form-label">Waktu Akhir</label>
-                                                <input type="time" class="form-control text-white"
-                                                    name="agenda_waktu_akhir" placeholder="Input Data" required
-                                                    value="<?php echo $d['agenda_waktu_akhir']; ?>">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Kegiatan</label>
-                                        <input type="text" class="form-control text-white" name="agenda_kegiatan"
-                                            placeholder="Input Data" required
-                                            value="<?php echo $d['agenda_kegiatan']; ?>">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="shift" class="form-label">Deskripsi</label>
-                                        <input type="text" class="form-control text-white" name="agenda_deskripsi"
-                                            placeholder="Input Data" required
-                                            value="<?php echo $d['agenda_deskripsi']; ?>">
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6 col-6 col-44">
-                                            <div class="mb-3">
-                                                <label for="shift" class="form-label">Lokasi</label>
-                                                <input type="text" class="form-control text-white" name="agenda_lokasi"
-                                                    placeholder="Input Data" required
-                                                    value="<?php echo $d['agenda_lokasi']; ?>">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6 col-6 col-44">
-                                            <div class="mb-3">
                                                 <label for="exampleFormControlTextarea1" class="form-label">Penanggung
                                                     Jawab</label>
                                                 <input type="text" class="form-control text-white" name="agenda_pj"
@@ -387,6 +335,13 @@ if ($_SESSION['status'] != "admin_login") {
                                                     value="<?php echo $d['agenda_pj']; ?>">
                                             </div>
                                         </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="shift" class="form-label">Deskripsi</label>
+                                        <input type="text" class="form-control text-white" name="agenda_deskripsi"
+                                            placeholder="Input Data" required
+                                            value="<?php echo $d['agenda_deskripsi']; ?>">
                                     </div>
 
                                     <div class="row">
@@ -441,7 +396,7 @@ if ($_SESSION['status'] != "admin_login") {
         });
 
     function goBack() {
-        window.location.href = 'agenda.php';
+        window.location.href = 'agenda_semua.php';
     }
     </script>
     <script src="../assets/libs/jquery/dist/jquery.min.js"></script>

@@ -414,6 +414,8 @@ if ($_SESSION['status'] != "admin_login") {
                                         <th class="fs-3 text-center" style="padding: 0 35px;">Status</th>
                                         <th class="fs-3 text-center" style="padding: 0 15px;">Dokumen Risalah <br> Rapat
                                         </th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -445,7 +447,15 @@ if ($_SESSION['status'] != "admin_login") {
                                                 target="_blank">Upload</a>
                                             <?php } ?>
                                         </td>
-
+                                        <td class="text-center">
+                                            <a href="edit_agenda.php?id=<?php echo $p['agenda_id']; ?>"
+                                                class="btn btn-custom-upload btn-sm">
+                                                <i class="ti ti-edit fs-3"></i></a>
+                                            <button type="button" class="btn btn-custom-hapus btn-sm"
+                                                onclick="hapusAgenda(<?php echo $p['agenda_id']; ?>)">
+                                                <i class="ti ti-trash fs-3"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                     <?php
                                     }
@@ -469,6 +479,27 @@ if ($_SESSION['status'] != "admin_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
+
+    function hapusAgenda(id) {
+        if (confirm(
+                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
+            )) {
+            fetch(`agenda_hapus.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Agenda berhasil dihapus');
+                        location.reload();
+                    } else {
+                        alert('Gagal menghapus agenda');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Terjadi kesalahan saat menghapus agenda');
+                });
+        }
+    }
 
     // Fungsi untuk menangani paginasi dan pencarian
     document.addEventListener('DOMContentLoaded', function() {
