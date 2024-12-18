@@ -375,134 +375,23 @@ if ($_SESSION['status'] != "admin_login") {
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-
-                <?php
-                $no = 1;
-                include '../koneksi.php';
-                $id = $_GET['id'];
-                $arsip = mysqli_query($koneksi, "SELECT * FROM order_me  WHERE orderme_id='$id'");
-                while ($p = mysqli_fetch_assoc($arsip)) {
-                ?>
                 <div class="card card-preview" style="border-radius: 10px 10px 10px 10px;">
                     <div class="card-header" style="background-color: #0e4551; width: 100%;">
-                        Header
+                        Detail Agenda Rapat
                     </div>
                     <div class="card-body">
-                        <form method="get" enctype="multipart/form-data">
-                            <div class="row">
-                                <div class="col-lg-4 col-4 mb-3">
-                                    <label for="shift" class="form-label">Kategori :</label>
-                                    <p>
-                                        <td><?php echo $p['orderme_kategori'] ?></td>
-                                    </p>
-                                </div>
-                                <div class="col-lg-4 col-4 col-44 mb-3">
-                                    <label for="shift" class="form-label">Tanggal Pengajuan :</label>
-                                    <p>
-                                        <td><?php echo date('d/m/Y', strtotime($p['orderme_tanggal'])) ?></td>
-                                    </p>
-                                </div>
-                                <div class="col-lg-4 col-4 col-44 mb-3">
-                                    <label for="shift" class="form-label">Lokasi :</label>
-                                    <p>
-                                        <td><?php echo $p['orderme_lokasi'] ?></td>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-4 col-4 col-44 mb-3">
-                                    <label for="shift" class="form-label">Penanggung Jawab :</label>
-                                    <p>
-                                        <td><?php echo $p['orderme_pj'] ? $p['orderme_pj'] : '-'; ?></td>
-                                    </p>
-                                </div>
-                                <div class="col-lg-4 col-4 col-44 mb-3">
-                                    <label for="shift" class="form-label">Penerima Request :</label>
-                                    <p>
-                                        <td><?php echo $p['orderme_penerima'] ?></td>
-                                    </p>
-                                </div>
-                                <div class="col-lg-4 col-4 col-44 mb-3">
-                                    <label for="shift" class="form-label">Tanggal Selesai :</label>
-                                    <p>
-                                        <td>
-                                            <?php 
-                                            if ($p['orderme_tglselesai'] == '0000-00-00' || empty($p['orderme_tglselesai'])) {
-                                                echo '-';
-                                            } else {
-                                                echo date('d/m/Y', strtotime($p['orderme_tglselesai']));
-                                            }
-                                            ?>
-                                        </td>
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-lg-4 col-4 col-44">
-                                    <label for="shift" class="form-label">Request Order :</label>
-                                    <p>
-                                        <td><?php echo $p['orderme_request'] ?></td>
-                                    </p>
-                                </div>
-                                <div class="col-lg-8 col-8 col-44">
-                                    <label for="shift" class="form-label">Deskripsi :</label>
-                                    <p>
-                                        <td><?php echo $p['orderme_desk'] ?></td>
-                                    </p>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-                <?php
-                }
-                ?>
-
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row mb-3">
-                            <div class="col-md-6 col-6 d-flex justify-content-start align-items-center">
-                                <?php
-                                $no = 1;
-                                include '../koneksi.php';
-                                $id = $_GET['id'];
-                                $arsip = mysqli_query($koneksi, "SELECT * FROM order_me  WHERE orderme_id='$id'");
-                                while ($p = mysqli_fetch_assoc($arsip)) {
-                                ?>
-                                <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2 fs-3"
-                                    href="#"><?php echo $p['orderme_status']; ?>
-                                </a>
-
-                            </div>
-                            <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
-                                <?php if ($p['orderme_status'] != 'Close') { ?>
-                                <a class="btn btn-custom-review btn-sm d-flex justify-content-end align-items-center mx-2"
-                                    href="tambah_orderme_isi.php?ordermeisi_order_id=<?php echo $id; ?>">
-                                    <i class="ti ti-plus fs-7 me-1"></i> Tambah
-                                </a>
-                                <?php } ?>
-                                <?php
-                                }
-                                ?>
-
-                                <a class="btn btn-custom-back btn-sm d-flex justify-content-end align-items-center mx-2"
-                                    href="order_me.php">
-                                    <i class="ti ti-arrow-narrow-left fs-7 me-1"></i> Kembali
-                                </a>
-                            </div>
-                        </div>
-
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
-                                <thead class="fs-4">
-                                    <tr class="text-center align-middle">
-                                        <th class="fs-3 text-center" style="padding: 0 10px;">No</th>
-                                        <th class="fs-3 text-center" style="padding: 0 5px;">Tanggal Follow Up</th>
-                                        <th class="fs-3 text-center" style="padding: 0 80px;">Histori Follow Up</th>
-                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
+                                <thead class="align-middle">
+                                    <tr class="text-center">
+                                        <th class="fs-3">No</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">No Ticket</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Nopeg</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Nomor HP</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Fasilitas</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Jumlah <br> Orang</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Kebutuhan Tambahan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Layout <br> Ruangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -510,22 +399,92 @@ if ($_SESSION['status'] != "admin_login") {
                                     include '../koneksi.php';
                                     $no = 1;
                                     $id = $_GET['id'];
-                                    $kategori = mysqli_query($koneksi, "SELECT * FROM orderme_isi where ordermeisi_order_id='$id'");
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM agenda_header where agendaheader_id = '$id'");
                                     while ($p = mysqli_fetch_array($kategori)) {
                                     ?>
                                     <tr class="fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_ticket'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_nopeg'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_nomor'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_fasilitas'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_jumlah'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_kebutuhan'] ?></td>
                                         <td class="text-center">
-                                            <?php echo date('d/m/Y', strtotime($p['ordermeisi_tanggal'])); ?>
+                                            <?php 
+                                            if (empty($p['agendaheader_layout'])) {
+                                                echo "Belum Upload"; 
+                                            } else { 
+                                            ?>
+                                            <a href="../agenda/<?php echo $p['agendaheader_layout']; ?>"
+                                                target="_blank">Upload</a>
+                                            <?php 
+                                            } 
+                                            ?>
                                         </td>
-                                        <td class="text-center"><?php echo $p['ordermeisi_history'] ?></td>
+                                    </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive products-table" data-simplebar>
+                            <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
+                                <thead class="align-middle">
+                                    <tr class="text-center">
+                                        <th class="fs-3">No</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Kategori</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Tanggal <br>Pelaksanaan
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Waktu <br>Pelaksanaan
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 40px;">Kegiatan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 40px;">Deskripsi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 25px;">Lokasi Fasilitas</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Penanggung <br> Jawab</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Status</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Dokumen Risalah <br> Rapat
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    include '../koneksi.php';
+                                    $no = 1;
+                                    $id = $_GET['id'];
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM agenda where agenda_header_id = '$id'");
+                                    while ($p = mysqli_fetch_array($kategori)) {
+                                    ?>
+                                    <tr class="fs-2">
+                                        <td class="text-center"><?php echo $no++; ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_kategori'] ?></td>
                                         <td class="text-center">
-                                            <a href="edit_ordermeisi.php?id=<?php echo $p['ordermeisi_id']; ?>"
-                                                class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
-                                            <button type="button" class="btn btn-custom-hapus btn-sm mt-1"
-                                                onclick="hapusOrderme(<?php echo $p['ordermeisi_id']; ?>)">
-                                                <i class="ti ti-trash fs-3"></i>
-                                            </button>
+                                            <?php echo date('d/m/Y', strtotime($p['agenda_tanggal'])); ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?php echo date('H:i', strtotime($p['agenda_tanggalawal'])); ?> -
+                                            <?php echo date('H:i', strtotime($p['agenda_tanggalakhir'])); ?>
+                                        </td>
+                                        <td class="text-center"><?php echo $p['agenda_kegiatan'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_deskripsi'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_lokasi'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_pj'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_status'] ?></td>
+                                        <td class="text-center">
+                                            <?php 
+                                            if (empty($p['agenda_dokumen'])) {
+                                                echo "Belum Upload"; 
+                                            } else { 
+                                            ?>
+                                            <a href="../agenda/<?php echo $p['agenda_dokumen']; ?>"
+                                                target="_blank">Upload</a>
+                                            <?php 
+                                            } 
+                                            ?>
                                         </td>
                                     </tr>
                                     <?php
@@ -537,41 +496,39 @@ if ($_SESSION['status'] != "admin_login") {
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <script>
-    fetch('sidebar_admin.php')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('sidebar').innerHTML = data;
-        });
-
-    function hapusOrderme(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`ordermeisi_hapus.php?id=${id}`)
-                .then(response => response.json())
+            <script>
+            fetch('sidebar_admin.php')
+                .then(response => response.text())
                 .then(data => {
-                    if (data.success) {
-                        alert('Order me berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus order me');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus order me');
+                    document.getElementById('sidebar').innerHTML = data;
                 });
-        }
-    }
-    </script>
-    <script src=" ../assets/libs/jquery/dist/jquery.min.js"></script>
-    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/sidebarmenu.js"></script>
-    <script src="../assets/js/app.min.js"></script>
-    <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
-    </body>
+
+            function hapusOrderme(id) {
+                if (confirm(
+                        'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
+                    )) {
+                    fetch(`ordermeisi_hapus.php?id=${id}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Order me berhasil dihapus');
+                                location.reload();
+                            } else {
+                                alert('Gagal menghapus order me');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Terjadi kesalahan saat menghapus order me');
+                        });
+                }
+            }
+            </script>
+            <script src=" ../assets/libs/jquery/dist/jquery.min.js"></script>
+            <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../assets/js/sidebarmenu.js"></script>
+            <script src="../assets/js/app.min.js"></script>
+            <script src="../assets/libs/simplebar/dist/simplebar.js"></script>
+            </body>
 
 </html>

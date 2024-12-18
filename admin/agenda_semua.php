@@ -369,10 +369,10 @@ if ($_SESSION['status'] != "admin_login") {
                         <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">AGENDA RAPAT
                         </h5>
                         <div class="row text-center justify-content-center pilihan-doc mb-5">
-                            <div class="col-lg-6 col-6 border-end pilihan-doc-kajian pilihan_dokumen">
+                            <div class="col-lg-6 col-6 border-end ">
                                 <a href="agenda.php"> Data Peminjaman Ruang / Gedung</a>
                             </div>
-                            <div class="col-lg-6 col-6 ">
+                            <div class="col-lg-6 col-6 pilihan-doc-kajian pilihan_dokumen">
                                 <a href="agenda_semua.php">Data Agenda Rapat</a>
                             </div>
                         </div>
@@ -391,15 +391,10 @@ if ($_SESSION['status'] != "admin_login") {
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <button type="button" class="btn btn-custom-eye"
-                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
-                                    onclick="tambahKategori()">
-                                    <i class="bi bi-plus-square"></i> Tambah
-                                </button>
-                                <!-- <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
+                                <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="export_agenda.php">
                                     <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
-                                </a> -->
+                                </a>
                             </div>
                         </div>
 
@@ -408,97 +403,49 @@ if ($_SESSION['status'] != "admin_login") {
                                 <thead class="align-middle">
                                     <tr class="text-center">
                                         <th class="fs-3">No</th>
-                                        <th class="fs-3 text-center" style="padding: 0 10px;">No Ticket</th>
-                                        <th class="fs-3 text-center" style="padding: 0 28px;">Nopeg</th>
-                                        <th class="fs-3 text-center" style="padding: 0 28px;">Kegiatan</th>
-                                        <th class="fs-3 text-center" style="padding: 0 18px;">Lokasi Fasilitas</th>
-                                        <th class="fs-3 text-center" style="padding: 0 10px;">Tanggal <br>Pelaksanaan
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Kategori</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Tanggal <br>Pelaksanaan
                                         </th>
-                                        <th class="fs-3 text-center" style="padding: 0 10px;">Waktu <br>Pelaksanaan
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Waktu <br>Pelaksanaan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 25px;">Kegiatan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 50px;">Deskripsi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 50px;">Lokasi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 20px;">Penanggung <br> Jawab</th>
+                                        <th class="fs-3 text-center" style="padding: 0 35px;">Status</th>
+                                        <th class="fs-3 text-center" style="padding: 0 15px;">Dokumen Risalah <br> Rapat
                                         </th>
-                                        <th class="fs-3 text-center" style="padding: 0 36px;">Status</th>
-                                        <th class="fs-3 text-center" style="padding: 0 10px;">Detail</th>
-                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     include '../koneksi.php';
                                     $no = 1;
-                                    $kategori = mysqli_query($koneksi, "SELECT * FROM agenda_header");
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM agenda");
                                     while ($p = mysqli_fetch_array($kategori)) {
                                     ?>
                                     <tr class="fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
-                                        <td class="text-center"><?php echo $p['agendaheader_ticket'] ?></td>
-                                        <td class="text-center"><?php echo $p['agendaheader_nopeg'] ?></td>
-                                        <td class="text-center"><?php echo $p['agendaheader_kegiatan'] ?></td>
-                                        <td class="text-center"><?php echo $p['agendaheader_lokasi'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_kategori'] ?></td>
                                         <td class="text-center">
-                                            <?php echo date('d/m/Y', strtotime($p['agendaheader_tanggal'])); ?>
+                                            <?php echo date('d/m/Y', strtotime($p['agenda_tanggal'])); ?></td>
+                                        <td class="text-center">
+                                            <?php echo date('H:i', strtotime($p['agenda_tanggalawal'])); ?> -
+                                            <?php echo date('H:i', strtotime($p['agenda_tanggalakhir'])); ?>
                                         </td>
+                                        <td class="text-center"><?php echo $p['agenda_kegiatan'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_deskripsi'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_lokasi'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_pj'] ?></td>
+                                        <td class="text-center"><?php echo $p['agenda_status'] ?></td>
                                         <td class="text-center">
-                                            <?php echo date('H:i', strtotime($p['agendaheader_tanggalawal'])); ?> -
-                                            <?php echo date('H:i', strtotime($p['agendaheader_tanggalakhir'])); ?>
-                                        </td>
-                                        <td class="text-center">
-                                            <?php 
-                                            echo $p['agendaheader_status'] ?? 'Waiting'; 
-                                            if ($p['agendaheader_status'] === "Rejected") {
-                                                echo "<br>(<small>". htmlspecialchars($p['agendaheader_alasan']) . "</small>)";
-                                            }
-                                            ?>
-                                        </td>
-                                        <td><a target="_blank"
-                                                href="agenda_detail.php?id=<?php echo $p['agendaheader_id']; ?>"
-                                                class="btn btn-custom-eye btn-sm">
-                                                <i class="ti ti-eye fs-3"></i></a></td>
-                                        <td class="text-center">
-                                            <?php if ($p['agendaheader_status'] !== "Approved") { ?>
-                                            <a href="edit_agendaheader.php?id=<?php echo $p['agendaheader_id']; ?>"
-                                                class="btn btn-custom-upload btn-sm">
-                                                <i class="ti ti-edit fs-3"></i></a>
+                                            <?php if (is_null($p['agenda_dokumen'])) { ?>
+                                            Belum Upload
+                                            <?php } else { ?>
+                                            <a href="../agenda/<?php echo $p['agenda_dokumen']; ?>"
+                                                target="_blank">Upload</a>
                                             <?php } ?>
-                                            <button type="button" class="btn btn-custom-hapus btn-sm"
-                                                onclick="hapusAgenda(<?php echo $p['agendaheader_id']; ?>)">
-                                                <i class="ti ti-trash fs-3"></i>
-                                            </button>
-                                            <?php if ($p['agendaheader_status'] === "Approved") { ?>
-                                            <a href="tambah_agenda.php?id=<?php echo $p['agendaheader_id']; ?>"
-                                                class="btn btn-custom-upload btn-sm">
-                                                <i class="ti ti-plus fs-3"></i></a>
-                                            <?php } ?>
-                                            <a href="approve_agenda.php?id=<?php echo $p['agendaheader_id']; ?>"
-                                                class="btn btn-custom-eye btn-sm mt-1"><i
-                                                    class="bi bi-check fs-3"></i></a>
-                                            <button class="btn btn-custom-hapus btn-sm mt-1"
-                                                onclick="openRejectModal(<?php echo $p['agendaheader_id']; ?>)">
-                                                <i class="bi bi-x fs-3"></i>
-                                            </button>
-                                            <div class="modal" id="rejectModal<?php echo $p['agendaheader_id']; ?>"
-                                                style="display:none; position: fixed; top: 61%; left: 60%; transform: translate(-50%, -50%); width: 500px; z-index: 1051;">
-                                                <div class="modal-content" style="padding: 10px;">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Alasan Penolakan</h5>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form method="POST"
-                                                            action="reject_agenda.php?id=<?php echo $p['agendaheader_id']; ?>">
-                                                            <div class="mb-3">
-                                                                <label for="alasan" class="form-label">Masukkan
-                                                                    Alasan</label>
-                                                                <textarea name="alasan" class="form-control" required
-                                                                    style="height: 80px;"></textarea>
-                                                            </div>
-                                                            <button type="submit"
-                                                                class="btn btn-custom-eye">Kirim</button>
-                                                            <button type="button" class="btn btn-custom-hapus"
-                                                                onclick="closeRejectModal(<?php echo $p['agendaheader_id']; ?>)">Batal</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </td>
+
                                     </tr>
                                     <?php
                                     }
@@ -522,40 +469,6 @@ if ($_SESSION['status'] != "admin_login") {
         .then(data => {
             document.getElementById('sidebar').innerHTML = data;
         });
-
-    function tambahKategori() {
-        window.location.href = 'tambah_agendaheader.php';
-    }
-
-    function openRejectModal(id) {
-        console.log("Opening reject modal for ID:", id);
-        document.getElementById('rejectModal' + id).style.display = 'block';
-    }
-
-    function closeRejectModal(id) {
-        document.getElementById('rejectModal' + id).style.display = 'none';
-    }
-
-    function hapusAgenda(id) {
-        if (confirm(
-                'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
-            )) {
-            fetch(`agendaheader_hapus.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Agenda berhasil dihapus');
-                        location.reload();
-                    } else {
-                        alert('Gagal menghapus agenda');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Terjadi kesalahan saat menghapus agenda');
-                });
-        }
-    }
 
     // Fungsi untuk menangani paginasi dan pencarian
     document.addEventListener('DOMContentLoaded', function() {
