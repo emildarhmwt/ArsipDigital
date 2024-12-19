@@ -307,8 +307,10 @@
                                          <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?>
                                          </td>
                                          <td><?php echo $p['user_nama'] ?></td>
-                                         <td><a style="color: blue"
-                                                 href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"><?php echo $p['arsip_nama'] ?></a>
+                                         <td><a href="../arsip/<?php echo $p['arsip_file']; ?>" target="_blank"
+                                                 style="color: white; text-decoration: underline;">
+                                                 <?php echo $p['arsip_nama'] ?>
+                                             </a>
                                          </td>
                                      </tr>
                                      <?php

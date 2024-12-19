@@ -333,6 +333,11 @@
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                <button type="button" class="btn btn-custom-eye"
+                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
+                                    onclick="tambahKategori()">
+                                    <i class="bi bi-plus-square"></i> Tambah
+                                </button>
                                 <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="export_excel.php">
                                     <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
@@ -377,7 +382,7 @@
                                         <th class="fs-3 text-center" style="padding: 0 60px;">Nilai Sisa Kontrak</th>
                                         <th class="fs-3 text-center" style="padding: 0 20px;">% Sisa</th>
                                         <th class="fs-3 text-center" style="padding: 0 60px;">Keterangan</th>
-                                        <th class="fs-3">Opsi</th>
+                                        <th class="fs-3 text-center" style="padding: 0 35px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -439,6 +444,10 @@
                                                 href="data_monitoring_kontrak.php?id=<?php echo $p['header_id']; ?>"><i
                                                     class="ti ti-eye fs-5"></i>
                                             </a>
+                                            <button type="button" class="btn btn-custom-hapus btn-sm"
+                                                onclick="hapusKontrak(<?php echo $p['header_id']; ?>)">
+                                                <i class="ti ti-trash fs-3"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     <?php

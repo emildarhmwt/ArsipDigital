@@ -374,25 +374,6 @@ if ($_SESSION['status'] != "admin_login") {
                             </div>
                         </div>
 
-                        <center>
-                            <?php
-                            if (isset($_GET['alert'])) {
-                                if ($_GET['alert'] == "gagal") {
-                            ?>
-                            <div class="alert alert-danger">File arsip gagal diupload. krena demi
-                                keamanan
-                                file
-                                .php tidak diperbolehkan.</div>
-                            <?php
-                                } else {
-                                ?>
-                            <div class="alert alert-success">Arsip berhasil tersimpan.</div>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </center>
-
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="align-middle">

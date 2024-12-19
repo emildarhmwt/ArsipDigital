@@ -303,11 +303,13 @@ if ($_SESSION['status'] != "admin_login") {
                                             ?>
                                     <tr class="text-center fs-3">
                                         <td class="text-center"><?php echo $no++; ?></td>
-                                        <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?>
-                                        </td>
+                                        <td><?php echo date('d M Y (H:i:s)', strtotime($p['riwayat_waktu'])) ?></td>
                                         <td><?php echo $p['user_nama'] ?></td>
-                                        <td><a style="color: blue"
-                                                href="arsip_preview_saya.php?id=<?php echo $p['arsip_id']; ?>"><?php echo $p['arsip_nama'] ?></a>
+                                        <td>
+                                            <a href="../arsip/<?php echo $p['arsip_file']; ?>" target="_blank"
+                                                style="color: #1e447d; text-decoration: underline;">
+                                                <?php echo $p['arsip_nama'] ?>
+                                            </a>
                                         </td>
                                     </tr>
                                     <?php

@@ -364,6 +364,11 @@
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
+                                <button type="button" class="btn btn-custom-eye"
+                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
+                                    onclick="tambahKategori()">
+                                    <i class="bi bi-plus-square"></i> Tambah
+                                </button>
                                 <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="export_statuspr.php">
                                     <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
@@ -410,6 +415,7 @@
                                         </th>
                                         <th class="fs-3 text-center" style="padding: 0 20px;">Status</th>
                                         <th class="fs-3 text-center" style="padding: 0 50px;">Catatan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 35px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -446,6 +452,14 @@
                                         <td class="text-center"><?php echo $p['statuspr_status'] ?></td>
                                         <td>
                                             <?php echo $p['statuspr_catatan'] !== NULL ? $p['statuspr_catatan'] : '-'; ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="edit_statuspr.php?id=<?php echo $p['statuspr_id']; ?>"
+                                                class="btn btn-custom-upload btn-sm"><i class="ti ti-edit fs-3"></i></a>
+                                            <button type="button" class="btn btn-custom-hapus btn-sm"
+                                                onclick="hapusAgenda(<?php echo $p['statuspr_id']; ?>)">
+                                                <i class="ti ti-trash fs-3"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     <?php

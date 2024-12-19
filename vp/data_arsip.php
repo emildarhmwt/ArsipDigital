@@ -160,7 +160,6 @@ if ($_SESSION['status'] != "vp_login") {
         data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <div id="sidebar"></div>
-        </aside>
         <!--  Sidebar End -->
         <!--  Main wrapper -->
         <div class="body-wrapper">
@@ -356,11 +355,10 @@ if ($_SESSION['status'] != "vp_login") {
                                                 <!-- <a target="_blank" class="btn btn-default" href="../arsip/<?php echo $p['arsip_file']; ?>"><i class="fa fa-download"></i></a> -->
                                                 <a target="_blank" class="btn btn-custom-edit btn-sm"
                                                     href="arsip_download.php?id=<?php echo $p['arsip_id']; ?>"
-                                                    download><i class="ti ti-download fs-7"></i></a>
-                                                <a target="_blank"
-                                                    href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
+                                                    download><i class="ti ti-download fs-3"></i></a>
+                                                <a target="_blank" href="../arsip/<?php echo $p['arsip_file']; ?>"
                                                     class="btn btn-custom-eye btn-sm text-center d-flex align-items-center justify-content-center">
-                                                    <i class="ti ti-eye fs-7 me-1"></i>
+                                                    <i class="ti ti-eye fs-3 me-1"></i>
                                                 </a>
                                             </div>
                                         </td>

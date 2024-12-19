@@ -429,21 +429,20 @@
                                              <div class="btn-group mb-3">
                                                  <a target="_blank" class="btn btn-custom-download btn-sm"
                                                      href="../arsip/<?php echo $p['arsip_file']; ?>" download><i
-                                                         class="ti ti-download fs-7"></i>
+                                                         class="ti ti-download fs-3"></i>
                                                  </a>
-                                                 <a target="_blank"
-                                                     href="arsip_preview_saya.php?id=<?php echo $p['arsip_id']; ?>"
+                                                 <a target="_blank" href="../arsip/<?php echo $p['arsip_file']; ?>"
                                                      class="btn btn-custom-eye btn-sm text-center d-flex align-items-center justify-content-center"><i
-                                                         class="ti ti-eye fs-7"></i>
+                                                         class="ti ti-eye fs-3"></i>
                                                  </a>
                                              </div>
                                              <div class="btn-group">
                                                  <a href="edit_arsip.php?id=<?php echo $p['arsip_id']; ?>"
                                                      class="btn btn-custom-upload btn-sm"><i
-                                                         class="ti ti-edit fs-7"></i></a>
+                                                         class="ti ti-edit fs-3"></i></a>
                                                  <button type="button" class="btn btn-custom-edit btn-sm"
                                                      onclick="hapusArsip(<?php echo $p['arsip_id']; ?>)">
-                                                     <i class="ti ti-trash fs-7"></i>
+                                                     <i class="ti ti-trash fs-3"></i>
                                                  </button>
                                              </div>
                                          </td>

@@ -208,6 +208,27 @@
         color: white !important;
     }
 
+    .pilihan-doc a {
+        cursor: pointer;
+        color: grey;
+        font-weight: bold;
+        text-decoration: none;
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+    }
+
+    .pilihan-doc-kajian a {
+        color: white;
+        text-decoration: underline;
+        font-family: "Varela Round", sans-serif;
+        font-size: 15px;
+    }
+
+    .pilihan_dokumen {
+        font-family: "Varela Round", sans-serif;
+        color: white;
+    }
+
     @media (max-width: 768px) {
         .navbar-judul {
             font-size: 10px;
@@ -239,6 +260,14 @@
 
         .tampil {
             display: none;
+        }
+
+        .pilihan-doc a {
+            font-size: 5px;
+        }
+
+        .pilihan-doc-kajian a {
+            font-size: 5px;
         }
 
     }
@@ -349,6 +378,14 @@
                     <div class="card-body">
                         <h5 class="card-title fw-semibold mb-5 mt-2 text-center fs-7 judul-tabel">AGENDA RAPAT
                         </h5>
+                        <div class="row text-center justify-content-center pilihan-doc mb-5">
+                            <div class="col-lg-6 col-6 border-end pilihan-doc-kajian pilihan_dokumen">
+                                <a href="agenda.php"> Data Peminjaman Ruang / Gedung</a>
+                            </div>
+                            <div class="col-lg-6 col-6">
+                                <a href="agenda_semua.php">Data Agenda Rapat</a>
+                            </div>
+                        </div>
                         <div class="row mb-3">
                             <div class="col-md-6 col-6 banyak-data">
                                 <label for="rowsPerPageSelect" class="form-label tampil">Tampilkan:</label>
@@ -364,78 +401,84 @@
                             <div class="col-md-6 col-6 d-flex justify-content-end align-items-center">
                                 <input type="text" class="form-control me-2 text-white" id="searchInput"
                                     placeholder="Cari..." style="max-width: 200px; height: 40px; font-size: .95rem;">
-                                <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
+                                <button type="button" class="btn btn-custom-eye"
+                                    style="height: 40px; padding: 0 .5rem; font-size: .95rem;"
+                                    onclick="tambahKategori()">
+                                    <i class="bi bi-plus-square"></i> Tambah
+                                </button>
+                                <!-- <a class="btn btn-custom-edit btn-sm d-flex justify-content-end align-items-center mx-2"
                                     href="export_agenda.php">
                                     <i class="bi bi-file-spreadsheet fs-6 me-1"></i> Export
-                                </a>
+                                </a> -->
                             </div>
                         </div>
-
-                        <center>
-                            <?php
-                            if (isset($_GET['alert'])) {
-                                if ($_GET['alert'] == "gagal") {
-                            ?>
-                            <div class="alert alert-danger">File arsip gagal diupload. krena demi
-                                keamanan
-                                file
-                                .php tidak diperbolehkan.</div>
-                            <?php
-                                } else {
-                                ?>
-                            <div class="alert alert-success">Arsip berhasil tersimpan.</div>
-                            <?php
-                                }
-                            }
-                            ?>
-                        </center>
 
                         <div class="table-responsive products-table" data-simplebar>
                             <table class="table table-bordered text-nowrap mb-0 align-middle table-hover">
                                 <thead class="align-middle">
                                     <tr class="text-center">
                                         <th class="fs-3">No</th>
-                                        <th class="fs-3 text-center" style="padding: 0 15px;">Kategori</th>
-                                        <th class="fs-3 text-center" style="padding: 0 25px;">Tanggal</th>
-                                        <th class="fs-3 text-center" style="padding: 0 37px;">Waktu</th>
-                                        <th class="fs-3 text-center" style="padding: 0 30px;">Kegiatan</th>
-                                        <th class="fs-3 text-center" style="padding: 0 40px;">Deskripsi</th>
-                                        <th class="fs-3 text-center" style="padding: 0 40px;">Lokasi </th>
-                                        <th class="fs-3 text-center" style="padding: 0 20px;">Penanggung <br> Jawab</th>
-                                        <th class="fs-3 text-center" style="padding: 0 25px;">Status</th>
-                                        <th class="fs-3 text-center" style="padding: 0 15px;">Dokumen <br> Risalah Rapat
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">No Ticket</th>
+                                        <th class="fs-3 text-center" style="padding: 0 28px;">Nopeg</th>
+                                        <th class="fs-3 text-center" style="padding: 0 28px;">Kegiatan</th>
+                                        <th class="fs-3 text-center" style="padding: 0 18px;">Lokasi Fasilitas</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Tanggal <br>Pelaksanaan
                                         </th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Waktu <br>Pelaksanaan
+                                        </th>
+                                        <th class="fs-3 text-center" style="padding: 0 36px;">Status</th>
+                                        <th class="fs-3 text-center" style="padding: 0 10px;">Detail</th>
+                                        <th class="fs-3 text-center" style="padding: 0 30px;">Opsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
                                     include '../koneksi.php';
                                     $no = 1;
-                                    $kategori = mysqli_query($koneksi, "SELECT * FROM agenda");
+                                    $kategori = mysqli_query($koneksi, "SELECT * FROM agenda_header");
                                     while ($p = mysqli_fetch_array($kategori)) {
                                     ?>
                                     <tr class="fs-2">
                                         <td class="text-center"><?php echo $no++; ?></td>
-                                        <td class="text-center"><?php echo $p['agenda_kategori'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_ticket'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_nopeg'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_kegiatan'] ?></td>
+                                        <td class="text-center"><?php echo $p['agendaheader_lokasi'] ?></td>
                                         <td class="text-center">
-                                            <?php echo date('d/m/Y', strtotime($p['agenda_tanggal'])); ?></td>
+                                            <?php echo date('d/m/Y', strtotime($p['agendaheader_tanggal'])); ?>
+                                        </td>
                                         <td class="text-center">
-                                            <?php echo date('H:i', strtotime($p['agenda_waktu_awal'])) ?> -
-                                            <?php echo date('H:i', strtotime($p['agenda_waktu_akhir'])) ?></td>
-                                        <td><?php echo $p['agenda_kegiatan'] ?></td>
-                                        <td><?php echo $p['agenda_deskripsi'] ?></td>
-                                        <td><?php echo $p['agenda_lokasi'] ?></td>
-                                        <td><?php echo $p['agenda_pj'] ?></td>
-                                        <td class="text-center"><?php echo $p['agenda_status'] ?></td>
+                                            <?php echo date('H:i', strtotime($p['agendaheader_tanggalawal'])); ?> -
+                                            <?php echo date('H:i', strtotime($p['agendaheader_tanggalakhir'])); ?>
+                                        </td>
                                         <td class="text-center">
-                                            <?php if (!empty($p['agenda_dokumen'])) { ?>
-                                            <a href="../agenda/<?php echo $p['agenda_dokumen']; ?>"
-                                                target="_blank">Upload</a>
-                                            <?php } else { ?>
-                                            Belum Upload
+                                            <?php 
+                                            echo $p['agendaheader_status'] ?? 'Waiting'; 
+                                            if ($p['agendaheader_status'] === "Rejected") {
+                                                echo "<br>(<small>". htmlspecialchars($p['agendaheader_alasan']) . "</small>)";
+                                            }
+                                            ?>
+                                        </td>
+                                        <td><a target="_blank"
+                                                href="agenda_detail.php?id=<?php echo $p['agendaheader_id']; ?>"
+                                                class="btn btn-custom-eye btn-sm">
+                                                <i class="ti ti-eye fs-3"></i></a></td>
+                                        <td class="text-center">
+                                            <?php if ($p['agendaheader_status'] !== "Approved") { ?>
+                                            <a href="edit_agendaheader.php?id=<?php echo $p['agendaheader_id']; ?>"
+                                                class="btn btn-custom-upload btn-sm">
+                                                <i class="ti ti-edit fs-3"></i></a>
+                                            <?php } ?>
+                                            <button type="button" class="btn btn-custom-hapus btn-sm"
+                                                onclick="hapusAgenda(<?php echo $p['agendaheader_id']; ?>)">
+                                                <i class="ti ti-trash fs-3"></i>
+                                            </button>
+                                            <?php if ($p['agendaheader_status'] === "Approved") { ?>
+                                            <a href="tambah_agenda.php?id=<?php echo $p['agendaheader_id']; ?>"
+                                                class="btn btn-custom-upload btn-sm">
+                                                <i class="ti ti-plus fs-3"></i></a>
                                             <?php } ?>
                                         </td>
-
                                     </tr>
                                     <?php
                                     }
@@ -461,14 +504,23 @@
         });
 
     function tambahKategori() {
-        window.location.href = 'tambah_agenda.php';
+        window.location.href = 'tambah_agendaheader.php';
+    }
+
+    function openRejectModal(id) {
+        console.log("Opening reject modal for ID:", id);
+        document.getElementById('rejectModal' + id).style.display = 'block';
+    }
+
+    function closeRejectModal(id) {
+        document.getElementById('rejectModal' + id).style.display = 'none';
     }
 
     function hapusAgenda(id) {
         if (confirm(
                 'Apakah anda yakin ingin menghapus data ini? File dan semua yang berhubungan akan dihapus secara permanen.'
             )) {
-            fetch(`agenda_hapus.php?id=${id}`)
+            fetch(`agendaheader_hapus.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {

@@ -54,7 +54,7 @@ if (in_array($kode_petugas, ['AD-AM-AA-1', 'AD-AM-AA-2', 'AD-AM-AA-3', 'AD-AM-AA
     $result_avp = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_kode = 'AD-AVP-A-8'"));
     $tujuan_avp = $result_avp['pks_id'] ?? null; // Set tujuan_avp to the pks_id of AD-AVP-3
 }elseif (in_array($kode_petugas, ['AD-AM-AI-1', 'AD-AM-AI-2', 'AD-AM-AI-3', 'AD-AM-AI-4', 'AD-AM-AI-5','AD-AM-AI-6', 'AD-AM-AI-7', 'AD-AM-AI-8', 'AD-AM-AI-9', 'AD-AM-AI-10'])) {
-    $result_avp = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_kode = 'AD-AVP-A-8'"));
+    $result_avp = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_kode = 'AD-AVP-A-9'"));
     $tujuan_avp = $result_avp['pks_id'] ?? null; // Set tujuan_avp to the pks_id of AD-AVP-3
 }elseif (in_array($kode_petugas, ['AD-AM-AJ-1', 'AD-AM-AJ-2', 'AD-AM-AJ-3', 'AD-AM-AJ-4', 'AD-AM-AJ-5','AD-AM-AJ-6', 'AD-AM-AJ-7', 'AD-AM-AJ-8', 'AD-AM-AJ-9', 'AD-AM-AJ-10'])) {
     $result_avp = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT pks_id FROM user_pks WHERE pks_kode = 'AD-AVP-A-10'"));

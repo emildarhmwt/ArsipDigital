@@ -231,7 +231,8 @@ if ($_SESSION['status'] != "admin_login") {
         font-size: 15px;
         color: #08203f;
         font-weight: bold;
-        margin-left: 5%;
+        margin-left: 3%;
+        z-index: 2;
     }
 
     .sm-ooc4 {
@@ -250,6 +251,7 @@ if ($_SESSION['status'] != "admin_login") {
         margin-left: 10%;
         margin-right: 5%;
         text-align: left;
+        z-index: 2;
     }
 
     .sm-ooc3 {
@@ -705,7 +707,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
-                                            Open
+                                            <a href="ndm_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openCounter">0</span>
@@ -715,7 +717,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc">
-                                            On Progress
+                                            <a href="ndm_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogressCounter">0</span>
@@ -725,7 +727,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc">
-                                            Close
+                                            <a href="ndm_close.php" class="sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4"> <span class="counter"
                                                 id="closeCounter">0</span>
@@ -769,7 +771,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc mt-3">
-                                            Open
+                                            <a href="ndk_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4 mt-3">
                                             <span class="counter" id="openkCounter">0</span>
@@ -779,7 +781,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc">
-                                            On Progress
+                                            <a href="ndk_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogresskCounter">0</span>
@@ -789,7 +791,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc">
-                                            Close
+                                            <a href="ndk_close.php" class="sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="closekCounter">0</span>
@@ -833,7 +835,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-6 sm-ooc mt-3">
-                                            Open
+                                            <a href="sm_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc4 mt-3">
                                             <span class="counter" id="opensmCounter">0</span>
@@ -843,7 +845,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc">
-                                            On Progress
+                                            <a href="sm_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="onprogresssmCounter">0</span>
@@ -853,7 +855,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-8 sm-ooc">
-                                            Close
+                                            <a href="sm_close.php" class="sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-4 sm-ooc4">
                                             <span class="counter" id="closesmCounter">0</span>
@@ -897,7 +899,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-6 sm-ooc mt-3">
-                                            Open
+                                            <a href="sk_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc4 mt-3">
                                             <span class="counter" id="openskCounter">0</span>
@@ -907,7 +909,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-6 sm-ooc">
-                                            On Progress
+                                            <a href="sk_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc4"> <span class="counter"
                                                 id="onprogressskCounter">0</span>
@@ -917,7 +919,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-8 col-6 sm-ooc">
-                                            Close
+                                            <a href="sk_close.php" class="sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc4"> <span class="counter"
                                                 id="closeskCounter">0</span>
@@ -946,7 +948,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2 mt-4">
-                                            Open
+                                            <a href="ar_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumCounter">0</span>
@@ -956,7 +958,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2">
-                                            On Progress
+                                            <a href="ar_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="DalamCounter">0</span>
@@ -966,7 +968,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2">
-                                            Close
+                                            <a href="ar_close.php" class="sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="SelesaiCounter">0</span>
@@ -995,7 +997,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2 mt-4">
-                                            Open
+                                            <a href="pr_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumPRCounter">0</span>
@@ -1005,7 +1007,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2">
-                                            On Progress
+                                            <a href="pr_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="DalamPRCounter">0</span>
@@ -1015,7 +1017,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2">
-                                            Close
+                                            <a href="pr_close.php" class=" sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="SelesaiPRCounter">0</span>
@@ -1044,7 +1046,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2 mt-4">
-                                            Open
+                                            <a href="om_open.php" class="sm-ooc">Open</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3 mt-4">
                                             <span class="counter" id="BelumORCounter">0</span>
@@ -1054,7 +1056,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2">
-                                            On Progress
+                                            <a href="om_progress.php" class="sm-ooc">On Progress</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="DalamORCounter">0</span>
@@ -1064,7 +1066,7 @@ if ($_SESSION['status'] != "admin_login") {
                                 <h5>
                                     <div class="row">
                                         <div class="col-lg-6 col-6 sm-ooc2">
-                                            Close
+                                            <a href="om_close.php" class="sm-ooc"> Close</a>
                                         </div>
                                         <div class="col-lg-4 col-6 sm-ooc3"> <span class="counter"
                                                 id="SelesaiORCounter">0</span>

@@ -342,8 +342,10 @@ if ($_SESSION['status'] != "admin_login") {
                                 <thead class="fs-4 text-center">
                                     <tr class="align-middle">
                                         <th class="fs-3" style="width: 5%;">No</th>
-                                        <th class="fs-3" style="padding: 0 20px;">Waktu Upload</th>
-                                        <th class="fs-3" style="padding: 0 60px;">Arsip</th>
+                                        <th class="fs-3" style="padding: 0 10px;">Waktu Upload</th>
+                                        <th class="fs-3" style="padding: 0 20px;">Kode Arsip</th>
+                                        <th class="fs-3" style="padding: 0 60px;">Nama Arsip</th>
+                                        <th class="fs-3" style="padding: 0 10px;">Jenis File <br> Arsip</th>
                                         <th class="fs-3" style="padding: 0 30px;">Kategori</th>
                                         <th class="fs-3" style="padding: 0 30px;">Status</th>
                                         <th class="fs-3" style="padding: 0 30px;">Petugas</th>
@@ -374,11 +376,9 @@ if ($_SESSION['status'] != "admin_login") {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>
-                                            <b>KODE</b> : <?php echo $p['arsip_kode'] ?><br>
-                                            <b>Nama</b> : <?php echo $p['arsip_nama'] ?><br>
-                                            <b>Jenis</b> : <?php echo $p['arsip_jenis'] ?><br>
-                                        </td>
+                                        <td class="text-center"><?php echo $p['arsip_kode'] ?></td>
+                                        <td class="text-center"><?php echo $p['arsip_nama'] ?></td>
+                                        <td class="text-center"><?php echo $p['arsip_jenis'] ?></td>
                                         <td class="text-center"><?php echo $p['kategori_nama'] ?></td>
                                         <td class="text-center"><?php echo $p['status_nama'] ?></td>
                                         <td class="text-center">
@@ -396,8 +396,7 @@ if ($_SESSION['status'] != "admin_login") {
                                                 <a target="_blank" class="btn btn-custom-download btn-sm"
                                                     href="../arsip/<?php echo $p['arsip_file']; ?>" download><i
                                                         class="ti ti-download fs-3"></i></a>
-                                                <a target="_blank"
-                                                    href="arsip_preview.php?id=<?php echo $p['arsip_id']; ?>"
+                                                <a target="_blank" href="../arsip/<?php echo $p['arsip_file']; ?>"
                                                     class="btn btn-custom-eye btn-sm">
                                                     <i class="ti ti-eye fs-3"></i></a>
                                             </div>

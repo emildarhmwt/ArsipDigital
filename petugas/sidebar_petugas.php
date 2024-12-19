@@ -114,23 +114,33 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link primary-hover-bg" href="arsip_saya.php"
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="order_me.php"
                                 aria-expanded="false">
                                 <span class="aside-icon p-2 bg-light-primary rounded-3">
                                     <i class="ti ti-archive fs-7 text-primary"></i>
+                                </span>
+                                <span class="hide-menu ms-2 ps-1 judul-sidebar">Order Me</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link sidebar-link warning-hover-bg" href="arsip_saya.php"
+                                aria-expanded="false">
+                                <span class="aside-icon p-2 bg-light-warning rounded-3">
+                                    <i class="ti ti-book-download fs-7 text-warning"></i>
                                 </span>
                                 <span class="hide-menu ms-2 ps-1 judul-sidebar">Arsip Saya</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link sidebar-link warning-hover-bg" href="riwayat_unduh.php"
+                            <a class="sidebar-link sidebar-link primary-hover-bg" href="riwayat_unduh.php"
                                 aria-expanded="false">
-                                <span class="aside-icon p-2 bg-light-warning rounded-3">
-                                    <i class="ti ti-book-download fs-7 text-warning"></i>
+                                <span class="aside-icon p-2 bg-light-primary rounded-3">
+                                    <i class="ti ti-archive fs-7 text-primary"></i>
                                 </span>
                                 <span class="hide-menu ms-2 ps-1 judul-sidebar">Riwayat Unduh</span>
                             </a>
                         </li>
+
                         <li class="nav-small-cap">
                             <i class="ti ti-dots nav-small-cap-icon fs-5"></i>
                             <span class="hide-menu judul-sidebar">PENGGUNA</span>
